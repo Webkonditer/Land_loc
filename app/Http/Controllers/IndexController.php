@@ -13,6 +13,13 @@ class IndexController extends Controller
     //
     public function execute(Request $request) {
 
-      return view('layouts/site');
+      //$pages = Page::all();
+      //$portfolios = Portfolio::get(array('name','filter','images'));
+      //$services = Service::where('id','<',20)->get();
+      //$peoples = People::take(3)->get();
+
+      //dd($peoples);
+
+      return view('site/index');
     }
 }

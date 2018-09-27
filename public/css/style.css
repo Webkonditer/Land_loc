@@ -1,0 +1,77 @@
+/*
+@Author: ThemeMascot
+@URL: http://ThemeMascot.com
+
+This is the file where you can add your custom styles to change the look of the
+theme. But don't modify style-main.css file.
+
+*/
+
+/* Your custom css codes start here: */
+
+/* -------- Menuzord ---------- */
+.menuzord-menu > li {
+    padding: 24px 0;
+    position: relative;
+}
+.menuzord-menu ul.dropdown {
+    top: 71px;
+}
+
+@media (min-width: 901px) {
+    .menuzord-menu > li.with-mega {
+        position: static;
+    }
+    .megamenu + .dropdown {
+        display: none !important;
+    }
+}
+
+@media (max-width: 900px) {
+    .megamenu {
+        display: none !important;
+    }
+}
+
+h1 {
+    font-weight: 500;
+    font-size: 40px;
+}
+
+a:not([href]) {
+    cursor: default;
+}
+
+.menuzord-brand img {
+    max-height: 63px;
+}
+
+.quote-of-the-day {
+
+}
+.quote-of-the-day__title {
+    position: relative;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+}
+.quote-of-the-day__date {
+    margin-right: 10px;
+    display: inline-block;
+    font-size: 14px;
+    color: #a9a9a9;
+}
+.quote-of-the-day__location {
+    font-size: 14px;
+    color: #a9a9a9;
+}
+.quote-of-the-day__text {
+    text-align: justify;
+    font-style: italic;
+    margin-top: 33px;
+}
+
+.quote-of-the-day__author {
+    text-align: right;
+    font-weight: bold;
+    font-style: italic;
+}

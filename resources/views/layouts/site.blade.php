@@ -1,448 +1,319 @@
 <!doctype html>
-<html>
+<html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, maximum-scale=1">
-<title>Unique</title>
-<link rel="icon" href="{{ asset('assets/favicon.png') }}" type="image/png">
-<link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
-<link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" type="text/css">
-<link href="{{ asset('assets/css/font-awesome.css') }}" rel="stylesheet" type="text/css">
-<link href="{{ asset('assets/css/animate.css') }}" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-<!--[if lt IE 9]>
-    <script src="{{ asset('assets/js/respond-1.1.0.min.js') }}"></script>
-    <script src="{{ asset('assets/js/html5shiv.js') }}"></script>
-    <script src="{{ asset('assets/js/html5element.js') }}"></script>
-<![endif]-->
+    <title>Бхакти-лата</title>
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="MgEj1Uue6bV2PEy3JUUkC4tzmvMzvqCrFeuQkukl">
+
+    <link href="{{ asset('/css/public.css?ver=0.3') }}" rel="stylesheet" type="text/css">
+
+    <script src="{{ asset('/js/public.js') }}"></script>
 
 </head>
-<body>
-
-<!--Header_section-->
-<header id="header_wrapper">
-  <div class="container">
-    <div class="header_box">
-      <div class="logo"><a href="#"><img src="assets/img/logo.png" alt="logo"></a></div>
-	  <nav class="navbar navbar-inverse" role="navigation">
-      <div class="navbar-header">
-        <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-        </div>
-	    <div id="main-nav" class="collapse navbar-collapse navStyle">
-			<ul class="nav navbar-nav" id="mainNav">
-			  <li class="active"><a href="#hero_section" class="scroll-link">Home</a></li>
-			  <li><a href="#aboutUs" class="scroll-link">About Us</a></li>
-			  <li><a href="#service" class="scroll-link">Services</a></li>
-			  <li><a href="#Portfolio" class="scroll-link">Portfolio</a></li>
-			  <li><a href="#clients" class="scroll-link">Clients</a></li>
-			  <li><a href="#team" class="scroll-link">Team</a></li>
-			  <li><a href="#contact" class="scroll-link">Contact</a></li>
-			</ul>
-      </div>
-	 </nav>
-    </div>
-  </div>
-</header>
-<!--Header_section-->
-
-<!--Hero_Section-->
-<section id="hero_section" class="top_cont_outer">
-  <div class="hero_wrapper">
-    <div class="container">
-      <div class="hero_section">
-        <div class="row">
-          <div class="col-lg-5 col-sm-7">
-            <div class="top_left_cont zoomIn wow animated">
-              <h2>We create <strong>awesome</strong> web templates</h2>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text  printer took a galley of type and scrambled it to make a type specimen.</p>
-              <a href="#service" class="read_more2">Read more</a> </div>
-          </div>
-          <div class="col-lg-7 col-sm-5">
-			<img src="assets/img/main_device_image.png" class="zoomIn wow animated" alt="" />
-		  </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!--Hero_Section-->
-
-<section id="aboutUs"><!--Aboutus-->
-<div class="inner_wrapper">
-  <div class="container">
-    <h2>About Us</h2>
-    <div class="inner_section">
-	<div class="row">
-      <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-12 pull-right"><img src="assets/img/about-img.jpg" class="img-circle delay-03s animated wow zoomIn" alt=""></div>
-      	<div class=" col-lg-7 col-md-7 col-sm-7 col-xs-12 pull-left">
-        	<div class=" delay-01s animated fadeInDown wow animated">
-			<h3>Lorem Ipsum has been the industry's standard dummy text ever..</h3><br/>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.PageMaker including versions of Lorem Ipsum.</p> <br/>
-<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged like Aldus PageMaker including versions of Lorem Ipsum.</p>
-</div>
-<div class="work_bottom"> <span>Want to know more..</span> <a href="#contact" class="contact_btn">Contact Us</a> </div>
-	   </div>
-
-      </div>
+<body class="boxed-layout pb-40 pt-sm-0" data-bg-img="{{ asset('/images/pattern/p5.png') }}">
 
 
-    </div>
-  </div>
-  </div>
-</section>
-<!--Aboutus-->
+    <div id="wrapper" class="clearfix">
+        <!-- preloader -->
 
+        <!-- Header -->
 
-<!--Service-->
-<section  id="service">
-  <div class="container">
-    <h2>Services</h2>
-    <div class="service_wrapper">
-      <div class="row">
-        <div class="col-lg-4">
-          <div class="service_block">
-            <div class="service_icon delay-03s animated wow  zoomIn"> <span><i class="fa fa-android"></i></span> </div>
-            <h3 class="animated fadeInUp wow">Android</h3>
-            <p class="animated fadeInDown wow">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
-          </div>
-        </div>
-        <div class="col-lg-4 borderLeft">
-          <div class="service_block">
-            <div class="service_icon icon2  delay-03s animated wow zoomIn"> <span><i class="fa fa-apple"></i></span> </div>
-            <h3 class="animated fadeInUp wow">Apple IOS</h3>
-            <p class="animated fadeInDown wow">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
-          </div>
-        </div>
-        <div class="col-lg-4 borderLeft">
-          <div class="service_block">
-            <div class="service_icon icon3  delay-03s animated wow zoomIn"> <span><i class="fa fa-html5"></i></span> </div>
-            <h3 class="animated fadeInUp wow">Design</h3>
-            <p class="animated fadeInDown wow">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
-          </div>
-        </div>
-      </div>
-	   <div class="row borderTop">
-        <div class="col-lg-4 mrgTop">
-          <div class="service_block">
-            <div class="service_icon delay-03s animated wow  zoomIn"> <span><i class="fa fa-dropbox"></i></span> </div>
-            <h3 class="animated fadeInUp wow">Concept</h3>
-            <p class="animated fadeInDown wow">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
-          </div>
-        </div>
-        <div class="col-lg-4 borderLeft mrgTop">
-          <div class="service_block">
-            <div class="service_icon icon2  delay-03s animated wow zoomIn"> <span><i class="fa fa-slack"></i></span> </div>
-            <h3 class="animated fadeInUp wow">User Research</h3>
-            <p class="animated fadeInDown wow">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
-          </div>
-        </div>
-        <div class="col-lg-4 borderLeft mrgTop">
-          <div class="service_block">
-            <div class="service_icon icon3  delay-03s animated wow zoomIn"> <span><i class="fa fa-users"></i></span> </div>
-            <h3 class="animated fadeInUp wow">User Experience</h3>
-            <p class="animated fadeInDown wow">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!--Service-->
+        <header id="header" class="header">
+            <div class="header-top bg-deep xs-text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="widget no-border m-0">
 
-
-
-
-<!-- Portfolio -->
-<section id="Portfolio" class="content">
-
-  <!-- Container -->
-  <div class="container portfolio_title">
-
-    <!-- Title -->
-    <div class="section-title">
-      <h2>Portfolio</h2>
-    </div>
-    <!--/Title -->
-
-  </div>
-  <!-- Container -->
-
-  <div class="portfolio-top"></div>
-
-  <!-- Portfolio Filters -->
-  <div class="portfolio">
-
-    <div id="filters" class="sixteen columns">
-      <ul class="clearfix">
-        <li><a id="all" href="#" data-filter="*" class="active">
-          <h5>All</h5>
-          </a></li>
-        <li><a class="" href="#" data-filter=".prototype">
-          <h5>Prototype</h5>
-          </a></li>
-        <li><a class="" href="#" data-filter=".design">
-          <h5>Design</h5>
-          </a></li>
-        <li><a class="" href="#" data-filter=".android">
-          <h5>Android</h5>
-          </a></li>
-        <li><a class="" href="#" data-filter=".appleIOS">
-          <h5>Apple IOS</h5>
-          </a></li>
-        <li><a class="" href="#" data-filter=".web">
-          <h5>Web App</h5>
-          </a></li>
-      </ul>
-    </div>
-    <!--/Portfolio Filters -->
-
-    <!-- Portfolio Wrapper -->
-    <div class="isotope fadeInLeft animated wow" style="position: relative; overflow: hidden; height: 480px;" id="portfolio_wrapper">
-
-      <!-- Portfolio Item -->
-      <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;" class="portfolio-item one-four   appleIOS isotope-item">
-        <div class="portfolio_img"> <img src="assets/img/portfolio_pic1.jpg"  alt="Portfolio 1"> </div>
-        <div class="item_overlay">
-          <div class="item_info">
-            <h4 class="project_name">SMS Mobile App</h4>
-          </div>
-        </div>
-        </div>
-      <!--/Portfolio Item -->
-
-      <!-- Portfolio Item-->
-      <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(337px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;" class="portfolio-item one-four  design isotope-item">
-        <div class="portfolio_img"> <img src="assets/img/portfolio_pic2.jpg" alt="Portfolio 1"> </div>
-        <div class="item_overlay">
-          <div class="item_info">
-            <h4 class="project_name">Finance App</h4>
-          </div>
-        </div>
-      </div>
-      <!--/Portfolio Item -->
-
-      <!-- Portfolio Item -->
-      <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(674px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;" class="portfolio-item one-four  design  isotope-item">
-        <div class="portfolio_img"> <img src="assets/img/portfolio_pic3.jpg" alt="Portfolio 1"> </div>
-        <div class="item_overlay">
-          <div class="item_info">
-            <h4 class="project_name">GPS Concept</h4>
-          </div>
-        </div>
-      </div>
-      <!--/Portfolio Item-->
-
-      <!-- Portfolio Item-->
-      <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(1011px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;" class="portfolio-item one-four  android  prototype web isotope-item">
-        <div class="portfolio_img"> <img src="assets/img/portfolio_pic4.jpg" alt="Portfolio 1"> </div>
-        <div class="item_overlay">
-          <div class="item_info">
-            <h4 class="project_name">Shopping</h4>
-          </div>
-        </div>
-      </div>
-      <!-- Portfolio Item -->
-
-      <!-- Portfolio Item -->
-      <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 240px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;" class="portfolio-item one-four  design isotope-item">
-        <div class="portfolio_img"> <img src="assets/img/portfolio_pic5.jpg" alt="Portfolio 1"> </div>
-        <div class="item_overlay">
-          <div class="item_info">
-            <h4 class="project_name">Managment</h4>
-          </div>
-        </div>
-      </div>
-      <!--/Portfolio Item -->
-
-      <!-- Portfolio Item -->
-      <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(337px, 240px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;" class="portfolio-item one-four  web isotope-item">
-        <div class="portfolio_img"> <img src="assets/img/portfolio_pic6.jpg" alt="Portfolio 1"> </div>
-        <div class="item_overlay">
-          <div class="item_info">
-            <h4 class="project_name">iPhone</h4>
-          </div>
-        </div>
-      </div>
-      <!--/Portfolio Item -->
-
-      <!-- Portfolio Item  -->
-      <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(674px, 240px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;" class="portfolio-item one-four  design web isotope-item">
-        <div class="portfolio_img"> <img src="assets/img/portfolio_pic7.jpg" alt="Portfolio 1"> </div>
-        <div class="item_overlay">
-          <div class="item_info">
-            <h4 class="project_name">Nexus Phone</h4>
-          </div>
-        </div>
-       </div>
-      <!--/Portfolio Item -->
-
-      <!-- Portfolio Item -->
-      <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(1011px, 240px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;" class="portfolio-item one-four   android isotope-item">
-        <div class="portfolio_img"> <img src="assets/img/portfolio_pic8.jpg" alt="Portfolio 1"> </div>
-        <div class="item_overlay">
-          <div class="item_info">
-				<h4 class="project_name">Android</h4>
-          </div>
-        </div>
-        </a> </div>
-      <!--/Portfolio Item -->
-
-    </div>
-    <!--/Portfolio Wrapper -->
-
-  </div>
-  <!--/Portfolio Filters -->
-
-  <div class="portfolio_btm"></div>
-
-
-  <div id="project_container">
-    <div class="clear"></div>
-    <div id="project_data"></div>
-  </div>
-
-
-</section>
-<!--/Portfolio -->
-
-<section class="page_section" id="clients"><!--page_section-->
-  <h2>Clients</h2>
-<!--page_section-->
-<div class="client_logos"><!--client_logos-->
-  <div class="container">
-    <ul class="fadeInRight animated wow">
-      <li><a href="javascript:void(0)"><img src="assets/img/client_logo1.png" alt=""></a></li>
-      <li><a href="javascript:void(0)"><img src="assets/img/client_logo2.png" alt=""></a></li>
-      <li><a href="javascript:void(0)"><img src="assets/img/client_logo3.png" alt=""></a></li>
-      <li><a href="javascript:void(0)"><img src="assets/img/client_logo5.png" alt=""></a></li>
-    </ul>
-  </div>
-</div>
-</section>
-<!--client_logos-->
-
-<section class="page_section team" id="team"><!--main-section team-start-->
-  <div class="container">
-    <h2>Team</h2>
-    <h6>Lorem ipsum dolor sit amet, consectetur adipiscing.</h6>
-    <div class="team_section clearfix">
-      <div class="team_area">
-        <div class="team_box wow fadeInDown delay-03s">
-          <div class="team_box_shadow"><a href="javascript:void(0)"></a></div>
-          <img src="assets/img/team_pic1.jpg" alt="">
-          <ul>
-            <li><a href="javascript:void(0)" class="fa fa-twitter"></a></li>
-            <li><a href="javascript:void(0)" class="fa fa-facebook"></a></li>
-            <li><a href="javascript:void(0)" class="fa fa-pinterest"></a></li>
-            <li><a href="javascript:void(0)" class="fa fa-google-plus"></a></li>
-          </ul>
-        </div>
-        <h3 class="wow fadeInDown delay-03s">Tom Rensed</h3>
-        <span class="wow fadeInDown delay-03s">Chief Executive Officer</span>
-        <p class="wow fadeInDown delay-03s">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consequat sollicitudin cursus. Dolor sit amet, consectetur adipiscing elit proin consequat.</p>
-      </div>
-      <div class="team_area">
-        <div class="team_box  wow fadeInDown delay-06s">
-          <div class="team_box_shadow"><a href="javascript:void(0)"></a></div>
-          <img src="assets/img/team_pic2.jpg" alt="">
-          <ul>
-            <li><a href="javascript:void(0)" class="fa fa-twitter"></a></li>
-            <li><a href="javascript:void(0)" class="fa fa-facebook"></a></li>
-            <li><a href="javascript:void(0)" class="fa fa-pinterest"></a></li>
-            <li><a href="javascript:void(0)" class="fa fa-google-plus"></a></li>
-          </ul>
-        </div>
-        <h3 class="wow fadeInDown delay-06s">Kathren Mory</h3>
-        <span class="wow fadeInDown delay-06s">Vice President</span>
-        <p class="wow fadeInDown delay-06s">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consequat sollicitudin cursus. Dolor sit amet, consectetur adipiscing elit proin consequat.</p>
-      </div>
-      <div class="team_area">
-        <div class="team_box wow fadeInDown delay-09s">
-          <div class="team_box_shadow"><a href="javascript:void(0)"></a></div>
-          <img src="assets/img/team_pic3.jpg" alt="">
-          <ul>
-            <li><a href="javascript:void(0)" class="fa fa-twitter"></a></li>
-            <li><a href="javascript:void(0)" class="fa fa-facebook"></a></li>
-            <li><a href="javascript:void(0)" class="fa fa-pinterest"></a></li>
-            <li><a href="javascript:void(0)" class="fa fa-google-plus"></a></li>
-          </ul>
-        </div>
-        <h3 class="wow fadeInDown delay-09s">Lancer Jack</h3>
-        <span class="wow fadeInDown delay-09s">Senior Manager</span>
-        <p class="wow fadeInDown delay-09s">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consequat sollicitudin cursus. Dolor sit amet, consectetur adipiscing elit proin consequat.</p>
-      </div>
-    </div>
-  </div>
-</section>
-<!--/Team-->
-<!--Footer-->
-<footer class="footer_wrapper" id="contact">
-  <div class="container">
-    <section class="page_section contact" id="contact">
-      <div class="contact_section">
-        <h2>Contact Us</h2>
-        <div class="row">
-          <div class="col-lg-4">
-
-          </div>
-          <div class="col-lg-4">
-
-          </div>
-          <div class="col-lg-4">
-
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-4 wow fadeInLeft">
-		 <div class="contact_info">
-                            <div class="detail">
-                                <h4>UNIQUE Infoway</h4>
-                                <p>104, Some street, NewYork, USA</p>
-                            </div>
-                            <div class="detail">
-                                <h4>call us</h4>
-                                <p>+1 234 567890</p>
-                            </div>
-                            <div class="detail">
-                                <h4>Email us</h4>
-                                <p>support@sitename.com</p>
                             </div>
                         </div>
+                        <div class="col-md-9">
+                            <div class="widget no-border m-0">
+                                <ul class="styled-icons icon-dark icon-circled icon-theme-colored icon-sm text-right">
+                                    <li style="vertical-align: middle;"><span style="line-height: 30px;">Присоединяйтесь:</span></li>
+                                    <li style="vertical-align: middle;"><a target="_blank" href="https://vk.com/bhaktilata"><i class="fa fa-vk"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-nav">
+                <div class="header-nav-wrapper navbar-scrolltofixed bg-lightest" style="z-index: 1000;">
+                    <div class="container">
+                        <nav id="menuzord" class="menuzord default bg-lightest menuzord-responsive">
+                            <a class="menuzord-brand pull-left flip xs-pull-center mt-10" href="/">
+                                <img src="/images/logo-wide.png" alt="">
+                            </a>
+                            <ul class="menuzord-menu">
+    <li class=" ">
+        <a href="https://iskconclub.ru" >Сайт отдела</a>
+                        </li>
+    <li class=" ">
+        <a href="https://iskconclub.ru/clubcontact.html" >Связь с нами</a>
+                        </li>
+</ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
 
-
-
-          <ul class="social_links">
-            <li class="twitter animated bounceIn wow delay-02s"><a href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
-            <li class="facebook animated bounceIn wow delay-03s"><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
-            <li class="pinterest animated bounceIn wow delay-04s"><a href="javascript:void(0)"><i class="fa fa-pinterest"></i></a></li>
-            <li class="gplus animated bounceIn wow delay-05s"><a href="javascript:void(0)"><i class="fa fa-google-plus"></i></a></li>
-          </ul>
-        </div>
-        <div class="col-lg-8 wow fadeInLeft delay-06s">
-          <div class="form">
-            <input class="input-text" type="text" name="" value="Your Name *" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">
-            <input class="input-text" type="text" name="" value="Your E-mail *" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">
-            <textarea class="input-text text-area" cols="0" rows="0" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;">Your Message *</textarea>
-            <input class="input-btn" type="submit" value="send message">
-          </div>
-        </div>
+        <!-- Start main-content -->
+        <div class="main-content">
+    <section>
+        <div class="container">
+            <div class="content"></div></div>
+<section data-bg-img="/images/pattern/p50.png" data-margin-top="-119px">
+<div class="section-title text-center">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+    <br><br>
+      <h1 class="mt-0">Ваш формат участия</h1>
+      <div class="title-icon">
+        <i class="fa fa-heart fa-3x"></i>
       </div>
+      <br><br><p></p>
+    </div>
+  </div>
+</div>
+</section>
+<div id="register" class="panel panel-default col-md-12">
+<p><h3 class="widget-title line-bottom">Как это работает?</h3></p>
+<p align="center"><h4>Спасибо вам, что подумываете стать частью нашего клуба. Этот клуб создан специально для тех, для кого слова "образование", "обучение", "наставничество" и "воспитание" - не пустой звук, но он считает их ключевой составляющей нашего социума, и потому хочет сам лучше понять принципы, на которых оно основано, и поддержать наши начинания в данной области с точки зрения восточной культуры.</h4></p>
+<br><br>
+<p><h3 class="widget-title line-bottom">Как это работает?</h3></p>
+<div class="row">
+<div class="panel panel-default col-md-10 col-md-offset-1">
+<br>
+<div class="row">
+<div class="col-md-9">
+<h3><strong>1.</strong> Вы выбираете комфортный формат Вашего участия (сумму).</h3>
+<br>
+<h3><strong>2.</strong> Вводите данные банковской карточки / электронных денег. Включая международные банки.</h3>
+<br>
+<h3><strong>3.</strong> Выбираете, если хотите, автоплатеж - все Ваши перечисления в будущем будут легко и удобно списываться автоматически!</h3>
+<br>
+<h3><strong>4.</strong> Отказаться от автоплатежа можно в любое время!</h3>
+</div>
+<div class="col-md-3">
+<img class="img-fullwidth" src="/images/bank.jpg" alt="...">
+</div>
+</div>
+
+</div></div>
+<br>
+<br>
+<p><h3 class="widget-title line-bottom">Выберите формат своего участия:</h3></p>
+<div class="row">
+
+<div class="thumbnail col-md-2"> <a href="#"><img class="img-fullwidth" src="/images/abl2.jpg" alt="..."></a>
+  <div class="caption text-center">
+    <h3>Спасибо!</h3>
+    <p>1000 руб.</p>
+    <p><a href="#" class="btn btn-theme-colored btn-flat" role="button">Выбрать</a></p>
+  </div>
+    <h5><strong>Бонус:</strong></h5>
+    <ul class="list table-list theme-colored check-circle">
+    <li>Возможность послужить в миссии;</li>
+    <li>Благодарственная грамота;</li>
+    </ul>
+  </div>
+
+<div class="thumbnail col-md-2"> <a href="#"><img class="img-fullwidth" src="/images/photo22.jpg" alt="..."></a>
+  <div class="caption text-center">
+    <h3>Доброжелатель</h3>
+    <p>250 руб./мес.</p>
+    <p><a href="#" class="btn btn-theme-colored btn-flat" role="button">Выбрать</a></p>
+  </div>
+    <h5><strong>Бонус:</strong></h5>
+    <ul class="list table-list theme-colored check-circle">
+    <li>Бонус участника "Спасибо";</li>
+    <li>Ежемесячный вебинар об образовании (1);</li>
+    </ul>
+</div>
+
+<div class="thumbnail col-md-2"> <a href="#"><img class="img-fullwidth" src="/images/abl3.jpg" alt="..."></a>
+  <div class="caption text-center">
+    <h3>Помощник</h3>
+    <p>500 руб./мес.</p>
+    <p><a href="#" class="btn btn-theme-colored btn-flat" role="button">Выбрать</a></p>
+</div>
+    <h5><strong>Бонус:</strong></h5>
+    <ul class="list table-list theme-colored check-circle">
+    <li>Бонус участника "Доброжелатель";</li>
+    <li>Участие в чате WhatsApp (2);</li>
+    </ul>
+</div>
+
+<div class="thumbnail col-md-2"> <a href="#"><img class="img-fullwidth" src="/images/abl4.jpg" alt="..."></a>
+  <div class="caption text-center">
+    <h3>Единомышленник</h3>
+    <p>1000 руб./мес.</p>
+    <p><a href="#" class="btn btn-theme-colored btn-flat" role="button">Выбрать</a></p>
+  </div>
+    <h5><strong>Бонус:</strong></h5>
+    <ul class="list table-list theme-colored check-circle">
+    <li>Бонус участника "Помощник";</li>
+    <li>Имя на доске участников клуба (3);</li>
+    </ul>
+</div>
+
+<div class="thumbnail col-md-2"> <a href="#"><img class="img-fullwidth" src="/images/photo5.jpg" alt="..."></a>
+  <div class="caption text-center">
+    <h3>Соратник</h3>
+    <p>2500 руб./мес.</p>
+    <p><a href="#" class="btn btn-theme-colored btn-flat" role="button">Выбрать</a> </p>
+</div>
+    <h5><strong>Бонус:</strong></h5>
+    <ul class="list table-list theme-colored check-circle">
+    <li>Бонус участника "Единомышленник";</li>
+    <li>Бесплатные онлайн-курсы нашего отдела (4);</li>
+    </ul>
+</div>
+
+<div class="thumbnail col-md-2"> <a href="#"><img class="img-fullwidth" src="/images/abl1.jpg" alt="..."></a>
+  <div class="caption text-center">
+    <h3>Попечитель</h3>
+    <p>5000 руб./мес.</p>
+    <p><a href="#" class="btn btn-theme-colored btn-flat" role="button">Выбрать</a></p>
+</div>
+    <h5><strong>Бонус:</strong></h5>
+    <ul class="list table-list theme-colored check-circle">
+    <li>Бонус участника "Соратник";</li>
+    <li>Бесплатное обучение в Индии (5);</li>
+    </ul>
+    </div>
+</div>
+
+<div class="row">
+<div class="col-md-8 col-md-offset-2 text-center">
+    <p>Нажимая кнопку "Выбрать" Вы соглашаетесь с <a class="text-theme-colored" style="cursor: pointer;" href="/oferta1.pdf" target="_blank">публичной офертой.</a></p>
+    <p>Если вы хотите делать взносы большего размера - <a class="text-theme-colored" style="cursor: pointer;" href="skype:makarovta?add">напишите нам!</a></p>
+    </ul>
+<br><br>
+</div>
+</div>
+<p><h5 class="widget-title line-bottom"><strong>Пояснения к бонусам:</strong></h5></p>
+<div class="row">
+<div class="col-md-10 col-md-offset-1">
+<h5>(1) - Вы сможете участвовать в группе ВКонтакте, где 1 раз в месяц мы будем организовывать вебинары об образовании в ИСККОН, с ответами на Ваши вопросы;</h5>
+<h5>(2) - Вы сможете участвовать в чате в WhatsApp, где Вы сможете обсуждать вебинары и разные образовательные темы с другими участниками.</h5>
+<h5>(3) - Мы разместим Ваше имя в списке на странице <a href="https://поддержиотдел.рф" target="_blank">https://поддержиотдел.рф</a> </h5>
+<h5>(4) - Во время Вашего нахождения в данном статусе Вы сможете бесплатно участвовать в любом организованном нами онлайн-курсе, если соответствуете требованиям данного курса.</h5>
+<h5>(5) - Один раз за год пребывания в данном статусе Вы можете оформить бесплатное обучение на курсах Бхакти-шастр или Бхакти-вайбхавы во Вриндаванском/Маяпурском институтах, Вриндаванской академии или Маяпурской академии Бхактиведанты (без учета дороги, питания и проживания) на себя или кого-то из членов вашей семьи, минимальное время нахождения в данном статусе перед подачей запроса - 6 мес.</h5>
+</div></div>
+<br><br>
+<p><h5 class="widget-title line-bottom"><strong>Частые вопросы:</strong></h5></p>
+<div class="row">
+<div class="col-md-10 col-md-offset-1">
+<div id="accordion1" class="panel-group accordion transparent">
+  <div class="panel">
+    <div class="panel-title"> <a class="collapsed" data-parent="#accordion1" data-toggle="collapse" href="#accordion11" aria-expanded="false"> <span class="open-sub"></span>Куда пойдут деньги?</a> </div>
+    <div id="accordion11" class="panel-collapse collapse" role="tablist" aria-expanded="false" style="height: 0px;">
+      <div class="panel-content">
+        <p>Деятельность происходит от лица ИП, который направит вырученные финансы на развитие образовательной деятельности в нашем социуме.</p>
+      </div>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-title"> <a class="collapsed" data-parent="#accordion1" data-toggle="collapse" href="#accordion12" aria-expanded="false"> <span class="open-sub"></span>Какая есть отчетность по финансам?</a> </div>
+    <div id="accordion12" class="panel-collapse collapse" role="tablist" aria-expanded="false" style="height: 0px;">
+      <div class="panel-content">
+        <p>Все данные по доходам предоставляются в налоговую инспекцию России. Информацию по доходам и расходам мы также будем предоставлять представителю Джи-Би-Си, а периодически делать открытые отчеты для всех участников нашей программы.</p>
+      </div>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-title"> <a data-parent="#accordion1" data-toggle="collapse" href="#accordion13" class="" aria-expanded="true"> <span class="open-sub"></span> Почему вы зарегистрированы как ИП?</a> </div>
+    <div id="accordion13" class="panel-collapse collapse" role="tablist" aria-expanded="true">
+      <div class="panel-content">
+        <p>Это связано с упрощением нашей работы с юридически-правовой точки зрения.</p>
+      </div>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-title"> <a class="collapsed" data-parent="#accordion1" data-toggle="collapse" href="#accordion14" aria-expanded="false"> <span class="open-sub"></span>Если я оставлю данные карты, Вы не снимете с меня больше положенного?</a> </div>
+    <div id="accordion14" class="panel-collapse collapse" role="tablist" aria-expanded="false" style="height: 0px;">
+      <div class="panel-content">
+        <p>Нет. Данные сохраняются в банке, а не у нас, и платеж будет делаться именно той суммы, что Вы указали.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div></div>
+</div></div>
+        </div>
     </section>
-  </div>
-  <div class="container">
-    <div class="footer_bottom"><span>Copyright © 2014,    Template by <a href="http://webthemez.com">WebThemez.com</a>. </span> </div>
-  </div>
-</footer>
+        </div>
+        <!-- end main-content -->
 
-<script type="text/javascript" src="assets/js/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="assets/js/jquery-scrolltofixed.js"></script>
-<script type="text/javascript" src="assets/js/jquery.nav.js"></script>
-<script type="text/javascript" src="assets/js/jquery.easing.1.3.js"></script>
-<script type="text/javascript" src="assets/js/jquery.isotope.js"></script>
-<script type="text/javascript" src="assets/js/wow.js"></script>
-<script type="text/javascript" src="assets/js/custom.js"></script>
+        <!-- Footer -->
+        <footer id="footer" class="footer pb-0 bg-black-111">
+            <div class="container pt-70 pb-40">
+                <div class="row multi-row-clearfix">
+                    <div class="col-sm-6 col-md-3" style="text-align:center;">
+                        <div class="widget dark"> <img alt="" src="/images/logo-wide2.png">
+                            <ul class="styled-icons icon-dark mt-20" style="display:inline-block">
+                                <li><a href="https://vk.com/bhaktilata" data-bg-color="#3B5998" style="background: rgb(59, 89, 152) none repeat scroll 0% 0% !important;"><i class="fa fa-vk"></i></a></li>
+                                <li><a href="https://www.youtube.com/channel/UCJqCv7PHvvKTBEYSy9_Rveg?spfreload=10" data-bg-color="#C22E2A" style="background: rgb(194, 46, 42) none repeat scroll 0% 0% !important;"><i class="fa fa-youtube"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                    <br><br>
+                    <p style="font-size: 10px; color: #fff;">Соединение с платежным шлюзом и передача информации осуществляется в защищенном режиме с использованием протокола шифрования SSL. В случае если Ваш банк поддерживает технологию безопасного проведения интернет-платежей Verified By Visa или MasterCard SecureCode для проведения платежа также может потребоваться ввод специального пароля.</p>
+<p style="font-size: 10px; color: #fff;">Настоящий сайт поддерживает 256-битное шифрование. Введенная информация не будет предоставлена третьим лицам за исключением случаев, предусмотренных законодательством РФ. Проведение платежей по банковским картам осуществляется в строгом соответствии с требованиями платежных систем МИР, Visa Int. и MasterCard Europe Sprl.</p>
 
+                    </div>
+                </div>
+            </div>
+            <div class="footer-nav bg-black-222 p-20">
+                <div class="row text-center">
+                    <div class="col-md-12">
+                        <p class="text-white font-11 m-0">© 2017, Бхакти-лата. Все права защищены.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
+    </div>
+    <script src="/js/custom.js"></script>
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function (d, w, c) {
+            (w[c] = w[c] || []).push(function() {
+                try {
+                    w.yaCounter46106202 = new Ya.Metrika({
+                        id:46106202,
+                        clickmap:true,
+                        trackLinks:true,
+                        accurateTrackBounce:true
+                    });
+                } catch(e) { }
+            });
+
+            var n = d.getElementsByTagName("script")[0],
+                s = d.createElement("script"),
+                f = function () { n.parentNode.insertBefore(s, n); };
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+            if (w.opera == "[object Opera]") {
+                d.addEventListener("DOMContentLoaded", f, false);
+            } else { f(); }
+        })(document, window, "yandex_metrika_callbacks");
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/46106202" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
 </body>
 </html>
