@@ -72,8 +72,9 @@
 
 
                 <div id="register" class="panel panel-default col-md-12">
-                    <p><h3 class="widget-title line-bottom">Отправка формы</h3>
-                    </p>
+                  <p><h3 class="widget-title line-bottom">Отправка формы</h3></p>
+					        <p></p>
+                  <p>Автоматическое перенаправление на платежный шлюз...</p>
 
                     <div class="col-md-6">
 
@@ -87,8 +88,8 @@
                          <input type=hidden name=Receipt value={{$Receipt}}>
                          <input type=hidden name=Recurring value="{{$Recurring}}">
                          <input type=hidden name=Culture value="ru">
-                         <input type=hidden name=IsTest value="1">
-                         <input type=submit value='Перейти на платежный шлюз'>
+                         <input type=hidden name=IsTest value="{{$IsTest}}">
+                         <input type=submit value='Перейти на платежный шлюз вручную'>
                          </form>
                          <script type="text/javascript">
                               setTimeout(function() {

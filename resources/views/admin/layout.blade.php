@@ -131,50 +131,27 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{route('admin.settings')}}">
+                        <i class="fa fa-sliders" aria-hidden="true"></i> <span>Настройки магазина</span>
+                    </a>
+                </li>
+
+                <li>
                     <a href="/admin/pages">
-                        <i class="fa fa-paperclip"></i> <span>Страницы</span>
+                        <i class="fa fa-users" aria-hidden="true"></i> <span>Администраторы</span>
                     </a>
                 </li>
                 <li>
                     <a href="">
-                        <i class="fa fa-quote-right"></i> <span>Цитата дня</span>
+                        <i class="fa fa-universal-access" aria-hidden="true"></i> <span>Жертвователи</span>
                     </a>
                 </li>
                 <li>
                     <a href="">
-                        <i class="fa fa-list-alt"></i> <span>Контакты</span>
+                        <i class="fa fa-rub" aria-hidden="true"></i> <span>Платежи</span>
                     </a>
                 </li>
-                <li>
-                    <a href="">
-                        <i class="fa fa-newspaper-o"></i> <span>Новости</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <i class="fa fa-file-text-o"></i> <span>Статьи</span>
-                    </a>
-                </li>
-                {{--<li>
-                    <a href="{{route('admin.courses.events.list')}}">
-                        <i class="fa fa-th-list"></i> <span>Расписание курсов</span>
-                    </a>
-                </li>--}}
-                <li>
-                    <a href="">
-                        <i class="fa fa-th-list"></i> <span>Расписание курсов</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{route('admin.formats.index')}}">
-                        <i class="fa fa-file-o"></i> <span>Документы</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <i class="fa fa-caret-square-o-right"></i> <span>Видео и вебинары</span>
-                    </a>
-                </li>
+                
             </ul>
         </section>
         <!-- /.sidebar -->

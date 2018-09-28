@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Format;
 use App\Donator;
 use App\Payment;
+use App\Setting;
 
 class InDexController extenDs Controller
 {
@@ -64,15 +65,18 @@ class InDexController extenDs Controller
 
     $payment_id = $payment->id;
 
-    // регистрационная информация (Идентификатор магазина, пароль #1)
-      $mrh_login = "iskconclub";
-      $mrh_pass1 = "TB4fw1ybFl8Bv0az8vUa";
+    $setting = Setting::first();
 
+    // регистрационная информация (Идентификатор магазина, пароль #1)
+      $mrh_login = $setting->mrh_login;
+
+      if($setting->test_mode == 1)$mrh_pass1 = $setting->test_pass1;
+      else $mrh_pass1 = $setting->mrh_pass1;
       // номер заказа
       $inv_id = $payment_id;
 
       // описание заказа
-      $inv_desc = "Участие в вебинарах и курсах";
+      $inv_desc = $setting->inv_desc;
 
       // сумма заказа
       $out_summ = $request->summ;
@@ -88,7 +92,10 @@ class InDexController extenDs Controller
       $receipt = urlencode($receipt);
 
       //Периодический платеж ()
-      $Recurring = true;
+      $Recurring = false;
+
+      if($setting->test_mode == 1)$IsTest = true;
+      else $IsTest = false;
 
       // формирование подписи
       $crc  = md5("$mrh_login:$out_summ:$inv_id:$receipt:$mrh_pass1");
@@ -102,7 +109,8 @@ class InDexController extenDs Controller
           'crc' => $crc,
           'Email' => $Email,
           'Receipt' => $receipt,
-          'Recurring' => $Recurring
+          'Recurring' => $Recurring,
+          'IsTest' => $IsTest
       ]);
     }
 
