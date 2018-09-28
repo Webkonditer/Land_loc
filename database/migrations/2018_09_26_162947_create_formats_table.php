@@ -18,7 +18,7 @@ class CreateFormatsTable extends Migration
           $table->integer('position');
           $table->string('image',255);
           $table->string('name',100);
-          $table->string('summ',150);
+          $table->integer('summ');
           $table->string('monthly',255);
           $table->string('bonus_1',255);
           $table->string('bonus_2',255);

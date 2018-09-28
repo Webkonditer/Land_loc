@@ -13,8 +13,10 @@
 
 Route::group(['middlevare'=>'web'], function () {
     Route::match(['get','post'],'/',['uses'=>'IndexController@execute','as'=>'home']);
-
-    Route::auth();
+    Route::get('/form/{id}', 'IndexController@forms')->name('form');
+    Route::post('/form_check', 'IndexController@form_check')->name('form_check');
+    Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+    //Route::auth();
 });
 
 
@@ -31,4 +33,4 @@ Route::group(['prefix'=>'admin','middlevare'=>'auth'], function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
