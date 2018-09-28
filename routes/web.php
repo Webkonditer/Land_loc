@@ -27,6 +27,9 @@ Route::group(['prefix'=>'admin','middlevare'=>'auth'], function () {
       //Route::get('/dashboard', 'DashboardController@index')->name('admin.dashboard');
       Route::resource('/formats', 'FormatController', ['as'=>'admin']);
   		Route::get('/formats/{format}/delete', 'FormatController@destroy')->name('admin.formats.delete');
+
+      Route::post('/setting/{setting}/update', 'settingController@update')->name('admin.setting.update');
+      Route::get('/setting', 'settingController@execute')->name('admin.settings');
 });
 
 
