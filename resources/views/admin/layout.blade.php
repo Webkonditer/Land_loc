@@ -144,7 +144,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{route('admin.donators')}}">
                         <i class="fa fa-universal-access" aria-hidden="true"></i> <span>Жертвователи</span>
                     </a>
                 </li>

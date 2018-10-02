@@ -31,10 +31,18 @@ Route::group(['prefix'=>'admin','middlevare'=>'auth'], function () {
       Route::post('/setting/{setting}/update', 'settingController@update')->name('admin.setting.update');
       Route::get('/setting', 'settingController@execute')->name('admin.settings');
 
+      Route::get('/administrators', 'AdminController@execute')->name('admin.administrators');
       Route::post('/administrators/create', 'AdminController@create')->name('admin.administrator.create');
       Route::post('/administrators/{user}/update', 'AdminController@update')->name('admin.administrator.update');
       Route::post('/administrators/{user}/delete', 'AdminController@destroy')->name('admin.administrator.delete');
-      Route::get('/administrators', 'AdminController@execute')->name('admin.administrators');
+
+      Route::get('/donators/{sort}', 'DonatorsController@execute_sort')->name('admin.donators.sort');
+      Route::get('/donators/monthly/{sort}', 'DonatorsController@execute_monthly')->name('admin.donators.sort.monthly');
+      Route::get('/donators/one_time/{sort}', 'DonatorsController@execute_one_time')->name('admin.donators.sort.one_time');
+      Route::get('/donators', 'DonatorsController@execute')->name('admin.donators');
+      Route::post('/donators/create', 'DonatorsController@create')->name('admin.donator.create');
+      Route::post('/donators/{donator}/update', 'DonatorsController@update')->name('admin.donator.edit');
+      Route::post('/donators/{donator}/delete', 'DonatorsController@destroy')->name('admin.donator.delete');
 });
 
 

@@ -44,12 +44,14 @@ class InDexController extenDs Controller
       'format_name' => 'required|string|max:60',
       'name' => 'required|string|max:100',
       'email' => 'required|email',
+      'city' => 'required|string|max:100',
       'summ' => 'required|integer',
       'monthly' => 'required|string|max:60',
     ]);
 
     $donator->name = $request->name;
     $donator->email = $request->email;
+    $donator->city = $request->city;
     $donator->format_name = $request->format_name;
     if($request->monthly == "Ежемесячно")$donator->monthly = "Ежемесячно"; else $donator->monthly = "Разово";
     $donator->summ = $request->summ;
@@ -92,8 +94,10 @@ class InDexController extenDs Controller
       $receipt = urlencode($receipt);
 
       //Периодический платеж ()
-      $Recurring = false;
+      if($request->monthly == "Ежемесячно") $Recurring = true;
+      else $Recurring = false;
 
+      //Тестовый режим
       if($setting->test_mode == 1)$IsTest = true;
       else $IsTest = false;
 

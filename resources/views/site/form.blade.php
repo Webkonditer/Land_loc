@@ -109,19 +109,26 @@
                                 </div>
                                 @endif
 
-                                <div class="form-group">
-                                    <label for="name" class="col-form-label">Ваши фамилия, имя и отчество</label>
-                                    <div>
-                                        <input lang="ru" type="text" id="name" name="name" required="required" class="form-control" />
-                        </div>
+                                    <div class="form-group">
+                                        <label for="name" class="col-form-label">Ваши фамилия, имя и отчество</label>
+                                        <div>
+                                            <input lang="ru" type="text" id="name" name="name" required="required" class="form-control" />
+                                        </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="email" class="col-form-label">Ваш адрес электронной почты</label>
+                                        <label for="email" class="col-form-label">Ваш Email</label>
                                         <div>
                                             <input type="email" id="email" name="email" required="required" class="form-control" />
-                        </div>
                                         </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="name" class="col-form-label">Ваш город</label>
+                                        <div>
+                                            <input lang="ru" type="text" id="city" name="city" required="required" class="form-control" />
+                                        </div>
+                                    </div>
 
                                         <div class="form-group">
                                             <div class="checkbox">
@@ -199,6 +206,8 @@
             if ($('#name').val() != '') $("#name").get(0).setCustomValidity('');
             $("#email").get(0).setCustomValidity('Введите, пожалуйста, корректный адрес электронной почты.');
             if ($("#email").val().search(pattern) == 0) $("#email").get(0).setCustomValidity('');
+            $("#city").get(0).setCustomValidity('Введите, пожалуйста, Ваш город.');
+            if ($("#city").val() != '') $("#city").get(0).setCustomValidity('');
             $("#pers").get(0).setCustomValidity('Для продолжения необходимо согласиться на обработку Ваших персональных даных.');
             if ($('#pers').is(':checked')) $("#pers").get(0).setCustomValidity('');
         }
