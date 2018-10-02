@@ -30,6 +30,11 @@ Route::group(['prefix'=>'admin','middlevare'=>'auth'], function () {
 
       Route::post('/setting/{setting}/update', 'settingController@update')->name('admin.setting.update');
       Route::get('/setting', 'settingController@execute')->name('admin.settings');
+
+      Route::post('/administrators/create', 'AdminController@create')->name('admin.administrator.create');
+      Route::post('/administrators/{user}/update', 'AdminController@update')->name('admin.administrator.update');
+      Route::post('/administrators/{user}/delete', 'AdminController@destroy')->name('admin.administrator.delete');
+      Route::get('/administrators', 'AdminController@execute')->name('admin.administrators');
 });
 
 
