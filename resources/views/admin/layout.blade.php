@@ -23,6 +23,8 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="/admin/AdminLTE/dist/css/skins/_all-skins.min.css">
+    <!-- jQuery 3 -->
+    <script src="/admin/AdminLTE/node_modules/jquery/dist/jquery.min.js"></script>
 
 
     {{--
@@ -137,12 +139,12 @@
                 </li>
 
                 <li>
-                    <a href="/admin/pages">
+                    <a href="{{route('admin.administrators')}}">
                         <i class="fa fa-users" aria-hidden="true"></i> <span>Администраторы</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{route('admin.donators')}}">
                         <i class="fa fa-universal-access" aria-hidden="true"></i> <span>Жертвователи</span>
                     </a>
                 </li>
@@ -151,7 +153,7 @@
                         <i class="fa fa-rub" aria-hidden="true"></i> <span>Платежи</span>
                     </a>
                 </li>
-                
+
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -187,8 +189,7 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- jQuery 3 -->
-<script src="/admin/AdminLTE/node_modules/jquery/dist/jquery.min.js"></script>
+
 <!-- Bootstrap 3.3.7 -->
 <script src="/admin/AdminLTE/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- FastClick -->
