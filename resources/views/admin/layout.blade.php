@@ -149,7 +149,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{route('admin.payments')}}">
                         <i class="fa fa-rub" aria-hidden="true"></i> <span>Платежи</span>
                     </a>
                 </li>
