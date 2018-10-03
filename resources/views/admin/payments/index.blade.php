@@ -40,7 +40,7 @@
                 @forelse($payments  as $payment)
                 <tr role="row" >
                     <td style="vertical-align:middle">{{ $payment->id }}</td>
-                    <td style="vertical-align:middle">{{ $payment->donator_id }}</td>
+                    <td style="vertical-align:middle"><a href="{{ route('admin.payments.id', ['id' => $payment->donator_id]) }}">{{ $payment->donator_id }}</a></td>
                     <td style="vertical-align:middle">{{ $payment->format_id }}</td>
                     <td style="vertical-align:middle">{{ $payment->summ }}</td>
                     <td style="vertical-align:middle">{{ $payment->monthly }}</td>

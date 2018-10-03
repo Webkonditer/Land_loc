@@ -93,10 +93,10 @@
                     <p><h3 class="widget-title line-bottom">Заполните пожалуйста форму</h3>
                     </p>
 
-                    <div class="col-md-6">
+
                         <form role="form" name="edit" enctype="multipart/form-data" action="{{ route('form_check')}}" method="POST">
                             @csrf
-
+                            <div class="col-md-6">
                             <fieldset>
 
                                 @if  ($errors->any())
@@ -133,11 +133,29 @@
                                         <div class="form-group">
                                             <div class="checkbox">
                                                 <label for="is_opened">
-                            <input id="pers" name="pers" required="required" type="checkbox"> &nbsp; Даю согласие на обработку моих персональных данных
-                        </label>
+                                                    <input id="pers" name="pers" required="required" type="checkbox"> &nbsp; Даю согласие на обработку моих персональных данных
+                                                </label>
                                             </div>
                                         </div>
-
+                                        </div>
+                                      @if ($format->monthly == "Ежемесячно")
+                                        <div class="col-md-6">
+                                        <label for="name" class="col-form-label">Условия подписки:</label>
+                                        <p>Сумма платежа - {{$format->summ}} рублей.</p>
+                                        <p>Периодичность списаний - ежемесячно в то число месяца, когда сделан первый платеж.</p>
+                                        <p>Отказаться от подписки Вы можете в любое время по Вашему желанию (Уже внесенные платежи не возвращаются).</p>
+                                        <p>Чтобы отказаться от подписки необходимо написать в техподдержку сайта по адресу makarovt@gmail.com</p>
+                                        <p>В письме необходимо сообщить о Вашем желании отказаться от подписки, укзать Ваши ФИО и адрес электронной почты.</p>
+                                        <p>Удаление подписки происходит в течение 48 часов.</p>
+                                        <div class="form-group">
+                                            <div class="checkbox">
+                                                <label for="is_opened">
+                                                    <input id="podp" name="podp" required="required" type="checkbox"> &nbsp; С условиями подписки ознакомился и согласен
+                                                </label>
+                                            </div>
+                                        </div>
+                                        </div>
+                                      @endif
                                           <input id="cost" name="format_id" value="{{$format->id}}" type="hidden">
                                           <input id="cost" name="format_name" value="{{$format->name}}" type="hidden">
                                           <input id="cost" name="monthly" value="{{$format->monthly}}" type="hidden">
@@ -151,7 +169,7 @@
                                        </div>
                             </fieldset>
                         </form>
-                    </div>
+
                 </div>
         </div>
     </div>
@@ -210,6 +228,8 @@
             if ($("#city").val() != '') $("#city").get(0).setCustomValidity('');
             $("#pers").get(0).setCustomValidity('Для продолжения необходимо согласиться на обработку Ваших персональных даных.');
             if ($('#pers').is(':checked')) $("#pers").get(0).setCustomValidity('');
+            $("#podp").get(0).setCustomValidity('Для продолжения необходимо согласиться с условиями подписки.');
+            if ($('#podp').is(':checked')) $("#podp").get(0).setCustomValidity('');
         }
         $('form').submit(function() {
             if (this.checkValidity()) {
