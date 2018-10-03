@@ -178,15 +178,7 @@
                                 </tr>
 
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="3">
-                                        <li class="pagination pull-right">
-
-                                        </li>
-                                    </td>
-                                </tr>
-                            </tfoot>
+                            
                         </table>
                     </div>
                 </div>
