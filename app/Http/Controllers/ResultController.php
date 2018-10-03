@@ -10,6 +10,7 @@ use App\Format;
 use App\Donator;
 use App\Payment;
 use App\Setting;
+use Carbon\Carbon;
 
 class ResultController extends Controller
 {
@@ -35,10 +36,9 @@ class ResultController extends Controller
             $pay = Payment::where('id', $inv_id)->first();
 
             // проверка корректности подписи
-            // check signature
             if ($my_crc !=$crc)
               {
-                //$pay->
+                dd(Carbon::now()->toDateTimeString());
                 echo "bad sign\n";
                 exit();
               }
