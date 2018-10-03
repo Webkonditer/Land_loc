@@ -49,6 +49,7 @@ Route::group(['prefix'=>'admin','middlevare'=>'auth'], function () {
 
       Route::get('/payments', 'PaymentsController@execute')->name('admin.payments');
       Route::get('/payments/{sort}', 'PaymentsController@execute_sort')->name('admin.payments.sort');
+      Route::get('/payments/id/{id}', 'PaymentsController@execute_id')->name('admin.payments.id');
 });
 
 
