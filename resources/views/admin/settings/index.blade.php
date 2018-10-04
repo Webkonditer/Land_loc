@@ -45,8 +45,8 @@
                           <input type="text"
                                  name="mrh_pass1"
                                  class="form-control"
-                                 value="{{$settings->mrh_pass1}}"
-                                 placeholder="Пароль 1 @if($settings->mrh_pass1 == 0)не @endif установлен"
+
+                                 placeholder="Пароль 1 @if($settings->mrh_pass1 == '')не @endif установлен"
                           />
                       </div>
                       <div class="form-group">
@@ -54,8 +54,8 @@
                           <input type="text"
                                  name="mrh_pass2"
                                  class="form-control"
-                                 value="{{$settings->mrh_pass2}}"
-                                 placeholder="Пароль 2 @if($settings->mrh_pass2 == 0)не @endif установлен"
+
+                                 placeholder="Пароль 2 @if($settings->mrh_pass2 == '')не @endif установлен"
                           />
                       </div>
                       <p></p>
