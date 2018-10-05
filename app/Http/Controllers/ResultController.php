@@ -34,19 +34,22 @@ class ResultController extends Controller
             $my_crc = strtoupper(md5("$out_summ:$inv_id:$mrh_pass2"));
 
             $pay = Payment::where('id', $inv_id)->first();
+            $don = Donator::where('id', $pay->donator_id)->first();
 
             // проверка корректности подписи
             if ($my_crc !=$crc)
               {
-                dd(Carbon::now()->toDateTimeString());
                 echo "bad sign\n";
                 exit();
               }
 
             // признак успешно проведенной операции
             // success
-            $pay->confirmation = $date;
-            $pay->save();
+            $pay->confirmation = Carbon::now()->format('Y-m-d H:i:s');
+            $pay->save();//Подтверждение платежа в таблицу платежей
+
+            $don->last_payment = Carbon::now()->format('Y-m-d H:i:s');
+            $don->save();//Подтверждение платежа в таблицу платежей
 
             if ($pay->monthly == "Ежемесячно") {
               // В таблицу ежемесячных
