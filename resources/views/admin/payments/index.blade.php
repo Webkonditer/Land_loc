@@ -47,7 +47,7 @@
                     <td style="vertical-align:middle">{{ $payment->created_at }}</td>
                     <td style="vertical-align:middle">{{ $payment->confirmation }}</td>
                     <td style="vertical-align:middle"><a href="{{ route('admin.donator.edit', ['id' => $payment->id]) }}">{{--<i class="icon glyphicon glyphicon-pencil"></i>--}}</a></td>
-                    <td style="vertical-align:middle"><a href="{{ route('admin.donator.delete', ['id' => $payment->id]) }}">{{--<i class="icon glyphicon glyphicon-remove"></i>--}}</a></td>
+                    <td style="vertical-align:middle"><a onclick="return confirm ('Удалить информацию о платеже из истории?')" href="{{ route('admin.payment.delete', ['id' => $payment->id]) }}"><i class="icon glyphicon glyphicon-remove"></i></a></td>
                 </tr>
                 @empty
                 <tr>

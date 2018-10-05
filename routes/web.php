@@ -45,11 +45,13 @@ Route::group(['prefix'=>'admin','middlevare'=>'auth'], function () {
       Route::get('/donators', 'DonatorsController@execute')->name('admin.donators');
       Route::post('/donators/create', 'DonatorsController@create')->name('admin.donator.create');
       Route::post('/donators/{donator}/update', 'DonatorsController@update')->name('admin.donator.edit');
-      Route::post('/donators/{donator}/delete', 'DonatorsController@destroy')->name('admin.donator.delete');
+      Route::get('/donators/{donator}/delete', 'DonatorsController@destroy')->name('admin.donator.delete');
 
       Route::get('/payments', 'PaymentsController@execute')->name('admin.payments');
       Route::get('/payments/{sort}', 'PaymentsController@execute_sort')->name('admin.payments.sort');
       Route::get('/payments/id/{id}', 'PaymentsController@execute_id')->name('admin.payments.id');
+      Route::get('/payments/{payment}/delete', 'PaymentsController@destroy')->name('admin.payment.delete');
+
 });
 
 
