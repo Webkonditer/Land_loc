@@ -7,6 +7,7 @@ use App\Donator;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use App\Payment;
 
 class DonatorsController extends Controller
 {
@@ -41,5 +42,14 @@ class DonatorsController extends Controller
       return view('admin.donators.one_time', [
         'donators' => Donator::where('monthly', 'Разово')->orderBy($sort)->paginate(10)
       ]);
+    }
+
+    public function destroy(Donator $donator)
+    {
+        $delPayments = Payment::where('donator_id', $donator->id)->delete();
+        $donator->delete();
+        return view('admin.donators.index', [
+          'donators' => Donator::orderBy('created_at', 'desc')->paginate(10)
+        ]);
     }
 }

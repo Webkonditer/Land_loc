@@ -43,7 +43,7 @@
                         <a href="{{ route('admin.donators.sort.one_time', ['sort' => 'format_name']) }}">Опция</a>
                     </th>
                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Код: активируйте, чтобы изменить сортировку">
-                        <a href="{{ route('admin.donators.sort.one_time', ['sort' => 'summ']) }}">Сумма пожертвования</a>
+                        <a href="{{ route('admin.donators.sort.one_time', ['sort' => 'summ']) }}">Сумма</a>
                     </th>
                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Код: активируйте, чтобы изменить сортировку">
                         <a href="{{ route('admin.donators.sort.one_time', ['sort' => 'monthly']) }}">Периодичность</a>
@@ -67,7 +67,7 @@
                     <td style="vertical-align:middle">{{ $donator->monthly }}</td>
                     <td style="vertical-align:middle">{{ $donator->created_at }}</td>
                     <td style="vertical-align:middle"><a href="{{ route('admin.payments.id', ['id' => $donator->id]) }}"><i class="fa fa-eye fa-2" aria-hidden="true"></i></a></td>
-                    <td style="vertical-align:middle"><a href="{{ route('admin.donator.delete', ['id' => $donator->id]) }}">{{--<i class="icon glyphicon glyphicon-remove"></i>--}}</a></td>
+                    <td style="vertical-align:middle"><a onclick="return confirm ('Удалить жертвователя и всю историю его платежей?')" href="{{ route('admin.donator.delete', ['id' => $donator->id]) }}"><i class="icon glyphicon glyphicon-remove"></i></a></td>
                 </tr>
                 @empty
                 <tr>

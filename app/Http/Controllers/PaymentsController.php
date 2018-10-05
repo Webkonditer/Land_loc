@@ -38,5 +38,12 @@ class PaymentsController extends Controller
     ]);
   }
 
+  public function destroy(Payment $payment)
+  {
+      $payment->delete();
+      return view('admin.payments.index', [
+        'payments' => Payment::orderBy('created_at', 'desc')->paginate(10)
+      ]);
+  }
 
 }
