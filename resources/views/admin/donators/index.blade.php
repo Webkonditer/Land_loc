@@ -43,13 +43,13 @@
                         <a href="{{ route('admin.donators.sort', ['sort' => 'format_name']) }}">Опция</a>
                     </th>
                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Код: активируйте, чтобы изменить сортировку">
-                        <a href="{{ route('admin.donators.sort', ['sort' => 'summ']) }}">Сумма пожертвования</a>
+                        <a href="{{ route('admin.donators.sort', ['sort' => 'summ']) }}">Сумма</a>
                     </th>
                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Код: активируйте, чтобы изменить сортировку">
                         <a href="{{ route('admin.donators.sort', ['sort' => 'monthly']) }}">Периодичность</a>
                     </th>
                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Код: активируйте, чтобы изменить сортировку">
-                        <a href="{{ route('admin.donators.sort', ['sort' => 'created_at']) }}">Зарегистрирован</a>
+                        <a href="">Согласие на ежемесячный платеж</a>
                     </th>
                     <th class="action" style="width:30px !important;"></th>
                     <th class="action" style="width:30px !important;"></th>
@@ -65,9 +65,9 @@
                     <td style="vertical-align:middle">{{ $donator->format_name }}</td>
                     <td style="vertical-align:middle">{{ $donator->summ }}</td>
                     <td style="vertical-align:middle">{{ $donator->monthly }}</td>
-                    <td style="vertical-align:middle">{{ $donator->created_at }}</td>
+                    <td style="vertical-align:middle">{{ $donator->recurring }}</td>
                     <td style="vertical-align:middle"><a href="{{ route('admin.payments.id', ['id' => $donator->id]) }}"><i class="fa fa-eye fa-2" aria-hidden="true"></i></a></td>
-                    <td style="vertical-align:middle"><a href="{{ route('admin.donator.delete', ['id' => $donator->id]) }}">{{--<i class="icon glyphicon glyphicon-remove"></i>--}}</a></td>
+                    <td style="vertical-align:middle"><a onclick="confirm('вы уверены?')" href="{{-- route('admin.donator.delete', ['id' => $donator->id]) --}}"><i class="icon glyphicon glyphicon-remove"></i></a></td>
                 </tr>
                 @empty
                 <tr>

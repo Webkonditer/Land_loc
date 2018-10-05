@@ -47,6 +47,7 @@ class InDexController extenDs Controller
       'city' => 'required|string|max:100',
       'summ' => 'required|integer',
       'monthly' => 'required|string|max:60',
+      'podp' => 'sometimes|required|accepted',
     ]);
 
     $donator->name = $request->name;
@@ -55,6 +56,7 @@ class InDexController extenDs Controller
     $donator->format_name = $request->format_name;
     if($request->monthly == "Ежемесячно")$donator->monthly = "Ежемесячно"; else $donator->monthly = "Разово";
     $donator->summ = $request->summ;
+    if($request->podp == "on")$donator->recurring = "Да"; else $donator->recurring = "---";
     $donator->save();
 
     $donator_id = $donator->id;

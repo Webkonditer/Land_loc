@@ -133,7 +133,7 @@
                                         <div class="form-group">
                                             <div class="checkbox">
                                                 <label for="is_opened">
-                                                    <input id="pers" name="pers" required="required" type="checkbox"> &nbsp; Даю согласие на обработку моих персональных данных
+                                                    <input id="pers" name="pers" required="required" type="checkbox"> &nbsp; С условиями <a href="/oferta1.pdf" target="_blank"><font color="green;">оферты</font></a> ознакомился и огласен
                                                 </label>
                                             </div>
                                         </div>
@@ -226,7 +226,7 @@
             if ($("#email").val().search(pattern) == 0) $("#email").get(0).setCustomValidity('');
             $("#city").get(0).setCustomValidity('Введите, пожалуйста, Ваш город.');
             if ($("#city").val() != '') $("#city").get(0).setCustomValidity('');
-            $("#pers").get(0).setCustomValidity('Для продолжения необходимо согласиться на обработку Ваших персональных даных.');
+            $("#pers").get(0).setCustomValidity('Для продолжения необходимо согласиться с условиями оферты.');
             if ($('#pers').is(':checked')) $("#pers").get(0).setCustomValidity('');
             $("#podp").get(0).setCustomValidity('Для продолжения необходимо согласиться с условиями подписки.');
             if ($('#podp').is(':checked')) $("#podp").get(0).setCustomValidity('');
