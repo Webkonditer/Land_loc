@@ -19,21 +19,21 @@ class PaymentsController extends Controller
   public function execute(Payment $payments) {
 
     return view('admin.payments.index', [
-      'payments' => Payment::orderBy('created_at', 'desc')->paginate(10)
+      'payments' => Payment::where('confirmation','!=',NULL)->orderBy('created_at', 'desc')->paginate(10)
     ]);
   }
 
   public function execute_sort(Payment $payments, $sort) {
 
     return view('admin.payments.index', [
-      'payments' => Payment::orderBy($sort)->paginate(10)
+      'payments' => Payment::where('confirmation','!=',NULL)->orderBy($sort)->paginate(10)
     ]);
   }
 
   public function execute_id(Payment $payments, $id) {
 
     return view('admin.payments.id', [
-      'payments' => Payment::where('donator_id', $id)->paginate(500),
+      'payments' => Payment::where('confirmation','!=',NULL)->where('donator_id', $id)->paginate(500),
       'donator' => Donator::where('id', $id)->first()
     ]);
   }
