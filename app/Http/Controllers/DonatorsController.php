@@ -48,8 +48,7 @@ class DonatorsController extends Controller
     {
         $delPayments = Payment::where('donator_id', $donator->id)->delete();
         $donator->delete();
-        return view('admin.donators.index', [
-          'donators' => Donator::orderBy('created_at', 'desc')->paginate(10)
-        ]);
+        return redirect()->route('admin.donators');
+        
     }
 }
