@@ -149,6 +149,7 @@
                             <div class="col-md-8 col-md-offset-2 text-center">
                                 <p>Нажимая кнопку "Выбрать" Вы соглашаетесь с <a class="text-theme-colored" style="cursor: pointer;" href="/oferta1.pdf" target="_blank">публичной офертой.</a></p>
                                 <p>Если вы хотите делать взносы большего размера - <a class="text-theme-colored" style="cursor: pointer;" href="skype:makarovta?add">напишите нам!</a></p>
+                                <p>Чтобы отказаться от имеющегося ежемесячного платежа, пройдите по этой <a class="text-theme-colored" style="cursor: pointer;" href="{{ route('unsubscribe') }}" target="_blank">этой ссылке</a>.</p>
                                 </ul>
                                 <br><br>
 </div>
