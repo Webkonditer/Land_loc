@@ -33,7 +33,7 @@ class RecurringController extends Controller
                   <body>
                       <p>Здравствуйте, '.$donator->name.'</p>
                       <p> </p>
-                      <p>Для того, чтобы отписаться от ежемесячного платежа, пожалуйста перейдите по ссылке'.$url.'</p>
+                      <p>Для того, чтобы отписаться от ежемесячного платежа, пожалуйста перейдите по ссылке '.$url.'</p>
                       <p> </p>
                       <p>Спасибо за то, что были с нами!</p>
                   </body>
@@ -42,8 +42,8 @@ class RecurringController extends Controller
 
               $headers[] = 'MIME-Version: 1.0';
               $headers[] = 'Content-type: text/html; charset=utf8';
-              $headers[] = 'To: Receiver <webkonditer@yandex.ru>';
-              $headers[] = 'From: Sender <sender@test.com>';
+              $headers[] = 'To: '.$donator->name.' <'.$request->email.'>';
+              $headers[] = 'From: bhaktilata.ru <info@bhaktilata.ru>';
 
               $result = mail($to, $subject, $message, implode("\r\n", $headers));
               //echo $result ? 'OK' : 'Error';
