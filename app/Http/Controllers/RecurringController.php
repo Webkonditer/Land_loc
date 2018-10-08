@@ -16,7 +16,7 @@ class RecurringController extends Controller
         'pers' => 'accepted',
         ]);
 
-        $donator = Donator::where('email', $request->email)->first();
+        $donator = Donator::where('last_payment','!=',NULL)->where('email', $request->email)->first();
         if (isset($donator->id)) {
             if(Recurring::where('donator_id', $donator->id)->count() != 0) {
 
@@ -42,9 +42,8 @@ class RecurringController extends Controller
 
               $headers[] = 'MIME-Version: 1.0';
               $headers[] = 'Content-type: text/html; charset=utf8';
-              $headers[] = 'To: Receiver <receiver@test.com>';
+              $headers[] = 'To: Receiver <webkonditer@yandex.ru>';
               $headers[] = 'From: Sender <sender@test.com>';
-              $headers[] = 'Cc: copy@test.com';
 
               $result = mail($to, $subject, $message, implode("\r\n", $headers));
               //echo $result ? 'OK' : 'Error';
