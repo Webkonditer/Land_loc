@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Recurring;
 use Illuminate\Support\Facades\Validator;
 use App\Donator;
 use App\Payment;
+use Carbon\Carbon;
+use App\Recurring;
 
 class RecurringController extends Controller
 {
@@ -56,6 +57,15 @@ class RecurringController extends Controller
     }
 
     public function unsubscribe_after_email($email, $key) {
+
+      $donator = Donator::where('last_payment','!=',NULL)->where('email', $email)->first();
+      if (isset($donator->id)) {
+          if(Recurring::where('donator_id', $donator->id)->count() != 0 && $key == '69483'.$donator->id.'5739') {
+              dd('Отписан');
+          }
+      }
+      dd('Ошибка отписки');
+
 
       dd($email);
 
