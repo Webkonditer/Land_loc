@@ -52,7 +52,7 @@ class ResultController extends Controller
             $don->save();//Подтверждение платежа в таблицу платежей
 
             if ($pay->monthly == "Ежемесячно") {
-              if($pay->repeated == 'повторный')) {
+              if($pay->repeated == 'повторный') {
                   $recurrings = Recurring;// В таблицу ежемесячных
 
                   $recurrings->payment_id = $pay->id;
