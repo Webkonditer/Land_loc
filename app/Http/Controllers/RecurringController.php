@@ -16,7 +16,7 @@ class RecurringController extends Controller
         'pers' => 'accepted',
         ]);
 
-        $donator = Donator::where('email', $request->email)->first();
+        $donator = Donator::where('last_payment','!=',NULL)->where('email', $request->email)->first();
         if (isset($donator->id)) {
             if(Recurring::where('donator_id', $donator->id)->count() != 0) {
 
