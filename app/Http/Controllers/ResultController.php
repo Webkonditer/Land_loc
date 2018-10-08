@@ -23,7 +23,7 @@ class ResultController extends Controller
             else $mrh_pass2 = $setting->mrh_pass2;
 
             //установка текущего времени
-            File::put('request', dump($request);
+            File::put('request', dump($request));
 
             $out_summ = $request->OutSum;
             $inv_id = $request->InvId;
