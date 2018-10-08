@@ -21,7 +21,7 @@ Route::group(['middlevare'=>'web'], function () {
     Route::get('/fail_url', function () {return view('site.fail');});
     Route::get('/unsubscribe', function () {return view('site.unsubscribe');});
     Route::post('/unsubscribe', 'RecurringController@unsubscribe')->name('unsubscribe');
-
+    Route::get('/unsubscribe/{email}/{key}', 'RecurringController@unsubscribe_after_email');
     //Route::auth();
 });
 

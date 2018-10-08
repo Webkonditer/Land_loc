@@ -53,6 +53,14 @@ class RecurringController extends Controller
         return redirect('unsubscribe')
                             ->withErrors('Указанный Вами Email в безе ежемесячных платежей не найден')
                             ->withInput();
+    }
 
+    public function unsubscribe_after_email($email, $key) {
+
+      dd($email);
+
+      return view('site.index', [
+        'formats' => Format::orderBy('position')->paginate(10),
+      ]);
     }
 }
