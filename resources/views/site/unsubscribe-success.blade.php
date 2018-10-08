@@ -84,48 +84,12 @@
                     </div>
                 </section>
                 <div id="register" class="panel panel-default col-md-12">
-                    <p><h3 class="widget-title line-bottom">Введите пожалуйста Email, указанный Вами при совершении первого платежа.</h3>
+                    <p><h3 class="widget-title line-bottom">Вы успешно отписаны от ежемесячного платежа.</h3>
                     </p>
+                    <p></p>                    
+                    <p>Вернуться на <a href="{{ route('home') }}"><font color="green;">главную страницу</font></a>.</p>
 
 
-                        <form role="form" name="edit" enctype="multipart/form-data" action="{{ route('unsubscribe')}}" method="POST">
-                            @csrf
-                            <div class="col-md-6">
-                            <fieldset>
-
-                                @if  ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach  ($errors->all() as $error){{--Возврат ошибок--}}
-                                        <li>{{$error}}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                                @endif
-
-                                    <div class="form-group">
-                                        <label for="email" class="col-form-label">Ваш Email</label>
-                                        <div>
-                                            <input type="email" id="email" name="email" required="required" class="form-control" value="{{old('email')}}"/>
-                                        </div>
-                                    </div>
-
-                                        <div class="form-group">
-                                            <div class="checkbox">
-                                                <label for="is_opened">
-                                                    <input id="pers" name="pers" required="required" type="checkbox"> Хочу отписаться от ежемесячного платежа
-                                                </label>
-                                            </div>
-                                        </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <div class="col-sm-10">
-                                                <input onclick="validation()" type="submit" class="btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)" value="Отписаться" />
-                                            </div>
-                                       </div>
-                            </fieldset>
-                        </form>
 
                 </div>
         </div>
