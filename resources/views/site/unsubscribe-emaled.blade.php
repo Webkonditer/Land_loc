@@ -86,7 +86,10 @@
                 <div id="register" class="panel panel-default col-md-12">
                     <p><h3 class="widget-title line-bottom">На Ваш Email отправлено письмо с инструкцией, как отписаться от ежемесячного платежа.</h3>
                     </p>
-                    <p>Вернуться на <a href="{{ route('home') }}"><font color="green;">главную страницу</font></a></p>
+                    <p></p>
+                    <p>Если письмо долго не приходят, проверьте папку "Спам".</p>
+                    <p></p>
+                    <p>Вернуться на <a href="{{ route('home') }}"><font color="green;">главную страницу</font></a>.</p>
 
 
 
