@@ -23,8 +23,7 @@ class ResultController extends Controller
             else $mrh_pass2 = $setting->mrh_pass2;
 
             //установка текущего времени
-            $tm=getdate(time()+9*3600);
-            $date="$tm[year]-$tm[mon]-$tm[mday] $tm[hours]:$tm[minutes]:$tm[seconds]";
+            File::put('request', dump($request);
 
             $out_summ = $request->OutSum;
             $inv_id = $request->InvId;
