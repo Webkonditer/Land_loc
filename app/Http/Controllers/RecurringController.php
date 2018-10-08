@@ -42,7 +42,6 @@ class RecurringController extends Controller
 
               $headers[] = 'MIME-Version: 1.0';
               $headers[] = 'Content-type: text/html; charset=utf8';
-              $headers[] = 'To: '.$donator->name.' <'.$request->email.'>';
               $headers[] = 'From: bhaktilata.ru <info@bhaktilata.ru>';
 
               $result = mail($to, $subject, $message, implode("\r\n", $headers));
