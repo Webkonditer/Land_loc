@@ -19,6 +19,9 @@ Route::group(['middlevare'=>'web'], function () {
     Route::get('/success_url', function () {return view('site.success');});
     Route::post('/result_url', 'ResultController@result')->name('result');
     Route::get('/fail_url', function () {return view('site.fail');});
+    Route::get('/unsubscribe', function () {return view('site.unsubscribe');});
+    Route::post('/unsubscribe', 'RecurringController@unsubscribe')->name('unsubscribe');
+
     //Route::auth();
 });
 

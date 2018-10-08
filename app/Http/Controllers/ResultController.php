@@ -11,6 +11,7 @@ use App\Donator;
 use App\Payment;
 use App\Setting;
 use Carbon\Carbon;
+use App\Recurring;
 
 class ResultController extends Controller
 {
@@ -52,7 +53,16 @@ class ResultController extends Controller
             $don->save();//Подтверждение платежа в таблицу платежей
 
             if ($pay->monthly == "Ежемесячно") {
-              // В таблицу ежемесячных
+              if($pay->repeated == 'повторный')) {
+                  $recurrings = Recurring;// В таблицу ежемесячных
+
+                  $recurrings->payment_id = $pay->id;
+                  $recurrings->donator_id = $pay->donator_id;
+                  $recurrings->format_id = $pay->format_id;
+                  $recurrings->summ = $pay->summ;
+                  $recurrings->save();
+              }
+
             }
 
             echo "OK$inv_id\n";
