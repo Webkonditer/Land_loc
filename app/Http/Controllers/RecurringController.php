@@ -19,7 +19,8 @@ class RecurringController extends Controller
 
         $donator = Donator::where('last_payment','!=',NULL)->where('email', $request->email)->first();
         if (isset($donator->id)) {
-            if(Recurring::where('donator_id', $donator->id)->count() != 0) {
+            $recur = Recurring::where('unsubscribed', NULL)->where('donator_id', $donator->id)->first();
+            if($recur != NULL) {
 
               $to = $request->email;
               $subject = 'Отписка от ежемесячного платежа';
@@ -62,11 +63,13 @@ class RecurringController extends Controller
       if (isset($donator->id)) {
           if(Recurring::where('donator_id', $donator->id)->count() != 0 && $key == '69483'.$donator->id.'5739') {
               //dd('Отписан');
-              $recur = Recurring::where('unsubscribed', '')->where('donator_id', $donator->id)->first();
-              $recur->unsubscribed = Carbon::now()->format('Y-m-d H:i:s');
-              $recur->save();//Внесение в таблицу регулярных платежей отметки об отписке.
+              $recur = Recurring::where('unsubscribed', NULL)->where('donator_id', $donator->id)->first();
+                if($recur != NULL) {
+                  $recur->unsubscribed = Carbon::now()->format('Y-m-d H:i:s');
+                  $recur->save();//Внесение в таблицу регулярных платежей отметки об отписке.
 
-              return view('site.unsubscribe-success');
+                  return view('site.unsubscribe-success');
+                }
           }
       }
       return view('site.unsubscribe-fail');
