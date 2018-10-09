@@ -8,6 +8,35 @@
 
 <div class="row">
     <div class="col-sm-12">
+      Поиск по Email:
+    </div>
+    <form role="form" name="edit" enctype="multipart/form-data" action="{{ route('admin.donators.search')}}" method="POST">
+
+
+
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+          <div class="col-sm-12">
+              <input type="text"
+                     name="email"
+                     class="col-sm-4"
+                     value="{{old('email')}}"
+                     placeholder="Введите нужный Email"
+              />
+              <button type="submit" name="submit" value="1" >Найти</button>
+          </div>
+          <div class="col-sm-12">
+              @if ($errors->any())
+                <div class="alert alert-danger">
+                  <ul>
+                    @foreach ($errors->all() as $error)
+                      <li>{{$error}}</li>
+                    @endforeach
+                  </ul>
+                </div>
+              @endif
+          </div>
+    <div class="col-sm-12">
       Выборки:
     </div>
     <div class="col-sm-12">

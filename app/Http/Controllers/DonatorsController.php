@@ -51,4 +51,22 @@ class DonatorsController extends Controller
         return redirect()->route('admin.donators');
 
     }
+
+    public function search(Donator $donators, Request $request) {
+
+      $validator = $this->validate($request, [
+          'email' => 'required|string|email|max:255',
+      ]);
+      //dd($request->all());
+      $donator = Donator::where('last_payment','!=',NULL)->where('email', $request->email)->first();
+      if (isset($donator->id)) {
+          return redirect()->route('admin.payments.id', $donator->id);
+      }
+      else {
+        return redirect('admin/donators')
+                            ->withErrors('Указанный Вами Email в безе не найден')
+                            ->withInput();
+      }
+
+    }
 }
