@@ -167,7 +167,7 @@
                                         <div class="form-group">
                                             <div class="checkbox">
                                                 <label for="is_opened">
-                                                    <input id="pers" name="pers" required="required" type="checkbox"> &nbsp; С условиями <a href="/oferta1.pdf" target="_blank"><font color="green;">оферты</font></a> ознакомился и огласен
+                                                    <input id="pers" name="pers" required="required" type="checkbox"> &nbsp; С условиями <a href="/oferta1.pdf" target="_blank"><font color="green;">оферты и политики</font></a> обработки персональных данных ознакомился и согласен
                                                 </label>
                                             </div>
                                         </div>

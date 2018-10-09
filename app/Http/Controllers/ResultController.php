@@ -67,4 +67,14 @@ class ResultController extends Controller
             echo "OK$inv_id\n";
             exit();
         }
+
+        public function success(Request $request) {
+
+          $pay = Payment::where('id', $request->inv_id)->first();
+          $format = Format::where('id', $pay->format_id)->first();
+          //dd($pay->format_id);
+          return view('site.success', [
+            'text' => $format->success,
+          ]);
+        }
 }
