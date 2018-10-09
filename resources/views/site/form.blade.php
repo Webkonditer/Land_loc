@@ -82,7 +82,7 @@
                                     <i class="fa fa-heart fa-3x"></i>
                                 </div>
                                 <h2 class="mt-0">"{{$format->name}}"</h2>
-                                <h3>( @if($format->monthly == "Ежемесячно")Ежемесячное @else Разовое @endif пожертвование {{$format->summ}} рублей )</h3>
+                                <h3>( @if($format->monthly == "Ежемесячно")Ежемесячное @else Разовое @endif пожертвование {{$format->summ}} @if(is_numeric ($format->summ))рублей @endif )</h3>
 
                                 <p></p>
                             </div>
@@ -109,24 +109,40 @@
                                 </div>
                                 @endif
 
+
+                                    @if(!is_numeric ($format->summ))
+                                      <div class="form-group">
+                                          <label for="name" class="col-form-label">Введите желаемую сумму</label>
+                                          <div>
+                                              <input lang="ru" type="text" id="def_sum" name="summ" required="required"
+                                              class="form-control" placeholder="1000" value="{{old('summ')}}" />
+                                          </div>
+                                      </div>
+                                    @else
+                                      <input id="cost" name="summ" value="{{$format->summ}}" type="hidden">
+                                    @endif
+
                                     <div class="form-group">
                                         <label for="name" class="col-form-label">Ваши фамилия, имя и отчество</label>
                                         <div>
-                                            <input lang="ru" type="text" id="name" name="name" required="required" class="form-control" />
+                                            <input lang="ru" type="text" id="name" name="name" required="required"
+                                            class="form-control" value="{{old('name')}}" />
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="email" class="col-form-label">Ваш Email</label>
                                         <div>
-                                            <input type="email" id="email" name="email" required="required" class="form-control" />
+                                            <input type="email" id="email" name="email" required="required"
+                                            class="form-control" value="{{old('email')}}" />
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="name" class="col-form-label">Ваш город</label>
                                         <div>
-                                            <input lang="ru" type="text" id="city" name="city" required="required" class="form-control" />
+                                            <input lang="ru" type="text" id="city" name="city" required="required"
+                                            class="form-control" value="{{old('city')}}" />
                                         </div>
                                     </div>
 
@@ -157,7 +173,7 @@
                                           <input id="cost" name="format_id" value="{{$format->id}}" type="hidden">
                                           <input id="cost" name="format_name" value="{{$format->name}}" type="hidden">
                                           <input id="cost" name="monthly" value="{{$format->monthly}}" type="hidden">
-                                          <input id="cost" name="summ" value="{{$format->summ}}" type="hidden">
+
 
                                         <div class="form-group row">
                                             <div class="col-sm-10">
@@ -216,8 +232,11 @@
     <script type="text/javascript">
         {{--Валидация формы--}}
         var pattern = /^[a-z0-9\._-]+@[a-z0-9-]+\.[a-z]{2,6}$/i;
+        var pattern_num = /^([0-9])+$/;
 
         function validation() {
+            $("#def_sum").get(0).setCustomValidity('Введите, пожалуйста, желаемую сумму цифрами.');
+            if($("#def_sum").val().search(pattern_num) == 0) $("#def_sum").get(0).setCustomValidity('');
             $("#name").get(0).setCustomValidity('Введите, пожалуйста, Ваше имя.');
             if ($('#name').val() != '') $("#name").get(0).setCustomValidity('');
             $("#email").get(0).setCustomValidity('Введите, пожалуйста, корректный адрес электронной почты.');

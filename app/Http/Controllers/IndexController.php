@@ -83,7 +83,8 @@ class InDexController extenDs Controller
       $inv_desc = $setting->inv_desc;
 
       // сумма заказа
-      $out_summ = $request->summ;
+
+        $out_summ = $request->summ;
 
       // кодировка
       $encoding = "utf-8";
