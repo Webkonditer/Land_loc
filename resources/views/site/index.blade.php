@@ -127,7 +127,7 @@
                             <div class="thumbnail col-md-2"> <a href="#"><img class="img-fullwidth" src="{{ asset('/storage/'.$format->image) }}" alt="..."></a>
                                 <div class="caption text-center">
                                     <h3>{{ $format->name }}</h3>
-                                    <p>{{ $format->summ }} руб.@if($format->monthly == "Ежемесячно")/мес. @endif</p>
+                                    <p>{{ $format->summ }} @if(is_numeric ($format->summ))руб. @endif @if($format->monthly == "Ежемесячно")/мес. @endif</p>
                                     <p><a href="{{ route('form', ['id' => $format->id]) }}" class="btn btn-theme-colored btn-flat" role="button">Выбрать</a></p>
                                 </div>
                                 <h5><strong>Бонус:</strong></h5>
