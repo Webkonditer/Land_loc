@@ -10,49 +10,52 @@
     <div class="col-sm-12">
 
       <table class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
-          <thead>
-              <tr role="row">
-                  <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Название: активируйте, чтобы изменить сортировку">
-                      Id
-                  </th>
-                  <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Название: активируйте, чтобы изменить сортировку">
-                      Имя
-                  </th>
-                  <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Название: активируйте, чтобы изменить сортировку">
-                      Email
-                  </th>
-                  <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Название: активируйте, чтобы изменить сортировку">
-                      Город
-                  </th>
-                  <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Название: активируйте, чтобы изменить сортировку">
-                      Опция
-                  </th>
-                  <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Код: активируйте, чтобы изменить сортировку">
-                      Сумма пожертвования
-                  </th>
-                  <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Код: активируйте, чтобы изменить сортировку">
-                      Периодичность
-                  </th>
-                  <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Код: активируйте, чтобы изменить сортировку">
-                      Зарегистрирован
-                  </th>
-                  <th class="action" style="width:30px !important;"></th>
-                  <th class="action" style="width:30px !important;"></th>
-              </tr>
-          </thead>
+
           <tbody>
 
               <tr role="row" >
+                  <td style="vertical-align:middle">ID</td>
                   <td style="vertical-align:middle">{{ $donator->id }}</td>
+              </tr>
+              <tr role="row" >
+                  <td style="vertical-align:middle">Имя</td>
                   <td style="vertical-align:middle">{{ $donator->name }}</td>
+              </tr>
+              <tr role="row" >
+                  <td style="vertical-align:middle">Email</td>
                   <td style="vertical-align:middle">{{ $donator->email }}</td>
+              </tr>
+              <tr role="row" >
+                  <td style="vertical-align:middle">Телефон</td>
+                  <td style="vertical-align:middle">{{ $donator->phone }}</td>
+              </tr>
+              <tr role="row" >
+                  <td style="vertical-align:middle">Город</td>
                   <td style="vertical-align:middle">{{ $donator->city }}</td>
+              </tr>
+              <tr role="row" >
+                  <td style="vertical-align:middle">Опция</td>
                   <td style="vertical-align:middle">{{ $donator->format_name }}</td>
+              </tr>
+              <tr role="row" >
+                  <td style="vertical-align:middle">Сумма</td>
                   <td style="vertical-align:middle">{{ $donator->summ }}</td>
+              </tr>
+              <tr role="row" >
+                  <td style="vertical-align:middle">Периодичность</td>
                   <td style="vertical-align:middle">{{ $donator->monthly }}</td>
+              </tr>
+              <tr role="row" >
+                  <td style="vertical-align:middle">Зарегистрирован</td>
                   <td style="vertical-align:middle">{{ $donator->created_at }}</td>
-                  <td style="vertical-align:middle"><a href="{{ route('admin.donator.edit', ['id' => $donator->id]) }}">{{--<i class="icon glyphicon glyphicon-pencil"></i>--}}</a></td>
-                  <td style="vertical-align:middle"><a href="{{ route('admin.donator.delete', ['id' => $donator->id]) }}">{{--<i class="icon glyphicon glyphicon-remove"></i>--}}</a></td>
+              </tr>
+              <tr role="row" >
+                  <td style="vertical-align:middle">Согласие на ежемесячный платеж</td>
+                  <td style="vertical-align:middle">{{ $donator->recurring }}</td>
+              </tr>
+              <tr role="row" >
+                  <td style="vertical-align:middle">Анонимный</td>
+                  <td style="vertical-align:middle">{{ $donator->anonim }}</td>
               </tr>
 
           </tbody>

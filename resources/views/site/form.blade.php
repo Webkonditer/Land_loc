@@ -82,7 +82,7 @@
                                     <i class="fa fa-heart fa-3x"></i>
                                 </div>
                                 <h2 class="mt-0">"{{$format->name}}"</h2>
-                                <h3>( @if($format->monthly == "Ежемесячно")Ежемесячное @else Разовое @endif пожертвование {{$format->summ}} @if(is_numeric ($format->summ))рублей @endif )</h3>
+                                <h3>( @if($format->monthly == "Ежемесячно")Ежемесячный @else Разовый @endif платеж: {{$format->summ}} @if(is_numeric ($format->summ))рублей @endif )</h3>
 
                                 <p></p>
                             </div>
@@ -139,12 +139,30 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <label for="email" class="col-form-label">Ваш телефон*</label>
+                                        <div>
+                                            <input type="text" id="phone" name="phone" required="required"
+                                            class="form-control" value="{{old('phone')}}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
                                         <label for="name" class="col-form-label">Ваш город</label>
                                         <div>
                                             <input lang="ru" type="text" id="city" name="city" required="required"
                                             class="form-control" value="{{old('city')}}" />
                                         </div>
                                     </div>
+
+                                  @if ($format->summ > 999)
+                                    <div class="form-group">
+                                        <div class="checkbox">
+                                            <label for="is_opened">
+                                                <input name="anonim" type="checkbox"> &nbsp; Хочу оставаться анонимным, не указывайте мое имя в списках.
+                                            </label>
+                                        </div>
+                                    </div>
+                                  @endif
 
                                         <div class="form-group">
                                             <div class="checkbox">
@@ -181,6 +199,7 @@
                                                 <input onclick="validation()" type="submit" class="btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)" value="Сохранить" />
                                             </div>
                                        </div>
+                                       <p>*Мы обещаем не беспокоить Вас по телефону без крайней необходимости</p>
                             </fieldset>
                         </form>
 
@@ -235,12 +254,16 @@
         var pattern_num = /^([0-9])+$/;
 
         function validation() {
+          @if(!is_numeric ($format->summ))
             $("#def_sum").get(0).setCustomValidity('Введите, пожалуйста, желаемую сумму цифрами.');
             if($("#def_sum").val().search(pattern_num) == 0) $("#def_sum").get(0).setCustomValidity('');
+         @endif
             $("#name").get(0).setCustomValidity('Введите, пожалуйста, Ваше имя.');
             if ($('#name').val() != '') $("#name").get(0).setCustomValidity('');
             $("#email").get(0).setCustomValidity('Введите, пожалуйста, корректный адрес электронной почты.');
             if ($("#email").val().search(pattern) == 0) $("#email").get(0).setCustomValidity('');
+            $("#phone").get(0).setCustomValidity('Введите, пожалуйста, номер телефона (только цифры).');
+            if($("#phone").val().search(pattern_num) == 0 && $('#phone').val().length > 4) $("#phone").get(0).setCustomValidity('');
             $("#city").get(0).setCustomValidity('Введите, пожалуйста, Ваш город.');
             if ($("#city").val() != '') $("#city").get(0).setCustomValidity('');
             $("#pers").get(0).setCustomValidity('Для продолжения необходимо согласиться с условиями оферты.');
