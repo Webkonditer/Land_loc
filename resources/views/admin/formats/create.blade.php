@@ -96,6 +96,18 @@
                             />
                         </div>
 
+                        <div class="form-group">
+                            <label for="description">Текст страницы результатов</label>
+                            <textarea id="description"
+                                      name="success"
+                                      rows="5"
+                                      cols="80"
+                                      class="js-editor-enabled">
+                                      {{old('success')}} 
+                           </textarea>
+
+                        </div>
+
 
 
 

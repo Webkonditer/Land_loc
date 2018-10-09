@@ -98,6 +98,16 @@
                             />
                         </div>
 
+                        <div class="form-group">
+                            <label for="description">Текст страницы результатов</label>
+                            <textarea id="description"
+                                      name="success"
+                                      rows="5"
+                                      cols="80"
+                                      class="js-editor-enabled">
+                                      @if(old('success')){{old('success')}} @else{{$format->success}} @endif 
+                           </textarea>
+
 
 
 

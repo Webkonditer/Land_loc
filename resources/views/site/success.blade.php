@@ -74,13 +74,9 @@
                 <div id="register" class="panel panel-default col-md-12">
                   <p><h3 class="widget-title line-bottom">Страница благодарности</h3></p>
 					        <p></p>
-
-
-                    <div class="col-md-6">
-                        <p>Операция прошла успешно.</p>
-                        <p>Спасибо большое за Ваше участие!</p>
-                    </div>
                 </div>
+
+                {!! $text !!}
         </div>
     </div>
     </section>

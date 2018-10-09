@@ -16,7 +16,7 @@ Route::group(['middlevare'=>'web'], function () {
     Route::get('/form/{id}', 'IndexController@forms')->name('form');
     Route::post('/form_check', 'IndexController@form_check')->name('form_check');
     Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
-    Route::get('/success_url', function () {return view('site.success');});
+    Route::get('/success_url', 'ResultController@success')->name('result');
     Route::post('/result_url', 'ResultController@result')->name('result');
     Route::get('/fail_url', function () {return view('site.fail');});
     Route::get('/unsubscribe', function () {return view('site.unsubscribe');});

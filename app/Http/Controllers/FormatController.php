@@ -62,6 +62,7 @@ class FormatController extends Controller
         'monthly' => 'string|max:2',
         'bonus_1' => 'required|string|max:191',
         'bonus_2' => 'required|string|max:191',
+        'success' => 'required',
 
     ]);
     //dd($request->all());
@@ -74,6 +75,7 @@ class FormatController extends Controller
       if($request->monthly)$format->monthly = "Ежемесячно"; else $format->monthly = "Разово";
       $format->bonus_1 = $request->bonus_1;
       $format->bonus_2 = $request->bonus_2;
+      $format->success = $request->success;
       $format->save();
 
       return redirect()->route('admin.formats.index');
@@ -124,6 +126,7 @@ class FormatController extends Controller
         'monthly' => 'string|max:2',
         'bonus_1' => 'required|string|max:191',
         'bonus_2' => 'required|string|max:191',
+        'success' => 'required',
       ]);
       //dump($request->all());
         if(null !==($request->file('image'))) $path = $request->file('image')->store('i/formatsImage', 'public');
@@ -136,6 +139,7 @@ class FormatController extends Controller
         if($request->monthly)$format->monthly = "Ежемесячно"; else $format->monthly = "Разово";
         $format->bonus_1 = $request->bonus_1;
         $format->bonus_2 = $request->bonus_2;
+        $format->success = $request->success;
         $format->save();
 
         return redirect()->route('admin.formats.index');
