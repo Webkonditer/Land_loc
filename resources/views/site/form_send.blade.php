@@ -79,7 +79,7 @@
                     <div class="col-md-6">
 
                       <form id="payform" action='https://auth.robokassa.ru/Merchant/Index.aspx' method=POST>
-                         <input type=hidden name=MrchLogin value="{{$mrh_login}}">                        
+                         <input type=hidden name=MrchLogin value="{{$mrh_login}}">
                          <input type=hidden name=OutSum value="{{$out_summ}}">
                          <input type=hidden name=InvId value="{{$inv_id}}">
                          <input type=hidden name=Desc value='"{{$inv_desc}}"'>
@@ -94,7 +94,7 @@
                          <script type="text/javascript">
                               setTimeout(function() {
                               	var form = document.getElementById('payform');
-                              	//form.submit();
+                              	form.submit();
                               }, 1);
                          </script>
                     </div>

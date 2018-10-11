@@ -53,7 +53,7 @@ class RecurringController extends Controller
             }
         }
         return redirect('unsubscribe')
-                            ->withErrors('Указанный Вами Email в безе ежемесячных платежей не найден')
+                            ->withErrors('Указанный Вами Email в базе ежемесячных платежей не найден')
                             ->withInput();
     }
 
