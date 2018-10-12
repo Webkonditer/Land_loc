@@ -22,6 +22,7 @@ Route::group(['middlevare'=>'web'], function () {
     Route::get('/unsubscribe', function () {return view('site.unsubscribe');});
     Route::post('/unsubscribe', 'RecurringController@unsubscribe')->name('unsubscribe');
     Route::get('/unsubscribe/{email}/{key}', 'RecurringController@unsubscribe_after_email');
+    Route::get('/cron_recurring', 'RecurringController@cron_script')->name('cron_script');
     //Route::auth();
 });
 
@@ -56,6 +57,8 @@ Route::group(['prefix'=>'admin','middlevare'=>'auth'], function () {
       Route::get('/payments/id/{id}', 'PaymentsController@execute_id')->name('admin.payments.id');
       Route::get('/payments/{payment}/delete', 'PaymentsController@destroy')->name('admin.payment.delete');
 
+      Route::get('/recurrings', 'RecurringController@execute')->name('admin.recurrings');
+      Route::get('/recurrings/{recurring}/delete', 'RecurringController@destroy')->name('admin.recurring.delete');
 });
 
 

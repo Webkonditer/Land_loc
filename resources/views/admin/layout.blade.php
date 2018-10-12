@@ -153,6 +153,11 @@
                         <i class="fa fa-rub" aria-hidden="true"></i> <span>Платежи</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{route('admin.recurrings')}}">
+                        <i class="fa fa-history" aria-hidden="true"></i> <span>Ежемесячные платежи</span>
+                    </a>
+                </li>
 
             </ul>
         </section>

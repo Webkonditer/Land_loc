@@ -8,6 +8,8 @@ use App\Donator;
 use App\Payment;
 use Carbon\Carbon;
 use App\Recurring;
+use App\Setting;
+use Illuminate\Support\Facades\Storage;
 
 class RecurringController extends Controller
 {
@@ -73,5 +75,103 @@ class RecurringController extends Controller
           }
       }
       return view('site.unsubscribe-fail');
+    }
+
+    public function cron_script(Payment $payment) {
+
+        $last_date = (new Carbon('last day of this month'))->format('d');
+        $today_d = Carbon::now()->format('d');
+        if($last_date == $today_d) {
+            $recurs = Recurring::where('unsubscribed', NULL)
+                                ->whereDay('created_at','>=', $today_d)
+                                ->get();
+        }
+        else {
+            $recurs = Recurring::where('unsubscribed', NULL)
+                                ->whereDay('created_at', $today_d)
+                                ->get();
+        }
+
+        $setting = Setting::first();
+
+        // регистрационная информация (Идентификатор магазина, пароль #1)
+          $mrh_login = $setting->mrh_login;
+
+          //пароль1
+          if($setting->test_mode == 1)$mrh_pass1 = $setting->test_pass1;
+          else $mrh_pass1 = $setting->mrh_pass1;
+
+          // описание заказа
+          $inv_desc = $setting->inv_desc;
+
+          // кодировка
+          $encoding = "utf-8";
+
+          //Тестовый режим
+          if($setting->test_mode == 1)$IsTest = true;
+          else $IsTest = false;
+
+        foreach($recurs as $recur){//dd($recur);
+
+            $payment->donator_id = $recur->donator_id;
+            $payment->format_id = $recur->format_id;
+            $payment->monthly = "Ежемесячно";
+            $payment->summ = $recur->summ;
+            $payment->save();
+            // номер заказа
+            $inv_id = $payment->id;
+            $prev_inv_id = $recur->payment_id;
+
+            // сумма заказа
+              $out_summ = $recur->summ;
+
+            // Адрес электронной почты покупателя
+            //$Email = $request->email;
+
+            //Фискальная информация URL-кодировать. Параметр включается в контрольную подпись запроса (после номера счета магазина). Например: MerchantLogin:OutSum:InvId:Receipt:Пароль#1
+            $receipt = '{"sno": "usn_income","items":[{"name": "Участие в вебинарах пакет '.$recur->format_id.'","quantity": 1.0,"sum": '.$recur->summ.'.0,"tax": "none"}]}';
+            $receipt = urlencode($receipt);
+
+            // формирование подписи
+            $crc  = md5("$mrh_login:$out_summ:$inv_id:$receipt:$mrh_pass1");
+
+/*
+            if( $curl = curl_init() ) {
+              curl_setopt($curl, CURLOPT_URL, 'https://auth.robokassa.ru/Merchant/Recurring');
+              curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+              curl_setopt($curl, CURLOPT_POST, true);
+              curl_setopt($curl, CURLOPT_POSTFIELDS, "MrchLogin=$mrh_login&OutSum=$out_summ&PreviousInvoiceID=$prev_inv_id&InvId=$inv_id&SignatureValue=$crc&Receipt=$Receipt&IsTest=$IsTest");
+              $out = curl_exec($curl);
+              //echo $out;
+              curl_close($curl);
+            }
+*/
+            $headers = stream_context_create(array(
+                'http' => array(
+                    'method' => 'POST',
+                    'header' => 'Content-Type: application/x-www-form-urlencoded' . PHP_EOL,
+                    'content' => "MrchLogin=$mrh_login&OutSum=$out_summ&PreviousInvoiceID=$prev_inv_id&InvId=$inv_id&SignatureValue=$crc&Receipt=$receipt&IsTest=$IsTest",
+                ),
+            ));
+
+            $out = file_get_contents('https://auth.robokassa.ru/Merchant/Recurring', false, $headers);
+
+            Storage::append('cron.html', $out);
+        }
+    }
+
+    public function execute(Recurring $recurrings) {
+
+      $this->middleware('auth');
+
+      return view('admin.recurrings.index', [
+        'recurrings' => Recurring::where('unsubscribed',NULL)->orderBy('created_at', 'desc')->paginate(10)
+      ]);
+    }
+
+    public function destroy(Recurring $recurring)
+    {
+        $recurring->delete();
+        return redirect()->route('admin.recurrings');
     }
 }
