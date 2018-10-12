@@ -135,7 +135,7 @@ class RecurringController extends Controller
             // формирование подписи
             $crc  = md5("$mrh_login:$out_summ:$inv_id:$receipt:$mrh_pass1");
 
-
+/*
             if( $curl = curl_init() ) {
               curl_setopt($curl, CURLOPT_URL, 'https://auth.robokassa.ru/Merchant/Recurring');
               curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
@@ -145,7 +145,33 @@ class RecurringController extends Controller
               //echo $out;
               curl_close($curl);
             }
+*/
+            $headers = stream_context_create(array(
+                'http' => array(
+                    'method' => 'POST',
+                    'header' => 'Content-Type: application/x-www-form-urlencoded' . PHP_EOL,
+                    'content' => "MrchLogin=$mrh_login&OutSum=$out_summ&PreviousInvoiceID=$prev_inv_id&InvId=$inv_id&SignatureValue=$crc&Receipt=$receipt&IsTest=$IsTest",
+                ),
+            ));
+
+            $out = file_get_contents('https://auth.robokassa.ru/Merchant/Recurring', false, $headers);
+
             Storage::append('cron.html', $out);
         }
+    }
+
+    public function execute(Recurring $recurrings) {
+
+      $this->middleware('auth');
+
+      return view('admin.recurrings.index', [
+        'recurrings' => Recurring::where('unsubscribed',NULL)->orderBy('created_at', 'desc')->paginate(10)
+      ]);
+    }
+
+    public function destroy(Recurring $recurring)
+    {
+        $recurring->delete();
+        return redirect()->route('admin.recurrings');
     }
 }

@@ -57,6 +57,8 @@ Route::group(['prefix'=>'admin','middlevare'=>'auth'], function () {
       Route::get('/payments/id/{id}', 'PaymentsController@execute_id')->name('admin.payments.id');
       Route::get('/payments/{payment}/delete', 'PaymentsController@destroy')->name('admin.payment.delete');
 
+      Route::get('/recurrings', 'RecurringController@execute')->name('admin.recurrings');
+      Route::get('/recurrings/{recurring}/delete', 'RecurringController@destroy')->name('admin.recurring.delete');
 });
 
 
