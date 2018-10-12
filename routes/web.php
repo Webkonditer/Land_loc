@@ -22,6 +22,7 @@ Route::group(['middlevare'=>'web'], function () {
     Route::get('/unsubscribe', function () {return view('site.unsubscribe');});
     Route::post('/unsubscribe', 'RecurringController@unsubscribe')->name('unsubscribe');
     Route::get('/unsubscribe/{email}/{key}', 'RecurringController@unsubscribe_after_email');
+    Route::get('/cron_recurring', 'RecurringController@cron_script')->name('cron_script');
     //Route::auth();
 });
 

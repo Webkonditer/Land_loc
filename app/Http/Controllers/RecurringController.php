@@ -8,6 +8,7 @@ use App\Donator;
 use App\Payment;
 use Carbon\Carbon;
 use App\Recurring;
+use Illuminate\Support\Facades\Storage;
 
 class RecurringController extends Controller
 {
@@ -73,5 +74,22 @@ class RecurringController extends Controller
           }
       }
       return view('site.unsubscribe-fail');
+    }
+
+    public function rron_script() {
+      //Echo($d = Carbon::now()->format('m-d'));
+    //dd(new Carbon('last day of this month'));
+
+
+      if( $curl = curl_init() ) {
+        curl_setopt($curl, CURLOPT_URL, 'https://auth.robokassa.ru/Merchant/Recurring');
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, "MrchLogin=$mrh_login&OutSum=$out_summ&PreviousInvoiceID=$prev_inv_id&InvId=$inv_id&Desc=$inv_desc&SignatureValue=$crc&Email=$Email&Receipt=$Receipt&IsTest=$IsTest");
+        $out = curl_exec($curl);
+        //echo $out;
+        curl_close($curl);
+      }
+      Storage::append('cron.html', $out);
     }
 }
