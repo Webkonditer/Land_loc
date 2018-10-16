@@ -30,6 +30,9 @@
                         <a href="{{ route('admin.payments.sort', ['sort' => 'created_at']) }}">Дата</a>
                     </th>
                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Код: активируйте, чтобы изменить сортировку">
+                        <a href="{{ route('admin.payments.sort', ['sort' => 'repeated']) }}">Тип</a>
+                    </th>
+                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Код: активируйте, чтобы изменить сортировку">
                         <a href="{{ route('admin.payments.sort', ['sort' => 'confirmation']) }}">Платеж подтвержден</a>
                     </th>
                     <th class="action" style="width:30px !important;"></th>
@@ -45,6 +48,7 @@
                     <td style="vertical-align:middle">{{ $payment->summ }}</td>
                     <td style="vertical-align:middle">{{ $payment->monthly }}</td>
                     <td style="vertical-align:middle">{{ $payment->created_at }}</td>
+                    <td style="vertical-align:middle">{{ $payment->repeated }}</td>
                     <td style="vertical-align:middle">{{ $payment->confirmation }}</td>
                     <td style="vertical-align:middle"><a href="{{ route('admin.donator.edit', ['id' => $payment->id]) }}">{{--<i class="icon glyphicon glyphicon-pencil"></i>--}}</a></td>
                     <td style="vertical-align:middle"><a onclick="return confirm ('Удалить информацию о платеже из истории?')" href="{{ route('admin.payment.delete', ['id' => $payment->id]) }}"><i class="icon glyphicon glyphicon-remove"></i></a></td>

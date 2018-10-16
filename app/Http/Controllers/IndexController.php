@@ -7,6 +7,7 @@ use App\Format;
 use App\Donator;
 use App\Payment;
 use App\Setting;
+use App\Recurring;
 
 class InDexController extenDs Controller
 {
@@ -51,6 +52,16 @@ class InDexController extenDs Controller
       'podp' => 'sometimes|required|accepted',
     ]);
 
+    $old_donator = Donator::where('last_payment','!=',NULL)->where('email', $request->email)->first();
+    if (isset($old_donator->id)) {
+      $old_recurring = Recurring::where('unsubscribed',NULL)->where('donator_id', $old_donator->id)->first();
+      if (isset($old_recurring->id)) {
+        return redirect()->back()
+                            ->withErrors('У Вас уже есть ежемесячная подписка. Если Вы хотите изменить ее, сначала отпишитесь от старой подписки.')
+                            ->withInput();
+      }
+    }
+    //dd('Еще нет');
     $donator->name = $request->name;
     $donator->email = $request->email;
     $donator->phone = $request->phone;
@@ -66,10 +77,20 @@ class InDexController extenDs Controller
 
     $payment->donator_id = $donator_id;
     $payment->format_id = $request->format_id;
-    if($request->monthly == "Ежемесячно")$payment->monthly = "Ежемесячно"; else $payment->monthly = "Разово";
+    if($request->monthly == "Ежемесячно"){
+      $payment->monthly = "Ежемесячно";
+      $payment->repeated = "Родительский";
+
+    }
+    else {
+      $payment->monthly = "Разово";
+      $payment->repeated = "Разовый";
+
+    }
+
     $payment->summ = $request->summ;
     $payment->save();
-
+    dd($payment->id);
     $payment_id = $payment->id;
 
     $setting = Setting::first();

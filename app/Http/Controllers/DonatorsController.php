@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use App\Payment;
+use App\Recurring;
 
 class DonatorsController extends Controller
 {
@@ -47,6 +48,7 @@ class DonatorsController extends Controller
     public function destroy(Donator $donator)
     {
         $delPayments = Payment::where('donator_id', $donator->id)->delete();
+        $delRecurrings = Recurring::where('donator_id', $donator->id)->delete();
         $donator->delete();
         return redirect()->route('admin.donators');
 
