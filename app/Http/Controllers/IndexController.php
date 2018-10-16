@@ -92,7 +92,7 @@ class InDexController extenDs Controller
 
     $payment->summ = $request->summ;
     $payment->save();
-    dd($payment->id);
+    //dd($payment->id);
     $payment_id = $payment->id;
 
     $setting = Setting::first();
