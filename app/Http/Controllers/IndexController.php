@@ -60,7 +60,6 @@ class InDexController extenDs Controller
                             ->withErrors('У Вас уже есть ежемесячная подписка. Если Вы хотите изменить ее, сначала отпишитесь от старой подписки.')
                             ->withInput();
       }
-      $donator = $old_donator;
     }
     //dd('Еще нет');
     $donator->name = $request->name;

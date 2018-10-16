@@ -44,7 +44,14 @@ class ResultController extends Controller
               }
 
             // признак успешно проведенной операции
-            // success
+            $old_donator = Donator::where('id','!=', $don->id)->where('email', $don->email)->first();
+            if (isset($old_donator->id)) {
+              $id = $old_donator->id;
+              $old_donator->delete(); //При совпадении убираем старого жертвователя
+              $don->id = $id; //Его ид отдаем новому
+              $pay->donator_id = $id;//Меняем ид донатора у платежа
+            }
+
             $pay->confirmation = Carbon::now()->format('Y-m-d H:i:s');
             $pay->save();//Подтверждение платежа в таблицу платежей
 
