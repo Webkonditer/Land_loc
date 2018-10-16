@@ -67,7 +67,7 @@
                     <td style="vertical-align:middle">{{ $donator->monthly }}</td>
                     <td style="vertical-align:middle">{{ $donator->created_at }}</td>
                     <td style="vertical-align:middle"><a href="{{ route('admin.payments.id', ['id' => $donator->id]) }}"><i class="fa fa-eye fa-2" aria-hidden="true"></i></a></td>
-                    <td style="vertical-align:middle"><a onclick="return confirm ('Удалить жертвователя и всю историю его платежей?')" href="{{ route('admin.donator.delete', ['id' => $donator->id]) }}"><i class="icon glyphicon glyphicon-remove"></i></a></td>
+                    <td style="vertical-align:middle"><a onclick="return confirm ('Удалить жертвователя, его подписки и всю историю его платежей?')" href="{{ route('admin.donator.delete', ['id' => $donator->id]) }}"><i class="icon glyphicon glyphicon-remove"></i></a></td>
                 </tr>
                 @empty
                 <tr>
