@@ -15,7 +15,7 @@ use App\Recurring;
 
 class ResultController extends Controller
 {
-        public function result(Request $request, Donator $donator, Payment $payment) {
+        public function result(Request $request, Donator $donator, Payment $payment, Recurring $recurrings) {
 
             // регистрационная информация (пароль #2)
             $setting = Setting::first();
@@ -59,8 +59,8 @@ class ResultController extends Controller
             $don->save();//Подтверждение платежа в таблицу платежей
 
             if ($pay->monthly == "Ежемесячно") {
-              if($pay->repeated != 'повторный') {
-                  $recurrings = Recurring;// В таблицу ежемесячных
+              if($pay->repeated != 'Рекурентный') {
+                  //$recurrings = Recurring;// В таблицу ежемесячных
 
                   $recurrings->payment_id = $pay->id;
                   $recurrings->donator_id = $pay->donator_id;

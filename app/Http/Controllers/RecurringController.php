@@ -79,7 +79,7 @@ class RecurringController extends Controller
       return view('site.unsubscribe-fail');
     }
 
-    public function cron_script(Payment $payment) {
+    public function cron_script(Payment $payment) {  
 
         $last_date = (new Carbon('last day of this month'))->format('d');
         $today_d = Carbon::now()->format('d');
@@ -116,6 +116,8 @@ class RecurringController extends Controller
 
         foreach($recurs as $recur){//dd($recur);
 
+			$payment = new Payment;
+		
             $payment->donator_id = $recur->donator_id;
             $payment->format_id = $recur->format_id;
             $payment->monthly = "Ежемесячно";
@@ -147,10 +149,11 @@ class RecurringController extends Controller
           if ($response == 'OK'.$inv_id) {
             $payment->confirmation = Carbon::now()->format('Y-m-d H:i:s');
             $payment->save();
-            dd($payment);
+            //dump($payment);
           }
-          //Storage::append('cron2.html', $post_request);
+          
         }
+		Storage::append('cron2.html', Carbon::now()->format('Y-m-d H:i:s'));
     }
 
     public function execute(Recurring $recurrings) {
