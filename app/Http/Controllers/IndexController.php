@@ -52,13 +52,15 @@ class InDexController extenDs Controller
       'podp' => 'sometimes|required|accepted',
     ]);
 
-    $old_donator = Donator::where('last_payment','!=',NULL)->where('email', $request->email)->first();
-    if (isset($old_donator->id)) {
-      $old_recurring = Recurring::where('unsubscribed',NULL)->where('donator_id', $old_donator->id)->first();
-      if (isset($old_recurring->id)) {
-        return redirect()->back()
-                            ->withErrors('У Вас уже есть ежемесячная подписка. Если Вы хотите изменить ее, сначала отпишитесь от старой подписки.')
-                            ->withInput();
+    if($request->monthly == "Ежемесячно"){
+      $old_donator = Donator::where('last_payment','!=',NULL)->where('email', $request->email)->first();
+      if (isset($old_donator->id)) {
+        $old_recurring = Recurring::where('unsubscribed',NULL)->where('donator_id', $old_donator->id)->first();
+        if (isset($old_recurring->id)) {
+          return redirect()->back()
+                              ->withErrors('У Вас уже есть ежемесячная подписка. Если Вы хотите изменить ее, сначала отпишитесь от старой подписки.')
+                              ->withInput();
+        }
       }
     }
     //dd('Еще нет');
