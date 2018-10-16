@@ -153,7 +153,7 @@ class RecurringController extends Controller
           }
           
         }
-		Storage::append('cron2.html', Carbon::now()->format('Y-m-d H:i:s'));
+		Storage::append('cron2.html', Carbon::now()->format('Y-m-d H:i:s'));//Крутняк
     }
 
     public function execute(Recurring $recurrings) {
