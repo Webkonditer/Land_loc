@@ -52,7 +52,7 @@ class ResultController extends Controller
               $anonim = $old_donator->anonim;
               $old_donator->delete(); //При совпадении убираем старого жертвователя
               $don->id = $id; //Его ид отдаем новому
-              $don->recurring = $recurring; //Согласие на ежемесячные
+              if ($recurring == 'Да')$don->recurring = $recurring; //Согласие на ежемесячные
               if ($don->anonim == 'Нет') $don->anonim = $anonim; //Анонимность
               $pay->donator_id = $id;//Меняем ид донатора у платежа
             }
