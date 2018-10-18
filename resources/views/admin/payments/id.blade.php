@@ -34,14 +34,6 @@
                   <td style="vertical-align:middle">{{ $donator->city }}</td>
               </tr>
               <tr role="row" >
-                  <td style="vertical-align:middle">Опция</td>
-                  <td style="vertical-align:middle">{{ $donator->format_name }}</td>
-              </tr>
-              <tr role="row" >
-                  <td style="vertical-align:middle">Сумма</td>
-                  <td style="vertical-align:middle">{{ $donator->summ }}</td>
-              </tr>
-              <tr role="row" >
                   <td style="vertical-align:middle">Периодичность</td>
                   <td style="vertical-align:middle">{{ $donator->monthly }}</td>
               </tr>
@@ -60,6 +52,59 @@
 
           </tbody>
       </table>
+
+      <h3>Подписка:</h3>
+
+
+
+      <div class="row">
+          <div class="col-sm-12">
+            @if (isset($recurring->id))
+              <table class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                  <thead>
+                      <tr role="row">
+                          <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Название: активируйте, чтобы изменить сортировку">
+                              Id
+                          </th>
+                          <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Название: активируйте, чтобы изменить сортировку">
+                              Номер первого чека
+                          </th>
+                          <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Название: активируйте, чтобы изменить сортировку">
+                              Опция
+                          </th>
+                          <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Название: активируйте, чтобы изменить сортировку">
+                              Id опции
+                          </th>
+                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Код: активируйте, чтобы изменить сортировку">
+                              Сумма пожертвования
+                          </th>
+                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Код: активируйте, чтобы изменить сортировку">
+                              Зарегистрирована
+                          </th>
+
+                          <th class="action" style="width:30px !important;"></th>
+                          <th class="action" style="width:30px !important;"></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+
+                      <tr role="row" >
+                          <td style="vertical-align:middle">{{ $recurring->id }}</td>
+                          <td style="vertical-align:middle">{{ $recurring->payment_id }}</td>
+                          <td style="vertical-align:middle">{{ $format->name }}</td>
+                          <td style="vertical-align:middle">{{ $recurring->format_id }}</td>
+                          <td style="vertical-align:middle">{{ $recurring->summ }}</td>
+                          <td style="vertical-align:middle">{{ $recurring->created_at }}</td>
+                          <td style="vertical-align:middle"><a href="{{ route('admin.donator.edit', ['id' => $recurring->id]) }}">{{--<i class="icon glyphicon glyphicon-pencil"></i>--}}</a></td>
+                          <td style="vertical-align:middle"><a onclick="return confirm ('Удалить эту ежемесячную подписку?')" href="{{ route('admin.recurring.delete', ['id' => $recurring->id]) }}"><i class="icon glyphicon glyphicon-remove"></i></a></td>
+                      </tr>
+                  </tbody>
+              </table>
+            @else
+                      <p style="color:green">Подписки отсутствуют.</p>
+            @endif
+          </div>
+      </div>
 
       <h3>Платежи жертвователя:</h3>
 
@@ -107,7 +152,7 @@
                 @empty
                 <tr>
                     <td>
-                      <h3 style="color:green">Платежи не найдены</h3>
+                      <p style="color:green">Платежи не найдены</p>
                     </td>
                 </tr>
 

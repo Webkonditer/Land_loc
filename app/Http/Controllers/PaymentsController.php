@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use App\Payment;
 use App\Donator;
+use App\Recurring;
+use App\Format;
 
 class PaymentsController extends Controller
 {
@@ -30,11 +32,16 @@ class PaymentsController extends Controller
     ]);
   }
 
-  public function execute_id(Payment $payments, $id) {
+  public function execute_id(Payment $payments, $id) {//Полные данные по жертвователю
 
+    $recurring = Recurring::where('unsubscribed',NULL)->where('donator_id', $id)->first();
+    if(isset($recurring->format_id))$format = Format::where('id', $recurring->format_id)->first();
+    else $format = NULL;
     return view('admin.payments.id', [
       'payments' => Payment::where('confirmation','!=',NULL)->where('donator_id', $id)->paginate(500),
-      'donator' => Donator::where('id', $id)->first()
+      'donator' => Donator::where('id', $id)->first(),
+      'recurring' => $recurring,
+      'format' => $format
     ]);
   }
 

@@ -50,10 +50,12 @@ class ResultController extends Controller
               $reg_date = $old_donator->created_at;
               $recurring = $old_donator->recurring;
               $anonim = $old_donator->anonim;
+              $monthly = $old_donator->monthly;
               $old_donator->delete(); //При совпадении убираем старого жертвователя
               $don->id = $id; //Его ид отдаем новому
               if ($recurring == 'Да')$don->recurring = $recurring; //Согласие на ежемесячные
               if ($don->anonim == 'Нет') $don->anonim = $anonim; //Анонимность
+              if ($monthly == 'Ежемесячно') $don->monthly = $monthly; //Ежемесячно
               $pay->donator_id = $id;//Меняем ид донатора у платежа
             }
 
