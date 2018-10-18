@@ -86,7 +86,7 @@ class ResultController extends Controller
                     <meta charset="utf8">
                 </head>
                 <body>
-                    <h2>Здравствуйте, '.$donator->name.'!</h2>
+                    <h2>Здравствуйте, '.$don->name.'!</h2>
                     '.$format->success.'
                 </body>
             </html>
