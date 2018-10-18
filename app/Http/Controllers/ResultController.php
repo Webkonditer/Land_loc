@@ -48,9 +48,12 @@ class ResultController extends Controller
             if (isset($old_donator->id)) {
               $id = $old_donator->id;
               $reg_date = $old_donator->created_at;
+              $recurring = $old_donator->recurring;
+              $anonim = $old_donator->anonim;
               $old_donator->delete(); //При совпадении убираем старого жертвователя
               $don->id = $id; //Его ид отдаем новому
-              $don->created_at = $reg_date; //
+              $don->recurring = $recurring; //Согласие на ежемесячные
+              $don->anonim = $anonim; //Анонимность
               $pay->donator_id = $id;//Меняем ид донатора у платежа
             }
 
