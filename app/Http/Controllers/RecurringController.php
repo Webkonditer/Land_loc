@@ -25,7 +25,7 @@ class RecurringController extends Controller
         if (isset($donator->id)) {
             $recur = Recurring::where('unsubscribed', NULL)->where('donator_id', $donator->id)->first();
             if($recur != NULL) {
-
+              //Отправка письма
               $to = $request->email;
               $subject = 'Отписка от ежемесячного платежа';
               $url = route('home').'/unsubscribe/'.$request->email.'/69483'.$donator->id.'5739';
@@ -79,7 +79,7 @@ class RecurringController extends Controller
       return view('site.unsubscribe-fail');
     }
 
-    public function cron_script(Payment $payment) {  
+    public function cron_script(Payment $payment) {
 
         $last_date = (new Carbon('last day of this month'))->format('d');
         $today_d = Carbon::now()->format('d');
@@ -117,7 +117,7 @@ class RecurringController extends Controller
         foreach($recurs as $recur){//dd($recur);
 
 			$payment = new Payment;
-		
+
             $payment->donator_id = $recur->donator_id;
             $payment->format_id = $recur->format_id;
             $payment->monthly = "Ежемесячно";
@@ -151,7 +151,7 @@ class RecurringController extends Controller
             $payment->save();
             //dump($payment);
           }
-          
+
         }
 		Storage::append('cron2.html', Carbon::now()->format('Y-m-d H:i:s'));//Крутняк
     }

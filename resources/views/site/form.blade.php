@@ -145,7 +145,7 @@
                                             class="form-control" value="{{old('phone')}}" />
                                         </div>
                                     </div>
-
+                                    <p>*Мы обещаем не беспокоить Вас по телефону без крайней необходимости</p>
                                     <div class="form-group">
                                         <label for="name" class="col-form-label">Ваш город</label>
                                         <div>

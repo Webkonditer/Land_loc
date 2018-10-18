@@ -88,9 +88,9 @@
                     </div>
                 </section>
                 <div id="register" class="panel panel-default col-md-12">
-                    <p><h3 class="widget-title line-bottom">Как это работает?</h3>
+                    <p><h3 class="widget-title line-bottom">Добро пожаловать!</h3>
                     </p>
-                    <p align="center"><h4>Спасибо вам, что подумываете стать частью нашего клуба. Этот клуб создан специально для тех, для кого слова "образование", "обучение", "наставничество" и "воспитание" - не пустой звук, но он считает их ключевой составляющей нашего социума, и потому хочет сам лучше понять принципы, на которых оно основано, и поддержать наши начинания в данной области с точки зрения восточной культуры.</h4>
+                    <p align="center"><h4>Спасибо вам, что подумываете стать частью нашего клуба. Этот клуб создан специально для тех, для кого слова "образование", "обучение", "наставничество" и "воспитание" - не пустой звук, но он считает их ключевой составляющей нашего социума, и потому хочет сам лучше понять принципы, на которых оно основано, и поддержать наши начинания в данной области.</h4>
                     </p>
                     <br><br>
                     <p><h3 class="widget-title line-bottom">Как это работает?</h3>
@@ -175,7 +175,7 @@
                                             <div class="panel-title"> <a class="collapsed" data-parent="#accordion1" data-toggle="collapse" href="#accordion11" aria-expanded="false"> <span class="open-sub"></span>Куда пойдут деньги?</a> </div>
                                             <div id="accordion11" class="panel-collapse collapse" role="tablist" aria-expanded="false" style="height: 0px;">
                                                 <div class="panel-content">
-                                                    <p>Деятельность происходит от лица ИП, который направит вырученные финансы на развитие образовательной деятельности в нашем социуме.</p>
+                                                    <p>Развитие образовательных начинаний в нашем социуме и поддержание тех, кто активно вовлечен в данную деятельность.</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -188,15 +188,7 @@
                                                         для всех участников нашей программы.</p>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="panel">
-                                            <div class="panel-title"> <a data-parent="#accordion1" data-toggle="collapse" href="#accordion13" class="" aria-expanded="true"> <span class="open-sub"></span> Почему вы зарегистрированы как ИП?</a> </div>
-                                            <div id="accordion13" class="panel-collapse collapse" role="tablist" aria-expanded="true">
-                                                <div class="panel-content">
-                                                    <p>Это связано с упрощением нашей работы с юридически-правовой точки зрения.</p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        </div>                                        
                                         <div class="panel">
                                             <div class="panel-title"> <a class="collapsed" data-parent="#accordion1" data-toggle="collapse" href="#accordion14" aria-expanded="false"> <span class="open-sub"></span>Если я оставлю данные карты, Вы не снимете с меня больше положенного?</a>
                                             </div>

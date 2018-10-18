@@ -72,6 +72,34 @@ class ResultController extends Controller
             }
 
             echo "OK$inv_id\n";
+
+            //Отправка письма
+            $to = $don->email;
+            $subject = 'Уведомление о платеже';
+            $url = route('home').'/unsubscribe/'.$don->email.'/69483'.$don->id.'5739';
+            $format = Format::where('id', $pay->format_id)->first();
+
+            $message = '
+            <html>
+                <head>
+                    <title>Уведомление о платеже</title>
+                    <meta charset="utf8">
+                </head>
+                <body>
+                    <h2>Здравствуйте, '.$donator->name.'!</h2>
+                    '.$format->success.'
+                </body>
+            </html>
+            ';
+
+            $headers[] = 'MIME-Version: 1.0';
+            $headers[] = 'Content-type: text/html; charset=utf8';
+            $headers[] = 'From: bhaktilata.ru <info@bhaktilata.ru>';
+
+            $result = mail($to, $subject, $message, implode("\r\n", $headers));
+            //echo $result ? 'OK' : 'Error';
+
+            //-------------------------------------------------
             exit();
         }
 
