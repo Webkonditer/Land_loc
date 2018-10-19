@@ -12,6 +12,8 @@ use App\Payment;
 use App\Setting;
 use Carbon\Carbon;
 use App\Recurring;
+use App\Course;
+use App\Course_payment;
 
 class ResultController extends Controller
 {
@@ -33,15 +35,22 @@ class ResultController extends Controller
 
             $my_crc = strtoupper(md5("$out_summ:$inv_id:$mrh_pass2"));
 
-            $pay = Payment::where('id', $inv_id)->first();
-            $don = Donator::where('id', $pay->donator_id)->first();
-
             // проверка корректности подписи
             if ($my_crc !=$crc)
               {
                 echo "bad sign\n";
                 exit();
               }
+
+              //Платежи за курсы
+              if ($inv_id > 1000000) {
+                $course_payment = Course_payment::where('id', $inv_id-1000000)->first();
+                $course_payment->confirmation = Carbon::now()->format('Y-m-d H:i:s');
+                exit();
+              }
+
+            $pay = Payment::where('id', $inv_id)->first();
+            $don = Donator::where('id', $pay->donator_id)->first();
 
             // признак успешно проведенной операции
             $old_donator = Donator::where('id','!=', $don->id)->where('email', $don->email)->first();

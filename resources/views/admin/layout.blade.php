@@ -128,11 +128,6 @@
                 <li class="header">ОСНОВЫНЕ РАЗЕДЛЫ</li>
 
                 <li>
-                    <a href="{{route('admin.formats.index')}}">
-                        <i class="fa fa-th-list"></i> <span>Список опций</span>
-                    </a>
-                </li>
-                <li>
                     <a href="{{route('admin.settings')}}">
                         <i class="fa fa-sliders" aria-hidden="true"></i> <span>Настройки магазина</span>
                     </a>
@@ -143,6 +138,12 @@
                         <i class="fa fa-users" aria-hidden="true"></i> <span>Администраторы</span>
                     </a>
                 </li>
+                <li class="header">ПОЖЕРТВОВАНИЯ</li>
+                <li>
+                    <a href="{{route('admin.formats.index')}}">
+                        <i class="fa fa-th-list"></i> <span>Список опций</span>
+                    </a>
+                </li>
                 <li>
                     <a href="{{route('admin.donators')}}">
                         <i class="fa fa-universal-access" aria-hidden="true"></i> <span>Жертвователи</span>
@@ -150,15 +151,20 @@
                 </li>
                 <li>
                     <a href="{{route('admin.payments')}}">
-                        <i class="fa fa-rub" aria-hidden="true"></i> <span>Платежи</span>
+                        <i class="fa fa-heart" aria-hidden="true"></i> <span>Пожертвования</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('admin.recurrings')}}">
-                        <i class="fa fa-history" aria-hidden="true"></i> <span>Ежемесячные платежи</span>
+                        <i class="fa fa-history" aria-hidden="true"></i> <span>Ежемесячные подписки</span>
                     </a>
                 </li>
-
+                <li class="header">ОПЛАТА КУРСОВ</li>
+                <li>
+                    <a href="{{route('admin.courses.payments')}}">
+                        <i class="fa fa-rub" aria-hidden="true"></i> <span>Платежи за курсы</span>
+                    </a>
+                </li>
             </ul>
         </section>
         <!-- /.sidebar -->

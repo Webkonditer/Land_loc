@@ -141,7 +141,7 @@
 
                                     <div class="form-group">
                                         <label for="title">Модуль: Варианты на выбор:</label>
-                                        <select class="form-control" id="modul" name="modul" required="required">
+                                        <select class="form-control" id="modul" name="module" required="required">
                                           @foreach ($modules as $modul)
                                             <option value="{{$modul}}"
                                             @if ($modul == old('modul'))

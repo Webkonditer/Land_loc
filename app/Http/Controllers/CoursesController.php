@@ -22,31 +22,17 @@ class CoursesController extends Controller
     }
     //----------------------------------------------------------------
     public function form_check($nic, Request $request, Course_payment $payment, Course $courses) {
-      
+
     $validator = $this->validate($request, [
       'summ' => 'required|integer',
       'name' => 'required|string|max:100',
       'email' => 'required|email',
       'group' => 'required|integer',
-      'modul' => 'required|string|max:250',
+      'module' => 'required|string|max:250',
     ]);
 
+    $course = Course::where('nic', $nic)->first();
 
-    $table->string('name');
-    $table->string('email');
-    $table->integer('course_id');
-    $table->string('course_name');
-    $table->string('module')->nullable();
-    $table->integer('summ');
-    $table->dateTime('confirmation')->nullable();
-    $table->string('repeated')->nullable();
-    $table->string('phone')->nullable();
-    $table->string('monthly',255)->nullable();
-    $table->string('anonim')->nullable();
-    $table->string('recur_consent')->nullable();
-
-    $course = Course::where('nic', $nic);
-    //dd('Еще нет');
     $payment->name = $request->name;
     $payment->email = $request->email;
     $payment->group_id = $request->group;
@@ -59,37 +45,36 @@ class CoursesController extends Controller
 
     $payment_id = $payment->id;
 
-    dd($payment);
     $setting = Setting::first();
 
     // регистрационная информация (Идентификатор магазина, пароль #1)
-/*      $mrh_login = $setting->mrh_login;
+      $mrh_login = $setting->mrh_login;
 
       if($setting->test_mode == 1)$mrh_pass1 = $setting->test_pass1;
       else $mrh_pass1 = $setting->mrh_pass1;
       // номер заказа
-      $inv_id = $payment_id;
+      $inv_id = $payment_id+1000000;
 
       // описание заказа
-      $inv_desc = $setting->inv_desc;
+      $inv_desc = 'Оплата: '.$payment->course_name.' - '.$payment->module;
 
       // сумма заказа
-
-        $out_summ = $request->summ;
+      $out_summ = $payment->summ;
 
       // кодировка
       $encoding = "utf-8";
 
       // Адрес электронной почты покупателя
-      $Email = $request->email;
+      $Email = $payment->email;
 
       //Фискальная информация URL-кодировать. Параметр включается в контрольную подпись запроса (после номера счета магазина). Например: MerchantLogin:OutSum:InvId:Receipt:Пароль#1
-      $receipt = '{"sno": "usn_income","items":[{"name": "Участие в вебинарах пакет '.$request->format_id.'","quantity": 1.0,"sum": '.$request->summ.'.0,"tax": "none"}]}';
+      $receipt = '{"sno": "usn_income","items":[{"name": "'.$inv_desc.'","quantity": 1.0,"sum": '.$out_summ.'.0,"tax": "none"}]}';
       $receipt = urlencode($receipt);
 
       //Периодический платеж ()
-      if($request->monthly == "Ежемесячно") $Recurring = true;
-      else $Recurring = false;
+      //if($request->monthly == "Ежемесячно") $Recurring = true;
+      //else
+      $Recurring = false;
 
       //Тестовый режим
       if($setting->test_mode == 1)$IsTest = true;
@@ -109,8 +94,15 @@ class CoursesController extends Controller
           'Receipt' => $receipt,
           'Recurring' => $Recurring,
           'IsTest' => $IsTest
-      ]); */
+      ]);
     }
     //----------------------------------------------------------------
+
+    public function payments(Course_payment $payments) {
+
+      return view('admin.courses.index', [
+        'payments' => Course_payment::where('confirmation','!=',NULL)->orderBy('created_at', 'desc')->paginate(10)
+      ]);
+    }
 
 }

@@ -22,6 +22,7 @@ class CreateCoursesTable extends Migration
             $table->text('description')->nullable();
             $table->text('module')->nullable();
             $table->integer('summ')->nullable();
+            $table->text('mail_text')->nullable();
             $table->string('monthly',255)->nullable();
             $table->timestamps();
           });
