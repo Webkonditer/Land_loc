@@ -44,6 +44,7 @@ class ResultController extends Controller
 
               //Платежи за курсы
               if ($inv_id > 1000000) {
+                File::put('request', dump($request));
                 $course_payment = Course_payment::where('id', $inv_id-1000000)->first();
                 $course_payment->confirmation = Carbon::now()->format('Y-m-d H:i:s');
                 exit();
