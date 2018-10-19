@@ -69,6 +69,7 @@ class ResultController extends Controller
                     <body>
                         <h2>Здравствуйте, '.$course_payment->name.'!</h2>
                         '.$course->mail_text.'
+                        <h3>Ваш пароль: '.$password.'</h3>
                     </body>
                 </html>
                 ';
