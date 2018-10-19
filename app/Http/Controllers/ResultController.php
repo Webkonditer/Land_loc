@@ -58,19 +58,30 @@ class ResultController extends Controller
                 echo "OK$inv_id\n";
 
                 $text =
-                'Харе Кришна. Примите, пожалуйста, наши смиренные поклоны. Вся слава Шриле Прабхупаде.
+                '<div class="panel panel-default col-md-8 col-md-offset-2">
+                <div class="panel-body">
+                <p style="margin:0cm 0cm 10pt"><span style="font-size:11pt"><span style="line-height:115%"><span style="font-family:Calibri,sans-serif"></span></span></span></p>
 
-                Благодарим Вас за дополнительный перевод!
+                <p style="margin:0cm 0cm 10pt"><span style="font-size:11pt"><span style="line-height:115%"><span style="font-family:Calibri,sans-serif">Харе Кришна!</span></span></span></p>
 
-                Ваши слуги,
-                Секретариат курса.';
+                <p style="margin:0cm 0cm 10pt"><span style="font-size:11pt"><span style="line-height:115%"><span style="font-family:Calibri,sans-serif">Примите, пожалуйста, наши смиренные поклоны. Вся слава Шриле Прабхупаде.</span></span></span></p>
+
+                <p style="margin:0cm 0cm 10pt"><span style="font-size:11pt"><span style="line-height:115%"><span style="font-family:Calibri,sans-serif">Благодарим Вас за дополнительный перевод!</span></span></span></p>
+
+                <p style="margin:0cm 0cm 10pt"><span style="font-size:11pt"><span style="line-height:115%"><span style="font-family:Calibri,sans-serif">Ваши слуги,<br />
+                Секретариат курса.</span></span></span></p>
+
+                <p style="margin:0cm 0cm 10pt"><span style="font-size:11pt"><span style="line-height:115%"><span style="font-family:Calibri,sans-serif"></span></span></span></p>
+                </div>
+                </div>.';
 
                 if($course_payment->module == 'Факультативная доплата за модуль'){
                   $mail_text = $text;
+                  $password = '';
                 }
                 else {
                   $mail_text = $course->mail_text;
-                  $password = '';
+
                 }
 
                 //Отправка письма
@@ -180,12 +191,22 @@ class ResultController extends Controller
               $course = Course::where('id', $course_payment->course_id)->first();
 
               $text =
-              'Харе Кришна. Примите, пожалуйста, наши смиренные поклоны. Вся слава Шриле Прабхупаде.
+              '<div class="panel panel-default col-md-8 col-md-offset-2">
+              <div class="panel-body">
+              <p style="margin:0cm 0cm 10pt"><span style="font-size:11pt"><span style="line-height:115%"><span style="font-family:Calibri,sans-serif"></span></span></span></p>
 
-              Благодарим Вас за дополнительный перевод!
+              <p style="margin:0cm 0cm 10pt"><span style="font-size:11pt"><span style="line-height:115%"><span style="font-family:Calibri,sans-serif">Харе Кришна!</span></span></span></p>
 
-              Ваши слуги,
-              Секретариат курса.';
+              <p style="margin:0cm 0cm 10pt"><span style="font-size:11pt"><span style="line-height:115%"><span style="font-family:Calibri,sans-serif">Примите, пожалуйста, наши смиренные поклоны. Вся слава Шриле Прабхупаде.</span></span></span></p>
+
+              <p style="margin:0cm 0cm 10pt"><span style="font-size:11pt"><span style="line-height:115%"><span style="font-family:Calibri,sans-serif">Благодарим Вас за дополнительный перевод!</span></span></span></p>
+
+              <p style="margin:0cm 0cm 10pt"><span style="font-size:11pt"><span style="line-height:115%"><span style="font-family:Calibri,sans-serif">Ваши слуги,<br />
+              Секретариат курса.</span></span></span></p>
+
+              <p style="margin:0cm 0cm 10pt"><span style="font-size:11pt"><span style="line-height:115%"><span style="font-family:Calibri,sans-serif"></span></span></span></p>
+              </div>
+              </div>.';
 
               if($course_payment->module == 'Факультативная доплата за модуль'){
                 return view('site.success', [
