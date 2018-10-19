@@ -191,7 +191,8 @@ class ResultController extends Controller
               $course = Course::where('id', $course_payment->course_id)->first();
 
               $text =
-              '<div class="panel panel-default col-md-8 col-md-offset-2">
+              '
+              <div class="panel panel-default col-md-8 col-md-offset-2">
               <div class="panel-body">
               <p style="margin:0cm 0cm 10pt"><span style="font-size:11pt"><span style="line-height:115%"><span style="font-family:Calibri,sans-serif"></span></span></span></p>
 
