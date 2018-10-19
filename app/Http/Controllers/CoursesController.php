@@ -9,100 +9,139 @@ use App\Setting;
 
 class CoursesController extends Controller
 {
-    public function forms($nic, Request $request) {
+  public function __construct() {
 
-      $course = Course::where('nic',$nic)->first();
-      if(isset($course->module))$modules = explode("\n", $course->module);
-      else abort(404);
+        $this->middleware('auth');
+  }
 
-      return view('site.courses.form', [
-        'course' => $course,
-        'modules'  => $modules,
-      ]);
-    }
-    //----------------------------------------------------------------
-    public function form_check($nic, Request $request, Course_payment $payment, Course $courses) {
-
-    $validator = $this->validate($request, [
-      'summ' => 'required|integer',
-      'name' => 'required|string|max:100',
-      'email' => 'required|email',
-      'group' => 'required|integer',
-      'module' => 'required|string|max:250',
+  public function index(Course $courses)
+  {
+    return view('admin.courses.index', [
+      'courses' => Course::orderBy('position')->paginate(10),
     ]);
+  }
 
-    $course = Course::where('nic', $nic)->first();
+  /**
+   * Show the form for creating a new resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function create(Course $courses)
+  {
+    return view('admin.courses.create', [
+      'courses'  => $courses,
+    ]);
+  }
 
-    $payment->name = $request->name;
-    $payment->email = $request->email;
-    $payment->group_id = $request->group;
-    $payment->course_id = $course->id;
-    $payment->course_name = $course->name;
-    $payment->module = $request->module;
-    $payment->summ = $request->summ;
-    $payment->confirmation = $request->confirmation;
-    $payment->save();
+  /**
+   * Store a newly created resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Http\Response
+   */
+  public function store(Request $request, Course $course)
+  {
+    //dd($request->all());
+    $validator = $this->validate($request, [
 
-    $payment_id = $payment->id;
+        'position' => 'required|integer',
+        'image' => 'required|image',
+        'name' => 'required|string|max:191',
+        'nic' => 'required|string|max:191',
+        'description' => 'required|string',
+        'module' => 'required|string',
+        'mail_text' => 'required|string',
+        'result_text' => 'required|string',
+    ]);
+    //dd($request->all());
+      $path = $request->file('image')->store('i/formatsImage', 'public');
 
-    $setting = Setting::first();
+      $course->position = $request->position;
+      $course->image = $path;
+      $course->name = $request->name;
+      $course->nic = $request->nic;
+      $course->description = $request->description;
+      $course->module = $request->module;
+      $course->mail_text = $request->mail_text;
+      $course->result_text = $request->result_text;
+      $course->save();
 
-    // регистрационная информация (Идентификатор магазина, пароль #1)
-      $mrh_login = $setting->mrh_login;
+      return redirect()->route('admin.courses.index');
+  }
 
-      if($setting->test_mode == 1)$mrh_pass1 = $setting->test_pass1;
-      else $mrh_pass1 = $setting->mrh_pass1;
-      // номер заказа
-      $inv_id = $payment_id+1000000;
+  /**
+   * Display the specified resource.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function show($id)
+  {
+      //
+  }
 
-      // описание заказа
-      $inv_desc = 'Оплата: '.$payment->course_name.' - '.$payment->module;
+  /**
+   * Show the form for editing the specified resource.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function edit(Format $format)
+  {
 
-      // сумма заказа
-      $out_summ = $payment->summ;
+    return view('admin.formats.edit', [
+      'format'  => $format,
+    ]);
+  }
 
-      // кодировка
-      $encoding = "utf-8";
 
-      // Адрес электронной почты покупателя
-      $Email = $payment->email;
+  /**
+   * Update the specified resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function update(Request $request, Format $format)
+  {
+      //dd($request->all());
+      $validator = $this->validate($request, [
 
-      //Фискальная информация URL-кодировать. Параметр включается в контрольную подпись запроса (после номера счета магазина). Например: MerchantLogin:OutSum:InvId:Receipt:Пароль#1
-      $receipt = '{"sno": "usn_income","items":[{"name": "'.$inv_desc.'","quantity": 1.0,"sum": '.$out_summ.'.0,"tax": "none"}]}';
-      $receipt = urlencode($receipt);
-
-      //Периодический платеж ()
-      //if($request->monthly == "Ежемесячно") $Recurring = true;
-      //else
-      $Recurring = false;
-
-      //Тестовый режим
-      if($setting->test_mode == 1)$IsTest = true;
-      else $IsTest = false;
-
-      // формирование подписи
-      $crc  = md5("$mrh_login:$out_summ:$inv_id:$receipt:$mrh_pass1");
-      //$crc  = md5("$mrh_login:$out_summ:$inv_id:$mrh_pass1");
-
-      return view('site.form_send', [
-          'mrh_login' => $mrh_login,
-          'out_summ' => $out_summ,
-          'inv_id' => $inv_id,
-          'inv_desc' => $inv_desc,
-          'crc' => $crc,
-          'Email' => $Email,
-          'Receipt' => $receipt,
-          'Recurring' => $Recurring,
-          'IsTest' => $IsTest
+        'position' => 'required|integer',
+        'image' => 'nullable|image',
+        'name' => 'required|string|max:191',
+        'summ' => 'required',
+        'monthly' => 'string|max:2',
+        'bonus_1' => 'required|string|max:191',
+        'bonus_2' => 'required|string|max:191',
+        'success' => 'required',
       ]);
-    }
-    //----------------------------------------------------------------
+      //dump($request->all());
+        if(null !==($request->file('image'))) $path = $request->file('image')->store('i/formatsImage', 'public');
+        else $path = null;
 
-    public function payments(Course_payment $payments) {
+        $format->position = $request->position;
+        if($path)$format->image = $path;
+        $format->name = $request->name;
+        $format->summ = $request->summ;
+        if($request->monthly)$format->monthly = "Ежемесячно"; else $format->monthly = "Разово";
+        $format->bonus_1 = $request->bonus_1;
+        $format->bonus_2 = $request->bonus_2;
+        $format->success = $request->success;
+        $format->save();
 
-      return view('admin.courses.index', [
-        'payments' => Course_payment::where('confirmation','!=',NULL)->orderBy('created_at', 'desc')->paginate(10)
-      ]);
-    }
+        return redirect()->route('admin.formats.index');
+  }
 
+  /**
+   * Remove the specified resource from storage.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function destroy(Format $format)
+  {
+      $format->delete();
+      return redirect()->route('admin.formats.index');
+  }
 }

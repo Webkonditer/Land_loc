@@ -161,6 +161,9 @@
                 </li>
                 <li class="header">ОПЛАТА КУРСОВ</li>
                 <li>
+                    <a href="{{route('admin.courses.index')}}">
+                        <i class="fa fa-file-text" aria-hidden="true"></i> <span>Список курсов</span>
+                    </a>
                     <a href="{{route('admin.courses.payments')}}">
                         <i class="fa fa-rub" aria-hidden="true"></i> <span>Платежи за курсы</span>
                     </a>

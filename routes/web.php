@@ -23,8 +23,8 @@ Route::group(['middlevare'=>'web'], function () {
     Route::post('/unsubscribe', 'RecurringController@unsubscribe')->name('unsubscribe');
     Route::get('/unsubscribe/{email}/{key}', 'RecurringController@unsubscribe_after_email');
     Route::get('/cron_recurring', 'RecurringController@cron_script')->name('cron_script');
-    Route::get('/courses/{nic}', 'CoursesController@forms')->name('courses_form');
-    Route::post('/courses/{nic}', 'CoursesController@form_check');
+    Route::get('/courses/{nic}', 'CoursePaymentsController@forms')->name('courses_form');
+    Route::post('/courses/{nic}', 'CoursePaymentsController@form_check');
     Route::get('/bs', function () {return redirect()->route('courses_form','bs');});
     //Route::auth();
 });
@@ -63,7 +63,9 @@ Route::group(['prefix'=>'admin','middlevare'=>'auth'], function () {
       Route::get('/recurrings', 'RecurringController@execute')->name('admin.recurrings');
       Route::get('/recurrings/{recurring}/delete', 'RecurringController@destroy')->name('admin.recurring.delete');
 
-      Route::get('/courses/payments', 'CoursesController@payments')->name('admin.courses.payments');
+      Route::get('/courses/payments', 'CoursePaymentsController@payments')->name('admin.courses.payments');
+      Route::resource('/courses', 'CoursesController', ['as'=>'admin']);
+      Route::get('/courses/{id}/delete', 'CoursesController@destroy')->name('admin.courses.delete');
 });
 
 
