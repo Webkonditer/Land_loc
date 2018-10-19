@@ -159,7 +159,7 @@ class ResultController extends Controller
 
         public function success(Request $request) {
 
-          if ($inv_id > 1000000) {
+          if ($request->InvId > 1000000) {
               $course_payment = Course_payment::where('id', $inv_id-1000000)->first();
               $course = Course::where('id', $course_payment->course_id)->first();
 
