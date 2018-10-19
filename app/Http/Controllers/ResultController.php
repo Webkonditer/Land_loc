@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Format;
 use App\Donator;
@@ -39,12 +40,13 @@ class ResultController extends Controller
             if ($my_crc !=$crc)
               {
                 echo "bad sign\n";
+                Storage::append('test.html', 'Пароль не совпадает');
                 exit();
               }
 
               //Платежи за курсы
               if ($inv_id > 1000000) {
-                File::put('request', dump($request));
+                Storage::append('test.html', $request);
                 $course_payment = Course_payment::where('id', $inv_id-1000000)->first();
                 $course_payment->confirmation = Carbon::now()->format('Y-m-d H:i:s');
                 exit();
