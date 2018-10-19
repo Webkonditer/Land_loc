@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Format;
 use App\Donator;
@@ -40,16 +41,47 @@ class ResultController extends Controller
             if ($my_crc !=$crc)
               {
                 echo "bad sign\n";
-                Storage::append('test_down.html', 'Пароль не совпадает');
+                //Storage::append('test_down.html', 'Пароль не совпадает');
                 exit();
               }
 
               //Платежи за курсы
               if ($inv_id > 1000000) {
-                Storage::append('test.html', $request);
+                //Storage::append('test.html', $request);
                 $course_payment = Course_payment::where('id', $inv_id-1000000)->first();
                 $course_payment->confirmation = Carbon::now()->format('Y-m-d H:i:s');
                 $course_payment->save();
+
+                $password = Hash::make($course_payment->group_id.$course_payment->course_name.$course_payment->module)
+                $course = Course::->where('id', $course_payment->course_id)->first();
+                echo "OK$inv_id\n";
+
+                //Отправка письма
+                $to = $course_payment->email;
+                $subject = 'Уведомление о платеже';
+
+                $message = '
+                <html>
+                    <head>
+                        <title>Уведомление о платеже</title>
+                        <meta charset="utf8">
+                    </head>
+                    <body>
+                        <h2>Здравствуйте, '.$course_payment->name.'!</h2>
+                        '.$course->mail_text.'
+                    </body>
+                </html>
+                ';
+
+                $headers[] = 'MIME-Version: 1.0';
+                $headers[] = 'Content-type: text/html; charset=utf8';
+                $headers[] = 'From: iskconclub.ru <info@iskconclub.ru>';
+
+                $result = mail($to, $subject, $message, implode("\r\n", $headers));
+                //echo $result ? 'OK' : 'Error';
+
+                //-------------------------------------------------
+
                 exit();
               }
 
@@ -114,7 +146,7 @@ class ResultController extends Controller
 
             $headers[] = 'MIME-Version: 1.0';
             $headers[] = 'Content-type: text/html; charset=utf8';
-            $headers[] = 'From: bhaktilata.ru <info@bhaktilata.ru>';
+            $headers[] = 'From: iskconclub.ru <info@iskconclub.ru';
 
             $result = mail($to, $subject, $message, implode("\r\n", $headers));
             //echo $result ? 'OK' : 'Error';

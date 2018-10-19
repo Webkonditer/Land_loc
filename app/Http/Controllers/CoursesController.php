@@ -86,11 +86,11 @@ class CoursesController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function edit(Format $format)
+  public function edit(Course $course)
   {
 
-    return view('admin.formats.edit', [
-      'format'  => $format,
+    return view('admin.courses.edit', [
+      'course'  => $course,
     ]);
   }
 
@@ -102,7 +102,7 @@ class CoursesController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, Format $format)
+  public function update(Request $request, Course $course)
   {
       //dd($request->all());
       $validator = $this->validate($request, [
@@ -110,27 +110,27 @@ class CoursesController extends Controller
         'position' => 'required|integer',
         'image' => 'nullable|image',
         'name' => 'required|string|max:191',
-        'summ' => 'required',
-        'monthly' => 'string|max:2',
-        'bonus_1' => 'required|string|max:191',
-        'bonus_2' => 'required|string|max:191',
-        'success' => 'required',
+        'nic' => 'required|string|max:191',
+        'description' => 'required|string',
+        'module' => 'required|string',
+        'mail_text' => 'required|string',
+        'result_text' => 'required|string',
       ]);
       //dump($request->all());
         if(null !==($request->file('image'))) $path = $request->file('image')->store('i/formatsImage', 'public');
         else $path = null;
 
-        $format->position = $request->position;
-        if($path)$format->image = $path;
-        $format->name = $request->name;
-        $format->summ = $request->summ;
-        if($request->monthly)$format->monthly = "Ежемесячно"; else $format->monthly = "Разово";
-        $format->bonus_1 = $request->bonus_1;
-        $format->bonus_2 = $request->bonus_2;
-        $format->success = $request->success;
-        $format->save();
+        $course->position = $request->position;
+        if($path)$course->image = $path;
+        $course->name = $request->name;
+        $course->nic = $request->nic;
+        $course->description = $request->description;
+        $course->module = $request->module;
+        $course->mail_text = $request->mail_text;
+        $course->result_text = $request->result_text;
+        $course->save();
 
-        return redirect()->route('admin.formats.index');
+        return redirect()->route('admin.courses.index');
   }
 
   /**
@@ -139,9 +139,9 @@ class CoursesController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function destroy(Format $format)
+  public function destroy(Course $course)
   {
-      $format->delete();
-      return redirect()->route('admin.formats.index');
+      $course->delete();
+      return redirect()->route('admin.courses.index');
   }
 }

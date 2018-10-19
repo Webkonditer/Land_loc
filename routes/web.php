@@ -65,7 +65,7 @@ Route::group(['prefix'=>'admin','middlevare'=>'auth'], function () {
 
       Route::get('/courses/payments', 'CoursePaymentsController@payments')->name('admin.courses.payments');
       Route::resource('/courses', 'CoursesController', ['as'=>'admin']);
-      Route::get('/courses/{id}/delete', 'CoursesController@destroy')->name('admin.courses.delete');
+      Route::get('/courses/{course}/delete', 'CoursesController@destroy')->name('admin.courses.delete');
 });
 
 
