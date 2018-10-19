@@ -52,7 +52,8 @@ class ResultController extends Controller
                 $course_payment->confirmation = Carbon::now()->format('Y-m-d H:i:s');
                 $course_payment->save();
 
-                $password = Hash::make($course_payment->group_id.$course_payment->course_name.$course_payment->module);
+                //$password = Hash::make($course_payment->group_id.$course_payment->course_name.$course_payment->module);
+                $password = md5($course_payment->group_id.$course_payment->course_name.$course_payment->module);
                 $course = Course::where('id', $course_payment->course_id)->first();
                 echo "OK$inv_id\n";
 
