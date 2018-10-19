@@ -57,6 +57,22 @@ class ResultController extends Controller
                 $course = Course::where('id', $course_payment->course_id)->first();
                 echo "OK$inv_id\n";
 
+                $text =
+                'Харе Кришна. Примите, пожалуйста, наши смиренные поклоны. Вся слава Шриле Прабхупаде.
+
+                Благодарим Вас за дополнительный перевод!
+
+                Ваши слуги,
+                Секретариат курса.';
+
+                if($course_payment->module == 'Факультативная доплата за модуль'){
+                  $mail_text = $text;
+                }
+                else {
+                  $mail_text = $course->mail_text;
+                  $password = '';
+                }
+
                 //Отправка письма
                 $to = $course_payment->email;
                 $subject = 'Уведомление о платеже';
@@ -69,7 +85,7 @@ class ResultController extends Controller
                     </head>
                     <body>
                         <h2>Здравствуйте, '.$course_payment->name.'!</h2>
-                        '.$course->mail_text.'
+                        '.$mail_text.'
                         <h3>Ваш пароль: '.$password.'</h3>
                     </body>
                 </html>
@@ -162,6 +178,21 @@ class ResultController extends Controller
           if ($request->InvId > 1000000) {
               $course_payment = Course_payment::where('id', $request->InvId-1000000)->first();
               $course = Course::where('id', $course_payment->course_id)->first();
+
+              $text =
+              'Харе Кришна. Примите, пожалуйста, наши смиренные поклоны. Вся слава Шриле Прабхупаде.
+
+              Благодарим Вас за дополнительный перевод!
+
+              Ваши слуги,
+              Секретариат курса.';
+
+              if($course_payment->module == 'Факультативная доплата за модуль'){
+                return view('site.success', [
+                  'text' => $text,
+                ]);
+                exit();
+              }
 
               return view('site.success', [
                 'text' => $course->result_text,
