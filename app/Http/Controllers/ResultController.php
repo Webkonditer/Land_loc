@@ -159,6 +159,16 @@ class ResultController extends Controller
 
         public function success(Request $request) {
 
+          if ($inv_id > 1000000) {
+              $course_payment = Course_payment::where('id', $inv_id-1000000)->first();
+              $course = Course::where('id', $course_payment->course_id)->first();
+
+              return view('site.success', [
+                'text' => $course->result_text,
+              ]);
+              exit();
+          }
+
           $pay = Payment::where('id', $request->inv_id)->first();
           $format = Format::where('id', $pay->format_id)->first();
           //dd($pay->format_id);
