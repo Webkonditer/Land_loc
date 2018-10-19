@@ -199,7 +199,6 @@
                                                 <input onclick="validation()" type="submit" class="btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)" value="Сохранить" />
                                             </div>
                                        </div>
-                                       <p>*Мы обещаем не беспокоить Вас по телефону без крайней необходимости</p>
                             </fieldset>
                         </form>
 
