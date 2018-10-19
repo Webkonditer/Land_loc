@@ -23,6 +23,9 @@ Route::group(['middlevare'=>'web'], function () {
     Route::post('/unsubscribe', 'RecurringController@unsubscribe')->name('unsubscribe');
     Route::get('/unsubscribe/{email}/{key}', 'RecurringController@unsubscribe_after_email');
     Route::get('/cron_recurring', 'RecurringController@cron_script')->name('cron_script');
+    Route::get('/courses/{nic}', 'CoursesController@forms')->name('courses_form');
+    Route::post('/courses/{nic}', 'CoursesController@form_check');
+    Route::get('/bs', function () {return redirect()->route('courses_form','bs');});
     //Route::auth();
 });
 

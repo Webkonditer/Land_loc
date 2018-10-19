@@ -27,9 +27,7 @@ class InDexController extenDs Controller
     }
 
     public function forms($id, Request $request) {
-//$ff = Format::where('id',$id)->first();
-//dd($ff);
-
+      
       return view('site.form', [
         'format' => Format::where('id',$id)->first(),
       ]);

@@ -77,53 +77,46 @@
                         <div class="row">
                             <div class="col-md-8 col-md-offset-2">
                                 <br><br>
-                                <h1 class="mt-0">Выбранный Вами формат участия</h1>
+                                <h1 class="mt-0">{{$course->name}}</h1>
                                 <div class="title-icon">
                                     <i class="fa fa-heart fa-3x"></i>
                                 </div>
-                                <h2 class="mt-0">"{{$format->name}}"</h2>
-                                <h3>( @if($format->monthly == "Ежемесячно")Ежемесячный @else Разовый @endif платеж: {{$format->summ}} @if(is_numeric ($format->summ))рублей @endif )</h3>
-
                                 <p></p>
                             </div>
                         </div>
                     </div>
                 </section>
                 <div id="register" class="panel panel-default col-md-12">
-                    <p><h3 class="widget-title line-bottom">Заполните пожалуйста форму</h3>
+                    <p><h3 class="widget-title line-bottom">Для оплаты заполните пожалуйста форму</h3>
                     </p>
 
 
-                        <form role="form" name="edit" enctype="multipart/form-data" action="{{ route('form_check')}}" method="POST">
+                        <form role="form" name="edit" enctype="multipart/form-data" action="" method="POST">
                             @csrf
                             <div class="col-md-6">
                             <fieldset>
 
-                                @if  ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach  ($errors->all() as $error){{--Возврат ошибок--}}
-                                        <li>{{$error}}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                                @endif
+                                      @if  ($errors->any())
+                                      <div class="alert alert-danger">
+                                          <ul>
+                                              @foreach  ($errors->all() as $error){{--Возврат ошибок--}}
+                                              <li>{{$error}}</li>
+                                              @endforeach
+                                          </ul>
+                                      </div>
+                                      @endif
 
 
-                                    @if(!is_numeric ($format->summ))
                                       <div class="form-group">
-                                          <label for="name" class="col-form-label">Введите желаемую сумму</label>
+                                          <label for="name" class="col-form-label">Сумма (от 1 до 4000 рублей).</label>
                                           <div>
                                               <input lang="ru" type="text" id="def_sum" name="summ" required="required"
-                                              class="form-control" placeholder="1000" value="{{old('summ')}}" />
+                                              class="form-control" placeholder="2000" value="{{old('summ')}}" />
                                           </div>
                                       </div>
-                                    @else
-                                      <input id="cost" name="summ" value="{{$format->summ}}" type="hidden">
-                                    @endif
 
                                     <div class="form-group">
-                                        <label for="name" class="col-form-label">Ваше духовное имя. Если его нет - ФИО."</label>
+                                        <label for="name" class="col-form-label">Ваше духовное имя. Если его нет - ФИО.</label>
                                         <div>
                                             <input lang="ru" type="text" id="name" name="name" required="required"
                                             class="form-control" value="{{old('name')}}" />
@@ -139,66 +132,48 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="email" class="col-form-label">Ваш телефон*</label>
+                                        <label for="group" class="col-form-label">Номер вашей группы</label>
                                         <div>
-                                            <input type="text" id="phone" name="phone" required="required"
-                                            class="form-control" value="{{old('phone')}}" />
-                                        </div>
-                                    </div>
-                                    <p>*Мы обещаем не беспокоить Вас по телефону без крайней необходимости</p>
-                                    <div class="form-group">
-                                        <label for="name" class="col-form-label">Ваш город</label>
-                                        <div>
-                                            <input lang="ru" type="text" id="city" name="city" required="required"
-                                            class="form-control" value="{{old('city')}}" />
+                                            <input type="text" id="group" name="group" required="required"
+                                            class="form-control" value="{{old('group')}}" />
                                         </div>
                                     </div>
 
-                                  @if ($format->summ > 999)
+                                    <div class="form-group">
+                                        <label for="title">Модуль: Варианты на выбор:</label>
+                                        <select class="form-control" id="modul" name="modul" required="required">
+                                          @foreach ($modules as $modul)
+                                            <option value="{{$modul}}"
+                                            @if ($modul == old('modul'))
+                                              selected = "selected"
+                                            @endif
+                                            >
+                                              {{$modul}}
+                                            </option>
+                                          @endforeach
+                                        </select>
+                                    </div>
+
                                     <div class="form-group">
                                         <div class="checkbox">
                                             <label for="is_opened">
-                                                <input name="anonim" type="checkbox"> &nbsp; Хочу оставаться анонимным, не указывайте мое имя в списках.
+                                                <input id="pers" name="pers" required="required" type="checkbox"> &nbsp; С условиями <a href="/oferta2.pdf" target="_blank"><font color="green;">оферты и политики</font></a> обработки персональных данных ознакомился и согласен
                                             </label>
                                         </div>
                                     </div>
-                                  @endif
+                                </div>
 
-                                        <div class="form-group">
-                                            <div class="checkbox">
-                                                <label for="is_opened">
-                                                    <input id="pers" name="pers" required="required" type="checkbox"> &nbsp; С условиями <a href="/oferta1.pdf" target="_blank"><font color="green;">оферты и политики</font></a> обработки персональных данных ознакомился и согласен
-                                                </label>
-                                            </div>
-                                        </div>
-                                        </div>
-                                      @if ($format->monthly == "Ежемесячно")
-                                        <div class="col-md-6">
-                                        <label for="name" class="col-form-label">Условия подписки:</label>
-                                        <p>Сумма платежа - {{$format->summ}} рублей.</p>
-                                        <p>Периодичность списаний - ежемесячно в то число месяца, когда сделан первый платеж.</p>
-                                        <p>Отказаться от подписки Вы можете в любое время по Вашему желанию (Уже внесенные платежи не возвращаются).</p>
-                                        <p>Чтобы отказаться от подписки Вам необходимо пройти по этой <a href="{{ route('unsubscribe') }}" target="_blank"><font color="green;">этой ссылке</font></a>.</p>
-                                        <div class="form-group">
-                                            <div class="checkbox">
-                                                <label for="is_opened">
-                                                    <input id="podp" name="podp" required="required" type="checkbox"> &nbsp; С условиями подписки ознакомился и согласен
-                                                </label>
-                                            </div>
-                                        </div>
-                                        </div>
-                                      @endif
-                                          <input id="cost" name="format_id" value="{{$format->id}}" type="hidden">
-                                          <input id="cost" name="format_name" value="{{$format->name}}" type="hidden">
-                                          <input id="cost" name="monthly" value="{{$format->monthly}}" type="hidden">
+                                <div class="col-md-6">
+                                  <br>
+                                    {!! $course->description !!}
+                                </div>
 
+                                <div class="form-group row">
+                                    <div class="col-sm-10">
+                                        <input onclick="validation()" type="submit" class="btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)" value="Сохранить и отправить" />
+                                    </div>
+                               </div>
 
-                                        <div class="form-group row">
-                                            <div class="col-sm-10">
-                                              <a href="{{ route('home') }}" class="btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)">Назад</a>
-                                                <input onclick="validation()" type="submit" class="btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)" value="Сохранить" />
-                                            </div>
-                                       </div>
                             </fieldset>
                         </form>
 
@@ -253,7 +228,7 @@
         var pattern_num = /^([0-9])+$/;
 
         function validation() {
-          @if(!is_numeric ($format->summ))
+          @if(!is_numeric ($course->summ))
             $("#def_sum").get(0).setCustomValidity('Введите, пожалуйста, желаемую сумму цифрами.');
             if($("#def_sum").val().search(pattern_num) == 0) $("#def_sum").get(0).setCustomValidity('');
          @endif
@@ -261,14 +236,21 @@
             if ($('#name').val() != '') $("#name").get(0).setCustomValidity('');
             $("#email").get(0).setCustomValidity('Введите, пожалуйста, корректный адрес электронной почты.');
             if ($("#email").val().search(pattern) == 0) $("#email").get(0).setCustomValidity('');
-            $("#phone").get(0).setCustomValidity('Введите, пожалуйста, номер телефона (только цифры).');
+            $("#group").get(0).setCustomValidity('Введите, пожалуйста, номер Вашей группы цифрами.');
+            if($("#group").val().search(pattern_num) == 0) $("#group").get(0).setCustomValidity('');
+            $("#modul").get(0).setCustomValidity('Выберите, пожалуйста, модуль.');
+            if ($("#modul").val() != '') $("#modul").get(0).setCustomValidity('');
+            $("#pers").get(0).setCustomValidity('Для продолжения необходимо согласиться с условиями оферты.');
+            if ($('#pers').is(':checked')) $("#pers").get(0).setCustomValidity('');
+
+            {{--$("#phone").get(0).setCustomValidity('Введите, пожалуйста, номер телефона (только цифры).');
             if($("#phone").val().search(pattern_num) == 0 && $('#phone').val().length > 4) $("#phone").get(0).setCustomValidity('');
             $("#city").get(0).setCustomValidity('Введите, пожалуйста, Ваш город.');
             if ($("#city").val() != '') $("#city").get(0).setCustomValidity('');
             $("#pers").get(0).setCustomValidity('Для продолжения необходимо согласиться с условиями оферты.');
             if ($('#pers').is(':checked')) $("#pers").get(0).setCustomValidity('');
             $("#podp").get(0).setCustomValidity('Для продолжения необходимо согласиться с условиями подписки.');
-            if ($('#podp').is(':checked')) $("#podp").get(0).setCustomValidity('');
+            if ($('#podp').is(':checked')) $("#podp").get(0).setCustomValidity('');--}}
         }
         $('form').submit(function() {
             if (this.checkValidity()) {
