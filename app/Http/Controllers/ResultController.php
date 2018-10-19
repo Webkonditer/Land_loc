@@ -40,7 +40,7 @@ class ResultController extends Controller
             if ($my_crc !=$crc)
               {
                 echo "bad sign\n";
-                Storage::append('test.html', 'Пароль не совпадает');
+                Storage::append('test_down.html', 'Пароль не совпадает');
                 exit();
               }
 
