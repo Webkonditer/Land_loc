@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Course;
 use App\Course_payment;
 use App\Setting;
+use Illuminate\Support\Facades\Auth;
 
 class CoursePaymentsController extends Controller
 {
@@ -100,11 +101,20 @@ class CoursePaymentsController extends Controller
 
     public function payments(Course_payment $payments) {
 
+      if (!Auth::check()) {return redirect('/login');}
+
       return view('admin.courses.payments', [
         'payments' => Course_payment::where('confirmation','!=',NULL)->orderBy('created_at', 'desc')->paginate(10)
       ]);
     }
     //-----------------------------------------------------------------
+    public function destroy(Course_payment $payment)
+    {
+        if (!Auth::check()) {return redirect('/login');}
+
+        $payment->delete();
+        return redirect()->route('admin.courses.payments');
+    }
 
 
 }

@@ -95,8 +95,8 @@
                     <td style="vertical-align:middle">{{ $payment->course_name }}</td>
                     <td style="vertical-align:middle">{{ $payment->module }}</td>
                     <td style="vertical-align:middle">{{ $payment->summ }}</td>
-                    <td style="vertical-align:middle"><a href="{{-- route('admin.payments.id', ['id' => $payment->id]) --}}"><i class="fa fa-eye fa-2" aria-hidden="true"></i></a></td>
-                    <td style="vertical-align:middle"><a onclick="return confirm ('Удалить информацию о платеже из базы?')" href="{{-- route('admin.courses.delete', ['id' => $payments->id]) --}}"><i class="icon glyphicon glyphicon-remove"></i></a></td>
+                    <td style="vertical-align:middle">{{--<a href="{{-- route('admin.payments.id', ['id' => $payment->id]) }}"><i class="fa fa-eye fa-2" aria-hidden="true"></i></a>--}}</td>
+                    <td style="vertical-align:middle"><a onclick="return confirm ('Удалить информацию о платеже из базы?')" href="{{ route('admin.courses.payments.delete', ['id' => $payment->id]) }}"><i class="icon glyphicon glyphicon-remove"></i></a></td>
                 </tr>
                 @empty
                 <tr>
@@ -111,7 +111,7 @@
                     <td colspan="3">
                         <li class="pagination pull-right">
                             {{$payments->links()}}
-                        </li> .
+                        </li> 
                     </td>
                 </tr>
             </tfoot>
