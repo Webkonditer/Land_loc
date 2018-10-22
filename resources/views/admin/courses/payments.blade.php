@@ -10,13 +10,9 @@
     <div class="col-sm-12">
       Поиск по Email:
     </div>
-    <form role="form" name="edit" enctype="multipart/form-data" action="{{-- route('admin.donators.search')--}}" method="POST">
-
-
-
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
           <div class="col-sm-12">
+            <form role="form" name="edit" enctype="multipart/form-data" action="" method="POST">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <input type="text"
                      name="email"
                      class="col-sm-4"
@@ -24,7 +20,25 @@
                      placeholder="Введите нужный Email"
               />
               <button type="submit" name="submit" value="1" >Найти</button>
+            </form>
           </div>
+
+          <div class="col-sm-12">
+            Поиск по номеру группы:
+          </div>
+                <div class="col-sm-12">
+                  <form role="form" name="edit" enctype="multipart/form-data" action="" method="POST">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="text"
+                           name="group"
+                           class="col-sm-4"
+                           value="{{old('group')}}"
+                           placeholder="Введите номер группы цифрой"
+                    />
+                    <button type="submit" name="submit" value="1" >Найти</button>
+                  </form>
+                </div>
+
           <div class="col-sm-12">
               @if ($errors->any())
                 <div class="alert alert-danger">
@@ -36,18 +50,7 @@
                 </div>
               @endif
           </div>
-    <div class="col-sm-12">
-      Выборки:
-    </div>
-    <div class="col-sm-12">
-        <a href="{{-- route('admin.donators.sort.monthly', ['sort' => 'id']) --}}">- Только с ежемесячным платежом</a>
-    </div>
-    <div class="col-sm-12">
-        <a href="{{-- route('admin.donators.sort.one_time', ['sort' => 'id']) --}}">- Только с разовым платежом</a>
-    </div>
-    <div class="col-sm-12">
-        <a href="{{-- route('admin.donators') --}}">- Все</a>
-    </div>
+    
     <div class="col-sm-12"><p></p></div>
 
 </div>
@@ -111,7 +114,7 @@
                     <td colspan="3">
                         <li class="pagination pull-right">
                             {{$payments->links()}}
-                        </li> 
+                        </li>
                     </td>
                 </tr>
             </tfoot>

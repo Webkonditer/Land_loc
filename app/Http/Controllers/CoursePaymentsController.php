@@ -116,5 +116,40 @@ class CoursePaymentsController extends Controller
         return redirect()->route('admin.courses.payments');
     }
 
+    public function search(Course_payment $payment, Request $request) {
+        if(isset($request->email)){
+          $validator = $this->validate($request, [
+              'email' => 'required|string|email|max:255',
+          ]);
+          $payment = Course_payment::where('confirmation','!=',NULL)->where('email', $request->email)->first();
+          if (isset($payment->id)) {
+            return view('admin.courses.payments', [
+              'payments' => Course_payment::where('confirmation','!=',NULL)->where('email', $request->email)->orderBy('created_at', 'desc')->paginate(10)
+            ]);
+          }
+          else {
+            return redirect()->back()
+                                ->withErrors('Указанный Вами Email в базе не найден')
+                                ->withInput();
+          }
+        }
+        if(isset($request->group)){
+          $validator = $this->validate($request, [
+              'group' => 'required|int',
+          ]);
+          $payment = Course_payment::where('confirmation','!=',NULL)->where('group_id', $request->group)->first();
+          if (isset($payment->id)) {
+            return view('admin.courses.payments', [
+              'payments' => Course_payment::where('confirmation','!=',NULL)->where('group_id', $request->group)->orderBy('created_at', 'desc')->paginate(10)
+            ]);
+          }
+          else {
+            return redirect()->back()
+                                ->withErrors('Указанный Вами номер группы в базе не найден')
+                                ->withInput();
+          }
+        }
+    }
+
 
 }
