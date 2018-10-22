@@ -87,7 +87,8 @@
                     </div>
                 </section>
                 <div id="register" class="panel panel-default col-md-12">
-                    <p><h3 class="widget-title line-bottom">Для оплаты заполните пожалуйста форму</h3>
+                  <center><h4></strong>Сразу после перевода на вашу почту будет отправлен пароль. Если письмо с паролем не пришло - оно в папке Спам. Если его нет в папке Спам - обратитесь к администратору курса.</strong></h4></center>
+                    <p><h3 class="widget-title line-bottom">Для перевода заполните пожалуйста форму</h3>
                     </p>
 
 
