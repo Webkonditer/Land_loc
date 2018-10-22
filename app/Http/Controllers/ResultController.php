@@ -58,7 +58,7 @@ class ResultController extends Controller
                 $pass_line = Course_pass::where('course', $course_payment->course_name)->where('module', $course_payment->module)->first();
                 if (isset($pass_line->password)) $password = $pass_line->password;
                 else $password = '----------------';
-                dd($password);
+                //dd($password);
 
                 $course = Course::where('id', $course_payment->course_id)->first();
                 echo "OK$inv_id\n";
