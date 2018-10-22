@@ -133,7 +133,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="group" class="col-form-label">Номер вашей группы</label>
+                                        <label for="group" class="col-form-label">Номер вашей группы (Узнайте Ваш номер у куратора)</label>
                                         <div>
                                             <input type="text" id="group" name="group" required="required"
                                             class="form-control" value="{{old('group')}}" />
