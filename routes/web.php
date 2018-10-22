@@ -66,6 +66,9 @@ Route::group(['prefix'=>'admin','middlevare'=>'auth'], function () {
       Route::get('/courses/payments', 'CoursePaymentsController@payments')->name('admin.courses.payments');
       Route::resource('/courses', 'CoursesController', ['as'=>'admin']);
       Route::get('/courses/{course}/delete', 'CoursesController@destroy')->name('admin.courses.delete');
+      Route::get('/course/passwords', 'CoursePassController@execute')->name('admin.courses.passwords');
+      Route::post('/course/passwords', 'CoursePassController@edit')->name('admin.courses.passwords');
+
 });
 
 

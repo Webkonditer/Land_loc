@@ -167,6 +167,9 @@
                     <a href="{{route('admin.courses.payments')}}">
                         <i class="fa fa-rub" aria-hidden="true"></i> <span>Платежи за курсы</span>
                     </a>
+                    <a href="{{route('admin.courses.passwords')}}">
+                        <i class="fa fa-eye" aria-hidden="true"></i> <span>Установка паролей</span>
+                    </a>
                 </li>
             </ul>
         </section>

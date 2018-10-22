@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use App\Recurring;
 use App\Course;
 use App\Course_payment;
+use App\Course_pass;
 
 class ResultController extends Controller
 {
@@ -42,7 +43,7 @@ class ResultController extends Controller
               {
                 echo "bad sign\n";
                 //Storage::append('test_down.html', 'Пароль не совпадает');
-                exit();
+                //exit();
               }
 
               //Платежи за курсы
@@ -53,7 +54,12 @@ class ResultController extends Controller
                 $course_payment->save();
 
                 //$password = Hash::make($course_payment->group_id.$course_payment->course_name.$course_payment->module);
-                $password = md5($course_payment->group_id.$course_payment->course_name.$course_payment->module);
+
+                $pass_line = Course_pass::where('course', $course_payment->course_name)->where('module', $course_payment->module)->first();
+                if (isset($pass_line->password)) $password = $pass_line->password;
+                else $password = '----------------';
+                dd($password);
+
                 $course = Course::where('id', $course_payment->course_id)->first();
                 echo "OK$inv_id\n";
 

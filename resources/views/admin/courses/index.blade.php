@@ -59,7 +59,7 @@
                     <td colspan="3">
                         <li class="pagination pull-right">
                             {{$courses->links()}}
-                        </li> .
+                        </li> 
                     </td>
                 </tr>
             </tfoot>
