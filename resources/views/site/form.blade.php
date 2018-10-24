@@ -90,8 +90,11 @@
                     </div>
                 </section>
                 <div id="register" class="panel panel-default col-md-12">
-                    <p><h3 class="widget-title line-bottom">Заполните пожалуйста форму</h3>
-                    </p>
+                  <center>
+                    <h4>
+                    <strong>Сразу после перевода на вашу почту будет отправлено письмо со ссылкой на группу клуба попечителей. Если письмо со ссылкой не пришло - оно в папке Спам. Если его нет в папке Спам - напишите на info@bhaktilata.ru </strong></h4></center>
+                  <p><h3 class="widget-title line-bottom">Заполните пожалуйста форму</h3>
+                  </p>
 
 
                         <form role="form" name="edit" enctype="multipart/form-data" action="{{ route('form_check')}}" method="POST">
@@ -158,7 +161,7 @@
                                     <div class="form-group">
                                         <div class="checkbox">
                                             <label for="is_opened">
-                                                <input name="anonim" type="checkbox"> &nbsp; Хочу оставаться анонимным, не указывайте мое имя в списках.
+                                                <input name="anonim" type="checkbox"> &nbsp; Хочу оставаться анонимным, не указывайте мое имя в открытых списках попечителей.
                                             </label>
                                         </div>
                                     </div>

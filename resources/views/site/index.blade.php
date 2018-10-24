@@ -104,9 +104,14 @@
                                     <br>
                                     <h3><strong>2.</strong> Вводите данные банковской карточки / электронных денег. Включая международные банки.</h3>
                                     <br>
-                                    <h3><strong>3.</strong> Выбираете, если хотите, автоплатеж - все Ваши перечисления в будущем будут легко и удобно списываться автоматически!</h3>
+                                    <h3><strong>3.</strong> Благодаря опции автоплатежа все Ваши перечисления в будущем будут легко и удобно списываться автоматически!</h3>
                                     <br>
                                     <h3><strong>4.</strong> Отказаться от автоплатежа можно в любое время!</h3>
+                                    <br>
+                                    <h3><strong>5.</strong> Ваши банковские данные находятся в абсолютной сохранности!</h3>
+                                    <p><i>Данные сохраняются в банке, а не у нас. Никто не будет иметь доступа к вашим банковским данным, никто не сможет их украсть и т.д. Раз в месяц будет подаваться автоматический запрос на снятие именно той суммы, которую вы выбрали. И, если у вас подключен мобильный банк, вам будут приходить SMS с просьбой подтвердить перевод. А на почту приходить чек о переводе.</i></p>
+
+
                                 </div>
                                 <div class="col-md-3">
                                     <img class="img-fullwidth" src="/images/bank.jpg" alt="...">
@@ -117,18 +122,127 @@
                         </div>
                         <br>
                         <br>
+
+                    <p><h3 class="widget-title line-bottom">Наша скромная благодарность вам.</h3>
+                    </p>
+                    <div class="row">
+                        <div class="panel panel-default col-md-10 col-md-offset-1">
+                            <br>
+                            <div class="row">
+                                <h4 align="center"><strong>Вы поддерживаете наше служение в образовании, и нам также хочется отблагодарить вас:</strong></h4>
+                                <br>
+                                <h4>1. Участием в обсуждениях и вебинарах ВКонтакте</h4>
+                                <p>Каждый регулярный попечитель клуба получает доступ к закрытой группе ВКонтакте только для членов клуба, в которой вы сможете получать свежие новости и отчеты по нашей деятельности, участвовать в обсуждениях, делиться своими идеями, а также участвовать в закрытых вебинарах об образовании;</p>
+                                <br>
+                                <h4>2. Накопительными бонусами - "Чайтаньями"</h4>
+                                <p>Вы получаете бонусы - "Чайтаньи", которые можно обменять на такие подарки как комплект книг "Шримад Бхагаватам" или бесплатное обучение в Маяпуре/Вриндаване.
+            <div class="row">
+			<div class="col-md-10 col-md-offset-1">
+			<div id="accordion1" class="panel-group accordion transparent">
+                                        <div class="panel">
+                                            <div class="panel-title"> <a class="collapsed" data-parent="#accordion1" data-toggle="collapse" href="#accordion11" aria-expanded="false"> <span class="open-sub">Шрила Прабхупада о валюте для ИСККОН - "Чайтаньях":</span></a> </div>
+                                            <div id="accordion11" class="panel-collapse collapse" role="tablist" aria-expanded="false" style="height: 0px;">
+                                                <div class="panel-content">
+                                                    <blockquote class="bg-theme-colored">
+                <p>Однажды утром он говорил с нами о будущем ИСККОН. Он сказал, что хочет выкупить землю в Маяуре и создать независимую общину. Когда это произойдет - он бы объявил независимость от Индии и создал бы отдельную страну - "Маяпур". Тогда его храмы повсюду в мире были бы посольствами "Маяпура", а президенты храмов - послами. У нас бы была собственная валюта. <b>Он называл их "Чайтаньи". Был бы один Чайтанья, пять Чайтаний, десять Чайтаний.</b> А для экспорта, мы бы производили предметы для преданного служения и распространяли их по всему миру.</p>
+                <footer>Из воспоминаний о Шриле Прабхупаде - том 1, глава 13</footer>
+              </blockquote>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel">
+                                            <div class="panel-title"> <a class="collapsed" data-parent="#accordion1" data-toggle="collapse" href="#accordion12" aria-expanded="false"> <span class="open-sub">На какие подарки можно обменять "Чайтаньи":</span></a>
+                                            </div>
+                                            <div id="accordion12" class="panel-collapse collapse" role="tablist" aria-expanded="false" style="height: 0px;">
+                                                <div class="panel-content">
+                                                <table class="table table-striped">
+                        <tbody>
+                          <tr>
+                            <td><strong>Базовый комплект книг *</strong><br>Бхагавад-гита, Нектар преданности, Нектар наставлений, Ишопанишад, Наука самосознания, Прабхупада, Кришна, Учение Шри Чайтаньи.</td>
+                            <th>60 Чайтаний</th>
+                          </tr>
+                          <tr>
+                            <td><strong>Бхакти-шастры онлайн (1 модуль) **</strong></td>
+                            <th>60 Чайтаний</th>
+                          </tr>
+                          <tr>
+                            <td><strong>Подарочный комплект книг 1 *</strong><br>Прабхупада Лиламрита, Кришна - Верховная Личность Бога (Делюкс).</td>
+                            <th>120 Чайтаний</th>
+                          </tr>
+                          <tr>
+                            <td><strong>Подарочный комплект книг 2 *</strong><br>Кришна АРТ, Кулинарная книга от Ямуны д.д.</td>
+                            <th>120 Чайтаний</th>
+                          </tr>
+                          <tr>
+                            <td><strong>Шримад Бхагаватам, песни 1-4 *</strong></td>
+                            <th>120 Чайтаний</th>
+                          </tr>
+<tr>
+                            <td><strong>Шримад Бхагаватам, песни 5-8 *</strong></td>
+                            <th>100 Чайтаний</th>
+                          </tr>
+<tr>
+                            <td><strong>Шримад Бхагаватам, песни 9-12 *</strong></td>
+                            <th>160 Чайтаньи</th>
+                          </tr>
+<tr>
+                            <td><strong>Полный комплект "Чайтанья-чаритамрита" *</strong></td>
+                            <th>120 Чайтаний</th>
+                          </tr>
+                          <tr>
+                            <td><strong>Очный курс отдела образования ***</strong><br>Включает: взнос, проживание и питание, если они предусмотрены.</td>
+                            <th>200 Чайтаний</th>
+                          </tr>
+<tr>
+                            <td><strong>Полный комплект "Шримад Бхагаватам" *</strong></td>
+                            <th>240 Чайтаний</th>
+                          </tr>
+<tr>
+                            <td><strong>Бхакти-шастры/Бхакти-вайбхава в Маяпуре или Вриндаване ****</strong><br>Только взнос за обучение, без билетов, питания и проживания.</td>
+                            <th>480 Чайтаний</th>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <br>
+                      <p>* Доставку из Москвы Почтой России вы оплачиваете самостоятельно.</p>
+                      <p>** Имеется ввиду только онлайн-курс отдела образования. За участие одного человека в одном модуле без взноса рекомендованного пожертвования.</p>
+                      <p>*** Участие одного человека на одном курсе из числа: "Курс подготовки учителей 1", "Курс подготовки учителей 2", "Курс подготовки лидеров и менеджеров", "Базовый курс для наставников", "Забота о преданных".</p>
+                      <p>**** Обучение на выбор во Вриндаванском/Маяпурском институтах, Вриндаванской академии или Маяпурской академии Бхактиведанты<p>
+
+
+                                                </div>
+                                            </div>
+                                        </div>     </div>
+
+
+            </div>
+            </div>
+
+
+
+
+                            </div>
+
+                        </div>
+                     </div>
+                        <br>
+                        <br>
+
                         <p><h3 class="widget-title line-bottom">Выберите формат своего участия:</h3>
                         </p>
                         <div class="row">
 
 
 
-                          @forelse($formats as $format)
+                            @forelse($formats  as $format)
                             <div class="thumbnail col-md-2"> <a href="#"><img class="img-fullwidth" src="{{ asset('/storage/'.$format->image) }}" alt="..."></a>
                                 <div class="caption text-center">
                                     <h3>{{ $format->name }}</h3>
-                                    <p>{{ $format->summ }} @if(is_numeric ($format->summ))руб. @endif @if($format->monthly == "Ежемесячно")/мес. @endif</p>
-                                    <p><a href="{{ route('form', ['id' => $format->id]) }}" class="btn btn-theme-colored btn-flat" role="button">Выбрать</a></p>
+                                    <p>{{ $format->summ }}
+                                        @if(is_numeric  ($format->summ))руб.
+                                        @endif
+                                        @if($format->monthly == "Ежемесячно")/мес. @endif</p> <p><a href="{{ route('form', ['id' => $format->id]) }}" class="btn btn-theme-colored btn-flat btn-xl" role="button">Выбрать</a>
+                                    </p>
                                 </div>
                                 <h5><strong>Бонус:</strong></h5>
                                 <ul class="list table-list theme-colored check-circle">
@@ -136,71 +250,29 @@
                                     <li>{{ $format->bonus_2 }}</li>
                                 </ul>
                             </div>
-                          @empty
+                            @empty
                             <tr>
-                              <td><h2>Опции отсутствуют</h2></td>
+                                <td><h2>Опции отсутствуют</h2>
+                                </td>
                             </tr>
-                          @endforelse
+                            @endforelse
 
 
                         </div>
 
                         <div class="row">
                             <div class="col-md-8 col-md-offset-2 text-center">
-                                <p>Нажимая кнопку "Выбрать" Вы соглашаетесь с <a class="text-theme-colored" style="cursor: pointer;" href="/oferta1.pdf" target="_blank">публичной офертой.</a></p>
                                 <p>Если вы хотите делать взносы большего размера - <a class="text-theme-colored" style="cursor: pointer;" href="skype:makarovta?add">напишите нам!</a></p>
-                                <p><a class="btn btn-default btn-theme-colored" style="cursor: pointer;" href="{{ route('unsubscribe') }}" target="_blank">Отписаться от ежемесячного платежа</a>.</p>
-                                </ul>
-                                <br><br>
-</div>
+                                </div><br><br>
+                            <div class="col-md-6 text-center">
+                             <p><a class="btn btn-default btn-xl btn-theme-colored" style="cursor: pointer;" href="https://iskconclub.ru/spend" target="_blank">Обменять Чайтаньи на подарок</a></p>
                             </div>
-                            <p><h5 class="widget-title line-bottom"><strong>Пояснения к бонусам:</strong></h5>
-                            </p>
-                            <div class="row">
-                                <div class="col-md-10 col-md-offset-1">
-                                    <h5>(1) - Вы сможете участвовать в группе ВКонтакте, где 1 раз в месяц мы будем организовывать вебинары об образовании в ИСККОН, с ответами на Ваши вопросы;</h5>
-                                    <h5>(2) - Вы сможете участвовать в чате в WhatsApp, где Вы сможете обсуждать вебинары и разные образовательные темы с другими участниками.</h5>
-                                    <h5>(3) - Мы разместим Ваше имя в списке на странице <a href="https://поддержиотдел.рф" target="_blank">https://поддержиотдел.рф</a> </h5>
-                                    <h5>(4) - Во время Вашего нахождения в данном статусе Вы сможете бесплатно участвовать в любом организованном нами онлайн-курсе, если соответствуете требованиям данного курса.</h5>
-                                    <h5>(5) - Один раз за год пребывания в данном статусе Вы можете оформить бесплатное обучение на курсах Бхакти-шастр или Бхакти-вайбхавы во Вриндаванском/Маяпурском институтах, Вриндаванской академии или Маяпурской академии Бхактиведанты (без учета дороги, питания и проживания) на себя или кого-то из членов вашей семьи, минимальное время нахождения в данном статусе перед подачей запроса - 6 мес.</h5>
-                                </div>
+                            <div class="col-md-6 text-center">
+                             <p><a class="btn btn-default btn-xl btn-theme-colored" style="cursor: pointer;" href="{{ route('unsubscribe') }}" target="_blank">Отписаться от ежемесячного перевода</a></p>
                             </div>
-                            <br><br>
-                            <p><h5 class="widget-title line-bottom"><strong>Частые вопросы:</strong></h5>
-                            </p>
-                            <div class="row">
-                                <div class="col-md-10 col-md-offset-1">
-                                    <div id="accordion1" class="panel-group accordion transparent">
-                                        <div class="panel">
-                                            <div class="panel-title"> <a class="collapsed" data-parent="#accordion1" data-toggle="collapse" href="#accordion11" aria-expanded="false"> <span class="open-sub"></span>Куда пойдут деньги?</a> </div>
-                                            <div id="accordion11" class="panel-collapse collapse" role="tablist" aria-expanded="false" style="height: 0px;">
-                                                <div class="panel-content">
-                                                    <p>Развитие образовательных начинаний в нашем социуме и поддержание тех, кто активно вовлечен в данную деятельность.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel">
-                                            <div class="panel-title"> <a class="collapsed" data-parent="#accordion1" data-toggle="collapse" href="#accordion12" aria-expanded="false"> <span class="open-sub"></span>Какая есть отчетность по финансам?</a>
-                                            </div>
-                                            <div id="accordion12" class="panel-collapse collapse" role="tablist" aria-expanded="false" style="height: 0px;">
-                                                <div class="panel-content">
-                                                    <p>Все данные по доходам предоставляются в налоговую инспекцию России. Информацию по доходам и расходам мы также будем предоставлять представителю Джи-Би-Си, а периодически делать открытые отчеты
-                                                        для всех участников нашей программы.</p>
-                                                </div>
-                                            </div>
-                                        </div>                                        
-                                        <div class="panel">
-                                            <div class="panel-title"> <a class="collapsed" data-parent="#accordion1" data-toggle="collapse" href="#accordion14" aria-expanded="false"> <span class="open-sub"></span>Если я оставлю данные карты, Вы не снимете с меня больше положенного?</a>
-                                            </div>
-                                            <div id="accordion14" class="panel-collapse collapse" role="tablist" aria-expanded="false" style="height: 0px;">
-                                                <div class="panel-content">
-                                                    <p>Нет. Данные сохраняются в банке, а не у нас, и платеж будет делаться именно той суммы, что Вы указали.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
+                      </div>
+
                         </div>
                     </div>
                 </div>
