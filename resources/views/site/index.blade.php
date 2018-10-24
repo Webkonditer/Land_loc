@@ -247,7 +247,7 @@
                                 <h5><strong>Бонус:</strong></h5>
                                 <ul class="list table-list theme-colored check-circle">
                                     <li>{{ $format->bonus_1 }}</li>
-                                    <li>{{ $format->bonus_2 }}</li>
+                                    <li>{!! $format->bonus_2 !!}</li>
                                 </ul>
                             </div>
                             @empty
