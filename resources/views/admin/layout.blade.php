@@ -171,7 +171,7 @@
                         <i class="fa fa-eye" aria-hidden="true"></i> <span>Установка паролей</span>
                     </a>
                     <a href="{{route('admin.courses.stat')}}">
-                        <i class="fa fa-eye" aria-hidden="true"></i> <span>Статистика</span>
+                        <i class="fa fa-calculator" aria-hidden="true"></i> <span>Статистика</span>
                     </a>
                 </li>
             </ul>
