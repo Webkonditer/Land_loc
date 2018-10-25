@@ -7,6 +7,7 @@ use App\Course;
 use App\Course_payment;
 use App\Setting;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class CoursePaymentsController extends Controller
 {
@@ -149,7 +150,85 @@ class CoursePaymentsController extends Controller
                                 ->withInput();
           }
         }
-    }
+      }
+
+      public function stat(Course_payment $payments) {
+
+        if (!Auth::check()) {return redirect('/login');}
+
+        $result = array();
+        $groups = Course_payment::where('confirmation','!=',NULL)->pluck('group_id');//Коллекция из столбца групп
+        foreach($groups as $value){$result[] = $value;}
+        $result = array_unique($result);
+
+        $month_now = Carbon::now()->format('m');echo '<br>';
+        $year_now = Carbon::now()->format('Y');echo '<br>';
+
+          $year = $year_now;
+            for ($month=$month_now; $month > 0 ; $month--) {
+              $month_result = array();
+
+              $month_result[] = $month.'.'.$year;
+              foreach ($result as $group){
+
+                $month_array = array();
+                $summ = 0;
+                $month_line = Course_payment::where('confirmation','!=',NULL)
+                                       ->where('group_id', $group)
+                                       ->whereYear('created_at', $year)
+                                       ->whereMonth('created_at', $month)
+                                       ->pluck('summ');
+
+                $count = $month_line->count();
+                if ($count == 0) {
+                  $summ = 0;
+                }
+                else {
+                  foreach($month_line as $value){$month_array[] = $value;}
+                  //dd($month_array);
+                  $summ = array_sum($month_array);
+                }
+                $month_result[] = $count.' / '.$summ;
+              };
+              $year_result[] = $month_result;
+            }
+
+            $year = $year_now-1;
+              for ($month=12; $month > $month_now ; $month--) {
+                $month_result = array();
+
+                $month_result[] = $month.'.'.$year;
+                foreach ($result as $group){
+                  $month_array = array();
+                  $summ = 0;
+                  $month_line = Course_payment::where('confirmation','!=',NULL)
+                                         ->where('group_id', $group)
+                                         ->whereYear('created_at', $year)
+                                         ->whereMonth('created_at', $month)
+                                         ->pluck('summ');
+
+                  $count = $month_line->count();
+                  if ($count == 0) {
+                    $summ = 0;
+                  }
+                  else {
+                    foreach($month_line as $value){$month_array[] = $value;}
+                    //dd($month_array);
+                    $summ = array_sum($month_array);
+                  }
+                  $month_result[] = $count.' / '.$summ;
+                };
+                $year_result[] = $month_result;
+              }
+
+        //dd($year_result);
+
+        return view('admin.courses.stat', [
+          'groups' => $result,
+          'year_results' => $year_result
+        ]);
+      }
+
 
 
 }
