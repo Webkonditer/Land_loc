@@ -84,50 +84,54 @@
                     </div>
                 </section>
                 <div id="register" class="panel panel-default col-md-12">
-                    <p><h3 class="widget-title line-bottom">Для продолжения введите пожалуйста Ваши Email и телефон</h3>
+                    <p>
+                      <h3 class="widget-title line-bottom">Выберите пожалуйста Ваш подарок</h3>
                     </p>
 
+                    <div class="col-md-12">
 
-                        <form role="form" name="edit" enctype="multipart/form-data" action="{{ route('spend.check') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="bonus_name" value="{{ $bonus_name }}">
-                            <input type="hidden" name="bonus_summ" value="{{ $bonus_summ }}">
-                            <div class="col-md-6">
-                            <fieldset>
+                        @if  ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach  ($errors->all() as $error){{--Возврат ошибок--}}
+                                <li>{{$error}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
 
-                                @if  ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach  ($errors->all() as $error){{--Возврат ошибок--}}
-                                        <li>{{$error}}</li>
-                                        @endforeach
-                                    </ul>
+                        <div class="panel">
+
+                          <div class="panel-content">
+                            <table class="table table-striped">
+                              <tbody>
+                                @foreach  ($gifts as $gift)
+                                  <tr>
+                                    <td><strong>{{ $gift->name }}</strong><br>{{ $gift->description }}</td>
+                                    <th>{{ $gift->summ }} Чайтаний</th>
+                                      <td>
+                                        <form role="form" name="edit" enctype="multipart/form-data" action="{{route('spend.entrance')}}" method="GET">
+
+                                            <input type="hidden" name="bonus_name" value="{{ $gift->name }}">
+                                            <input type="hidden" name="bonus_summ" value="{{ $gift->summ }}">
+                                            <input type="submit" class="btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)" value="Выбрать" />
+                                        </form>
+                                      </td>
+                                  </tr>
+                                @endforeach
+                              </tbody>
+                            </table>
+              <br>
+              <p>* Доставку из Москвы Почтой России вы оплачиваете самостоятельно.</p>
+              <p>** Имеется ввиду только онлайн-курс отдела образования. За участие одного человека в одном модуле без взноса рекомендованного пожертвования.</p>
+              <p>*** Участие одного человека на одном курсе из числа: "Курс подготовки учителей 1", "Курс подготовки учителей 2", "Курс подготовки лидеров и менеджеров", "Базовый курс для наставников", "Забота о преданных".</p>
+              <p>**** Обучение на выбор во Вриндаванском/Маяпурском институтах, Вриндаванской академии или Маяпурской академии Бхактиведанты<p>
+
+
+                                        </div>
+
                                 </div>
-                                @endif
 
-                                    <div class="form-group">
-                                        <label for="email" class="col-form-label">Ваш Email</label>
-                                        <div>
-                                            <input type="email" id="email" name="email" required="required" class="form-control" value="{{old('email')}}"/>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email" class="col-form-label">Ваш телефон</label>
-                                        <div>
-                                            <input type="text" id="phone" name="phone" required="required" class="form-control" value="{{old('phone')}}"/>
-                                        </div>
-                                    </div>
-
-
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <div class="col-sm-10">
-                                                <input onclick="validation()" type="submit" class="btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)" value="Отправить" />
-                                            </div>
-                                       </div>
-                            </fieldset>
-                        </form>
 
                 </div>
         </div>
