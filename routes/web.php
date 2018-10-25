@@ -26,6 +26,8 @@ Route::group(['middlevare'=>'web'], function () {
     Route::get('/courses/{nic}', 'CoursePaymentsController@forms')->name('courses_form');
     Route::post('/courses/{nic}', 'CoursePaymentsController@form_check');
     Route::get('/bs', function () {return redirect()->route('courses_form','bs');});
+    Route::get('/spend', 'BonusController@gifts')->name('bonus.gifts');
+    Route::post('/spend', 'BonusController@entrance_check');
     //Route::auth();
 });
 

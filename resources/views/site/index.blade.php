@@ -265,7 +265,7 @@
                                 <p>Если вы хотите делать взносы большего размера - <a class="text-theme-colored" style="cursor: pointer;" href="skype:makarovta?add">напишите нам!</a></p>
                                 </div><br><br>
                             <div class="col-md-6 text-center">
-                             <p><a class="btn btn-default btn-xl btn-theme-colored" style="cursor: pointer;" href="https://iskconclub.ru/spend" target="_blank">Обменять Чайтаньи на подарок</a></p>
+                             <p><a class="btn btn-default btn-xl btn-theme-colored" style="cursor: pointer;" href="{{ route('bonus.entrance') }}" target="_blank">Обменять Чайтаньи на подарок</a></p>
                             </div>
                             <div class="col-md-6 text-center">
                              <p><a class="btn btn-default btn-xl btn-theme-colored" style="cursor: pointer;" href="{{ route('unsubscribe') }}" target="_blank">Отписаться от ежемесячного перевода</a></p>
