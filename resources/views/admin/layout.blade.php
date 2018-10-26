@@ -159,6 +159,11 @@
                         <i class="fa fa-history" aria-hidden="true"></i> <span>Ежемесячные подписки</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{route('admin.bonus.applications')}}">
+                        <i class="fa fa-envelope-open-o" aria-hidden="true"></i> <span>Заявки на подарки</span>
+                    </a>
+                </li>
                 <li class="header">ОПЛАТА КУРСОВ</li>
                 <li>
                     <a href="{{route('admin.courses.index')}}">

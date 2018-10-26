@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Donator;
+use App\Bonus_application;
 
 class BonusController extends Controller
 {
@@ -101,9 +102,55 @@ class BonusController extends Controller
                             ->withInput();
       }
 
+      if ($donator->bonus_points < $request->bonus_summ) {
+        return redirect(route('bonus.gifts'))
+                            ->withErrors('Ваш баланс - '.$donator->bonus_points.' Чайтаний. Этого недостаточно, чтобы получить выбранный Вами подарок. Выберите пожалуйста другой.')
+                            ->withInput();
+      }
+      //Заносим в базу
+      $bonus_application = new Bonus_application;
 
-    dd($request);
+      $bonus_application->donator_id = $donator->id;
+      $bonus_application->name = $donator->name;
+      $bonus_application->email = $donator->email;
+      $bonus_application->phone = $donator->phone;
+      $bonus_application->bonus_points = $donator->bonus_points;
+      $bonus_application->bonus = $request->bonus_name;
+      $bonus_application->summ = $request->bonus_summ;
+      $bonus_application->save();
 
-      return view('site.bonus.entrance');
+      //Отправка письма
+      $to = 'webkonditer@yandex.ru';
+      $subject = 'Заявка на подарок';
+
+      $message = '
+      <html>
+          <head>
+              <title>Поступила заявка на подарок</title>
+              <meta charset="utf8">
+          </head>
+          <body>
+              <h2>Поступила заявка на подарок</h2>
+              <p>От: '.$donator->name.'</p>
+              <p>Email: '.$donator->email.'</p>
+              <p>Телефон: '.$donator->phone.'</p>
+              <p>Количество бонусных баллов: '.$donator->bonus_points.'</p>
+              <p>------------------------------</p>
+              <p>Подарок: '.$request->bonus_name.'</p>
+              <p>Стоимость подарка: '.$request->bonus_summ.'</p>
+          </body>
+      </html>
+      ';
+
+      $headers[] = 'MIME-Version: 1.0';
+      $headers[] = 'Content-type: text/html; charset=utf8';
+      $headers[] = 'From: iskconclub.ru <info@iskconclub.ru>';
+
+      $result = mail($to, $subject, $message, implode("\r\n", $headers));
+      //echo $result ? 'OK' : 'Error';
+
+
+      return view('site.bonus.success');
+      //dd($request->email);
     }
 }

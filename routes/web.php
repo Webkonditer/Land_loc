@@ -77,6 +77,12 @@ Route::group(['prefix'=>'admin','middlevare'=>'auth'], function () {
       Route::get('/course/passwords', 'CoursePassController@execute')->name('admin.courses.passwords');
       Route::post('/course/passwords', 'CoursePassController@edit')->name('admin.courses.passwords');
 
+      Route::get('/bonus/applications', 'BonusApplicationController@execute')->name('admin.bonus.applications');
+      Route::post('/bonus/application/return', 'BonusApplicationController@return')->name('admin.bonuses.return');
+
+      Route::post('/bonus/application/process', 'BonusApplicationController@process')->name('admin.bonuses.process');
+      Route::post('/bonus/application/processed', 'BonusApplicationController@processed')->name('admin.bonuses.processed');
+
 });
 
 
