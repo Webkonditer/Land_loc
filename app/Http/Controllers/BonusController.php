@@ -13,50 +13,50 @@ class BonusController extends Controller
 {
     public function gifts(Request $request) {
 
-      $gift[1] = (object) array('name' => 'Базовый комплект книг',
+      $gift[1] = (object) array('name' => 'Базовый комплект книг*',
                        'description' => 'Бхагавад-гита, Нектар преданности, Нектар наставлений, Ишопанишад, Наука самосознания, Прабхупада, Кришна, Учение Шри Чайтаньи.',
                        'summ' => '60',
                        );
-       $gift[2] = (object) array('name' => 'Бхакти-шастры онлайн (1 модуль)',
+       $gift[2] = (object) array('name' => 'Бхакти-шастры онлайн (1 модуль)**',
                         'description' => '',
                         'summ' => '60',
                         );
-      $gift[3] = (object) array('name' => 'Подарочный комплект книг 1',
+      $gift[3] = (object) array('name' => 'Подарочный комплект книг 1*',
                        'description' => 'Прабхупада Лиламрита, Кришна - Верховная Личность Бога (Делюкс).',
                        'summ' => '120',
                        );
-      $gift[4] = (object) array('name' => 'Подарочный комплект книг 2',
+      $gift[4] = (object) array('name' => 'Подарочный комплект книг 2*',
                       'description' => 'Кришна АРТ, Кулинарная книга от Ямуны д.д.',
                       'summ' => '120',
                       );
 
-      $gift[5] = (object) array('name' => 'Шримад Бхагаватам, песни 1-4',
+      $gift[5] = (object) array('name' => 'Шримад Бхагаватам, песни 1-4*',
                        'description' => '',
                        'summ' => '120',
                        );
 
-     $gift[6] = (object) array('name' => 'Шримад Бхагаватам, песни 5-8',
+     $gift[6] = (object) array('name' => 'Шримад Бхагаватам, песни 5-8*',
                       'description' => '',
                       'summ' => '100',
                       );
-     $gift[7] = (object) array('name' => 'Шримад Бхагаватам, песни 9-12',
+     $gift[7] = (object) array('name' => 'Шримад Бхагаватам, песни 9-12*',
                      'description' => '',
                      'summ' => '160',
                      );
-     $gift[8] = (object) array('name' => 'Полный комплект "Чайтанья-чаритамрита"',
+     $gift[8] = (object) array('name' => 'Полный комплект "Чайтанья-чаритамрита"*',
                       'description' => '',
                       'summ' => '120',
                       );
-    $gift[9] = (object) array('name' => 'Очный курс отдела образования',
+    $gift[9] = (object) array('name' => 'Очный курс отдела образования***',
                      'description' => 'Включает: взнос, проживание и питание, если они предусмотрены.',
                      'summ' => '200',
                      );
 
-    $gift[10] = (object) array('name' => 'Полный комплект "Шримад Бхагаватам"',
+    $gift[10] = (object) array('name' => 'Полный комплект "Шримад Бхагаватам"*',
                     'description' => '',
                     'summ' => '240',
                     );
-    $gift[11] = (object) array('name' => 'Бхакти-шастры/Бхакти-вайбхава в Маяпуре или Вриндаване',
+    $gift[11] = (object) array('name' => 'Бхакти-шастры/Бхакти-вайбхава в Маяпуре или Вриндаване****',
                    'description' => 'Только взнос за обучение, без билетов, питания и проживания.',
                    'summ' => '480',
                    );
@@ -103,8 +103,10 @@ class BonusController extends Controller
       }
 
       if ($donator->bonus_points < $request->bonus_summ) {
+        $points = $donator->bonus_points;
+        if($donator->bonus_points == '')$points = 0;
         return redirect(route('bonus.gifts'))
-                            ->withErrors('Ваш баланс - '.$donator->bonus_points.' Чайтаний. Этого недостаточно, чтобы получить выбранный Вами подарок. Выберите пожалуйста другой.')
+                            ->withErrors('Ваш баланс - '.$points.' Чайтаний. Этого недостаточно, чтобы получить выбранный Вами подарок. Выберите пожалуйста другой.')
                             ->withInput();
       }
       //Заносим в базу
