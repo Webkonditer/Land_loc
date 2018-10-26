@@ -120,7 +120,7 @@ class BonusController extends Controller
       $bonus_application->save();
 
       //Отправка письма
-      $to = 'webkonditer@yandex.ru';
+      $to = 'info@bhaktilata.ru';
       $subject = 'Заявка на подарок';
 
       $message = '
