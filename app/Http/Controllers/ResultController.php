@@ -128,8 +128,10 @@ class ResultController extends Controller
               $recurring = $old_donator->recurring;
               $anonim = $old_donator->anonim;
               $monthly = $old_donator->monthly;
+              $ctn = $old_donator->bonus_points;
               $old_donator->delete(); //При совпадении убираем старого жертвователя
               $don->id = $id; //Его ид отдаем новому
+              $don->bonus_points = $ctn;
               if ($recurring == 'Да')$don->recurring = $recurring; //Согласие на ежемесячные
               if ($don->anonim == 'Нет') $don->anonim = $anonim; //Анонимность
               if ($monthly == 'Ежемесячно') $don->monthly = $monthly; //Ежемесячно
