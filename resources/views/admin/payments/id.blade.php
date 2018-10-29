@@ -49,6 +49,10 @@
                   <td style="vertical-align:middle">Анонимный</td>
                   <td style="vertical-align:middle">{{ $donator->anonim }}</td>
               </tr>
+              <tr role="row" >
+                  <td style="vertical-align:middle">Чайтаньи</td>
+                  <td style="vertical-align:middle">@if ($donator->bonus_points > 0) {{ $donator->bonus_points }} @else 0 @endif</td>
+              </tr>
 
           </tbody>
       </table>
