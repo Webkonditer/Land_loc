@@ -248,6 +248,9 @@
                                 <ul class="list table-list theme-colored check-circle">
                                     <li>{{ $format->bonus_1 }}</li>
                                     <li>{!! $format->bonus_2 !!}</li>
+                                    @if ($format->ctn > 0)
+                                      <p><strong>+{{ $format->ctn }} Чайтаний в мес.</strong></p>
+                                    @endif
                                 </ul>
                             </div>
                             @empty

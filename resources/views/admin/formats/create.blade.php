@@ -97,13 +97,24 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="title">Чайтаньи</label>
+                            <input type="text"
+                                   name="ctn"
+                                   class="form-control"
+                                   id="ctn"
+                                   value="{{old('ctn')}}"
+                                   placeholder="Количество Чайтаний цифрой"
+                            />
+                        </div>
+
+                        <div class="form-group">
                             <label for="description">Текст страницы результатов</label>
                             <textarea id="description"
                                       name="success"
                                       rows="5"
                                       cols="80"
                                       class="js-editor-enabled">
-                                      {{old('success')}} 
+                                      {{old('success')}}
                            </textarea>
 
                         </div>

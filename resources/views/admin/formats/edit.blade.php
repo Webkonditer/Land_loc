@@ -99,13 +99,24 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="title">Чайтаньи</label>
+                            <input type="text"
+                                   name="ctn"
+                                   class="form-control"
+                                   id="ctn"
+                                   value="@if(old('ctn')){{old('ctn')}} @else{{$format->ctn}} @endif"
+                                   placeholder="Количество Чайтаний цифрой"
+                            />
+                        </div>
+
+                        <div class="form-group">
                             <label for="description">Текст страницы результатов</label>
                             <textarea id="description"
                                       name="success"
                                       rows="5"
                                       cols="80"
                                       class="js-editor-enabled">
-                                      @if(old('success')){{old('success')}} @else{{$format->success}} @endif 
+                                      @if(old('success')){{old('success')}} @else{{$format->success}} @endif
                            </textarea>
 
 

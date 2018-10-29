@@ -27,15 +27,14 @@ class ResultController extends Controller
             if($setting->test_mode == 1)$mrh_pass2 = $setting->test_pass2;
             else $mrh_pass2 = $setting->mrh_pass2;
 
-            //установка текущего времени
-            //File::put('request', dump($request));
-
+            //Переменные из запроса
             $out_summ = $request->OutSum;
             $inv_id = $request->InvId;
-            $crc = $request->SignatureValue;
 
+            $crc = $request->SignatureValue;
             $crc = strtoupper($crc);
 
+            //Вычисляем подпись
             $my_crc = strtoupper(md5("$out_summ:$inv_id:$mrh_pass2"));
 
             // проверка корректности подписи
@@ -53,12 +52,9 @@ class ResultController extends Controller
                 $course_payment->confirmation = Carbon::now()->format('Y-m-d H:i:s');
                 $course_payment->save();
 
-                //$password = Hash::make($course_payment->group_id.$course_payment->course_name.$course_payment->module);
-
                 $pass_line = Course_pass::where('course', $course_payment->course_name)->where('module', $course_payment->module)->first();
                 if (isset($pass_line->password)) $password = $pass_line->password;
                 else $password = '----------------';
-                //dd($password);
 
                 $course = Course::where('id', $course_payment->course_id)->first();
                 echo "OK$inv_id\n";
@@ -87,7 +83,6 @@ class ResultController extends Controller
                 }
                 else {
                   $mail_text = $course->mail_text;
-
                 }
 
                 //Отправка письма
@@ -120,10 +115,12 @@ class ResultController extends Controller
                 exit();
               }
 
+              //Вычисляем платеж и жертвователя
             $pay = Payment::where('id', $inv_id)->first();
             $don = Donator::where('id', $pay->donator_id)->first();
+            $form = Format::where('id', $pay->format_id)->first();
 
-            // признак успешно проведенной операции
+            // Меняем данные жертвователя
             $old_donator = Donator::where('id','!=', $don->id)->where('email', $don->email)->first();
             if (isset($old_donator->id)) {
               $id = $old_donator->id;
@@ -142,6 +139,9 @@ class ResultController extends Controller
             $pay->confirmation = Carbon::now()->format('Y-m-d H:i:s');
             $pay->save();//Подтверждение платежа в таблицу платежей
 
+            if ($form->ctn > 0) {
+              $don->bonus_points = $don->bonus_points + $form->ctn;
+            }
             $don->last_payment = Carbon::now()->format('Y-m-d H:i:s');
             $don->save();//Подтверждение платежа в таблицу платежей
 
@@ -175,6 +175,7 @@ class ResultController extends Controller
                 <body>
                     <h2>Здравствуйте, '.$don->name.'!</h2>
                     '.$format->success.'
+                    <p>Ваш бонусный счет сейчас: '.$don->bonus_points.' Чайтаний.
                 </body>
             </html>
             ';
