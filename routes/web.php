@@ -80,9 +80,9 @@ Route::group(['prefix'=>'admin','middlevare'=>'auth'], function () {
 
       Route::get('/bonus/applications', 'BonusApplicationController@execute')->name('admin.bonus.applications');
       Route::post('/bonus/application/return', 'BonusApplicationController@return')->name('admin.bonuses.return');
-
       Route::post('/bonus/application/process', 'BonusApplicationController@process')->name('admin.bonuses.process');
       Route::post('/bonus/application/processed', 'BonusApplicationController@processed')->name('admin.bonuses.processed');
+      Route::get('/bonus/stat', 'BonusApplicationController@stat')->name('admin.bonus.stat');
 
 });
 

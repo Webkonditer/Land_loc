@@ -119,11 +119,33 @@ class PaymentsController extends Controller
             $year_result[] = $month_result;
           }
 
-    //dd($year_result);
+          //Вычисляем кол-во отписавшихся
+          $year = $year_now;//Текущий год
+          $month_results = array();
+            for ($month=$month_now; $month > 0 ; $month--) {//Перебираем месяцы
+            $month_results[] = array('year'=>$year, 'month'=>$month);
+            }
+          $year = $year_now-1;//Прошлый год
+            for ($month=12; $month > $month_now ; $month--) {
+              $month_results[] = array('year'=>$year, 'month'=>$month);
+            }
+
+            foreach ($month_results as $month_result){
+              $summ = 0;
+              $month_array = array();
+              $month_line = Recurring::where('unsubscribed','!=',NULL)
+                                               ->whereYear('unsubscribed', $month_result['year'])
+                                               ->whereMonth('unsubscribed', $month_result['month'])
+                                               ->get();
+
+              $unsubscribed[] = $month_line->count();
+            };
 
     return view('admin.payments.stat', [
       'formats' => $result,
-      'year_results' => $year_result
+      'year_results' => $year_result,
+      'months' => $month_results,
+      'unsubscribeds' => $unsubscribed,
     ]);
 
   }

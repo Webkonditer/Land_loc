@@ -40,6 +40,27 @@
             </tbody>
 
         </table>
+
+        <h3>Отписались от ежемесячных платежей:</h3>
+        <table class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+            <thead>
+                <tr role="row">
+                    </th>
+                    @foreach($months  as $month)
+                      <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Название: активируйте, чтобы изменить сортировку">
+                          {{ $month['month'] }}.{{ $month['year'] }}
+                      </th>
+                    @endforeach
+                </tr>
+            </thead>
+            <tbody>
+              <tr role="row" >
+                @foreach($unsubscribeds  as $unsubscribed)
+                        <td style="vertical-align:middle">{{ $unsubscribed }}</td>
+                @endforeach
+              </tr>
+            </tbody>
+        </table>
       </div>
     </div>
 @endsection

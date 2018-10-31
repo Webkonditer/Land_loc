@@ -169,6 +169,12 @@
                         <i class="fa fa-envelope-open-o" aria-hidden="true"></i> <span>Заявки на подарки</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{route('admin.bonus.stat')}}">
+                        <i class="fa fa-calculator" aria-hidden="true"></i> <span>Статистика по подаркам</span>
+                    </a>
+                </li>
+
                 <li class="header">ОПЛАТА КУРСОВ</li>
                 <li>
                     <a href="{{route('admin.courses.index')}}">
