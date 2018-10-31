@@ -160,6 +160,11 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{route('admin.payments.stat')}}">
+                        <i class="fa fa-calculator" aria-hidden="true"></i> <span>Статистика</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{route('admin.bonus.applications')}}">
                         <i class="fa fa-envelope-open-o" aria-hidden="true"></i> <span>Заявки на подарки</span>
                     </a>

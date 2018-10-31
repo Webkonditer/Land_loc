@@ -184,7 +184,7 @@ class ResultController extends Controller
 
             $headers[] = 'MIME-Version: 1.0';
             $headers[] = 'Content-type: text/html; charset=utf8';
-            $headers[] = 'From: iskconclub.ru <info@iskconclub.ru';
+            $headers[] = 'From: iskconclub.ru <info@iskconclub.ru>';
 
             $result = mail($to, $subject, $message, implode("\r\n", $headers));
             //echo $result ? 'OK' : 'Error';
