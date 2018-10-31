@@ -10,6 +10,7 @@ use App\Payment;
 use App\Donator;
 use App\Recurring;
 use App\Format;
+use Carbon\Carbon;
 
 class PaymentsController extends Controller
 {
@@ -56,22 +57,22 @@ class PaymentsController extends Controller
     $result = array();
     $formats = Format::all();//Коллекция из столбца групп
     foreach($formats as $format){$result[$format->id] = $format->name;}
-    dd($result);
+    //dd($result);
 
-    $month_now = Carbon::now()->format('m');echo '<br>';
-    $year_now = Carbon::now()->format('Y');echo '<br>';
+    $month_now = Carbon::now()->format('m');echo '<br>';//Текущий месяц
+    $year_now = Carbon::now()->format('Y');echo '<br>';//Текущий год
 
-      $year = $year_now;
-        for ($month=$month_now; $month > 0 ; $month--) {
+      $year = $year_now;//Текущий год
+        for ($month=$month_now; $month > 0 ; $month--) {//Перебираем месяцы
           $month_result = array();
 
           $month_result[] = $month.'.'.$year;
-          foreach ($result as $group){
+          foreach ($result as $format_id=>$format_name){
 
             $month_array = array();
             $summ = 0;
             $month_line = Payment::where('confirmation','!=',NULL)
-                                   ->where('group_id', $group)
+                                   ->where('format_id', $format_id)
                                    ->whereYear('created_at', $year)
                                    ->whereMonth('created_at', $month)
                                    ->pluck('summ');
@@ -85,7 +86,7 @@ class PaymentsController extends Controller
               //dd($month_array);
               $summ = array_sum($month_array);
             }
-            $month_result[] = $count.' / '.$summ;
+            $month_result[] = $summ;
           };
           $year_result[] = $month_result;
         }
@@ -95,11 +96,11 @@ class PaymentsController extends Controller
             $month_result = array();
 
             $month_result[] = $month.'.'.$year;
-            foreach ($result as $group){
+            foreach ($result as $format_id=>$format_name){
               $month_array = array();
               $summ = 0;
               $month_line = Payment::where('confirmation','!=',NULL)
-                                     ->where('format_id', $group)
+                                     ->where('format_id', $format_id)
                                      ->whereYear('created_at', $year)
                                      ->whereMonth('created_at', $month)
                                      ->pluck('summ');
@@ -113,18 +114,18 @@ class PaymentsController extends Controller
                 //dd($month_array);
                 $summ = array_sum($month_array);
               }
-              $month_result[] = $count.' / '.$summ;
+              $month_result[] = $summ;
             };
             $year_result[] = $month_result;
           }
 
     //dd($year_result);
 
-    return view('admin.courses.stat', [
-      'groups' => $result,
+    return view('admin.payments.stat', [
+      'formats' => $result,
       'year_results' => $year_result
     ]);
-    
+
   }
 
 }
