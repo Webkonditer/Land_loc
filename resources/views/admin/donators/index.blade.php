@@ -49,6 +49,21 @@
         <a href="{{ route('admin.donators') }}">- Все</a>
     </div>
     <div class="col-sm-12"><p></p></div>
+    <div class="col-sm-12">
+      Выгрузить email:<br>
+      @forelse ($urls as $url)
+        <a href="{{ asset('storage/i/emails/'.$url) }}">{{ $url }} </a>&nbsp;&nbsp;
+
+      @empty
+        Адреса в базе отсутствуют.
+      @endforelse
+    </div>
+    <div class="col-sm-12"><p></p></div>
+    <div class="col-sm-12">
+      Выгрузить Чайтаньи:<br>
+        <a href="{{ asset('storage/i/Чайтаньи.csv') }}">Чайтаньи.csv</a>
+    </div>
+    <div class="col-sm-12"><p></p></div>
 
 </div>
 <div class="row">
