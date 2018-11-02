@@ -46,7 +46,7 @@ class DonatorsController extends Controller
         else Storage::append($email, $data2);
       }
       //Выгрузка Чайтаний
-      Storage::delete('storage/i/Чайтаньи.csv');
+      Storage::delete('public/i/Чайтаньи.csv');
       $ctn_lines = Donator::where('last_payment','!=',NULL)->get();
       foreach($ctn_lines as $ctn_line){
 
