@@ -1,82 +1,13 @@
 @extends('admin.layout')
 
-@section('crumbs')<li  class="active">Жертвователи</li>
+@section('crumbs')<li  class="active">Результаты поиска</li>
 @endsection
 
 @section('content')
-<h2>Жертвователи:</h2>
+<h2>Результаты поиска:</h2>
 
 <div class="row">
-    <div class="col-sm-12">
-      Поиск по Email:
-    </div>
-    <form role="form" name="edit" enctype="multipart/form-data" action="{{ route('admin.donators.search')}}" method="POST">
 
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-          <div class="col-sm-12">
-              <input type="text"
-                     name="email"
-                     class="col-sm-4"
-                     value="{{old('email')}}"
-                     placeholder="Введите нужный Email"
-              />
-              <button type="submit" name="submit" value="1" >Найти</button>
-          </div>
-    </form>
-    <div class="col-sm-12">
-      Поиск по номеру телефона:
-    </div>
-    <form role="form" name="edit" enctype="multipart/form-data" action="{{ route('admin.donators.search')}}" method="POST">
-
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-          <div class="col-sm-12">
-              <input type="text"
-                     name="phone"
-                     class="col-sm-4"
-                     value="{{old('phone')}}"
-                     placeholder="Введите телефон (только цифры)"
-              />
-              <button type="submit" name="submit" value="1" >Найти</button>
-          </div>
-    </form>
-          <div class="col-sm-12">
-              @if ($errors->any())
-                <div class="alert alert-danger">
-                  <ul>
-                    @foreach ($errors->all() as $error)
-                      <li>{{$error}}</li>
-                    @endforeach
-                  </ul>
-                </div>
-              @endif
-          </div>
-    <div class="col-sm-12">
-      Выборки:
-    </div>
-    <div class="col-sm-12">
-        <a href="{{ route('admin.donators.sort.monthly', ['sort' => 'id']) }}">- Только с ежемесячным платежом</a>
-    </div>
-    <div class="col-sm-12">
-        <a href="{{ route('admin.donators.sort.one_time', ['sort' => 'id']) }}">- Только с разовым платежом</a>
-    </div>
-    <div class="col-sm-12">
-        <a href="{{ route('admin.donators') }}">- Все</a>
-    </div>
-    <div class="col-sm-12">
-      Выгрузить email:<br>
-      @forelse ($urls as $url)
-        <a href="{{ asset('storage/i/emails/'.$url) }}">{{ $url }} </a>&nbsp;&nbsp;
-
-      @empty
-        Адреса в базе отсутствуют.
-      @endforelse
-    </div>
-    <div class="col-sm-12">
-      Выгрузить Чайтаньи:<br>
-        <a href="{{ asset('storage/i/Чайтаньи.csv') }}">Чайтаньи.csv</a>
-    </div>
     <div class="col-sm-12"><p></p></div>
 
 </div>
@@ -86,22 +17,22 @@
             <thead>
                 <tr role="row">
                     <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Название: активируйте, чтобы изменить сортировку">
-                        <a href="{{ route('admin.donators.sort', ['sort' => 'id']) }}">Id</a>
+                        <a href="">Id</a>
                     </th>
                     <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Название: активируйте, чтобы изменить сортировку">
-                        <a href="{{ route('admin.donators.sort', ['sort' => 'name']) }}">Имя</a>
+                        <a href="">Имя</a>
                     </th>
                     <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Название: активируйте, чтобы изменить сортировку">
-                        <a href="{{ route('admin.donators.sort', ['sort' => 'email']) }}">Email</a>
+                        <a href="">Email</a>
                     </th>
                     <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Название: активируйте, чтобы изменить сортировку">
-                        <a href="{{ route('admin.donators.sort', ['sort' => 'city']) }}">Город</a>
+                        <a href="">Город</a>
                     </th>
                     <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Название: активируйте, чтобы изменить сортировку">
-                        <a href="{{ route('admin.donators.sort', ['sort' => 'format_name']) }}">Опция</a>
+                        <a href="">Опция</a>
                     </th>
                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Код: активируйте, чтобы изменить сортировку">
-                        <a href="{{ route('admin.donators.sort', ['sort' => 'monthly']) }}">Периодичность</a>
+                        <a href="">Периодичность</a>
                     </th>
                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Код: активируйте, чтобы изменить сортировку">
                         <a href="">Согласие на ежемесячный платеж</a>
@@ -132,13 +63,7 @@
                 @endforelse
             </tbody>
             <tfoot>
-                <tr>
-                    <td colspan="3">
-                        <li class="pagination pull-right">
-                            {{$donators->links()}}
-                        </li> .
-                    </td>
-                </tr>
+              
             </tfoot>
 
         </table>
