@@ -13,7 +13,7 @@
 
 Route::group(['middlevare'=>'web'], function () {
     Route::match(['get','post'],'/',['uses'=>'IndexController@execute','as'=>'home']);
-    Route::get('/form/{id}', 'IndexController@forms')->name('form');
+    Route::get('/form/{id}', 'IndexController@forms')->name('form')->middleware('IsUser');
     Route::post('/form_check', 'IndexController@form_check')->name('form_check');
     Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
     Route::get('/success_url', 'ResultController@success')->name('result');
@@ -31,6 +31,10 @@ Route::group(['middlevare'=>'web'], function () {
     Route::get('/spend/entrance', 'BonusController@entrance')->name('spend.entrance');
     Route::post('/spend/check', 'BonusController@entrance_check')->name('spend.check');
     //Route::auth();Route::match(['get', 'post'],
+    //Аутентификация
+    Route::get('/user/login',['as' => 'user.login','uses' => 'UserAuth\LoginController@showLoginForm']);
+    Route::post('/user/login',['uses' => 'UserAuth\LoginController@login']);
+    Route::get('/user/logout',['as' => 'user.logout','uses' => 'UserAuth\LoginController@logout']);
 });
 
 

@@ -12,6 +12,11 @@ use App\Recurring;
 class InDexController extenDs Controller
 {
     //
+    public function __construct()
+        {
+            //$this->middleware('IsUser');
+        }
+
     public function execute(Request $request) {
 
       //$pages = Page::all();
@@ -27,7 +32,7 @@ class InDexController extenDs Controller
     }
 
     public function forms($id, Request $request) {
-      
+
       return view('site.form', [
         'format' => Format::where('id',$id)->first(),
       ]);
