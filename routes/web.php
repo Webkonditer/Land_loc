@@ -35,12 +35,13 @@ Route::group(['middlevare'=>'web'], function () {
     Route::get('/user/login',['as' => 'user.login','uses' => 'UserAuth\LoginController@showLoginForm']);
     Route::post('/user/login',['uses' => 'UserAuth\LoginController@login']);
     Route::get('/user/logout',['as' => 'user.logout','uses' => 'UserAuth\LoginController@logout']);
+    Route::post('/user/register',['as' => 'user.register','uses' => 'UserAuth\RegisterController@create']);
 });
 
 
 
 
-Route::group(['prefix'=>'admin','middlevare'=>'auth'], function () {
+Route::group(['prefix'=>'admin','middleware'=>'IsAdmin'], function () {
 
       //Route::get('/dashboard', 'DashboardController@index')->name('admin.dashboard');
       Route::resource('/formats', 'FormatController', ['as'=>'admin']);

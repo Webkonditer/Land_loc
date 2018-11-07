@@ -158,7 +158,7 @@ class RecurringController extends Controller
 
     public function execute(Recurring $recurrings) {
 
-      if (!Auth::check()) {
+      if (!Auth::guard('admin_guard')->check()) {
         return redirect('/login');
     }
 
@@ -169,7 +169,7 @@ class RecurringController extends Controller
 
     public function destroy(Recurring $recurring)
     {
-        if (!Auth::check()) {return redirect('/login');}
+        if (!Auth::guard('admin_guard')->check()) {return redirect('/login');}
 
         $recurring->unsubscribed = Carbon::now()->format('Y-m-d H:i:s');
         $recurring->save();

@@ -20,7 +20,8 @@ class LoginController extends Controller
     //protected $redirectTo = Request::session()->get('_previous')['url'];
     protected function redirectTo()
       {
-          return session('next_url');
+          if(session('next_url') != '') return session('next_url');
+          else return '/';
       }
 
     protected $redirectAfterLogout = '/';
@@ -36,9 +37,6 @@ class LoginController extends Controller
 
     public function showLoginForm(Request $request)
         {
-            //print_r($request->session(['attributes']));
-            //dd($request->session()->get('_previous')['url']);
-            //dd(session('_previous')['url']);
             $next_url = session('_previous')['url'];
 
             session(['next_url' => $next_url]);

@@ -50,6 +50,11 @@ return [
             'driver' => 'session',
             'provider' => 'user_guard',
         ],
+
+        'admin_guard' =>[
+            'driver' => 'session',
+            'provider' => 'admin_guard',
+        ],
     ],
 
     /*
@@ -78,6 +83,11 @@ return [
         'user_guard' => [
             'driver' => 'eloquent',
             'model' => App\Donator::class,
+        ],
+
+        'admin_guard' => [
+            'driver' => 'eloquent',
+            'model' => App\User::class,
         ],
 
         // 'users' => [
