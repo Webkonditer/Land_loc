@@ -301,7 +301,16 @@
                             безопасного проведения интернет-платежей Verified By Visa или MasterCard SecureCode для проведения платежа также может потребоваться ввод специального пароля.</p>
                         <p style="font-size: 10px; color: #fff;">Настоящий сайт поддерживает 256-битное шифрование. Введенная информация не будет предоставлена третьим лицам за исключением случаев, предусмотренных законодательством РФ. Проведение
                             платежей по банковским картам осуществляется в строгом соответствии с требованиями платежных систем МИР, Visa Int. и MasterCard Europe Sprl.</p>
-
+                        <p style="font-size: 10px; color: #fff;">
+                          <a href="https://money.yandex.ru" target="_blank">
+                             <img src="https://money.yandex.ru/img/yamoney_button.gif"
+                              alt="Я принимаю Яндекс.Деньги" align="left" hspace="5"
+                              title="Я принимаю Яндекс.Деньги" border="0" width="88" height="31"/>
+                          </a>
+                          Принимаем Яндекс.Деньги – доступный и безопасный способ платить за товары и услуги через интернет.
+                          Пополнение счета и оплата заказов происходят в реальном времени
+                          <a href="http://money.yandex.ru/" target="_blank">на сайте платежной системы</a>.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -319,36 +328,7 @@
     <script src="/js/custom.js"></script>
 
     <!-- Yandex.Metrika counter -->
-    <script type="text/javascript">
-        (function(d, w, c) {
-            (w[c] = w[c] || []).push(function() {
-                try {
-                    w.yaCounter46106202 = new Ya.Metrika({
-                        id: 46106202,
-                        clickmap: true,
-                        trackLinks: true,
-                        accurateTrackBounce: true
-                    });
-                } catch (e) {}
-            });
 
-            var n = d.getElementsByTagName("script")[0],
-                s = d.createElement("script"),
-                f = function() {
-                    n.parentNode.insertBefore(s, n);
-                };
-            s.type = "text/javascript";
-            s.async = true;
-            s.src = "https://mc.yandex.ru/metrika/watch.js";
-
-            if (w.opera == "[object Opera]") {
-                d.addEventListener("DOMContentLoaded", f, false);
-            } else {
-                f();
-            }
-        })(document, window, "yandex_metrika_callbacks");
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/46106202" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
 </body>
 

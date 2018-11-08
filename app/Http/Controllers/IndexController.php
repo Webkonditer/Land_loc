@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Format;
 use App\Donator;
 use App\Payment;
 use App\Setting;
 use App\Recurring;
+use Auth;
 
 class InDexController extenDs Controller
 {
@@ -18,13 +20,9 @@ class InDexController extenDs Controller
         }
 
     public function execute(Request $request) {
-
-      //$pages = Page::all();
       //$portfolios = Portfolio::get(array('name','filter','images'));
       //$services = Service::where('id','<',20)->get();
       //$peoples = People::take(3)->get();
-
-      //dd($peoples);
 
       return view('site.index', [
         'formats' => Format::orderBy('position')->paginate(10),
@@ -33,21 +31,28 @@ class InDexController extenDs Controller
 
     public function forms($id, Request $request) {
 
+      if(Auth::guard('user_guard')->user()) {
+        $user_id = Auth::guard('user_guard')->user()->id;
+        $user = Donator::where('id', $user_id)->first();
+      }
+      else $user = '';
+
       return view('site.form', [
         'format' => Format::where('id',$id)->first(),
+        'user' => $user,
       ]);
     }
 
     public function form_check(Request $request, Donator $donator, Payment $payment) {
 
-//dd($request);
+dd($request);
 
     $validator = $this->validate($request, [
 
       'format_id' => 'required|integer',
       'format_name' => 'required|string|max:60',
       'name' => 'required|string|max:100',
-      'email' => 'required|email',
+      'email' => 'required|email|unique:donators',
       'phone' => 'required|integer',
       'city' => 'required|string|max:100',
       'summ' => 'required|integer',
@@ -76,6 +81,7 @@ class InDexController extenDs Controller
     $donator->summ = $request->summ;
     if($request->podp == "on")$donator->recurring = "Да"; else $donator->recurring = "---";
     if(isset($request->anonim) )$donator->anonim = "Да"; else $donator->anonim = "Нет";
+    $donator->password = Hash::make($this->generate_password(8));
     $donator->save();
 
     $donator_id = $donator->id;
@@ -148,6 +154,29 @@ class InDexController extenDs Controller
           'Recurring' => $Recurring,
           'IsTest' => $IsTest
       ]);
+    }
+
+    protected function generate_password($number)
+    {
+      $arr = array('a','b','c','d','e','f',
+                   'g','h','i','j','k','l',
+                   'm','n','o','p','r','s',
+                   't','u','v','x','y','z',
+                   'A','B','C','D','E','F',
+                   'G','H','I','J','K','L',
+                   'M','N','O','P','R','S',
+                   'T','U','V','X','Y','Z',
+                   '1','2','3','4','5','6',
+                   '7','8','9','0');
+      // Генерируем пароль
+      $pass = "";
+      for($i = 0; $i < $number; $i++)
+      {
+        // Вычисляем случайный индекс массива
+        $index = rand(0, count($arr) - 1);
+        $pass .= $arr[$index];
+      }
+      return $pass;
     }
 
 }

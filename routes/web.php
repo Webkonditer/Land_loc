@@ -13,7 +13,7 @@
 
 Route::group(['middlevare'=>'web'], function () {
     Route::match(['get','post'],'/',['uses'=>'IndexController@execute','as'=>'home']);
-    Route::get('/form/{id}', 'IndexController@forms')->name('form')->middleware('IsUser');
+    Route::get('/form/{id}', 'IndexController@forms')->name('form');
     Route::post('/form_check', 'IndexController@form_check')->name('form_check');
     Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
     Route::get('/success_url', 'ResultController@success')->name('result');

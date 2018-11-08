@@ -109,7 +109,7 @@ return [
     ],
     'string'               => 'The :attribute must be a string.',
     'timezone'             => 'The :attribute must be a valid zone.',
-    'unique'               => 'Такой :attribute уже используется.',
+    'unique'               => 'Такой :attribute уже используется. Пожалуйста выполните вход. Пароль был выслан на Вашу почту после совершения Вами первого платежа. Если Вы забыли пароль, Вы можете воспользоваться функцией сброса пароля.',
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
 

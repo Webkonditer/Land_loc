@@ -148,7 +148,7 @@
                                   @csrf
                                   <fieldset>
                                     <div class="form-group">
-                                        <label for="name" class="col-form-label">Ваше духовное имя. Если его нет - ФИО."</label>
+                                        <label for="name" class="col-form-label">Ваше духовное имя. Если его нет - ФИО.</label>
                                         <div>
                                             <input lang="ru" type="text" id="name" name="name" required="required"
                                             class="form-control" value="{{old('name')}}" />
