@@ -45,46 +45,84 @@ class InDexController extenDs Controller
 
     public function form_check(Request $request, Donator $donator, Payment $payment) {
 
-dd($request);
+//dd($request);
 
-    $validator = $this->validate($request, [
+    if(!isset($request->autorised)) { //Для неавторизованных
 
-      'format_id' => 'required|integer',
-      'format_name' => 'required|string|max:60',
-      'name' => 'required|string|max:100',
-      'email' => 'required|email|unique:donators',
-      'phone' => 'required|integer',
-      'city' => 'required|string|max:100',
-      'summ' => 'required|integer',
-      'monthly' => 'required|string|max:60',
-      'podp' => 'sometimes|required|accepted',
-    ]);
+        $validator = $this->validate($request, [
+          'format_id' => 'required|integer',
+          'format_name' => 'required|string|max:60',
+          'name' => 'required|string|max:100',
+          'email' => 'required|email|unique:donators',
+          'phone' => 'required|integer',
+          'city' => 'required|string|max:100',
+          'summ' => 'required|integer',
+          'monthly' => 'required|string|max:60',
+          'podp' => 'sometimes|required|accepted',
+        ]);
 
-    if($request->monthly == "Ежемесячно"){
-      $old_donator = Donator::where('last_payment','!=',NULL)->where('email', $request->email)->first();
-      if (isset($old_donator->id)) {
-        $old_recurring = Recurring::where('unsubscribed',NULL)->where('donator_id', $old_donator->id)->first();
-        if (isset($old_recurring->id)) {
-          return redirect()->back()
-                              ->withErrors('У Вас уже есть ежемесячная подписка. Если Вы хотите изменить ее, сначала отпишитесь от старой подписки.')
-                              ->withInput();
-        }
+        $donator->name = $request->name;
+        $donator->email = $request->email;
+        $donator->phone = $request->phone;
+        $donator->city = $request->city;
+        $donator->format_name = $request->format_name;
+        if($request->monthly == "Ежемесячно")$donator->monthly = "Ежемесячно"; else $donator->monthly = "Разово";
+        $donator->summ = $request->summ;
+        if($request->podp == "on")$donator->recurring = "Да"; else $donator->recurring = "---";
+        if(isset($request->anonim) )$donator->anonim = "Да"; else $donator->anonim = "Нет";
+        $password = $this->generate_password(8);
+        $donator->password = Hash::make($password);
+        $donator->save();
+
+        $donator_id = $donator->id;
+
+        //Отправка письма
+        $to = $donator->email;
+        $subject = 'Регистрация на iskconclub.ru';
+
+        $message = '
+        <html>
+            <head>
+                <title>Уведомление о регистрации</title>
+                <meta charset="utf8">
+            </head>
+            <body>
+                <h2>Здравствуйте, '.$donator->name.'!</h2>
+                <p>Вы успешно зарегистрированы на сайте http://iskconclub.ru</p>
+                <p>Ваш логин: '.$donator->email.' </p>
+                <p>Ваш пароль: '.$password.' </p>
+            </body>
+        </html>
+        ';
+
+        $headers[] = 'MIME-Version: 1.0';
+        $headers[] = 'Content-type: text/html; charset=utf8';
+        $headers[] = 'From: iskconclub.ru <info@iskconclub.ru>';
+
+        $result = mail($to, $subject, $message, implode("\r\n", $headers));
+    }
+    else { //Для авторизованных
+
+      $validator = $this->validate($request, [
+        'summ' => 'required|integer',
+        'podp' => 'sometimes|required|accepted',
+        'format_id' => 'required|integer',
+        'format_name' => 'required|string|max:60',
+        'monthly' => 'required|string|max:60',
+      ]);
+
+      $donator_id = Auth::guard('user_guard')->user()->id; //ид донатора
+
+      //проверяем на наличие подписок
+      if($request->monthly == "Ежемесячно"){
+          $old_recurring = Recurring::where('unsubscribed',NULL)->where('donator_id', $donator_id)->first();
+          if (isset($old_recurring->id)) {
+            return redirect()->back()
+                                ->withErrors('У Вас уже есть ежемесячная подписка. Если Вы хотите изменить ее, сначала удалите старую подписку в личном кабинете.')
+                                ->withInput();
+          }
       }
     }
-    //dd('Еще нет');
-    $donator->name = $request->name;
-    $donator->email = $request->email;
-    $donator->phone = $request->phone;
-    $donator->city = $request->city;
-    $donator->format_name = $request->format_name;
-    if($request->monthly == "Ежемесячно")$donator->monthly = "Ежемесячно"; else $donator->monthly = "Разово";
-    $donator->summ = $request->summ;
-    if($request->podp == "on")$donator->recurring = "Да"; else $donator->recurring = "---";
-    if(isset($request->anonim) )$donator->anonim = "Да"; else $donator->anonim = "Нет";
-    $donator->password = Hash::make($this->generate_password(8));
-    $donator->save();
-
-    $donator_id = $donator->id;
 
     $payment->donator_id = $donator_id;
     $payment->format_id = $request->format_id;
