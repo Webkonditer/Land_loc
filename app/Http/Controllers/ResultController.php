@@ -139,18 +139,20 @@ class ResultController extends Controller
               ';
             }
             else $mail_text = $format->success;
+            if($don->bonus_points == '') $bonus_points = 0;
+            else $bonus_points = $don->bonus_points;
 
             //Отправка письма
             $data = [
                 'name' => $don->name,
                 'text' => $mail_text,
-                'bonus_points' => $don->bonus_points,
+                'bonus_points' => $bonus_points,
             ];
 
             Mail::to($don->email)->send(new DonatPayConfirm($data));
 
             //-------------------------------------------------
-            exit(77777777);
+            exit();
         }
 
         public function success(Request $request) {
