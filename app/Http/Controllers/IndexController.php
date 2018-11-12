@@ -88,7 +88,6 @@ class InDexController extenDs Controller
         ];
 
         Mail::to($donator->email)->send(new DonatLetter($data));
-        dd(999999999999999999999);
     }
     else { //Для авторизованных
 
