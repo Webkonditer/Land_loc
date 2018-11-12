@@ -36,4 +36,9 @@ class ResetPasswordController extends Controller
     {
         $this->middleware('guest');
     }
+
+    protected function guard()
+    { dd('1111111111111111');
+        return Auth::guard('user_guard');
+    }
 }

@@ -59,6 +59,18 @@
                                 <li class=" ">
                                     <a href="https://iskconclub.ru/clubcontact.html" >Связь с нами</a>
                                 </li>
+                                <li class=" ">
+                                    <a href="{{route('user.dashboard')}}" >Личный кабинет</a>
+                                </li>
+                                @if(!Auth::guard('user_guard')->user())
+                                  <li class=" ">
+                                      <a href="{{route('user.login')}}" >Войти/Зарегистрироваться</a>
+                                  </li>
+                                @else
+                                  <li class=" ">
+                                      <a href="{{route('logout')}}" >Выйти</a>
+                                  </li>
+                                @endif
                             </ul>
                         </nav>
                     </div>

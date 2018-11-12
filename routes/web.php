@@ -36,6 +36,10 @@ Route::group(['middlevare'=>'web'], function () {
     Route::post('/user/login',['uses' => 'UserAuth\LoginController@login']);
     Route::get('/user/logout',['as' => 'user.logout','uses' => 'UserAuth\LoginController@logout']);
     Route::post('/user/register',['as' => 'user.register','uses' => 'UserAuth\RegisterController@create']);
+    //Личный кабинете
+    Route::get('/user/dashboard',['as' => 'user.dashboard','uses' => 'UserDashboardController@execute','middleware'=>'IsUser']);
+    Route::post('/user/dashboard/edit',['as' => 'user.dashboard.edit','uses' => 'UserDashboardController@edit','middleware'=>'IsUser']);
+
 });
 
 
@@ -96,3 +100,7 @@ Route::group(['prefix'=>'admin','middleware'=>'IsAdmin'], function () {
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

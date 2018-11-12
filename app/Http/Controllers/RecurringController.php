@@ -169,10 +169,16 @@ class RecurringController extends Controller
 
     public function destroy(Recurring $recurring)
     {
-        if (!Auth::guard('admin_guard')->check()) {return redirect('/login');}
+        $donator = Donator::where('id', $recurring->donator_id)->first();
+dd($donator->id);
+        if (Auth::guard('admin_guard')->check() || Auth::guard('user_guard')->user()->id == $donator->id ) {
 
-        $recurring->unsubscribed = Carbon::now()->format('Y-m-d H:i:s');
-        $recurring->save();
-        return redirect()->route('admin.recurrings');
+            $recurring->unsubscribed = Carbon::now()->format('Y-m-d H:i:s');
+            $recurring->save();
+
+            $donator->monthly = 'Разово';
+            $donator->save();
+        }
+        else return redirect()->back();
     }
 }
