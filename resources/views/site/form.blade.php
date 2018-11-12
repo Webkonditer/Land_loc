@@ -118,6 +118,8 @@
                               <input class="form-control" id="e-mail" type="email" name="email" placeholder="Ваш email" required="required">
                               <input class="form-control" id="password" type="password" name="password" placeholder="Ваш пароль" required>
                               <input onclick="validation_left()" type="submit" class="form-control btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)" value="Войти" />
+                              <br>
+                              Если Вы забыли свой пароль, нажмите <a href="{{ url('/password/reset')}}">--Сброс пароля--</a>
                         </form>
                     </div>
                   @endif

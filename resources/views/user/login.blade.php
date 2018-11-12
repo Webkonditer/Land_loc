@@ -131,11 +131,12 @@
                               <div class="form-group">
 
                                 <a href="{{ route('home') }}" class="btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)">Назад</a>
-                                  <input onclick="validation_left()" type="submit" class="btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)" value="Зарегистрироваться" />
+                                  <input onclick="validation_left()" type="submit" class="btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)" value="Войти" />
 
                               </div>
                           </fieldset>
                       </form>
+                      <a href="{{ url('/password/reset')}}">--Сброс пароля--</a>
 
 
                     </div>
@@ -192,7 +193,7 @@
                                     <div class="form-group row">
                                         <div class="col-sm-10">
                                           <a href="{{ route('home') }}" class="btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)">Назад</a>
-                                            <input onclick="validation()" type="submit" class="btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)" value="Сохранить" />
+                                            <input onclick="validation()" type="submit" class="btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)" value="Зарегистрироваться" />
                                         </div>
                                    </div>
                             </fieldset>
