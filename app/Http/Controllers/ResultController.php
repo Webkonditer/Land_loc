@@ -45,7 +45,7 @@ class ResultController extends Controller
               {
                 echo "bad sign\n";
                 //Storage::append('test_down.html', 'Пароль не совпадает');
-                //exit();
+                exit();
               }
 
               //Платежи за курсы
