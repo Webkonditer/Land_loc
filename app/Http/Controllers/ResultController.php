@@ -87,12 +87,6 @@ class ResultController extends Controller
                 }
 
                 //Отправка письма
-                $to = $course_payment->email;
-
-
-                $result = mail($to, $subject, $message, implode("\r\n", $headers));
-                //echo $result ? 'OK' : 'Error';
-
                 $data = [
                     'name' => $course_payment->name,
                     'text' => $mail_text,
@@ -110,24 +104,6 @@ class ResultController extends Controller
             $pay = Payment::where('id', $inv_id)->first();
             $don = Donator::where('id', $pay->donator_id)->first();
             $form = Format::where('id', $pay->format_id)->first();
-
-            // Меняем данные жертвователя
-            $old_donator = Donator::where('id','!=', $don->id)->where('email', $don->email)->first();
-            if (isset($old_donator->id)) {
-              $id = $old_donator->id;
-              $reg_date = $old_donator->created_at;
-              $recurring = $old_donator->recurring;
-              $anonim = $old_donator->anonim;
-              $monthly = $old_donator->monthly;
-              $ctn = $old_donator->bonus_points;
-              $old_donator->delete(); //При совпадении убираем старого жертвователя
-              $don->id = $id; //Его ид отдаем новому
-              $don->bonus_points = $ctn;
-              if ($recurring == 'Да')$don->recurring = $recurring; //Согласие на ежемесячные
-              if ($don->anonim == 'Нет') $don->anonim = $anonim; //Анонимность
-              if ($monthly == 'Ежемесячно') $don->monthly = $monthly; //Ежемесячно
-              $pay->donator_id = $id;//Меняем ид донатора у платежа
-            }
 
             $pay->confirmation = Carbon::now()->format('Y-m-d H:i:s');
             $pay->save();//Подтверждение платежа в таблицу платежей
