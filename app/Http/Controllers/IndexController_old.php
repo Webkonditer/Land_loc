@@ -12,7 +12,6 @@ use App\Recurring;
 use Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Feedback;
-use App\Mail\DonatLetter;
 
 class InDexController extenDs Controller
 {
@@ -80,15 +79,29 @@ class InDexController extenDs Controller
         $donator_id = $donator->id;
 
         //Отправка письма
+        $to = $donator->email;
+        $subject = 'Регистрация на iskconclub.ru';
 
-        $data = [
-            'name' => $donator->name,
-            'email' => $donator->email,
-            'password' => $password,
-        ];
+        $message = '
+        <html>
+            <head>
+                <title>Уведомление о регистрации</title>
+                <meta charset="utf8">
+            </head>
+            <body>
+                <h2>Здравствуйте, '.$donator->name.'!</h2>
+                <p>Вы успешно зарегистрированы на сайте http://iskconclub.ru</p>
+                <p>Ваш логин: '.$donator->email.' </p>
+                <p>Ваш пароль: '.$password.' </p>
+            </body>
+        </html>
+        ';
 
-        Mail::to($donator->email)->send(new DonatLetter($data));
-        dd(999999999999999999999);
+        $headers[] = 'MIME-Version: 1.0';
+        $headers[] = 'Content-type: text/html; charset=utf8';
+        $headers[] = 'From: iskconclub.ru <info@iskconclub.ru>';
+
+        $result = mail($to, $subject, $message, implode("\r\n", $headers));
     }
     else { //Для авторизованных
 
