@@ -5,7 +5,7 @@
     </head>
     <body>
         <h2>Здравствуйте, {{$data['name']}}!</h2>
-        {{$data['text']}}
+        {!! $data['text'] !!}
         <h3>Ваш пароль: {{$data['password']}}</h3>
     </body>
 </html>
