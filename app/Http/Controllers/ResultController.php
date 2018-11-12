@@ -17,6 +17,7 @@ use App\Recurring;
 use App\Course;
 use App\Course_payment;
 use App\Course_pass;
+use App\Mail\CoursMailMain;
 
 class ResultController extends Controller
 {
@@ -87,28 +88,18 @@ class ResultController extends Controller
 
                 //Отправка письма
                 $to = $course_payment->email;
-                $subject = 'Уведомление о платеже';
 
-                $message = '
-                <html>
-                    <head>
-                        <title>Уведомление о платеже</title>
-                        <meta charset="utf8">
-                    </head>
-                    <body>
-                        <h2>Здравствуйте, '.$course_payment->name.'!</h2>
-                        '.$mail_text.'
-                        <h3>Ваш пароль: '.$password.'</h3>
-                    </body>
-                </html>
-                ';
-
-                $headers[] = 'MIME-Version: 1.0';
-                $headers[] = 'Content-type: text/html; charset=utf8';
-                $headers[] = 'From: iskconclub.ru <info@iskconclub.ru>';
 
                 $result = mail($to, $subject, $message, implode("\r\n", $headers));
                 //echo $result ? 'OK' : 'Error';
+
+                $data = [
+                    'name' => $course_payment->name,
+                    'text' => $mail_text,
+                    'password' => $password,
+                ];
+
+                Mail::to($course_payment->email)->send(new CoursMailMain($data));
 
                 //-------------------------------------------------
 

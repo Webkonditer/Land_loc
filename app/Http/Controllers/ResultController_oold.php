@@ -114,13 +114,12 @@ class ResultController extends Controller
 
                 exit();
               }
-              // Пожертвования
+
               //Вычисляем платеж и жертвователя
             $pay = Payment::where('id', $inv_id)->first();
             $don = Donator::where('id', $pay->donator_id)->first();
             $form = Format::where('id', $pay->format_id)->first();
 
-            /*
             // Меняем данные жертвователя
             $old_donator = Donator::where('id','!=', $don->id)->where('email', $don->email)->first();
             if (isset($old_donator->id)) {
@@ -138,33 +137,29 @@ class ResultController extends Controller
               if ($monthly == 'Ежемесячно') $don->monthly = $monthly; //Ежемесячно
               $pay->donator_id = $id;//Меняем ид донатора у платежа
             }
-            */
 
-            //Подтверждение платежа в таблицу платежей
             $pay->confirmation = Carbon::now()->format('Y-m-d H:i:s');
-            $pay->save();
+            $pay->save();//Подтверждение платежа в таблицу платежей
 
-            //Начисляем бонусы
             if ($form->ctn > 0) {
               $don->bonus_points = $don->bonus_points + $form->ctn;
             }
-
-            //Отметка донатору о последнем платеже
             $don->last_payment = Carbon::now()->format('Y-m-d H:i:s');
-            $don->save();
+            $don->save();//Подтверждение платежа в таблицу платежей
 
-            //Если родительский, вносим в таблицу рекурентных
             if ($pay->monthly == "Ежемесячно") {
               if($pay->repeated != 'Рекурентный') {
+                  //$recurrings = Recurring;// В таблицу ежемесячных
+
                   $recurrings->payment_id = $pay->id;
                   $recurrings->donator_id = $pay->donator_id;
                   $recurrings->format_id = $pay->format_id;
                   $recurrings->summ = $pay->summ;
                   $recurrings->save();
               }
+
             }
 
-            //Говорим ок робокасе
             echo "OK$inv_id\n";
 
             //Отправка письма
@@ -172,11 +167,6 @@ class ResultController extends Controller
             $subject = 'Уведомление о платеже';
             $url = route('home').'/unsubscribe/'.$don->email.'/69483'.$don->id.'5739';
             $format = Format::where('id', $pay->format_id)->first();
-
-            if($pay->repeated == 'Рекурентный') {
-                $message_text = 'Мы получили Ваш ежемесячный платеж. Спаибо Вам большое!';//текст для рекурентного
-            }
-            else $message_text = $format->success;//текст для разового или родительского
 
             $message = '
             <html>
@@ -186,7 +176,7 @@ class ResultController extends Controller
                 </head>
                 <body>
                     <h2>Здравствуйте, '.$don->name.'!</h2>
-                    '.$message_text.'
+                    '.$format->success.'
                     <p>Ваш бонусный счет сейчас: '.$don->bonus_points.' Чайтаний.
                 </body>
             </html>
@@ -205,7 +195,6 @@ class ResultController extends Controller
 
         public function success(Request $request) {
 
-          //страница успеха для платежей за курсы
           if ($request->InvId > 1000000) {
               $course_payment = Course_payment::where('id', $request->InvId-1000000)->first();
               $course = Course::where('id', $course_payment->course_id)->first();
@@ -242,7 +231,6 @@ class ResultController extends Controller
               exit();
           }
 
-          //страница успеха для пожертвований
           $pay = Payment::where('id', $request->inv_id)->first();
           $format = Format::where('id', $pay->format_id)->first();
           //dd($pay->format_id);
