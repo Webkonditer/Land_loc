@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Auth;
 
 class ResetPasswordController extends Controller
 {
@@ -38,7 +39,7 @@ class ResetPasswordController extends Controller
     }
 
     protected function guard()
-    { 
+    {
         return Auth::guard('user_guard');
     }
 }
