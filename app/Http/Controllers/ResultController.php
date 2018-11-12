@@ -18,6 +18,8 @@ use App\Course;
 use App\Course_payment;
 use App\Course_pass;
 use App\Mail\CoursMailMain;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Feedback;
 
 class ResultController extends Controller
 {
@@ -43,7 +45,7 @@ class ResultController extends Controller
               {
                 echo "bad sign\n";
                 //Storage::append('test_down.html', 'Пароль не совпадает');
-                exit();
+                //exit();
               }
 
               //Платежи за курсы
