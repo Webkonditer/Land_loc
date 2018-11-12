@@ -19,7 +19,7 @@ use App\Course_payment;
 use App\Course_pass;
 use App\Mail\CoursMailMain;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\Feedback;
+use App\Mail\DonatPayConfirm;
 
 class ResultController extends Controller
 {
@@ -117,8 +117,7 @@ class ResultController extends Controller
             $don->save();//Подтверждение платежа в таблицу платежей
 
             if ($pay->monthly == "Ежемесячно") {
-              if($pay->repeated != 'Рекурентный') {
-                  //$recurrings = Recurring;// В таблицу ежемесячных
+              if($pay->repeated != 'Рекурентный') {// В таблицу ежемесячных
 
                   $recurrings->payment_id = $pay->id;
                   $recurrings->donator_id = $pay->donator_id;
@@ -126,40 +125,32 @@ class ResultController extends Controller
                   $recurrings->summ = $pay->summ;
                   $recurrings->save();
               }
-
             }
 
             echo "OK$inv_id\n";
 
             //Отправка письма
-            $to = $don->email;
-            $subject = 'Уведомление о платеже';
-            $url = route('home').'/unsubscribe/'.$don->email.'/69483'.$don->id.'5739';
+
             $format = Format::where('id', $pay->format_id)->first();
 
-            $message = '
-            <html>
-                <head>
-                    <title>Уведомление о платеже</title>
-                    <meta charset="utf8">
-                </head>
-                <body>
-                    <h2>Здравствуйте, '.$don->name.'!</h2>
-                    '.$format->success.'
-                    <p>Ваш бонусный счет сейчас: '.$don->bonus_points.' Чайтаний.
-                </body>
-            </html>
-            ';
+            if($pay->repeated == 'Рекурентный') {
+              $mail_text = '
+              <p> Мы получили Ваш ежемесячный взнос. Спасибо Вам большое за Вашу поддержку!</p>
+              ';
+            }
+            else $mail_text = $format->success;
 
-            $headers[] = 'MIME-Version: 1.0';
-            $headers[] = 'Content-type: text/html; charset=utf8';
-            $headers[] = 'From: iskconclub.ru <info@iskconclub.ru>';
+            //Отправка письма
+            $data = [
+                'name' => $don->name,
+                'text' => $mail_text,
+                'bonus_points' => $don->bonus_points,
+            ];
 
-            $result = mail($to, $subject, $message, implode("\r\n", $headers));
-            //echo $result ? 'OK' : 'Error';
+            Mail::to($don->email)->send(new DonatPayConfirm($data));
 
             //-------------------------------------------------
-            exit();
+            exit(77777777);
         }
 
         public function success(Request $request) {
