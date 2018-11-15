@@ -108,18 +108,18 @@
                     <h4>
                     <strong>Сразу после перевода на вашу почту будет отправлено письмо со ссылкой на группу клуба попечителей. Если письмо со ссылкой не пришло - оно в папке Спам. Если его нет в папке Спам - напишите на info@bhaktilata.ru </strong></h4></center>
                   <p>
-                    <h3 class="widget-title line-bottom">Заполните пожалуйста форму</h3>
+                    <h4 class="widget-title line-bottom">Уже делаете регулярные переводы? Авторизуйтесь!</h4>
                   </p>
                   @if(!Auth::guard('user_guard')->user())
                     <div class="col-md-12 panel panel-default" style="padding-top: 10px;">
                         <form name="edit" class="form-inline" enctype="multipart/form-data" action="{{ url('/user/login')}}" method="POST">
                             @csrf
-                              <label for="name" class="col-form-label">Если вы уже зарегистрированы на сайте, пожалуйста выполните вход:</label>
+                              <label for="name" class="col-form-label">Ваш email:</label>
                               <input class="form-control" id="e-mail" type="email" name="email" placeholder="Ваш email" required="required">
+                              <label for="name" class="col-form-label">Ваш пароль:</label>
                               <input class="form-control" id="password" type="password" name="password" placeholder="Ваш пароль" required>
                               <input onclick="validation_left()" type="submit" class="form-control btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)" value="Войти" />
-                              <br>
-                              Если Вы забыли свой пароль, нажмите <a href="{{ url('/password/reset')}}">--Сброс пароля--</a>
+                              <a href="{{ url('/password/reset')}}" class="form-control btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)">Забыл пароль</a>
                         </form>
                     </div>
                   @endif
@@ -134,7 +134,10 @@
                   </div>
                   @endif
 
-
+                  <p>
+                    <h4 class="widget-title">Ваш первый перевод? Заполните, пожалуйста, форму:</h4>
+                  </p>
+                  <div class="col-md-12 panel panel-default" style="padding-top: 10px;">
                         <form role="form" name="edit" enctype="multipart/form-data" action="{{ route('form_check')}}" method="POST">
                             @csrf
                             <div class="col-md-6">
