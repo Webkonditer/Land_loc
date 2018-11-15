@@ -119,7 +119,7 @@
                               <label for="name" class="col-form-label">Ваш пароль:</label>
                               <input class="form-control" id="password" type="password" name="password" placeholder="Ваш пароль" required>
                               <input onclick="validation_left()" type="submit" class="form-control btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)" value="Войти" />
-                              <a href="{{ url('/password/reset')}}" class="form-control btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)">Забыл пароль</a>
+                              <a href="{{ url('/password/reset')}}" class="form-control btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62); padding-top:12px;">Забыл пароль</a>
                         </form>
                     </div>
                   @endif
