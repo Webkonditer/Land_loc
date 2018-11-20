@@ -106,7 +106,7 @@ class InDexController extenDs Controller
           $old_recurring = Recurring::where('unsubscribed',NULL)->where('donator_id', $donator_id)->first();
           if (isset($old_recurring->id)) {
             return redirect()->back()
-                                ->withErrors('У Вас уже есть ежемесячная подписка. Если Вы хотите изменить ее, сначала удалите старую подписку в личном кабинете.')
+                                ->withErrors('У Вас уже есть ежемесячная подписка. Изменить подписку Вы можете в личном кабинете.')
                                 ->withInput();
           }
       }
