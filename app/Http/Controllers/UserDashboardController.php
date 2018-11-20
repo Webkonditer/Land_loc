@@ -8,6 +8,7 @@ use App\Donator;
 use App\Recurring;
 use App\Format;
 use Auth;
+use Carbon\Carbon;
 
 class UserDashboardController extends Controller
 {
@@ -23,7 +24,8 @@ class UserDashboardController extends Controller
       'payments' => Payment::where('confirmation','!=',NULL)->where('donator_id', $id)->paginate(500),
       'donator' => Donator::where('id', $id)->first(),
       'recurring' => $recurring,
-      'format' => $format
+      'format' => $format,
+      'formates' => Format::where('monthly', 'Ежемесячно')->get()
     ]);
   }
 
@@ -38,6 +40,8 @@ class UserDashboardController extends Controller
         'phone' => 'sometimes|required|integer|min:10000',
         'city' => 'sometimes|required|string|max:100',
         'anonim' => 'sometimes|required|string|max:3',
+        'format' => 'sometimes|required|string|max:100',
+        'consent' => 'sometimes|accepted',
     ],
     $messages = [
       'name.required' => 'Поле имя не может быть пустым',
@@ -45,6 +49,7 @@ class UserDashboardController extends Controller
       'phone.min' => 'Поле телефона должно содержать не менее 5 цифр',
       'city.required' => 'Поле город не может быть пустым',
       'anonim.required' => 'Поле анонимность не может быть пустым',
+      'consent.accepted' => 'Для продолжения необходимо поставить галочку',
     ]);
 
     if (isset($request->name)) {
@@ -58,6 +63,19 @@ class UserDashboardController extends Controller
     }
     if (isset($request->anonim)) {
       $donator->anonim = $request->anonim;
+    }
+    if (isset($request->format)) {
+      $format = Format::where('id', $request->format)->first();
+      $donator->format_name = $format->name;
+      $donator->monthly = 'Ежемесячно';
+      $donator->recurring = 'Да';
+      $donator->recurring_change = 'Да';
+      $donator->summ = $format->summ;
+      $recurring = Recurring::where('donator_id', $donator->id)->first();
+      $recurring->format_id = $format->id;
+      $recurring->summ = $format->summ;
+      $recurring->created_at = Carbon::now()->format('Y-m-d H:i:s');
+      $recurring->save();
     }
     $donator->save();
 

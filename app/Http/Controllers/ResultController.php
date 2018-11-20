@@ -114,6 +114,7 @@ class ResultController extends Controller
               $don->bonus_points = $don->bonus_points + $form->ctn;
             }
             $don->last_payment = Carbon::now()->format('Y-m-d H:i:s');
+            if ($pay->monthly == "Ежемесячно") $don->recurring = 'Да';
             $don->save();//Подтверждение платежа в таблицу платежей
 
             if ($pay->monthly == "Ежемесячно") {

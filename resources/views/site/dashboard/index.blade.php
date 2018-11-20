@@ -106,7 +106,7 @@
                                 <tr role="row" >
                                     <td style="vertical-align:middle">Ваше имя</td>
                                     <td style="vertical-align:middle">{{ $donator->name }}</td>
-                                    <td style="vertical-align:middle"><a href="#win1">Изменить</a></td>
+                                    <td style="vertical-align:middle"><i class="fa fa-pencil" aria-hidden="true"></i> <a href="#win1">Изменить</a></td>
                                     <a href="#x" class="overlay" id="win1"></a>
                                     <div class="popup">
                                       <form name="edit" class="form-inline" enctype="multipart/form-data" action="{{ route('user.dashboard.edit')}}" method="POST">
@@ -122,7 +122,7 @@
                                 <tr role="row" >
                                     <td style="vertical-align:middle">Ваш телефон</td>
                                     <td style="vertical-align:middle">{{ $donator->phone }}</td>
-                                    <td style="vertical-align:middle"><a href="#win2">Изменить</a></td>
+                                    <td style="vertical-align:middle"><i class="fa fa-pencil" aria-hidden="true"></i> <a href="#win2">Изменить</a></td>
                                     <a href="#x" class="overlay" id="win2"></a>
                                     <div class="popup">
                                       <form name="edit" class="form-inline" enctype="multipart/form-data" action="{{ route('user.dashboard.edit')}}" method="POST">
@@ -137,7 +137,7 @@
                                 <tr role="row" >
                                     <td style="vertical-align:middle">Ваш город</td>
                                     <td style="vertical-align:middle">{{ $donator->city }}</td>
-                                    <td style="vertical-align:middle"><a href="#win3">Изменить</a></td>
+                                    <td style="vertical-align:middle"><i class="fa fa-pencil" aria-hidden="true"></i> <a href="#win3">Изменить</a></td>
                                     <a href="#x" class="overlay" id="win3"></a>
                                     <div class="popup">
                                       <form name="edit" class="form-inline" enctype="multipart/form-data" action="{{ route('user.dashboard.edit')}}" method="POST">
@@ -152,7 +152,7 @@
                                 <tr role="row" >
                                     <td style="vertical-align:middle">Анонимность</td>
                                     <td style="vertical-align:middle">{{ $donator->anonim }}</td>
-                                    <td style="vertical-align:middle"><a href="#win4">Изменить</a></td>
+                                    <td style="vertical-align:middle"><i class="fa fa-pencil" aria-hidden="true"></i> <a href="#win4">Изменить</a></td>
                                     <a href="#x" class="overlay" id="win4"></a>
                                     <div class="popup">
                                       <form name="edit" class="form-inline" enctype="multipart/form-data" action="{{ route('user.dashboard.edit')}}" method="POST">
@@ -199,7 +199,7 @@
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Код: активируйте, чтобы изменить сортировку">
                                                 Подписка зарегистрирована
                                             </th>
-
+                                            <th class="action" style="width:200px !important;"></th>
                                             <th class="action" style="width:200px !important;"></th>
                                         </tr>
                                     </thead>
@@ -210,6 +210,23 @@
                                             <td style="vertical-align:middle">{{ $format->name }}</td>
                                             <td style="vertical-align:middle">{{ $recurring->summ }}</td>
                                             <td style="vertical-align:middle">{{ $recurring->created_at }}</td>
+                                            <td style="vertical-align:middle"><i class="fa fa-pencil" aria-hidden="true"></i> <a href="#win11">Изменить</a></td>
+                                            <a href="#x" class="overlay" id="win11"></a>
+                                            <div class="popup">
+                                              <form name="edit" class="form-inline" enctype="multipart/form-data" action="{{ route('user.dashboard.edit')}}" method="POST">
+                                                  @csrf
+                                                  <label for="name" class="col-form-label" >Выберите формат Вашего участия:</label>
+                                                  <select class="form-control" name="format" required="required">
+                                                      <option value="" selected>Выберите формат</option>
+                                                    @foreach($formates  as $formatt)
+                                                      <option value="{{ $formatt->id }}">{{ $formatt->name }} ({{ $formatt->summ }} руб/мес.)</option>
+                                                    @endforeach
+                                                  </select>
+                                                  <input name="consent" type="checkbox" required="required"> &nbsp;Согласен на изменение суммы ежемесячного платежа
+                                                  <input onclick="return confirm ('Изменить подписку?')" type="submit" class="form-control btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)" value="Изменить" />
+                                              </form>
+                                            <a class="close"title="Закрыть" href="#close"></a>
+                                            </div>
                                             <td style="vertical-align:middle"><a onclick="return confirm ('Отписаться от этого ежемесячного платежа?')" href="{{ route('admin.recurring.delete', ['id' => $recurring->id]) }}"><i class="icon glyphicon glyphicon-remove"></i> Отменить подписку</a></td>
                                         </tr>
                                     </tbody>
