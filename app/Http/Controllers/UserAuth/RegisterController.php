@@ -83,6 +83,6 @@ class RegisterController extends Controller
           //session(['next_url' => $next_url]);
           //dd(session('next_url'));
           return redirect()->back()
-                              ->withErrors('Выуспешно зарегистрированы.Теперь войдите, используя Ваш email и пароль.');
+                              ->withErrors('Вы успешно зарегистрированы.Теперь войдите, используя Ваш email и пароль.');
     }
 }
