@@ -165,4 +165,16 @@ class DonatorsController extends Controller
         }
 
     }
+
+    public function ch_edit(Request $request)
+    {
+      $validator = $this->validate($request, [
+          'ch' => 'required|integer',
+      ]);
+        $donator = Donator::where('id', $request->id)->first();
+        $donator->bonus_points = $request->ch;
+        $donator->save();
+
+        return redirect()->back();
+    }
 }

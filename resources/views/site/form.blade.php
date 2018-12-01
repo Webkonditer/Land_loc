@@ -107,9 +107,9 @@
                   <center>
                     <h4>
                     <strong>Сразу после перевода на вашу почту будет отправлено письмо со ссылкой на группу клуба попечителей. Если письмо со ссылкой не пришло - оно в папке Спам. Если его нет в папке Спам - напишите на info@bhaktilata.ru </strong></h4></center>
-                  <p>
+
                     <h4 class="widget-title line-bottom">Уже делаете регулярные переводы? Авторизуйтесь!</h4>
-                  </p>
+
                   @if(!Auth::guard('user_guard')->user())
                     <div class="col-md-12 panel panel-default" style="padding-top: 10px;">
                         <form name="edit" class="form-inline" enctype="multipart/form-data" action="{{ url('/user/login')}}" method="POST">
@@ -122,6 +122,7 @@
                               <a href="{{ url('/password/reset')}}" class="form-control btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62); padding-top:12px;">Забыл пароль</a>
                         </form>
                     </div>
+                    <br>
                   @endif
 
                   @if  ($errors->any())
@@ -134,9 +135,10 @@
                   </div>
                   @endif
 
-                  <p>
+
+                    <div style="clear: both"></div>
                     <h4 class="widget-title">Ваш первый перевод? Заполните, пожалуйста, форму:</h4>
-                  </p>
+
                   <div class="col-md-12 panel panel-default" style="padding-top: 10px;">
                         <form role="form" name="edit" enctype="multipart/form-data" action="{{ route('form_check')}}" method="POST">
                             @csrf

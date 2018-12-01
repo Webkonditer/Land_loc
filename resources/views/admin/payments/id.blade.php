@@ -51,7 +51,18 @@
               </tr>
               <tr role="row" >
                   <td style="vertical-align:middle">Чайтаньи</td>
-                  <td style="vertical-align:middle">@if ($donator->bonus_points > 0) {{ $donator->bonus_points }} @else 0 @endif</td>
+                  <td style="vertical-align:middle">
+                    @if ($admin_email == 'webkonditer@yandex.ru' || $admin_email == 'makarovt@gmail.com')
+                        <form name="edit" class="form-inline" enctype="multipart/form-data" action="{{ route('admin.ch.edit')}}" method="POST">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $donator->id }}" />
+                            <input type="text" name="ch" class="form-control" size="6" required="required" value="@if ($donator->bonus_points > 0) {{ $donator->bonus_points }} @else 0 @endif">
+                            <input onclick="return confirm ('Изменить количество Чайтаний?')" type="submit" class="form-control btn btn-primary" value="Изменить" />
+                        </form>
+                    @else
+                      @if ($donator->bonus_points > 0) {{ $donator->bonus_points }} @else 0 @endif
+                    @endif
+                  </td>
               </tr>
 
           </tbody>

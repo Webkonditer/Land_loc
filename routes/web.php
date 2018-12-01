@@ -93,6 +93,8 @@ Route::group(['prefix'=>'admin','middleware'=>'IsAdmin'], function () {
       Route::post('/bonus/application/processed', 'BonusApplicationController@processed')->name('admin.bonuses.processed');
       Route::get('/bonus/stat', 'BonusApplicationController@stat')->name('admin.bonus.stat');
 
+      Route::post('/ch/edit', 'DonatorsController@ch_edit')->name('admin.ch.edit');
+
 });
 
 
