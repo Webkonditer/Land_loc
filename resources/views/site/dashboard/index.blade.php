@@ -56,7 +56,7 @@
                             </a>
                             <ul class="menuzord-menu">
                                 <li class=" ">
-                                    <a href="https://iskconclub.ru" >Сайт отдела</a>
+                                    <a href="https://iskconclub.ru" >bhaktilata.ru</a>
                                 </li>
                                 <li class=" ">
                                     <a href="https://iskconclub.ru/clubcontact.html" >Связь с нами</a>
@@ -234,7 +234,7 @@
                               @else
                                         <p style="color:green">Подписки отсутствуют.</p>
                               @endif
-                              
+
                             </div>
                         </div>
 

@@ -56,7 +56,7 @@
                             </a>
                             <ul class="menuzord-menu">
                                 <li class=" ">
-                                    <a href="https://iskconclub.ru" >Сайт отдела</a>
+                                    <a href="https://iskconclub.ru" >bhaktilata.ru</a>
                                 </li>
                                 <li class=" ">
                                     <a href="https://iskconclub.ru/clubcontact.html" >Связь с нами</a>
@@ -108,9 +108,9 @@
                     <h4>
                     <strong>Сразу после перевода на вашу почту будет отправлено письмо со ссылкой на группу клуба попечителей. Если письмо со ссылкой не пришло - оно в папке Спам. Если его нет в папке Спам - напишите на info@bhaktilata.ru </strong></h4></center>
 
+                  @if(!Auth::guard('user_guard')->user())
                     <h4 class="widget-title line-bottom">Уже делаете регулярные переводы? Авторизуйтесь!</h4>
 
-                  @if(!Auth::guard('user_guard')->user())
                     <div class="col-md-12 panel panel-default" style="padding-top: 10px;">
                         <form name="edit" class="form-inline" enctype="multipart/form-data" action="{{ url('/user/login')}}" method="POST">
                             @csrf
@@ -137,7 +137,9 @@
 
 
                     <div style="clear: both"></div>
-                    <h4 class="widget-title">Ваш первый перевод? Заполните, пожалуйста, форму:</h4>
+                    @if(!Auth::guard('user_guard')->user())
+                      <h4 class="widget-title">Ваш первый перевод? Заполните, пожалуйста, форму:</h4>
+                    @endif
 
                   <div class="col-md-12 panel panel-default" style="padding-top: 10px;">
                         <form role="form" name="edit" enctype="multipart/form-data" action="{{ route('form_check')}}" method="POST">
