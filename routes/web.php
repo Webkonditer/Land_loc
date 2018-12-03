@@ -39,7 +39,13 @@ Route::group(['middlevare'=>'web'], function () {
     //Личный кабинете
     Route::get('/user/dashboard',['as' => 'user.dashboard','uses' => 'UserDashboardController@execute','middleware'=>'IsUser']);
     Route::post('/user/dashboard/edit',['as' => 'user.dashboard.edit','uses' => 'UserDashboardController@edit','middleware'=>'IsUser']);
-
+    //Вега проект
+    Route::post('/vega/form_check', 'vega\IndexController@form_check')->name('vega.form_check');
+    Route::get('/vega/form_check', 'vega\IndexController@form_check')->name('vega.form_check');//убрать потом
+    Route::post('/vega/result_url', 'vega\ResultController@result')->name('vega.result_url');
+    Route::get('/vega/result_url', 'vega\ResultController@result')->name('vega.result_url');//убрать потом
+    Route::get('/vega/success_url', 'vega\IndexController@success')->name('vega.success');
+    Route::get('/vega/fail_url', 'vega\IndexController@fail')->name('vega.fail');
 });
 
 
