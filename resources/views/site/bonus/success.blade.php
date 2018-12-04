@@ -53,7 +53,7 @@
                             </a>
                             <ul class="menuzord-menu">
                                 <li class=" ">
-                                    <a href="https://iskconclub.ru" >bhaktilata.ru</a>
+                                    <a href="https://bhaktilata.ru" >Сайт отдела</a>
                                 </li>
                                 <li class=" ">
                                     <a href="https://iskconclub.ru/clubcontact.html" >Связь с нами</a>

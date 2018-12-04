@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use Auth;
+use App\VegaPayment;
+use App\VegaUser;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Feedback;
 use App\Mail\DonatLetter;
@@ -19,48 +21,29 @@ class InDexController extenDs Controller
         }
 
 
-    public function form_check(Request $request) {
+    public function form_check(Request $request, VegaUser $vegauser) {
 
       dump('Страница приземления с Тильды и перенаправления на платежный шлюз. Сюда должны прийти все необходимые данные из формы.');
       dd($request);
     if(!isset($request->autorised)) { //Для неавторизованных
 
         $validator = $this->validate($request, [
-          'format_id' => 'required|integer',
-          'format_name' => 'required|string|max:60',
           'name' => 'required|string|max:100',
           'email' => 'required|email|unique:donators',
-          'phone' => 'required|integer',
-          'city' => 'required|string|max:100',
-          'summ' => 'required|integer',
-          'monthly' => 'required|string|max:60',
-          'podp' => 'sometimes|required|accepted',
+          'course_namber' => 'required|integer',
+          'format' => 'sometimes|string|max:100',
+          'ref_namber' => 'sometimes|required|integer',
         ]);
 
-        $donator->name = $request->name;
-        $donator->email = $request->email;
-        $donator->phone = $request->phone;
-        $donator->city = $request->city;
-        $donator->format_name = $request->format_name;
-        if($request->monthly == "Ежемесячно")$donator->monthly = "Ежемесячно"; else $donator->monthly = "Разово";
-        $donator->summ = $request->summ;
-        if($request->podp == "on")$donator->recurring = "Да"; else $donator->recurring = "---";
-        if(isset($request->anonim) )$donator->anonim = "Да"; else $donator->anonim = "Нет";
-        $password = $this->generate_password(8);
-        $donator->password = Hash::make($password);
-        $donator->save();
+        $vegauser->name = $request->name;
+        $vegauser->email = $request->email;
+        //$vegauser->phone = $request->phone;
+        //$vegauser->city = $request->city;
+        $vegauser->save();
 
-        $donator_id = $donator->id;
+        $user_id = $vegauser->id;
 
-        //Отправка письма
-
-        $data = [
-            'name' => $donator->name,
-            'email' => $donator->email,
-            'password' => $password,
-        ];
-
-        Mail::to($donator->email)->send(new DonatLetter($data));
+        
     }
     else { //Для авторизованных
 
