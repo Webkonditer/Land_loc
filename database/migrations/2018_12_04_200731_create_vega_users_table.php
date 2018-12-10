@@ -23,6 +23,7 @@ class CreateVegaUsersTable extends Migration
               $table->rememberToken()->nullable();
               $table->dateTime('last_payment')->nullable();
               $table->timestamps();
+              $table->integer('refer')->nullable();
           });
     }
 

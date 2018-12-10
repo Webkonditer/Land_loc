@@ -40,7 +40,7 @@ class InDexController extenDs Controller
         //dd('Первый');
         $vegauser->name = $request->name;
         $vegauser->email = $request->email;
-        //$vegauser->phone = $request->phone;
+        //$vegauser->refer = $request->ref_namber;
         //$vegauser->city = $request->city;
         $vegauser->save();
 
