@@ -44,9 +44,9 @@
 
     <header class="main-header">
 
-        <a href="index2.html" class="logo">
+        <a href="/login" class="logo">
             <span class="logo-mini"><b>I</b>C</span>
-            <span class="logo-lg">iskconclub.ru</span>
+            <span class="logo-lg">Prostofood</span>
         </a>
 
         <!-- Header Navbar: style can be found in header.less -->

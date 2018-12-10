@@ -86,7 +86,6 @@
                          <input type=hidden name=SignatureValue value="{{$crc}}">
                          <input type=hidden name=Email value="{{$Email}}">
                          <input type=hidden name=Receipt value={{$Receipt}}>
-                         <input type=hidden name=Recurring value="{{$Recurring}}">
                          <input type=hidden name=Culture value="ru">
                          <input type=hidden name=IsTest value="{{$IsTest}}">
                          <input type=submit value='Перейти на платежный шлюз вручную'>
@@ -94,7 +93,7 @@
                          <script type="text/javascript">
                               setTimeout(function() {
                               	var form = document.getElementById('payform');
-                              	form.submit();
+                              	//form.submit();
                               }, 1);
                          </script>
                     </div>
@@ -140,39 +139,6 @@
     </div>
     <script src="/js/custom.js"></script>
 
-
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript">
-        (function(d, w, c) {
-            (w[c] = w[c] || []).push(function() {
-                try {
-                    w.yaCounter46106202 = new Ya.Metrika({
-                        id: 46106202,
-                        clickmap: true,
-                        trackLinks: true,
-                        accurateTrackBounce: true
-                    });
-                } catch (e) {}
-            });
-
-            var n = d.getElementsByTagName("script")[0],
-                s = d.createElement("script"),
-                f = function() {
-                    n.parentNode.insertBefore(s, n);
-                };
-            s.type = "text/javascript";
-            s.async = true;
-            s.src = "https://mc.yandex.ru/metrika/watch.js";
-
-            if (w.opera == "[object Opera]") {
-                d.addEventListener("DOMContentLoaded", f, false);
-            } else {
-                f();
-            }
-        })(document, window, "yandex_metrika_callbacks");
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/46106202" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
 </body>
 
 </html>

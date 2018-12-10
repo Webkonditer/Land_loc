@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use Auth;
 use App\VegaPayment;
 use App\VegaUser;
+use App\Format;
+use App\Setting;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Feedback;
 use App\Mail\DonatLetter;
@@ -21,20 +23,21 @@ class InDexController extenDs Controller
         }
 
 
-    public function form_check(Request $request, VegaUser $vegauser) {
+    public function form_check(Request $request, VegaUser $vegauser, VegaPayment $vegapayment) {
 
-      dump('Страница приземления с Тильды и перенаправления на платежный шлюз. Сюда должны прийти все необходимые данные из формы.');
-      dd($request);
-    if(!isset($request->autorised)) { //Для неавторизованных
+      $validator = $this->validate($request, [
+        'name' => 'required|string|max:100',
+        'email' => 'required|email',
+        'course_namber' => 'required|integer',
+        'format' => 'sometimes|string|max:100',
+        'ref_namber' => 'sometimes|required|integer',
+      ]);
 
-        $validator = $this->validate($request, [
-          'name' => 'required|string|max:100',
-          'email' => 'required|email|unique:donators',
-          'course_namber' => 'required|integer',
-          'format' => 'sometimes|string|max:100',
-          'ref_namber' => 'sometimes|required|integer',
-        ]);
+      $user = VegaUser::where('email', $request->email)->first();
 
+    if(!isset($user->id)) { //Для тех, кто в первый раз
+
+        //dd('Первый');
         $vegauser->name = $request->name;
         $vegauser->email = $request->email;
         //$vegauser->phone = $request->phone;
@@ -43,48 +46,25 @@ class InDexController extenDs Controller
 
         $user_id = $vegauser->id;
 
-        
-    }
-    else { //Для авторизованных
-
-      $validator = $this->validate($request, [
-        'summ' => 'required|integer',
-        'podp' => 'sometimes|required|accepted',
-        'format_id' => 'required|integer',
-        'format_name' => 'required|string|max:60',
-        'monthly' => 'required|string|max:60',
-      ]);
-
-      $donator_id = Auth::guard('user_guard')->user()->id; //ид донатора
-
-      //проверяем на наличие подписок
-      if($request->monthly == "Ежемесячно"){
-          $old_recurring = Recurring::where('unsubscribed',NULL)->where('donator_id', $donator_id)->first();
-          if (isset($old_recurring->id)) {
-            return redirect()->back()
-                                ->withErrors('У Вас уже есть ежемесячная подписка. Изменить подписку Вы можете в личном кабинете.')
-                                ->withInput();
-          }
-      }
-    }
-
-    $payment->donator_id = $donator_id;
-    $payment->format_id = $request->format_id;
-    if($request->monthly == "Ежемесячно"){
-      $payment->monthly = "Ежемесячно";
-      $payment->repeated = "Родительский";
 
     }
-    else {
-      $payment->monthly = "Разово";
-      $payment->repeated = "Разовый";
-
+    else { //Для тех, кто уже в базе
+      //dd('неПервый');
+      $user_id = $user->id;
     }
 
-    $payment->summ = $request->summ;
-    $payment->save();
-    //dd($payment->id);
-    $payment_id = $payment->id;
+    $format = Format::where('position', $request->course_namber)->first();
+
+    $vegapayment->user_id = $user_id;
+    $vegapayment->course_id = $request->course_namber;
+    $vegapayment->course_name = $format->name;
+    if(isset($request->format))$vegapayment->format = $request->format;
+    //$vegapayment->ref_namber = $request->ref_namber;
+    $vegapayment->summ = $format->summ;
+    $vegapayment->save();
+    //dd($vegapayment);
+
+    $payment_id = $vegapayment->id;
 
     $setting = Setting::first();
 
@@ -97,11 +77,11 @@ class InDexController extenDs Controller
       $inv_id = $payment_id;
 
       // описание заказа
-      $inv_desc = $setting->inv_desc;
+      $inv_desc = 'Оплата за курс: "'.$format->name.'"';
 
       // сумма заказа
 
-        $out_summ = $request->summ;
+        $out_summ = $format->summ;
 
       // кодировка
       $encoding = "utf-8";
@@ -110,12 +90,12 @@ class InDexController extenDs Controller
       $Email = $request->email;
 
       //Фискальная информация URL-кодировать. Параметр включается в контрольную подпись запроса (после номера счета магазина). Например: MerchantLogin:OutSum:InvId:Receipt:Пароль#1
-      $receipt = '{"sno": "usn_income","items":[{"name": "Участие в вебинарах пакет '.$request->format_id.'","quantity": 1.0,"sum": '.$request->summ.'.0,"tax": "none"}]}';
+      $receipt = '{"sno": "usn_income","items":[{"name": "Оплата курсов пакет '.$request->course_namber.'","quantity": 1.0,"sum": '.$request->summ.'.0,"tax": "none"}]}';
       $receipt = urlencode($receipt);
 
       //Периодический платеж ()
-      if($request->monthly == "Ежемесячно") $Recurring = true;
-      else $Recurring = false;
+      ///if($request->monthly == "Ежемесячно") $Recurring = true;
+      //else $Recurring = false;
 
       //Тестовый режим
       if($setting->test_mode == 1)$IsTest = true;
@@ -133,7 +113,6 @@ class InDexController extenDs Controller
           'crc' => $crc,
           'Email' => $Email,
           'Receipt' => $receipt,
-          'Recurring' => $Recurring,
           'IsTest' => $IsTest
       ]);
     }

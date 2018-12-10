@@ -29,8 +29,8 @@ class DonatPayConfirm extends Mailable
      */
     public function build()
     {
-      return $this->from('info@bhaktilata.ru')
-                  ->subject('Уведомление о поступлении платежа на bhaktilata.ru')
+      return $this->from('info@kurs.prostofood.online')
+                  ->subject('Подтверждение о получении оплаты за обучение')
                   ->view('mails.donat_confirm');
     }
 }

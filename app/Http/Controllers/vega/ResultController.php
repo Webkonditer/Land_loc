@@ -9,22 +9,17 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Format;
-use App\Donator;
-use App\Payment;
+use App\VegaPayment;
+use App\VegaUser;
 use App\Setting;
 use Carbon\Carbon;
-use App\Recurring;
-use App\Course;
-use App\Course_payment;
-use App\Course_pass;
 use App\Mail\CoursMailMain;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\DonatPayConfirm;
 
 class ResultController extends Controller
 {
-        public function result(Request $request, Donator $donator, Payment $payment, Recurring $recurrings) {
-dd('Страница результата для робокассы');
+        public function result(Request $request, VegaUser $user, VegaPayment $payment) {
             // регистрационная информация (пароль #2)
             $setting = Setting::first();
             if($setting->test_mode == 1)$mrh_pass2 = $setting->test_pass2;
@@ -45,109 +40,35 @@ dd('Страница результата для робокассы');
               {
                 echo "bad sign\n";
                 //Storage::append('test_down.html', 'Пароль не совпадает');
-                exit();
-              }
-
-              //Платежи за курсы
-              if ($inv_id > 1000000) {
-                //Storage::append('test.html', $request);
-                $course_payment = Course_payment::where('id', $inv_id-1000000)->first();
-                $course_payment->confirmation = Carbon::now()->format('Y-m-d H:i:s');
-                $course_payment->save();
-
-                $pass_line = Course_pass::where('course', $course_payment->course_name)->where('module', $course_payment->module)->first();
-                if (isset($pass_line->password)) $password = $pass_line->password;
-                else $password = '----------------';
-
-                $course = Course::where('id', $course_payment->course_id)->first();
-                echo "OK$inv_id\n";
-
-                $text =
-                '<div class="panel panel-default col-md-8 col-md-offset-2">
-                <div class="panel-body">
-                <p style="margin:0cm 0cm 10pt"><span style="font-size:11pt"><span style="line-height:115%"><span style="font-family:Calibri,sans-serif"></span></span></span></p>
-
-                <p style="margin:0cm 0cm 10pt"><span style="font-size:11pt"><span style="line-height:115%"><span style="font-family:Calibri,sans-serif">Харе Кришна!</span></span></span></p>
-
-                <p style="margin:0cm 0cm 10pt"><span style="font-size:11pt"><span style="line-height:115%"><span style="font-family:Calibri,sans-serif">Примите, пожалуйста, наши смиренные поклоны. Вся слава Шриле Прабхупаде.</span></span></span></p>
-
-                <p style="margin:0cm 0cm 10pt"><span style="font-size:11pt"><span style="line-height:115%"><span style="font-family:Calibri,sans-serif">Благодарим Вас за дополнительный перевод!</span></span></span></p>
-
-                <p style="margin:0cm 0cm 10pt"><span style="font-size:11pt"><span style="line-height:115%"><span style="font-family:Calibri,sans-serif">Ваши слуги,<br />
-                Секретариат курса.</span></span></span></p>
-
-                <p style="margin:0cm 0cm 10pt"><span style="font-size:11pt"><span style="line-height:115%"><span style="font-family:Calibri,sans-serif"></span></span></span></p>
-                </div>
-                </div>.';
-
-                if($course_payment->module == 'Факультативная доплата за модуль'){
-                  $mail_text = $text;
-                  $password = '';
-                }
-                else {
-                  $mail_text = $course->mail_text;
-                }
-
-                //Отправка письма
-                $data = [
-                    'name' => $course_payment->name,
-                    'text' => $mail_text,
-                    'password' => $password,
-                ];
-
-                Mail::to($course_payment->email)->send(new CoursMailMain($data));
-
-                //-------------------------------------------------
-
-                exit();
+                //exit();
               }
 
               //Вычисляем платеж и жертвователя
-            $pay = Payment::where('id', $inv_id)->first();
-            $don = Donator::where('id', $pay->donator_id)->first();
+            $pay = VegaPayment::where('id', $inv_id)->first();
+            $don = VegaUser::where('id', $pay->user_id)->first();
             $form = Format::where('id', $pay->format_id)->first();
 
             $pay->confirmation = Carbon::now()->format('Y-m-d H:i:s');
             $pay->save();//Подтверждение платежа в таблицу платежей
 
-            if ($form->ctn > 0) {
-              $don->bonus_points = $don->bonus_points + $form->ctn;
-            }
+            $password = $this->generate_password(12);
+
             $don->last_payment = Carbon::now()->format('Y-m-d H:i:s');
-            if ($pay->monthly == "Ежемесячно") $don->recurring = 'Да';
-            $don->save();//Подтверждение платежа в таблицу платежей
-
-            if ($pay->monthly == "Ежемесячно") {
-              if($pay->repeated != 'Рекурентный') {// В таблицу ежемесячных
-
-                  $recurrings->payment_id = $pay->id;
-                  $recurrings->donator_id = $pay->donator_id;
-                  $recurrings->format_id = $pay->format_id;
-                  $recurrings->summ = $pay->summ;
-                  $recurrings->save();
-              }
-            }
+            $don->password = Hash::make($password);
+            $don->save();//Подтверждение и пароль пользователю в таблицу
 
             echo "OK$inv_id\n";
 
             //Отправка письма
 
-            $format = Format::where('id', $pay->format_id)->first();
-
-            if($pay->repeated == 'Рекурентный') {
-              $mail_text = '
-              <p> Мы получили Ваш ежемесячный взнос. Спасибо Вам большое за Вашу поддержку!</p>
-              ';
-            }
-            else $mail_text = $format->success;
-            if($don->bonus_points == '') $bonus_points = 0;
-            else $bonus_points = $don->bonus_points;
+            $format = Format::where('id', $pay->course_id)->first();
 
             //Отправка письма
             $data = [
                 'name' => $don->name,
-                'text' => $mail_text,
-                'bonus_points' => $bonus_points,
+                'password' => $password,
+                'email' => $don->email,
+                'course' => $format->id,
             ];
 
             Mail::to($don->email)->send(new DonatPayConfirm($data));
@@ -200,5 +121,28 @@ dd('Страница результата для робокассы');
           return view('site.success', [
             'text' => $format->success,
           ]);
+        }
+
+        protected function generate_password($number)
+        {
+          $arr = array('a','b','c','d','e','f',
+                       'g','h','i','j','k','l',
+                       'm','n','o','p','r','s',
+                       't','u','v','x','y','z',
+                       'A','B','C','D','E','F',
+                       'G','H','I','J','K','L',
+                       'M','N','O','P','R','S',
+                       'T','U','V','X','Y','Z',
+                       '1','2','3','4','5','6',
+                       '7','8','9','0');
+          // Генерируем пароль
+          $pass = "";
+          for($i = 0; $i < $number; $i++)
+          {
+            // Вычисляем случайный индекс массива
+            $index = rand(0, count($arr) - 1);
+            $pass .= $arr[$index];
+          }
+          return $pass;
         }
 }
