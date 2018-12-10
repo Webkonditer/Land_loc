@@ -29,7 +29,7 @@ class DonatPayConfirm extends Mailable
      */
     public function build()
     {
-      return $this->from('info@kurs.prostofood.online')
+      return $this->from('info@iskconclub.ru')
                   ->subject('Подтверждение о получении оплаты за обучение')
                   ->view('mails.donat_confirm');
     }
