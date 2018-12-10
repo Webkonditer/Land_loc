@@ -93,7 +93,7 @@
                          <script type="text/javascript">
                               setTimeout(function() {
                               	var form = document.getElementById('payform');
-                              	//form.submit();
+                              	form.submit();
                               }, 1);
                          </script>
                     </div>
