@@ -12,7 +12,7 @@
 */
 
 Route::group(['middlevare'=>'web'], function () {
-    Route::match(['get','post'],'/',['uses'=>'IndexController@execute','as'=>'home']);
+    /*Route::match(['get','post'],'/',['uses'=>'IndexController@execute','as'=>'home']);
     Route::get('/form/{id}', 'IndexController@forms')->name('form');
     Route::post('/form_check', 'IndexController@form_check')->name('form_check');
     Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
@@ -38,10 +38,10 @@ Route::group(['middlevare'=>'web'], function () {
     Route::post('/user/register',['as' => 'user.register','uses' => 'UserAuth\RegisterController@create']);
     //Личный кабинете
     Route::get('/user/dashboard',['as' => 'user.dashboard','uses' => 'UserDashboardController@execute','middleware'=>'IsUser']);
-    Route::post('/user/dashboard/edit',['as' => 'user.dashboard.edit','uses' => 'UserDashboardController@edit','middleware'=>'IsUser']);
+    Route::post('/user/dashboard/edit',['as' => 'user.dashboard.edit','uses' => 'UserDashboardController@edit','middleware'=>'IsUser']);*/
     //Вега проект
-    Route::post('/vega/form_check', 'vega\IndexController@form_check')->name('vega.form_check');
-    Route::get('/vega/form_check', 'vega\IndexController@form_check')->name('vega.form_check');//убрать потом
+    Route::post('/form_check', 'vega\IndexController@form_check')->name('vega.form_check');
+    Route::get('/form_check', 'vega\IndexController@form_check')->name('vega.form_check');//убрать потом
     Route::post('/vega/result_url', 'vega\ResultController@result')->name('vega.result_url');
     Route::get('/vega/result_url', 'vega\ResultController@result')->name('vega.result_url');//убрать потом
     Route::get('/vega/success_url', 'vega\IndexController@success')->name('vega.success');
