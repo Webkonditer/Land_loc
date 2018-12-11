@@ -4,19 +4,21 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Auth;
+use Request;
 
 class IsUser
 {
 
     public function handle($request, Closure $next, $guard = 'user_guard')
     {
+
+
         if (!Auth::guard($guard)->check()) {
 
-                $next_url = session('_previous')['url'];
-//dump($request);dd($request->REQUEST_URI);
-                session(['next_url' => $next_url]);
+//dump($request);dd(Request::path());
+                session(['next_url' => Request::path()]);
 
-                return redirect('/user/login');
+                return redirect('/login');
         }
 
         return $next($request);

@@ -32,23 +32,45 @@ Route::group(['middlevare'=>'web'], function () {
     Route::post('/spend/check', 'BonusController@entrance_check')->name('spend.check');
     //Route::auth();Route::match(['get', 'post'],
     //Аутентификация
-    Route::get('/user/login',['as' => 'user.login','uses' => 'UserAuth\LoginController@showLoginForm']);
-    Route::post('/user/login',['uses' => 'UserAuth\LoginController@login']);
-    Route::get('/user/logout',['as' => 'user.logout','uses' => 'UserAuth\LoginController@logout']);
     Route::post('/user/register',['as' => 'user.register','uses' => 'UserAuth\RegisterController@create']);
     //Личный кабинете
     Route::get('/user/dashboard',['as' => 'user.dashboard','uses' => 'UserDashboardController@execute','middleware'=>'IsUser']);
     Route::post('/user/dashboard/edit',['as' => 'user.dashboard.edit','uses' => 'UserDashboardController@edit','middleware'=>'IsUser']);*/
     //Вега проект
+
+    //Route::auth();
+
+    Route::group(['namespace' => 'UserAuth'], function() {
+      Route::get('/login',['as' => 'login','uses' => 'LoginController@showLoginForm']);
+      Route::post('/login',['uses' => 'LoginController@login']);
+      Route::get('/password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+      Route::post('/password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+      Route::get('/password/reset/{token}', 'ResetPasswordController@showResetForm');
+      Route::post('/password/reset', 'ResetPasswordController@reset')->name('password.update');
+      Route::get('/logout',['as' => 'logout','uses' => 'LoginController@logout']);
+    });
+
+    Route::group(['namespace' => 'Auth'], function() {
+      Route::get('/dashboard/login',['as' => 'admin_login','uses' => 'LoginController@showLoginForm']);
+      Route::post('/dashboard/login',['uses' => 'LoginController@login']);
+      Route::get('/dashboard/logout',['as' => 'admin_logout','uses' => 'LoginController@logout']);
+    });
+
     Route::post('/form_check', 'vega\IndexController@form_check')->name('vega.form_check');
     Route::post('/result_url', 'vega\ResultController@result')->name('vega.result_url');
-    Route::get('/vega/result_url', 'vega\ResultController@result')->name('vega.result_url');//убрать потом
-    Route::get('/vega/success_url', 'vega\IndexController@success')->name('vega.success');
-    Route::get('/vega/fail_url', 'vega\IndexController@fail')->name('vega.fail');
+    Route::get('/success_url', 'vega\IndexController@success')->name('vega.success');
+    Route::get('/fail_url', 'vega\IndexController@fail')->name('vega.fail');
+
+    Route::get('/course/{course}', 'vega\VideosController@execute')->name('vega.course');
+
+    //Route::get('/user/login',['as' => 'user.login','uses' => 'UserAuth\LoginController@showLoginForm']);
+    //Route::post('/user/login',['uses' => 'UserAuth\LoginController@login']);
+    //Route::get('/user/logout',['as' => 'user.logout','uses' => 'UserAuth\LoginController@logout']);
+    //Route::get('/password/reset/',['as' => 'password.reset','uses' => 'UserAuth\ResetPasswordController@showLinkRequestForm']);
+    //Route::post('/password/reset/',['as' => 'password.reset','uses' => 'UserAuth\ResetPasswordController@reset']);
+    //Route::get('/password/reset/{token}',['as' => 'password.reset','uses' => 'UserAuth\ResetPasswordController@showResetForm']);
+    //Route::post('/password/email',['as' => 'password.email','uses' => 'UserAuth\ForgotPasswordController@sendResetLinkEmail']);
 });
-
-
-
 
 Route::group(['prefix'=>'admin','middleware'=>'IsAdmin'], function () {
 
@@ -103,11 +125,6 @@ Route::group(['prefix'=>'admin','middleware'=>'IsAdmin'], function () {
 });
 
 
-
-Auth::routes();
+//Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

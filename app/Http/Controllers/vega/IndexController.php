@@ -5,7 +5,6 @@ namespace App\Http\Controllers\vega;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
-use Auth;
 use App\VegaPayment;
 use App\VegaUser;
 use App\Format;
@@ -119,12 +118,12 @@ class InDexController extenDs Controller
 
     protected function success()
     {
-      dd('Страница упеха');
+      return view('site.success');
     }
 
     protected function fail()
     {
-      dd('Страница неудачного платежа');
+      return view('site.fail');
     }
 
 }

@@ -69,17 +69,17 @@
         <!-- Start main-content -->
         <div class="main-content">
             <section>
-
-
                 <div id="register" class="panel panel-default col-md-12">
                   <p><h3 class="widget-title line-bottom">Страница благодарности</h3></p>
 					        <p></p>
+                
+                    <p>Благодарим Вас за оплату курса!</p>
+                    <p>На указанный Вами почтовый ящик отправлено письмо с дальнейшими инструкциями.</p>
+                    <p>Если у Вас появятся вопросы, Вы можете написать в техподдержку по адресу ?????</p>
+                    <p> </p>
+                    <p>С уважением, администрация школы "Prostofood.online"</p>
                 </div>
-
-                {!! $text !!}
-        </div>
-    </div>
-    </section>
+            </section>
     </div>
     <!-- end main-content -->
 

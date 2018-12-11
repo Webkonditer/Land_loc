@@ -77,12 +77,12 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Donator::class,
+            'model' => App\VegaUser::class,
         ],
 
         'user_guard' => [
             'driver' => 'eloquent',
-            'model' => App\Donator::class,
+            'model' => App\VegaUser::class,
         ],
 
         'admin_guard' => [

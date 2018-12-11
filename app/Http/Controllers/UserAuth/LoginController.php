@@ -20,13 +20,22 @@ class LoginController extends Controller
     //protected $redirectTo = Request::session()->get('_previous')['url'];
     protected function redirectTo()
       {
-          //if(session('next_url') != '') return session('next_url');
-          //else return '/';
-          //return Request::session()->get('_previous')['url'];
-          return back()->getTargetUrl();
+          if(session('next_url') != '') return session('next_url');
+          else return '/course/1';
+          //return $request->path();
+          //return '/course/1';//session('_previous')['url'];//back()->getTargetUrl();
       }
 
-    protected $redirectAfterLogout = '/';
+      public function logout(Request $request)   {
+
+           $this->guard()->logout();
+
+           $request->session()->flush();
+
+           $request->session()->regenerate();
+
+           return redirect('/login');
+       }
     /**
      * Create a new controller instance.
      *
@@ -37,14 +46,7 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function showLoginForm(Request $request)
-        {
-            //$next_url = session('_previous')['url'];
-            //session(['next_url' => $next_url]);
-            //dd(back()->getTargetUrl());
-            if(Auth::guard('user_guard')->user()) return redirect('/');
-            return view('user.login');
-        }
+
 
     protected function guard()
         {

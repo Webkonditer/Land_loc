@@ -5,10 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Войдите, используя регистрационные данные из письма</div>
+                <div class="card-header">Вход в админку</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('admin_login') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -57,9 +57,6 @@
                                     Войти
                                 </button>
 
-                                <a class="btn btn-link" href="{{ route('password.reset') }}">
-                                    Забыли пароль?
-                                </a>
                             </div>
                         </div>
                     </form>

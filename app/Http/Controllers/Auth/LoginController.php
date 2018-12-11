@@ -44,4 +44,22 @@ class LoginController extends Controller
            return Auth::guard('admin_guard');
        }
 
+       public function showLoginForm(Request $request)
+           {
+               if(Auth::guard('admin_guard')->user()) return redirect('/admin/formats');
+               return view('auth.admin_login');
+           }
+
+
+        public function logout(Request $request)   {
+
+             $this->guard()->logout();
+
+             $request->session()->flush();
+
+             $request->session()->regenerate();
+
+             return redirect('/dashboard/login');
+         }
+
 }

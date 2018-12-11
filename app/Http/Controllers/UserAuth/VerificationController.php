@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\UserAuth;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -26,7 +26,7 @@ class VerificationController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin/formats';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.

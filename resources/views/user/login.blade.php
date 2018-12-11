@@ -69,23 +69,8 @@
         <!-- Start main-content -->
         <div class="main-content">
             <section>
-                <div class="container">
-                    <div class="content"></div>
-                </div>
-                <section data-bg-img="/images/pattern/p50.png" data-margin-top="-119px">
-                    <div class="section-title text-center">
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-2">
-                                <br><br>
-                                <h3 class="mt-0">Пожалуйста войдите или зарегистрируйтесь</h3>
-                                <div class="title-icon">
-                                    <i class="fa fa-heart fa-3x"></i>
-                                </div>
-                                <p></p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+
+
                 <div id="register" class="panel panel-default col-md-12">
 
                     @if  ($errors->any())
@@ -98,10 +83,10 @@
                     </div>
                     @endif
 
-                    <div class="col-md-6">{{--Правая колонка--}}
-                      <p><h3 class="widget-title line-bottom">Войти:</h3></p>
+                    <div class="col-md-12">{{--Правая колонка--}}
+                      <p><h3 class="widget-title line-bottom">Пожалуйста укажите регистрационные данные из полученного Вами письма</h3></p>
 
-                      <form role="form" name="edit" enctype="multipart/form-data" action="{{ url('/user/login')}}" method="POST">
+                      <form role="form" name="edit" enctype="multipart/form-data" action="{{ url('/login')}}" method="POST">
                           @csrf
 
                           <fieldset>
@@ -130,7 +115,6 @@
                               </div>
                               <div class="form-group">
 
-                                <a href="{{ route('home') }}" class="btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)">Назад</a>
                                   <input onclick="validation_left()" type="submit" class="btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)" value="Войти" />
 
                               </div>
@@ -141,64 +125,7 @@
 
                     </div>
 
-                          <div class="col-md-6"> {{--Левая колонка--}}
 
-                            <p><h3 class="widget-title line-bottom">Зарегистрироваться:</h3></p>
-
-                              <form role="form" name="edit" enctype="multipart/form-data" action="{{ route('user.register')}}" method="POST">
-                                  @csrf
-                                  <fieldset>
-                                    <div class="form-group">
-                                        <label for="name" class="col-form-label">Ваше духовное имя. Если его нет - ФИО.</label>
-                                        <div>
-                                            <input lang="ru" type="text" id="name" name="name" required="required"
-                                            class="form-control" value="{{old('name')}}" />
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="email" class="col-form-label">Ваш Email</label>
-                                        <div>
-                                            <input type="email" id="email" name="email" required="required"
-                                            class="form-control" value="{{old('email')}}" />
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="password" class="col-form-label">Ваш пароль</label>
-                                        <input id="pass" type="password" class="form-control" name="password" required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="password" class="col-form-label">Повторите пароль</label>
-                                        <input id="pass_check" type="password" class="form-control" name="password_confirmation" required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="email" class="col-form-label">Ваш телефон*</label>
-                                        <div>
-                                            <input type="text" id="phone" name="phone" required="required"
-                                            class="form-control" value="{{old('phone')}}" />
-                                        </div>
-                                    </div>
-                                    <p>*Мы обещаем не беспокоить Вас по телефону без крайней необходимости</p>
-                                    <div class="form-group">
-                                        <label for="name" class="col-form-label">Ваш город</label>
-                                        <div>
-                                            <input lang="ru" type="text" id="city" name="city" required="required"
-                                            class="form-control" value="{{old('city')}}" />
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <div class="col-sm-10">
-                                          <a href="{{ route('home') }}" class="btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)">Назад</a>
-                                            <input onclick="validation()" type="submit" class="btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)" value="Зарегистрироваться" />
-                                        </div>
-                                   </div>
-                            </fieldset>
-                        </form>
-                      </div>
                 </div>
         </div>
     </div>

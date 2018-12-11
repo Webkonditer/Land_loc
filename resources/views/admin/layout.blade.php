@@ -83,7 +83,7 @@
                                 </div>
                                 --}}
                                 <div class="pull-right">
-                                    <a href="{{ route('logout') }}" class="btn btn-default btn-flat">Выйти</a>
+                                    <a href="{{ route('admin_logout') }}" class="btn btn-default btn-flat">Выйти</a>
                                 </div>
                             </li>
                         </ul>
