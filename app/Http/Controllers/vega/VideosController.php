@@ -49,7 +49,7 @@ if (!$request->cookie('device')) {
 
 // вывод Cookie
 dump($request->cookie('device'));
-//return response('Hello World')->cookie('device', 'Устройство 1',60);
+return response('Hello World')->cookie('device', 'Устройство 1',60);
       dd($request);
 
 
