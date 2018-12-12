@@ -11,6 +11,7 @@ use App\Format;
 use App\Setting;
 use Carbon\Carbon;
 use Cookie;
+use Illuminate\Cookie\CookieJar;
 
 class VideosController extends Controller
 {
@@ -20,7 +21,7 @@ class VideosController extends Controller
         $this->middleware('IsUser');
     }
 
-    public function execute($course, Request $request, VegaUser $vegauser, VegaPayment $vegapayment) {
+    public function execute(CookieJar $cookieJar, $course, Request $request, VegaUser $vegauser, VegaPayment $vegapayment) {
 
       $id = Auth::guard('user_guard')->user()->id;
 
@@ -43,14 +44,19 @@ class VideosController extends Controller
       }
 
 
-if (!$request->cookie('device')) {
-    Cookie::queue('device', 'Устройство 1',60);
-}
+//if (!$request->cookie('device')) {
+    Cookie::queue(Cookie::make('name', 'value', 4500));
+    $cookieJar->queue(cookie('name', $request->referrer, 45000));
+//}
 
 // вывод Cookie
-dump($request->cookie('device'));
-return response('Hello World')->cookie('device', 'Устройство 1',60);
-      dd($request);
+dump($request->cookie());
+//return response('Hello World')->withCookie(cookie('name', 'name',10));
+
+$response = new \Illuminate\Http\Response(view('auth.login'));
+$response->withCookie(cookie('name', $request->referrer, 45000));
+return $response;
+
 
 
 
