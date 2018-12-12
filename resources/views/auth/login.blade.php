@@ -8,6 +8,19 @@
                 <div class="card-header">Войдите, используя регистрационные данные из письма</div>
 
                 <div class="card-body">
+
+                    <div class="col-sm-12">
+                        @if ($errors->any())
+                          <div class="alert alert-danger">
+                            <ul>
+                              @foreach ($errors->all() as $error)
+                                <li>{{$error}}</li>
+                              @endforeach
+                            </ul>
+                          </div>
+                        @endif
+                    </div>
+
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
