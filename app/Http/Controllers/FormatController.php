@@ -60,8 +60,8 @@ class FormatController extends Controller
         'name' => 'required|string|max:191',
         'summ' => 'required',
         'monthly' => 'string|max:2',
-        'bonus_1' => 'required|string|max:191',
-        'bonus_2' => 'required|string|max:191',
+        'bonus_1' => 'required|string|max:500',
+        'bonus_2' => 'required|string|max:500',
         'success' => 'required',
         'ctn' => 'required|integer',
     ]);
@@ -124,11 +124,7 @@ class FormatController extends Controller
         'image' => 'nullable|image',
         'name' => 'required|string|max:191',
         'summ' => 'required',
-        'monthly' => 'string|max:2',
-        'bonus_1' => 'required|string|max:191',
-        'bonus_2' => 'required|string|max:191',
-        'ctn' => 'required|integer',
-        'success' => 'required',
+        'video_1' => 'required',
       ]);
       //dump($request->all());
         if(null !==($request->file('image'))) $path = $request->file('image')->store('i/formatsImage', 'public');
@@ -139,10 +135,10 @@ class FormatController extends Controller
         $format->name = $request->name;
         $format->summ = $request->summ;
         if($request->monthly)$format->monthly = "Ежемесячно"; else $format->monthly = "Разово";
-        $format->bonus_1 = $request->bonus_1;
-        $format->bonus_2 = $request->bonus_2;
-        $format->ctn = $request->ctn;
-        $format->success = $request->success;
+        $format->video_1 = $request->video_1;
+        $format->text_1 = $request->text_1;
+        //$format->ctn = $request->ctn;
+        //$format->success = $request->success;
         $format->save();
 
         return redirect()->route('admin.formats.index');

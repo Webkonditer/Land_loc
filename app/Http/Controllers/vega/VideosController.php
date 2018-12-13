@@ -64,25 +64,17 @@ class VideosController extends Controller
         $search_device = Device::where('user_id', $id)->where('course_id', $course)->where('device', $_COOKIE['dev'])->first();
         if (!isset($search_device->id)) {
           return redirect()->back()
-            ->withErrors('!!К сожалению Вы можете использовать Ваш пароль только на трех устройствах. Обратитесь пожалуйста в техподдержку.')
+            ->withErrors('К сожалению Вы можете использовать Ваш пароль только на трех устройствах. Обратитесь пожалуйста в техподдержку.')
             ->withInput();
         }
       }
 
+      //Вывод страницы
+      return view('site.vega.course_page', [
+        'format' => Format::where('id', $payment->course_id)->first(),
+      ]);
 
-
-if (isset($_COOKIE['dev'])) dump($_COOKIE['dev']);
-return response('Поздравляем! Вы вошли на страницу курса! Скоро здесь будет долгожданное видео');
-
-
-
-
-      foreach ($payments as $payment) {
-
-      }
-      dump($payments);
-      dd($request);
+      //if (isset($_COOKIE['dev'])) dump($_COOKIE['dev']);
 
     }
-
 }
