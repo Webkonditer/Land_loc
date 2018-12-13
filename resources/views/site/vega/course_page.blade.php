@@ -87,12 +87,10 @@
                     <div class="content"></div>
                 </div>
 
-                <div id="register" class="panel panel-default col-md-12">
 
 
-                        <p><h3>{{ $format->name }}</h3>
-                        </p>
-                        <div class="row">
+                        <h2 class="text-center">{{ $format->name }}</h2>
+
 
                           </p>{!! $format->video_1 !!}</p>
                           </p>{!! $format->text_1 !!}</p>
@@ -124,8 +122,7 @@
                             @endforelse
 
 --}}
-                        </div>
-                    </div>
+
                 </div>
             </section>
         </div>

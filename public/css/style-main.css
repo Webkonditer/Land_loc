@@ -50,7 +50,7 @@ This file contains the common styles of this theme.
 		* job.less
 		* shop.less
 		* blog.less
-		* shortcodes.less 
+		* shortcodes.less
 			* alerts.less
 			* blockquote.less
 			* buttons.less
@@ -752,8 +752,8 @@ section > .container-fluid {
   background: rgba(0, 0, 0, 0.6);
   text-decoration: none;
 }
-/*  
- * extra.less 
+/*
+ * extra.less
  * -----------------------------------------------
 */
 /* -------- Heading Style ---------- */
@@ -1580,7 +1580,6 @@ section > .container-fluid {
  * -----------------------------------------------
 */
 .boxed-layout .container {
-  max-width: 1170px;
   padding-left: 30px;
   padding-right: 30px;
 }
@@ -1588,7 +1587,6 @@ section > .container-fluid {
 .boxed-layout .main-content,
 .boxed-layout .footer {
   margin: 0 auto;
-  max-width: 1170px;
   box-shadow: 0 0 8px -2px #333;
 }
 .boxed-layout .header,
@@ -3554,7 +3552,7 @@ table.no-border td {
   padding: 5px 15px;
 }
 /*
- * Blog 
+ * Blog
  * -----------------------------------------------
 */
 .post .entry-header {
@@ -4505,8 +4503,8 @@ blockquote p {
 .funfact.style-1:hover .funfact-title {
   color: #333333;
 }
-/*  
- * home-boxes.less 
+/*
+ * home-boxes.less
  * -----------------------------------------------
 */
 .home-boxes .each-box {
