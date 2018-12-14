@@ -20,10 +20,11 @@
     <link rel="stylesheet" href="https://static.tildacdn.com/css/tilda-slds-1.4.min.css" type="text/css" media="all" /><link rel="stylesheet" href="https://static.tildacdn.com/css/tilda-zoom-2.0.min.css" type="text/css" media="all" /><link rel="stylesheet" href="https://static.tildacdn.com/css/tilda-popup-1.1.min.css" type="text/css" media="all" />
 
     <script src="{{ asset('/js/public.js') }}"></script>
+    <script  src = "/js/jquery-cookie/jquery.cookie.js"></script>
 
 </head>
 
-<body class="boxed-layout pb-40 pt-sm-0" data-bg-img="{{ asset('/images/pattern/p5.png') }}">
+<body class="boxed-layout pb-40 pt-sm-0">
 
 
     <div id="wrapper" class="clearfix">
@@ -87,41 +88,29 @@
                     <div class="content"></div>
                 </div>
 
+                <h2 class="text-center">{{ $format->name }}</h2>
 
 
-                        <h2 class="text-center">{{ $format->name }}</h2>
+                @for ($i=1; $i <= $pages; $i++)
+                  <div style="margin:20px 30px 10px 30px">
+                    <h3>Видео {{ $i }}</h3>
+                    <?php $text = "text_".$i; ?>
+                    {!! $format->$text !!}
+                  </div>
+                  <?php $video = "video_".$i; ?>
+                  <div>{!! $format->$video !!}</div>
+                @endfor
 
+                <div class="checkbox" style="margin:0px 30px 0px 30px; padding-bottom:20px">
+                    @if ($end)
+                      Вы посмотрели все видео.
+                    @else
+                      <label for="is_opened">
+                          <input id="checkbox" onclick="next_video()" name="anonim" type="checkbox"> &nbsp; Я просмотрел(а) это видео.
+                      </label>
+                    @endif
 
-                          </p>{!! $format->video_1 !!}</p>
-                          </p>{!! $format->text_1 !!}</p>
-{{--
-                            @forelse($formats  as $format)
-                            <div class="thumbnail col-md-2"> <a href="#"><img class="img-fullwidth" src="{{ asset('/storage/'.$format->image) }}" alt="..."></a>
-                                <div class="caption text-center">
-                                    <h3>{{ $format->name }}</h3>
-                                    <p>{{ $format->summ }}
-                                        @if(is_numeric  ($format->summ))руб.
-                                        @endif
-                                        @if($format->monthly == "Ежемесячно")/мес. @endif</p> <p><a href="{{-- route('form', ['id' => $format->id]) }}" class="btn btn-theme-colored btn-flat btn-xl" role="button">Выбрать</a>
-                                    </p>
-                                </div>
-                                <h5><strong>Бонус:</strong></h5>
-                                <ul class="list table-list theme-colored check-circle">
-                                    <li>{{ $format->bonus_1 }}</li>
-                                    <li>{!! $format->bonus_2 !!}</li>
-                                    @if ($format->ctn > 0)
-                                      <p><strong>+{{ $format->ctn }} Чайтаний в мес.</strong></p>
-                                    @endif
-                                </ul>
-                            </div>
-                            @empty
-                            <tr>
-                                <td><h2>Опции отсутствуют</h2>
-                                </td>
-                            </tr>
-                            @endforelse
-
---}}
+                </div>
 
                 </div>
             </section>
@@ -131,7 +120,7 @@
         <!-- Footer -->
         <footer id="footer" class="footer pb-0 bg-black-111">
             <div class="t-tildalabel " id="tildacopy" data-tilda-sign="206353#4087779">
-              <a href="https://tilda.cc/?upm=206353" class="t-tildalabel__link">
+              <a href="https://tilda.cc/" class="t-tildalabel__link">
                 <div class="t-tildalabel__wrapper">
                   <div class="t-tildalabel__txtleft">
                     Made on
@@ -150,6 +139,16 @@
 
     </div>
     <script src="/js/custom.js"></script>
+    <script type="text/javascript">
+        {{--Куки + перезагрузка--}}
+        $('#checkbox').prop('checked', false);
+        function next_video() {
+          if(typeof $.cookie('course_{{ $format->id }}') == 'undefined') {var course = 2;}
+          else {var course = Number.parseInt($.cookie('course_{{ $format->id }}'))+1;}
+          $.cookie('course_{{ $format->id }}',course,{expires:90});
+          window.location.reload();
+        }
+    </script>
 </body>
 
 </html>
