@@ -74,15 +74,20 @@ class VideosController extends Controller
       if (isset($_COOKIE[$COOKIE_name])) $pages = ($_COOKIE[$COOKIE_name]);
       else $pages = 1;
       $format = Format::where('id', $payment->course_id)->first();
-      if($pages > $format->count()) {
-        $pages = $format->count();
-        $end = true;
-      }
-      else $end = false;
+
       for ($i=1; $i <= $pages; $i++) {
         $text = "text_".$i;
         $video = "video_".$i;
-        $videos[$i] = array( "text" => $format->$text, "video" => $format->$video);
+
+        if(!$format->$video) {
+          $pages = $pages-1;
+          $end = true;
+          break;
+        }
+        else {
+          $end = false;
+          $videos[$i] = array( "text" => $format->$text, "video" => $format->$video);
+        }
       }
       //dd($videos);
       return view('site.vega.course_page', [
