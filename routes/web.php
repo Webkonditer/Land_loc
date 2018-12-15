@@ -86,20 +86,20 @@ Route::group(['prefix'=>'admin','middleware'=>'IsAdmin'], function () {
       Route::post('/administrators/{user}/update', 'AdminController@update')->name('admin.administrator.update');
       Route::post('/administrators/{user}/delete', 'AdminController@destroy')->name('admin.administrator.delete');
 
-      Route::get('/donators/{sort}', 'DonatorsController@execute_sort')->name('admin.donators.sort');
-      Route::get('/donators/monthly/{sort}', 'DonatorsController@execute_monthly')->name('admin.donators.sort.monthly');
-      Route::get('/donators/one_time/{sort}', 'DonatorsController@execute_one_time')->name('admin.donators.sort.one_time');
-      Route::get('/donators', 'DonatorsController@execute')->name('admin.donators');
-      Route::post('/donators/create', 'DonatorsController@create')->name('admin.donator.create');
-      Route::post('/donators/{donator}/update', 'DonatorsController@update')->name('admin.donator.edit');
-      Route::get('/donators/{donator}/delete', 'DonatorsController@destroy')->name('admin.donator.delete');
-      Route::post('/donators/search', 'DonatorsController@search')->name('admin.donators.search');
+      Route::get('/vegausers/{sort}', 'vega\VegaUsersController@execute_sort')->name('admin.vegausers.sort');
+      Route::get('/vegausers/monthly/{sort}', 'vega\VegaUsersController@execute_monthly')->name('admin.vegausers.sort.monthly');
+      Route::get('/vegausers/one_time/{sort}', 'vega\VegaUsersController@execute_one_time')->name('admin.vegausers.sort.one_time');
+      Route::get('/vegausers', 'vega\VegaUsersController@execute')->name('admin.vegausers');
+      Route::post('/vegausers/create', 'vega\VegaUsersController@create')->name('admin.vegausers.create');
+      Route::post('/vegausers/{vegauser}/update', 'vega\VegaUsersController@update')->name('admin.vegausers.edit');
+      Route::get('/vegausers/{vegauser}/delete', 'vega\VegaUsersController@destroy')->name('admin.vegausers.delete');
+      Route::post('/vegausers/search', 'vega\VegaUsersController@search')->name('admin.vegausers.search');
 
-      Route::get('/payments/stat', 'PaymentsController@stat')->name('admin.payments.stat');
-      Route::get('/payments', 'PaymentsController@execute')->name('admin.payments');
-      Route::get('/payments/{sort}', 'PaymentsController@execute_sort')->name('admin.payments.sort');
-      Route::get('/payments/id/{id}', 'PaymentsController@execute_id')->name('admin.payments.id');
-      Route::get('/payments/{payment}/delete', 'PaymentsController@destroy')->name('admin.payment.delete');
+      Route::get('/vegapayments/stat', 'vega\VegaPaymentsController@stat')->name('admin.vegapayments.stat');
+      Route::get('/vegapayments', 'vega\VegaPaymentsController@execute')->name('admin.vegapayments');
+      Route::get('/vegapayments/{sort}', 'vega\VegaPaymentsController@execute_sort')->name('admin.vegapayments.sort');
+      Route::get('/vegapayments/id/{id}', 'vega\VegaPaymentsController@execute_id')->name('admin.vegapayments.id');
+      Route::get('/vegapayments/{vegapayment}/delete', 'vega\VegaPaymentsController@destroy')->name('admin.vegapayments.delete');
 
       Route::get('/recurrings', 'RecurringController@execute')->name('admin.recurrings');
       Route::get('/recurrings/{recurring}/delete', 'RecurringController@destroy')->name('admin.recurring.delete');

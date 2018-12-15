@@ -21,11 +21,13 @@ class VideosController extends Controller
         $this->middleware('IsUser');
     }
 
-    public function execute(Device $device, $course, Request $request, VegaUser $vegauser, VegaPayment $vegapayment) {
+    public function execute(Device $device, Request $request, VegaUser $vegauser, VegaPayment $vegapayment, $course) {
 
       $id = Auth::guard('user_guard')->user()->id;
 
-      $payment = VegaPayment::where('user_id', $id)->where('course_id', $course)->orderBy('created_at', 'desc')->first();
+      $format = Format::where('position', $course)->first();
+
+      $payment = VegaPayment::where('user_id', $id)->where('course_id', $format->id)->orderBy('created_at', 'desc')->first();
 
       //Оплачен ли даный курс
       if (!isset($payment->id)) {
@@ -46,7 +48,7 @@ class VideosController extends Controller
 
       //Проверка трех девайсов
       if (!isset($_COOKIE['dev'])) {
-          $devices = Device::where('user_id', $id)->where('course_id', $course)->get();
+          $devices = Device::where('user_id', $id)->get();
           if ($devices->count() == 3) {
             return redirect()->back()
               ->withErrors('К сожалению Вы можете использовать Ваш пароль только на трех устройствах. Обратитесь пожалуйста в техподдержку.')
@@ -55,13 +57,13 @@ class VideosController extends Controller
           else {
             $device->user_id = $id;
             $device->course_id = $course;
-            $device->device = str_random(8);;
+            $device->device = str_random(8);
             $device->save();
             setcookie("dev", $device->device, time()+7862400);
           }
       }
       else {
-        $search_device = Device::where('user_id', $id)->where('course_id', $course)->where('device', $_COOKIE['dev'])->first();
+        $search_device = Device::where('user_id', $id)->where('device', $_COOKIE['dev'])->first();
         if (!isset($search_device->id)) {
           return redirect()->back()
             ->withErrors('К сожалению Вы можете использовать Ваш пароль только на трех устройствах. Обратитесь пожалуйста в техподдержку.')
@@ -73,7 +75,6 @@ class VideosController extends Controller
       $COOKIE_name = "course_".$payment->course_id;
       if (isset($_COOKIE[$COOKIE_name])) $pages = ($_COOKIE[$COOKIE_name]);
       else $pages = 1;
-      $format = Format::where('id', $payment->course_id)->first();
 
       for ($i=1; $i <= $pages; $i++) {
         $text = "text_".$i;

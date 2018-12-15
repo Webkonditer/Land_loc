@@ -138,58 +138,28 @@
                         <i class="fa fa-users" aria-hidden="true"></i> <span>Администраторы</span>
                     </a>
                 </li>
-                <li class="header">ПОЖЕРТВОВАНИЯ</li>
+                <li class="header">Курсы</li>
                 <li>
                     <a href="{{route('admin.formats.index')}}">
-                        <i class="fa fa-th-list"></i> <span>Список опций</span>
+                        <i class="fa fa-th-list"></i> <span>Список курсов</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('admin.donators')}}">
-                        <i class="fa fa-universal-access" aria-hidden="true"></i> <span>Жертвователи</span>
+                    <a href="{{route('admin.vegausers')}}">
+                        <i class="fa fa-universal-access" aria-hidden="true"></i> <span>Учащиеся</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('admin.payments')}}">
-                        <i class="fa fa-heart" aria-hidden="true"></i> <span>Пожертвования</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{route('admin.recurrings')}}">
-                        <i class="fa fa-history" aria-hidden="true"></i> <span>Ежемесячные подписки</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{route('admin.payments.stat')}}">
-                        <i class="fa fa-calculator" aria-hidden="true"></i> <span>Статистика</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{route('admin.bonus.applications')}}">
-                        <i class="fa fa-envelope-open-o" aria-hidden="true"></i> <span>Заявки на подарки</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{route('admin.bonus.stat')}}">
-                        <i class="fa fa-calculator" aria-hidden="true"></i> <span>Статистика по подаркам</span>
+                    <a href="{{route('admin.vegapayments')}}">
+                        <i class="fa fa-heart" aria-hidden="true"></i> <span>Платежи</span>
                     </a>
                 </li>
 
-                <li class="header">ОПЛАТА КУРСОВ</li>
-                <li>
-                    <a href="{{route('admin.courses.index')}}">
-                        <i class="fa fa-file-text" aria-hidden="true"></i> <span>Список курсов</span>
-                    </a>
-                    <a href="{{route('admin.courses.payments')}}">
-                        <i class="fa fa-rub" aria-hidden="true"></i> <span>Платежи за курсы</span>
-                    </a>
-                    <a href="{{route('admin.courses.passwords')}}">
-                        <i class="fa fa-eye" aria-hidden="true"></i> <span>Установка паролей</span>
-                    </a>
-                    <a href="{{route('admin.courses.stat')}}">
+                {{--<li>
+                    <a href="{{route('admin.payments.stat')}}">
                         <i class="fa fa-calculator" aria-hidden="true"></i> <span>Статистика</span>
                     </a>
-                </li>
+                </li>--}}
             </ul>
         </section>
         <!-- /.sidebar -->
