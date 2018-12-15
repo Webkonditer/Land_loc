@@ -54,77 +54,74 @@ class FormatController extends Controller
 
     //dd($request->all());
     $validator = $this->validate($request, [
-
-        'position' => 'required|integer',
-        'image' => 'required|image',
-        'name' => 'required|string|max:191',
-        'summ' => 'required',
-        'monthly' => 'string|max:2',
-        'bonus_1' => 'required|string|max:500',
-        'bonus_2' => 'required|string|max:500',
-        'success' => 'required',
-        'ctn' => 'required|integer',
+      'position' => 'required|integer',
+      'image' => 'required|image',
+      'name' => 'required|string|max:191',
+      'summ' => 'required',
+      'video_1' => 'required|string|',
+      'text_1' => 'required|string|',
     ]);
     //dd($request->all());
       $path = $request->file('image')->store('i/formatsImage', 'public');
 
       $format->position = $request->position;
-      $format->image = $path;
+      if($path)$format->image = $path;
       $format->name = $request->name;
       $format->summ = $request->summ;
       if($request->monthly)$format->monthly = "Ежемесячно"; else $format->monthly = "Разово";
-      $format->bonus_1 = $request->bonus_1;
-      $format->bonus_2 = $request->bonus_2;
-      $format->ctn = $request->ctn;
-      $format->success = $request->success;
+      $format->video_1 = $request->video_1;
+      $format->text_1 = $request->text_1;
+      $format->video_2 = $request->video_2;
+      $format->text_2 = $request->text_2;
+      $format->video_3 = $request->video_3;
+      $format->text_3 = $request->text_3;
+      $format->video_4 = $request->video_4;
+      $format->text_4 = $request->text_4;
+      $format->video_5 = $request->video_5;
+      $format->text_5 = $request->text_5;
+      $format->video_6 = $request->video_6;
+      $format->text_6 = $request->text_6;
+      $format->video_7 = $request->video_7;
+      $format->text_7 = $request->text_7;
+      $format->video_8 = $request->video_8;
+      $format->text_8 = $request->text_8;
+      $format->video_9 = $request->video_9;
+      $format->text_9 = $request->text_9;
+      $format->video_10 = $request->video_10;
+      $format->text_10 = $request->text_10;
+      $format->video_11 = $request->video_11;
+      $format->text_11 = $request->text_11;
+      $format->video_12 = $request->video_12;
+      $format->text_12 = $request->text_12;
+      $format->video_13 = $request->video_13;
+      $format->text_13 = $request->text_13;
+      $format->video_14 = $request->video_14;
+      $format->text_14 = $request->text_14;
+      $format->video_15 = $request->video_15;
+      $format->text_15 = $request->text_15;
+      $format->success = '-';
       $format->save();
 
       return redirect()->route('admin.formats.index');
   }
 
-  /**
-   * Display the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function show($id)
-  {
-      //
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
   public function edit(Format $format)
   {
-
     return view('admin.formats.edit', [
       'format'  => $format,
     ]);
   }
 
-
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
   public function update(Request $request, Format $format)
   {
       //dd($request->all());
       $validator = $this->validate($request, [
-
         'position' => 'required|integer',
         'image' => 'nullable|image',
         'name' => 'required|string|max:191',
         'summ' => 'required',
-        'video_1' => 'required',
+        'video_1' => 'required|string|',
+        'text_1' => 'required|string|',
       ]);
       //dump($request->all());
         if(null !==($request->file('image'))) $path = $request->file('image')->store('i/formatsImage', 'public');
@@ -165,7 +162,6 @@ class FormatController extends Controller
         $format->text_14 = $request->text_14;
         $format->video_15 = $request->video_15;
         $format->text_15 = $request->text_15;
-        //$format->success = $request->success;
         $format->save();
 
         return redirect()->route('admin.formats.index');

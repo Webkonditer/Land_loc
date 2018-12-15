@@ -5,16 +5,17 @@
 ?>
 @extends('admin.layout')
 
-@section('crumbs')<li class="active">Новая опция</li>@endsection
+@section('crumbs')<li class="active">Новый курс</li>@endsection
 
 @section('content')
     <div class="row">
         <div class="col-sm-12">
             <div class="box box-primary">
 
-                <h2>Создание новой опции</h2>
+                <h2>Создание нового курса</h2>
                 <form role="form" name="edit" enctype="multipart/form-data" action="{{ route('admin.formats.store')}}" method="POST">
 
+                  {{--Ошибки--}}
                   @if ($errors->any())
                     <div class="alert alert-danger">
                       <ul>
@@ -22,105 +23,71 @@
                           <li>{{$error}}</li>
                         @endforeach
                       </ul>
-
                     </div>
-
                   @endif
 
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <div class="box-body">
+                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                  <div class="box-body">
 
-                      <div class="form-group">
-                          <label for="title">Положение в списке</label>
-                          <input type="text"
-                                 name="position"
-                                 class="form-control"
-                                 value="{{old('position')}}"
-                                 placeholder="Положение в списке цифрой"
-                          />
-                      </div>
+                    <div class="form-group">
+                        <label for="title">Положение в списке</label>
+                        <input type="text"
+                               name="position"
+                               class="form-control"
+                               value="{{old('position')}}"
+                               placeholder="Положение в списке цифрой"
+                        />
+                    </div>
 
-                      <div class="form-group">
-                          <label for="exampleInputFile">Загрузите изображение с компьютера</label>
-                          <input type="file" name="image" id="exampleInputFile">
-                      </div>
+                    <div class="form-group">
+                        <label for="exampleInputFile">Загрузите изображение с компьютера</label>
+                        <input type="file" name="image" id="exampleInputFile">
+                    </div>
 
-                      <div class="form-group">
-                          <label for="title">Укажите название опции</label>
-                          <input type="text"
-                                 name="name"
-                                 class="form-control"
-                                 value="{{old('name')}}"
-                                 placeholder="Название опции"
-                          />
-                      </div>
+                    <div class="form-group">
+                        <label for="title">Укажите название курса</label>
+                        <input type="text"
+                               name="name"
+                               class="form-control"
+                               value="{{old('name')}}"
+                               placeholder="Название курса"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">Стоимость курса</label>
+                        <input type="text"
+                               name="summ"
+                               class="form-control"
+                               id="summ"
+                               value="{{old('summ')}}"
+                               placeholder="Сумма цифрами"
+                        />
+                    </div>
+
+                    @for ($i=1; $i < 16; $i++)
 
                         <div class="form-group">
-                            <label for="title">Сумма пожертвования</label>
+                            <label for="title">Видео {{ $i }}</label>
+
                             <input type="text"
-                                   name="summ"
+                                   name="video_{{ $i }}"
                                    class="form-control"
-                                   id="summ"
-                                   value="{{old('summ')}}"
-                                   placeholder="Сумма цифрами"
+                                   id="video_{{ $i }}"
+                                   value="@if(old('video_'.$i)){{old('video_'.$i)}} @endif"
+                                   placeholder="Вставьте скрипт Vimeo"
                             />
                         </div>
-
                         <div class="form-group">
-                          <div class="checkbox">
-                              <label for="monthly">
-                                  <input id="monthly" name="monthly" type="checkbox"> Ежемесячное пожертвование
-                              </label>
-                          </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="title">Бонус 1</label>
-                            <input type="text"
-                                   name="bonus_1"
-                                   class="form-control"
-                                   id="bonus_1"
-                                   value="{{old('bonus_1')}}"
-                                   placeholder="Бонус 1"
-                            />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="title">Бонус 2</label>
-                            <input type="text"
-                                   name="bonus_2"
-                                   class="form-control"
-                                   id="bonus_2"
-                                   value="{{old('bonus_2')}}"
-                                   placeholder="Бонус 2"
-                            />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="title">Чайтаньи</label>
-                            <input type="text"
-                                   name="ctn"
-                                   class="form-control"
-                                   id="ctn"
-                                   value="{{old('ctn')}}"
-                                   placeholder="Количество Чайтаний цифрой"
-                            />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="description">Текст страницы результатов</label>
-                            <textarea id="description"
-                                      name="success"
-                                      rows="5"
+                            <label for="description">Текст для видео {{ $i }}</label>
+                            <textarea id="text_{{ $i }}"
+                                      name="text_{{ $i }}"
+                                      rows="3"
                                       cols="80"
                                       class="js-editor-enabled">
-                                      {{old('success')}}
+                                      @if(old('text_'.$i)){{old('text_'.$i)}} @endif
                            </textarea>
-
-                        </div>
-
-
-
+                    @endfor
 
                     </div>
                     <!-- /.box-body -->
