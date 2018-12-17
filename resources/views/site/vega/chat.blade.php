@@ -24,10 +24,9 @@
 
 </head>
 
-<body class="boxed-layout pb-40 pt-sm-0">
+<body style="height:100%">
 
 
-    <div id="wrapper" class="clearfix">
         <!-- preloader -->
 
         <!-- Header -->
@@ -90,37 +89,51 @@
 
                 <h2 class="text-center">Вопросы и ответы</h2>
 
+                    <div style="margin:10px 30px 10px 30px">
+                        <table class="table table-hover dataTable" role="grid" aria-describedby="example2_info">
 
-                  <div id="rec79860777" class="r t-rec t-rec_pt_60 t-rec_pb_60" style="padding-top:60px;padding-bottom:60px; "  data-record-type="356"   >
-                    <!-- T356 -->
-                    <div class="t356">
-                    	<div class="t-container ">
-                    	  	<div class="t-col t-col_8 t-prefix_2">
-                    			<div field="title" class="t356__title t-name t-name_xl" style="">— What's an ideal font size for footnotes and is there any reason the footnote font needs to be smaller?</div>			<div field="text" class="t356__text t-text t-text_md" style="">— For a footnote, for it to be used in-text, the writer found some content necessary to include with the manuscript, however less initially important than the main copy. Therefore, it is necessary for the main copy to have more hierarchy than the footnote.</div>		</div>
-                    	</div>
+                            @forelse($vegachats  as $vegachat)
+                            <tr role="row" >
+                                <td style="vertical-align:middle">{{'<'}}{{ $vegachat->nik }}{{'>'}}</td>
+                                <td style="vertical-align:middle">{{ $vegachat->question }}</td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td>
+                                  <h3>Сообщения отсутствуют</h3>
+                                </td>
+                            </tr>
+
+                        @endforelse
+                        <form role="form" name="edit" enctype="multipart/form-data" action="{{ route('vega.chat', $nik)}}" method="POST">
+                          <tr role="row" >
+                              <td style="vertical-align:middle"><a name="bottom"></a>Ваше сообщение:</td>
+                              <td style="vertical-align:middle">
+                                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                  <input type="text"
+                                         name="question"
+                                         class=""
+                                         value=""
+                                         style="width:100%"
+                                  />
+
+                              </td>
+                          <tr>
+                          </tr>
+                              <td></td>
+                              <td>
+                              </td>
+                          </tr>
+                        </form>
+                      </table>
                     </div>
-
-                    <div class="t356">
-                    	<div class="t-container ">
-                    	  	<div class="t-col t-col_8 t-prefix_2">
-                    			<div field="title" class="t356__title t-name t-name_xl" style="">— What's an ideal font size for footnotes and is there any reason the footnote font needs to be smaller?</div>			<div field="text" class="t356__text t-text t-text_md" style="">— For a footnote, for it to be used in-text, the writer found some content necessary to include with the manuscript, however less initially important than the main copy. Therefore, it is necessary for the main copy to have more hierarchy than the footnote.</div>		</div>
-                    	</div>
-                    </div>
-
-                    <div class="t356">
-                    	<div class="t-container ">
-                    	  	<div class="t-col t-col_8 t-prefix_2">
-                    			<div field="title" class="t356__title t-name t-name_xl" style="">— What's an ideal font size for footnotes and is there any reason the footnote font needs to be smaller?</div>			<div field="text" class="t356__text t-text t-text_md" style="">— For a footnote, for it to be used in-text, the writer found some content necessary to include with the manuscript, however less initially important than the main copy. Therefore, it is necessary for the main copy to have more hierarchy than the footnote.</div>		</div>
-                    	</div>
-                    </div>
-
-                  </div>
             </section>
         </div>
         <!-- end main-content -->
 
         <!-- Footer -->
-        <footer id="footer" class="footer pb-0 bg-black-111">
+        <footer id="footer" class="footer pb-0 bg-black-111" style=" position: absolute; bottom: 0; width: 100%;
+   height: 70px;">
             <div class="t-tildalabel " id="tildacopy" data-tilda-sign="206353#4087779">
               <a href="https://tilda.cc/" class="t-tildalabel__link">
                 <div class="t-tildalabel__wrapper">
@@ -139,7 +152,6 @@
         </footer>
 
 
-    </div>
     <script src="/js/custom.js"></script>
 
 </body>

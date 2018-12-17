@@ -20,8 +20,12 @@ class VegaChatController extends Controller
 
     public function execute(VegaUser $vegauser, VegaChat $vegachat) {
 
+      $email = Auth::guard('user_guard')->user()->email;
+      $pos = strpos($email, '@')+1;
+      $nik = substr($email, 0, $pos);
       return view('site.vega.chat', [
-        'vegachat' => $vegachat,
+        'vegachats' => $vegachat->get(),
+        'nik' => $nik,
       ]);
 
     }
