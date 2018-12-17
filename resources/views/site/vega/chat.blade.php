@@ -107,6 +107,13 @@
                     	</div>
                     </div>
 
+                    <div class="t356">
+                    	<div class="t-container ">
+                    	  	<div class="t-col t-col_8 t-prefix_2">
+                    			<div field="title" class="t356__title t-name t-name_xl" style="">— What's an ideal font size for footnotes and is there any reason the footnote font needs to be smaller?</div>			<div field="text" class="t356__text t-text t-text_md" style="">— For a footnote, for it to be used in-text, the writer found some content necessary to include with the manuscript, however less initially important than the main copy. Therefore, it is necessary for the main copy to have more hierarchy than the footnote.</div>		</div>
+                    	</div>
+                    </div>
+
                   </div>
             </section>
         </div>
