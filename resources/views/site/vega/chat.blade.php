@@ -88,31 +88,26 @@
                     <div class="content"></div>
                 </div>
 
-                <h2 class="text-center">{{ $format->name }}</h2>
+                <h2 class="text-center">Вопросы и ответы</h2>
 
 
-                @for ($i=1; $i <= $pages; $i++)
-                  <div style="margin:20px 30px 10px 30px">
-                    <h3>Видео {{ $i }}</h3>
-                    <?php $text = "text_".$i; ?>
-                    {!! $format->$text !!}
+                  <div id="rec79860777" class="r t-rec t-rec_pt_60 t-rec_pb_60" style="padding-top:60px;padding-bottom:60px; "  data-record-type="356"   >
+                    <!-- T356 -->
+                    <div class="t356">
+                    	<div class="t-container ">
+                    	  	<div class="t-col t-col_8 t-prefix_2">
+                    			<div field="title" class="t356__title t-name t-name_xl" style="">— What's an ideal font size for footnotes and is there any reason the footnote font needs to be smaller?</div>			<div field="text" class="t356__text t-text t-text_md" style="">— For a footnote, for it to be used in-text, the writer found some content necessary to include with the manuscript, however less initially important than the main copy. Therefore, it is necessary for the main copy to have more hierarchy than the footnote.</div>		</div>
+                    	</div>
+                    </div>
+
+                    <div class="t356">
+                    	<div class="t-container ">
+                    	  	<div class="t-col t-col_8 t-prefix_2">
+                    			<div field="title" class="t356__title t-name t-name_xl" style="">— What's an ideal font size for footnotes and is there any reason the footnote font needs to be smaller?</div>			<div field="text" class="t356__text t-text t-text_md" style="">— For a footnote, for it to be used in-text, the writer found some content necessary to include with the manuscript, however less initially important than the main copy. Therefore, it is necessary for the main copy to have more hierarchy than the footnote.</div>		</div>
+                    	</div>
+                    </div>
+
                   </div>
-                  <?php $video = "video_".$i; ?>
-                  <div>{!! $format->$video !!}</div>
-                @endfor
-
-                <div class="checkbox" style="margin:0px 30px 0px 30px; padding-bottom:20px">
-                    @if ($end)
-                      Вы посмотрели все видео.
-                    @else
-                      <label for="is_opened">
-                          <input id="checkbox" onclick="next_video()" name="anonim" type="checkbox"> &nbsp; Я просмотрел(а) это видео.
-                      </label>
-                    @endif
-
-                </div>
-
-                </div>
             </section>
         </div>
         <!-- end main-content -->
@@ -139,16 +134,7 @@
 
     </div>
     <script src="/js/custom.js"></script>
-    <script type="text/javascript">
-        {{--Куки + перезагрузка--}}
-        $('#checkbox').prop('checked', false);
-        function next_video() {
-          if(typeof $.cookie('course_{{ $format->id }}') == 'undefined') {var course = 2;}
-          else {var course = Number.parseInt($.cookie('course_{{ $format->id }}'))+1;}
-          $.cookie('course_{{ $format->id }}',course,{expires:90});
-          window.location.reload();
-        }
-    </script>
+
 </body>
 
 </html>
