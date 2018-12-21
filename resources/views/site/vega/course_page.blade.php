@@ -97,7 +97,7 @@
                     <?php $text = "text_".$i; ?>
                     {!! $format->$text !!}
                     <?php $video = "video_".$i; ?>
-                    <div style="z-index: {{ 100-$i }};">{!! $format->$video !!}</div>
+                    <div style="z-index: {{ 100-$i }};overflow: hidden;">{!! $format->$video !!}</div>
                   </div>
                 @endfor
 
