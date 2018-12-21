@@ -63,6 +63,8 @@ Route::group(['middlevare'=>'web'], function () {
 
     Route::get('/course/{course}', 'vega\VideosController@execute')->name('vega.course');
     Route::get('/chat', 'vega\VegaChatController@execute')->name('vega.chat');
+    Route::post('/chat/new', 'vega\VegaChatController@new_message')->name('vega.chat.new');
+    Route::get('/chat/delete/{vegachat}', 'vega\VegaChatController@delete')->name('chat.delete');
     //Route::get('/user/login',['as' => 'user.login','uses' => 'UserAuth\LoginController@showLoginForm']);
     //Route::post('/user/login',['uses' => 'UserAuth\LoginController@login']);
     //Route::get('/user/logout',['as' => 'user.logout','uses' => 'UserAuth\LoginController@logout']);

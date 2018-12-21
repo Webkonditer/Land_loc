@@ -20,24 +20,44 @@ class VegaChatController extends Controller
 
     public function execute(VegaUser $vegauser, VegaChat $vegachat) {
 
-      $email = Auth::guard('user_guard')->user()->email;
+      if(isset(Auth::guard('admin_guard')->user()->email)) {
+        $email = Auth::guard('admin_guard')->user()->email;
+        $is_admin = 1;
+      }
+      else {
+        if(isset(Auth::guard('user_guard')->user()->email)) {
+          $email = Auth::guard('user_guard')->user()->email;
+          $is_admin = 0;
+        }
+        else {
+          return redirect()->route('login');
+        }
+      }
       $pos = strpos($email, '@')+1;
       $nik = substr($email, 0, $pos);
       return view('site.vega.chat', [
         'vegachats' => $vegachat->get(),
         'nik' => $nik,
+        'is_admin' => $is_admin,
       ]);
 
     }
 
-    public function new_question(VegaUser $vegauser, VegaPayment $vegapayment) {
+    public function new_message(Request $request, VegaPayment $vegapayment, VegaChat $vegachat) {
 
-      $id = Auth::guard('user_guard')->user()->id;
-      $email = Auth::guard('user_guard')->user()->email;
-      $pos = strpos($email, '@')+1;
-      $nik = substr($email, 0, $pos);
-      dd($nik);
+      $vegachat->question_id = 0;
+      $vegachat->nik = $request->nik;
+      $vegachat->question = $request->message;
+      if(isset(Auth::guard('admin_guard')->user()->email)) $vegachat->answer = 1;
+      $vegachat->save();
 
+      return redirect()->route('vega.chat');
     }
+
+    public function delete(VegaChat $vegachat) {
+      $vegachat->delete();
+      return redirect()->route('vega.chat');
+    }
+
 
 }

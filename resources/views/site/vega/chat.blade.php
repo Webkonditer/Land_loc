@@ -1,5 +1,9 @@
+<?php
+  //
+?>
+
 <!doctype html>
-<html lang="ru">
+<html lang="ru" style="position: relative; min-height: 100%;">
 
 <head>
     <meta charset="UTF-8">
@@ -24,13 +28,7 @@
 
 </head>
 
-<body style="height:100%">
-
-
-        <!-- preloader -->
-
-        <!-- Header -->
-
+<body style="height:100%; margin-bottom: 70px;">
 
         <header id="header" class="header">
           <div id="nav77550271" class="t199__header t199__js__header t199__is__active" style="" data-menu="yes">
@@ -93,9 +91,12 @@
                         <table class="table table-hover dataTable" role="grid" aria-describedby="example2_info">
 
                             @forelse($vegachats  as $vegachat)
-                            <tr role="row" >
-                                <td style="vertical-align:middle">{{'<'}}{{ $vegachat->nik }}{{'>'}}</td>
-                                <td style="vertical-align:middle">{{ $vegachat->question }}</td>
+                            <tr role="row" @isset($vegachat->answer) style="font-weight: 600" @endisset>
+                                <td >{{'<'}}{{ $vegachat->nik }}{{'>'}}</td>
+                                <td>{{ $vegachat->question }}</td>
+                                @if($is_admin)
+                                  <td><a onclick="return confirm ('Удалить сообщение?')" href="{{ route('chat.delete', ['id' => $vegachat->id]) }}"><i class="icon glyphicon glyphicon-remove"></i></a></td>
+                                @endif
                             </tr>
                             @empty
                             <tr>
@@ -105,25 +106,19 @@
                             </tr>
 
                         @endforelse
-                        <form role="form" name="edit" enctype="multipart/form-data" action="{{ route('vega.chat', $nik)}}" method="POST">
+                        <form id="form" name="edit" enctype="multipart/form-data" action="{{ route('vega.chat.new') }}" method="POST">
                           <tr role="row" >
                               <td style="vertical-align:middle"><a name="bottom"></a>Ваше сообщение:</td>
-                              <td style="vertical-align:middle">
+                              <td>
                                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                  <input type="hidden" name="nik" value="{{ $nik }}">
                                   <input type="text"
-                                         name="question"
+                                         name="message"
                                          class=""
                                          value=""
                                          style="width:100%"
                                   />
-
                               </td>
-                          <tr>
-                          </tr>
-                              <td></td>
-                              <td>
-                              </td>
-                          </tr>
                         </form>
                       </table>
                     </div>
@@ -153,6 +148,13 @@
 
 
     <script src="/js/custom.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        $('html, body').animate({
+          scrollTop: $('#form').offset().top
+        }, 2000);
+      });
+    </script>
 
 </body>
 
