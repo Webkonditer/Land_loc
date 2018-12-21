@@ -92,10 +92,10 @@
 
 
                 @for ($i=1; $i <= $pages; $i++)
-                  <div style="margin:20px 30px 10px 30px">
+                  <div style="margin:20px 30px 10px 30px;z-index: {{ $i }};">
                     <h3>Видео {{ $i }}</h3>
                     <?php $text = "text_".$i; ?>
-                    {!! $format->$text !!}                  
+                    {!! $format->$text !!}
                     <?php $video = "video_".$i; ?>
                     <div>{!! $format->$video !!}</div>
                   </div>
