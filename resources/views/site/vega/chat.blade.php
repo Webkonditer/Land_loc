@@ -151,8 +151,8 @@
     <script type="text/javascript">
       $(function(){
         $('html, body').animate({
-          scrollTop: $('#form').offset().top
-        }, 2000);
+          scrollTop: $('#footer').offset().top
+        }, 8000);
       });
     </script>
 
