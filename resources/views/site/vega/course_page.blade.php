@@ -95,10 +95,10 @@
                   <div style="margin:20px 30px 10px 30px">
                     <h3>Видео {{ $i }}</h3>
                     <?php $text = "text_".$i; ?>
-                    {!! $format->$text !!}
+                    {!! $format->$text !!}                  
+                    <?php $video = "video_".$i; ?>
+                    <div>{!! $format->$video !!}</div>
                   </div>
-                  <?php $video = "video_".$i; ?>
-                  <div>{!! $format->$video !!}</div>
                 @endfor
 
                 <div class="checkbox" style="margin:0px 30px 0px 30px; padding-bottom:20px">
