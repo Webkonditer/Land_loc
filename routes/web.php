@@ -56,6 +56,7 @@ Route::group(['middlevare'=>'web'], function () {
       Route::get('/dashboard/logout',['as' => 'admin_logout','uses' => 'LoginController@logout']);
     });
 
+    Route::get('/', 'vega\IndexController@execute')->name('vega.home');
     Route::post('/form_check', 'vega\IndexController@form_check')->name('vega.form_check');
     Route::post('/result_url', 'vega\ResultController@result')->name('vega.result_url');
     Route::get('/success_url', 'vega\IndexController@success')->name('vega.success');

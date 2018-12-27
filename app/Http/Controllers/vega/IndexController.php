@@ -21,6 +21,12 @@ class InDexController extenDs Controller
             //$this->middleware('IsUser');
         }
 
+    public function execute(Request $request) {
+
+      return view('site.vega.index', [
+        'formats' => Format::orderBy('position')->get(),
+      ]);
+    }
 
     public function form_check(Request $request, VegaUser $vegauser, VegaPayment $vegapayment) {
 
