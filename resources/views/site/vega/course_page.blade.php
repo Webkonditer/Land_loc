@@ -174,7 +174,7 @@
     </div>
     <script src="/js/custom.js"></script>
     <script type="text/javascript">
-        $(".fluid-width-video-wrapper").padding-top(60%);
+        $(".fluid-width-video-wrapper").css({padding-top:60%});
         {{--Куки + перезагрузка--}}
         $('#checkbox').prop('checked', false);
         function next_video() {
