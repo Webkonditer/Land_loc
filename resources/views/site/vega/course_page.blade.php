@@ -1,30 +1,24 @@
-<!doctype html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PROSTOfood</title>
 
-    <title>Prostofood</title>
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="MgEj1Uue6bV2PEy3JUUkC4tzmvMzvqCrFeuQkukl">
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+    <!-- Styles -->
+    <link href="/css/app.css" rel="stylesheet">
 
     <link href="{{ asset('/css/public.css?ver=0.3') }}" rel="stylesheet" type="text/css">
-
-    {{--SCC с Тильды--}}
-    <link rel="stylesheet" href="https://static.tildacdn.com/css/tilda-grid-3.0.min.css" type="text/css" media="all" />
-    <link rel="stylesheet" href="https://tilda.ws/project206353/tilda-blocks-2.12.css?t=1544194322" type="text/css" media="all" />
-    <link rel="stylesheet" href="https://static.tildacdn.com/css/tilda-animation-1.0.min.css" type="text/css" media="all" />
-    <link rel="stylesheet" href="https://static.tildacdn.com/css/tilda-slds-1.4.min.css" type="text/css" media="all" /><link rel="stylesheet" href="https://static.tildacdn.com/css/tilda-zoom-2.0.min.css" type="text/css" media="all" /><link rel="stylesheet" href="https://static.tildacdn.com/css/tilda-popup-1.1.min.css" type="text/css" media="all" />
-
     <script src="{{ asset('/js/public.js') }}"></script>
     <script  src = "/js/jquery-cookie/jquery.cookie.js"></script>
 
 </head>
-
-<body class="boxed-layout pb-40 pt-sm-0">
+<body class="">
 
 
     <div id="wrapper" class="clearfix">
@@ -32,111 +26,177 @@
 
         <!-- Header -->
 
-
         <header id="header" class="header">
-          <div id="nav77550271" class="t199__header t199__js__header t199__is__active" style="" data-menu="yes">
-            <div class="t199__holder">
-              <a class="t199__logo" href="" style="">
-                <div class="t199__logo-text t-title" field="title" style="">
-                  PROSTOfood
-                </div>
-                <div class="t199__logo-text-mobile t-title" field="title" style="">PROSTOfood</div>
-              </a>
-              <a class="t199__mmenu-toggler t199__js__menu-toggler" href="#">
-                <span class="t199__mmenu-toggler-in"></span>
-              </a>
-              <div class="t199__mmenu t199__js__menu">
-                <nav class="t199__menu">
-                  <a class="t199__menu-item t-title t-menu__link-item" href="">
-                    О школе
-                  </a>
-                  <a class="t199__menu-item t-title t-menu__link-item" href="">
-                    Преимущества
-                  </a>
-                  <a class="t199__menu-item t-title t-menu__link-item" href="">
-                    Выбор курса
-                  </a>
-                  <a class="t199__menu-item t-title t-menu__link-item" href="">
-                    Формат обучения
-                  </a>
-                  <a class="t199__menu-item t-title t-menu__link-item" href="">
-                    Об авторах
-                  </a>
-                  <a class="t199__menu-item t-title t-menu__link-item" href="{{route('vega.chat')}}" >
-                    Чат
-                  </a>
-                  @if(!Auth::guard('user_guard')->user())
-                        <a class="t199__menu-item t-title t-menu__link-item" href="{{route('login')}}" >
-                          Войти
-                        </a>
-                  @else
-                        <a class="t199__menu-item t-title t-menu__link-item" href="{{route('logout')}}" >
-                          Выйти
-                        </a>
-                  @endif
 
-                </nav>
-              </div>
+            <div class="header-nav">
+                <div class="header-nav-wrapper navbar-scrolltofixed bg-lightest" style="z-index: 1000;">
+                    <div class="container">
+                      <nav id="menuzord" class="menuzord default bg-lightest menuzord-responsive">
+                          <ul class="menuzord-menu">
+                            <li class="">
+                              <a href="http://prostofood.online">Приобрести курс</a>
+                            </li>
+                            <li class="">
+                              <a href="{{route('vega.home')}}">Выбрать курс</a>
+                            </li>
+                            <li class="">
+                              <a href="https://vk.com/prostofoodonline">ВКонтакте</a>
+                            </li>
+                            <li class="">
+                              <a href="https://www.instagram.com/prostofood_online/">Instagram</a>
+                            </li>
+                            @if(!Auth::guard('user_guard')->user())
+                              <li class="">
+                                  <a class="t199__menu-item t-title t-menu__link-item" href="{{route('login')}}" >
+                                    Войти
+                                  </a>
+                              </li>
+                            @else
+                              <li class="">
+                                  <a class="t199__menu-item t-title t-menu__link-item" href="{{route('logout')}}" >
+                                    Выйти
+                                  </a>
+                              </li>
+                            @endif
+                        </ul>
+                      </nav>
+                    </div>
+                </div>
             </div>
-          </div>
         </header>
 
         <!-- Start main-content -->
-        <div class="main-content">
-            <section>
-                <div class="container">
-                    <div class="content"></div>
-                </div>
+    <section>
+      <h2 class="text-center">{{ $format->name }}</h2>
+      <ul id="myTab" class="nav nav-tabs boot-tabs">
+          @for ($i=1; $i <= $pages; $i++)
+            <li
+              @if ($i == $pages) class="active" @endif
+              @if ($i > $pages) class="disabled" @endif
+            ><a href="#profile{{$i}}" data-toggle="tab">Видео {{$i}}</a></li>
+          @endfor
+      </ul>
 
-                <h2 class="text-center">{{ $format->name }}</h2>
 
 
-                @for ($i=1; $i <= $pages; $i++)
-                  <div style="margin:20px 30px 10px 30px;">
-                    <h3>Видео {{ $i }}</h3>
-                    <?php $text = "text_".$i; ?>
-                    {!! $format->$text !!}
-                    <?php $video = "video_".$i; ?>
-                    <div style="z-index: {{ 100-$i }};overflow: hidden;">{!! $format->$video !!}</div>
-                  </div>
-                @endfor
+<div id="myTabContent" class="tab-content">
+  @for ($i=1; $i <= $pages; $i++)
+  <div class="tab-pane fade @if ($i == $pages) in active @endif " id="profile{{$i}}">
+    <div class="row">
 
-                <div class="checkbox" style="margin:0px 30px 0px 30px; padding-bottom:20px">
-                    @if ($end)
-                      Вы посмотрели все видео.
-                    @else
-                      <label for="is_opened">
-                          <input id="checkbox" onclick="next_video()" name="anonim" type="checkbox"> &nbsp; Я просмотрел(а) это видео.
-                      </label>
-                    @endif
-
-                </div>
-
-                </div>
-            </section>
+        <div class="col-md-8 col-md-offset-2">
+            <h3>Видео {{$i}}</h3>
+            <?php $video = "video_".$i; ?>
+            <div style="z-index: {{ 100-$i }};overflow: hidden;">{!! $format->$video !!}</div>
         </div>
+    </div>
+
+<br><br>
+<div class="row">
+<div class="col-md-8 col-md-offset-2">
+<div id="accordion1" class="panel-group accordion">
+  <div class="panel">
+    <div class="panel-title"> <a data-parent="#accordion1" data-toggle="collapse" href="#accordion11" class="" aria-expanded="true"> <span class="open-sub"></span> Рецепт данного блюда</a> </div>
+    <div id="accordion11" class="panel-collapse collapse" role="tablist" aria-expanded="true">
+      <div class="panel-content">
+        <pre>Рецепт первого блюда:
+        1. Покупаем
+        2. Готовим.
+        </pre>
+      </div>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-title"> <a class="collapsed" data-parent="#accordion1" data-toggle="collapse" href="#accordion12" aria-expanded="false"> <span class="open-sub"></span>Советы по приготовлению</a> </div>
+    <div id="accordion12" class="panel-collapse collapse" role="tablist" aria-expanded="false" style="height: 0px;">
+      <div class="panel-content">
+        <pre>Надо прелдожить Кришне!
+        Не забудьте.</pre>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+    @if ($i == $pages)
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <form>
+                    <div class="form-group text-center">
+                        <div class="checkbox">
+                          @if ($end)
+                            Вы посмотрели все видео.
+                          @else
+                            <label for="is_opened">
+                                <input id="checkbox" onclick="next_video()" name="anonim" type="checkbox">
+                                &nbsp; <strong>Я просмотрел(-а) видео и попробовал(-а) сделать по нему блюдо.</strong>
+                            </label>
+                          @endif
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    @endif
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+        <h3>Ваши обратная связь и вопросы:</h3>
+        <textarea class="form-control"></textarea>
+        </div>
+    </div>
+    <br>
+
+  </div>
+@endfor
+
+
+
+
+  <div class="tab-pane fade" id="profile2">
+    <p>Как во вкладке к видео 1</p>
+  </div>
+  <div class="tab-pane fade disabled" id="profile3">
+    <p>Видео недоступно. Пожалуйста, просмотрите предыдущие видео, чтобы получить доступ к данному уроку. Не забудьте отметить галочкой просмотренное видео!</p>
+  </div>
+  <div class="tab-pane fade disabled" id="profile4">
+    <p>Видео недоступно. Пожалуйста, просмотрите предыдущие видео, чтобы получить доступ к данному уроку. Не забудьте отметить галочкой просмотренное видео!</p>
+  </div>
+  <div class="tab-pane fade" id="profile5">
+    <p>Видео недоступно. Пожалуйста, просмотрите предыдущие видео, чтобы получить доступ к данному уроку. Не забудьте отметить галочкой просмотренное видео!</p>
+  </div>
+  <div class="tab-pane fade" id="profile6">
+    <p>Видео недоступно. Пожалуйста, просмотрите предыдущие видео, чтобы получить доступ к данному уроку. Не забудьте отметить галочкой просмотренное видео!</p>
+  </div>
+  <div class="tab-pane fade" id="profile7">
+    <p>Видео недоступно. Пожалуйста, просмотрите предыдущие видео, чтобы получить доступ к данному уроку. Не забудьте отметить галочкой просмотренное видео!</p>
+  </div>
+  <div class="tab-pane fade" id="profile8">
+    <p>Видео недоступно. Пожалуйста, просмотрите предыдущие видео, чтобы получить доступ к данному уроку. Не забудьте отметить галочкой просмотренное видео!</p>
+  </div>
+  <div class="tab-pane fade" id="profile9">
+    <p>Видео недоступно. Пожалуйста, просмотрите предыдущие видео, чтобы получить доступ к данному уроку. Не забудьте отметить галочкой просмотренное видео!</p>
+  </div>
+  <div class="tab-pane fade" id="profile10">
+    <p>Видео недоступно. Пожалуйста, просмотрите предыдущие видео, чтобы получить доступ к данному уроку. Не забудьте отметить галочкой просмотренное видео!</p>
+  </div>
+
+</div>
+
+    </section>
         <!-- end main-content -->
 
         <!-- Footer -->
-        <footer id="footer" class="footer pb-0 bg-black-111">
-            <div class="t-tildalabel " id="tildacopy" data-tilda-sign="206353#4087779">
-              <a href="https://tilda.cc/" class="t-tildalabel__link">
-                <div class="t-tildalabel__wrapper">
-                  <div class="t-tildalabel__txtleft">
-                    Made on
-                  </div>
-                  <div class="t-tildalabel__wrapimg">
-                    <img src="https://static.tildacdn.com/img/tildacopy.png" class="t-tildalabel__img">
-                  </div>
-                  <div class="t-tildalabel__txtright">
-                    Tilda
-                  </div>
+            <div class="footer-nav bg-black-222 p-20">
+                <div class="row text-center">
+                    <div class="col-md-12">
+                        <p class="text-white font-11 m-0">© PROSTOfood. Все права защищены.</p>
+                    </div>
                 </div>
-              </a>
             </div>
         </footer>
 
-
+        <a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
     </div>
     <script src="/js/custom.js"></script>
     <script type="text/javascript">
@@ -149,6 +209,6 @@
           window.location.reload();
         }
     </script>
-</body>
 
+</body>
 </html>

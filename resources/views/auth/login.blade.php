@@ -37,20 +37,19 @@
                     <div class="container">
                         <nav id="menuzord" class="menuzord default bg-lightest menuzord-responsive">
                             <ul class="menuzord-menu">
-    <li class="">
-        <a href="https://prostofood.online" >Приобрести курс</a>
-        </li>
-        <li class="">
-        <a href="https://kurs.prostofood.online" >Выбрать курс</a>
-        </li>
-        <li class="">
-        <a href="https://kurs.prostofood.online" >ВКонтакте</a>
-        </li>
-        <li class="">
-        <a href="https://kurs.prostofood.online" >Instagram</a>
-        </li>
-                </ul>
-
+                              <li class="">
+                                <a href="http://prostofood.online">Приобрести курс</a>
+                              </li>
+                              <li class="">
+                                <a href="{{route('vega.home')}}">Выбрать курс</a>
+                              </li>
+                              <li class="">
+                                <a href="https://vk.com/prostofoodonline">ВКонтакте</a>
+                              </li>
+                              <li class="">
+                                <a href="https://www.instagram.com/prostofood_online/">Instagram</a>
+                              </li>
+                          </ul>
                         </nav>
                     </div>
                 </div>
@@ -76,7 +75,7 @@
           @endforeach
         </ul>
       </div>
-    @endif    
+    @endif
 
     <form method="POST" action="{{ route('login') }}">
         @csrf

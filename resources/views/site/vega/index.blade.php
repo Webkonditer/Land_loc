@@ -27,23 +27,22 @@
             <div class="header-nav">
                 <div class="header-nav-wrapper navbar-scrolltofixed bg-lightest" style="z-index: 1000;">
                     <div class="container">
-                        <nav id="menuzord" class="menuzord default bg-lightest menuzord-responsive">
-                            <ul class="menuzord-menu">
-    <li class="">
-        <a href="" >Приобрести курс</a>
-        </li>
-        <li class="">
-        <a href="" >Выбрать курс</a>
-        </li>
-        <li class="">
-        <a href="" >ВКонтакте</a>
-        </li>
-        <li class="">
-        <a href="" >Instagram</a>
-        </li>
-                </ul>
-
-                        </nav>
+                      <nav id="menuzord" class="menuzord default bg-lightest menuzord-responsive">
+                          <ul class="menuzord-menu">
+                            <li class="">
+                              <a href="http://prostofood.online">Приобрести курс</a>
+                            </li>
+                            <li class="">
+                              <a href="{{route('vega.home')}}">Выбрать курс</a>
+                            </li>
+                            <li class="">
+                              <a href="https://vk.com/prostofoodonline">ВКонтакте</a>
+                            </li>
+                            <li class="">
+                              <a href="https://www.instagram.com/prostofood_online/">Instagram</a>
+                            </li>
+                        </ul>
+                      </nav>
                     </div>
                 </div>
             </div>
