@@ -87,7 +87,7 @@
         <div class="col-md-8 col-md-offset-2">
             <h3>Видео {{$i}}</h3>
             <?php $video = "video_".$i; ?>
-            <div style="max-height:456px;overflow: hidden;">{!! $format->$video !!}</div>
+            <div style="max-height:550px;overflow: hidden;">{!! $format->$video !!}</div>
         </div>
     </div>
 
