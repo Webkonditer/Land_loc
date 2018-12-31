@@ -81,74 +81,112 @@
 
 <div id="myTabContent" class="tab-content">
   @for ($i=1; $i <= $pages; $i++)
-  <div class="tab-pane fade @if ($i == $pages) in active @endif " id="profile{{$i}}">
-    <div class="row">
+    <div class="tab-pane fade @if ($i == $pages) in active @endif " id="profile{{$i}}">
+      <div class="row">
 
-        <div class="col-md-8 col-md-offset-2">
-            <h3>Видео {{$i}}</h3>
-            <?php $video = "video_".$i; ?>
-            <div style="max-height:650px;overflow: hidden;">{!! $format->$video !!}</div>
-        </div>
-    </div>
-
-<br><br>
-<div class="row">
-<div class="col-md-8 col-md-offset-2">
-<div id="accordion1" class="panel-group accordion">
-  <div class="panel">
-    <div class="panel-title"> <a data-parent="#accordion1" data-toggle="collapse" href="#accordion11" class="" aria-expanded="true"> <span class="open-sub"></span> Рецепт данного блюда</a> </div>
-    <div id="accordion11" class="panel-collapse collapse" role="tablist" aria-expanded="true">
-      <div class="panel-content">
-        <pre>Рецепт первого блюда:
-        1. Покупаем
-        2. Готовим.
-        </pre>
+          <div class="col-md-8 col-md-offset-2">
+              <h3>Видео {{$i}}</h3>
+              <?php $video = "video_".$i; ?>
+              <div style="max-height:650px;overflow: hidden;">{!! $format->$video !!}</div>
+          </div>
       </div>
-    </div>
-  </div>
-  <div class="panel">
-    <div class="panel-title"> <a class="collapsed" data-parent="#accordion1" data-toggle="collapse" href="#accordion12" aria-expanded="false"> <span class="open-sub"></span>Советы по приготовлению</a> </div>
-    <div id="accordion12" class="panel-collapse collapse" role="tablist" aria-expanded="false" style="height: 0px;">
-      <div class="panel-content">
-        <pre>Надо прелдожить Кришне!
-        Не забудьте.</pre>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
 
-    @if ($i == $pages)
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <form>
-                    <div class="form-group text-center">
-                        <div class="checkbox">
-                          @if ($end)
-                            Вы посмотрели все видео.
-                          @else
-                            <label for="is_opened">
-                                <input id="checkbox" onclick="next_video()" name="anonim" type="checkbox">
-                                &nbsp; <strong>Я просмотрел(-а) видео и попробовал(-а) сделать по нему блюдо.</strong>
-                            </label>
-                          @endif
-                        </div>
+      <br><br>
+      <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+              <div id="accordion{{$i}}" class="panel-group accordion">
+                <div class="panel">
+                  <div class="panel-title"> <a data-parent="#accordion{{$i}}" data-toggle="collapse" href="#accordion{{$i}}{{$i}}" class="" aria-expanded="true"> <span class="open-sub"></span> Рецепт данного блюда</a> </div>
+                  <div id="accordion{{$i}}{{$i}}" class="panel-collapse collapse" role="tablist" aria-expanded="true">
+                    <div class="panel-content">
+                        <?php $text = "text_".$i; ?>
+                        <pre>
+                          {!! $format->$text !!}
+                        </pre>
                     </div>
-                </form>
-            </div>
-        </div>
-    @endif
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-        <h3>Ваши обратная связь и вопросы:</h3>
-        <textarea class="form-control"></textarea>
-        </div>
-    </div>
+                  </div>
+                </div>
+                <div class="panel">
+                  <div class="panel-title"> <a class="collapsed" data-parent="#accordion{{$i}}" data-toggle="collapse" href="#accordion10{{$i}}" aria-expanded="false"> <span class="open-sub"></span>Советы по приготовлению</a> </div>
+                  <div id="accordion10{{$i}}" class="panel-collapse collapse" role="tablist" aria-expanded="false" style="height: 0px;">
+                    <div class="panel-content">
+                      <?php $text2 = "text2_".$i; ?>
+                      <pre>
+                        {!! $format->$text2 !!}
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+      </div>
+
+      @if ($i == $pages)
+          <div class="row">
+              <div class="col-md-8 col-md-offset-2">
+                  <form>
+                      <div class="form-group text-center">
+                          <div class="checkbox">
+                            @if ($end)
+                              Вы посмотрели все видео.
+                            @else
+                              <label for="is_opened">
+                                  <input id="checkbox" onclick="next_video()" name="anonim" type="checkbox">
+                                  &nbsp; <strong>Я просмотрел(-а) видео и попробовал(-а) сделать по нему блюдо.</strong>
+                              </label>
+                            @endif
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      @endif
+
     <br>
 
   </div>
 @endfor
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+    <h3>Ваши обратная связь и вопросы:</h3>
+    <div class="panel panel-default" style="max-height:250px; overflow:auto; font-size: 10pt;" id="scroll">
+          <table class="table table-hover dataTable" role="grid" aria-describedby="example2_info">
+
+              @forelse($vegachats  as $vegachat)
+              <tr role="row" @isset($vegachat->answer) style="font-weight: 600" @endisset>
+                  <td >{{'<'}}{{ $vegachat->nik }}{{'>'}}</td>
+                  <td>{{ $vegachat->question }}</td>
+                  @if($is_admin)
+                    <td><a onclick="return confirm ('Удалить сообщение?')" href="{{ route('chat.delete', ['id' => $vegachat->id]) }}"><i class="icon glyphicon glyphicon-remove"></i></a></td>
+                  @endif
+              </tr>
+              @empty
+              <tr>
+                  <td>
+                    <h4>Сообщения пока отсутствуют</h4>
+                  </td>
+              </tr>
+
+          @endforelse
+
+        </table>
+        <form id="form" name="edit" enctype="multipart/form-data" action="{{ route('vega.chat.new') }}" method="POST">
+                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                  <input type="hidden" name="nik" value="{{ $nik }}">
+                  <input type="hidden" name="question_id" value="{{ $format->id }}">
+                  <input type="text"
+                         name="message"
+                         class=""
+                         value=""
+                         style="width:100%; border:none; padding-left:10px;"
+                         placeholder="Ваше сообщение или вопрос"
+                  />
+        </form>
+      </div>
+
+    </div>
+</div>
 
 
 
@@ -183,6 +221,8 @@
           $.cookie('course_{{ $format->id }}',course,{expires:90});
           window.location.reload();
         }
+        var block = document.getElementById("scroll");
+        block.scrollTop = block.scrollHeight;
     </script>
 
 </body>

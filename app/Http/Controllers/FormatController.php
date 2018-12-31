@@ -60,6 +60,8 @@ class FormatController extends Controller
       'summ' => 'required',
       'video_1' => 'required|string|',
       'text_1' => 'required|string|',
+      'text2_1' => 'required|string|',
+
     ]);
     //dd($request->all());
       $path = $request->file('image')->store('i/formatsImage', 'public');
@@ -100,6 +102,23 @@ class FormatController extends Controller
       $format->video_15 = $request->video_15;
       $format->text_15 = $request->text_15;
       $format->success = '-';
+
+      $format->text2_1 = $request->text2_1;
+      $format->text2_2 = $request->text2_2;
+      $format->text2_3 = $request->text2_3;
+      $format->text2_4 = $request->text2_4;
+      $format->text2_5 = $request->text2_5;
+      $format->text2_6 = $request->text2_6;
+      $format->text2_7 = $request->text2_7;
+      $format->text2_8 = $request->text2_8;
+      $format->text2_9 = $request->text2_9;
+      $format->text2_10 = $request->text2_10;
+      $format->text2_11 = $request->text2_11;
+      $format->text2_12 = $request->text2_12;
+      $format->text2_13 = $request->text2_13;
+      $format->text2_14 = $request->text2_14;
+      $format->text2_15 = $request->text2_15;
+
       $format->save();
 
       return redirect()->route('admin.formats.index');
@@ -122,6 +141,7 @@ class FormatController extends Controller
         'summ' => 'required',
         'video_1' => 'required|string|',
         'text_1' => 'required|string|',
+        'text2_1' => 'required|string|',
       ]);
       //dump($request->all());
         if(null !==($request->file('image'))) $path = $request->file('image')->store('i/formatsImage', 'public');
@@ -162,6 +182,23 @@ class FormatController extends Controller
         $format->text_14 = $request->text_14;
         $format->video_15 = $request->video_15;
         $format->text_15 = $request->text_15;
+
+        $format->text2_1 = $request->text2_1;
+        $format->text2_2 = $request->text2_2;
+        $format->text2_3 = $request->text2_3;
+        $format->text2_4 = $request->text2_4;
+        $format->text2_5 = $request->text2_5;
+        $format->text2_6 = $request->text2_6;
+        $format->text2_7 = $request->text2_7;
+        $format->text2_8 = $request->text2_8;
+        $format->text2_9 = $request->text2_9;
+        $format->text2_10 = $request->text2_10;
+        $format->text2_11 = $request->text2_11;
+        $format->text2_12 = $request->text2_12;
+        $format->text2_13 = $request->text2_13;
+        $format->text2_14 = $request->text2_14;
+        $format->text2_15 = $request->text2_15;
+
         $format->save();
 
         return redirect()->route('admin.formats.index');

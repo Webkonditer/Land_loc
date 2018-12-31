@@ -83,7 +83,7 @@
                             />
                         </div>
                         <div class="form-group">
-                            <label for="description">Текст для видео {{ $i }}</label>
+                            <label for="description">Рецепт для видео {{ $i }}</label>
                             <textarea id="text_{{ $i }}"
                                       name="text_{{ $i }}"
                                       rows="3"
@@ -91,6 +91,17 @@
                                       class="js-editor-enabled">
                                       @if(old('text_'.$i)){{old('text_'.$i)}} @else<?php $text = "text_".$i; ?>{{ $format->$text }} @endif
                            </textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Советы для видео {{ $i }}</label>
+                            <textarea id="text2_{{ $i }}"
+                                      name="text2_{{ $i }}"
+                                      rows="3"
+                                      cols="80"
+                                      class="js-editor-enabled">
+                                      @if(old('text2_'.$i)){{old('text2_'.$i)}} @else<?php $text2 = "text2_".$i; ?>{{ $format->$text2 }} @endif
+                           </textarea>
+                        </div>
                     @endfor
 
                     </div>

@@ -45,18 +45,18 @@ class VegaChatController extends Controller
 
     public function new_message(Request $request, VegaPayment $vegapayment, VegaChat $vegachat) {
 
-      $vegachat->question_id = 0;
+      $vegachat->question_id = $request->question_id;
       $vegachat->nik = $request->nik;
       $vegachat->question = $request->message;
       if(isset(Auth::guard('admin_guard')->user()->email)) $vegachat->answer = 1;
       $vegachat->save();
 
-      return redirect()->route('vega.chat');
+      return redirect()->back();
     }
 
     public function delete(VegaChat $vegachat) {
       $vegachat->delete();
-      return redirect()->route('vega.chat');
+      return redirect()->back();
     }
 
 

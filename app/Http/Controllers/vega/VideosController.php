@@ -10,6 +10,7 @@ use App\VegaUser;
 use App\Format;
 use App\Setting;
 use App\Device;
+use App\VegaChat;
 use Carbon\Carbon;
 use Cookie;
 
@@ -90,12 +91,29 @@ class VideosController extends Controller
           $videos[$i] = array( "text" => $format->$text, "video" => $format->$video);
         }
       }
-      //dd($videos);
+      //Переменные для чата
+      if(isset(Auth::guard('admin_guard')->user()->email)) {
+        $email = Auth::guard('admin_guard')->user()->email;
+        $is_admin = 1;
+      }
+      else {
+        if(isset(Auth::guard('user_guard')->user()->email)) {
+          $email = Auth::guard('user_guard')->user()->email;
+          $is_admin = 0;
+        }
+      }
+      $pos = strpos($email, '@')+1;
+      $nik = substr($email, 0, $pos);
+
+      //dd($payment->course_id);
       return view('site.vega.course_page', [
         'format' => Format::where('id', $payment->course_id)->first(),
         'videos' => $videos,
         'pages' => $pages,
         'end' => $end,
+        'vegachats' => VegaChat::where('question_id', $payment->course_id)->get(),
+        'nik' => $nik,
+        'is_admin' => $is_admin,
       ]);
 
       //if (isset($_COOKIE['dev'])) dump($_COOKIE['dev']);

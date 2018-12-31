@@ -109,7 +109,6 @@
                           <input id="checkbox" onclick="next_video()" name="anonim" type="checkbox"> &nbsp; Я просмотрел(а) это видео.
                       </label>
                     @endif
-
                 </div>
 
                 </div>
