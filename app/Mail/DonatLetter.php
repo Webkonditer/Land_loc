@@ -29,7 +29,7 @@ class DonatLetter extends Mailable
     public function build()
     {
         //dd($this->data);
-        return $this->from('info@bhaktilata.ru')
+        return $this->from('info@kurs.prostofood.online')
                     ->subject('Успешная регистрация на bhaktilata.ru')
                     ->view('mails.donator_first');
     }

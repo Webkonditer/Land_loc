@@ -37,7 +37,7 @@ class InDexController extenDs Controller
         'format' => 'sometimes|string|max:100',
         'ref_namber' => 'sometimes|required|integer',
       ]);
-
+dd($request);
       $user = VegaUser::where('email', $request->email)->first();
 
     if(!isset($user->id)) { //Для тех, кто в первый раз
