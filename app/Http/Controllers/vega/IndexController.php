@@ -87,6 +87,7 @@ class InDexController extenDs Controller
       // сумма заказа
 
         $out_summ = $format->summ;
+        if(substr($request->format, 0, 1) == 2) $out_summ = $format->summ2;
 
       // кодировка
       $encoding = "utf-8";
