@@ -65,6 +65,17 @@
                         />
                     </div>
 
+                    <div class="form-group">
+                        <label for="title">Стоимость курса с сопровождением</label>
+                        <input type="text"
+                               name="summ2"
+                               class="form-control"
+                               id="summ2"
+                               value="{{old('summ2')}}"
+                               placeholder="Сумма цифрами"
+                        />
+                    </div>
+
                     @for ($i=1; $i < 16; $i++)
 
                         <div class="form-group">

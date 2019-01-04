@@ -58,6 +58,7 @@ class FormatController extends Controller
       'image' => 'required|image',
       'name' => 'required|string|max:191',
       'summ' => 'required',
+      'summ2' => 'required',
       'video_1' => 'required|string|',
       'text_1' => 'required|string|',
       'text2_1' => 'required|string|',
@@ -70,6 +71,7 @@ class FormatController extends Controller
       if($path)$format->image = $path;
       $format->name = $request->name;
       $format->summ = $request->summ;
+      $format->summ2 = $request->summ2;
       if($request->monthly)$format->monthly = "Ежемесячно"; else $format->monthly = "Разово";
       $format->video_1 = $request->video_1;
       $format->text_1 = $request->text_1;
@@ -139,6 +141,7 @@ class FormatController extends Controller
         'image' => 'nullable|image',
         'name' => 'required|string|max:191',
         'summ' => 'required',
+        'summ2' => 'required',
         'video_1' => 'required|string|',
         'text_1' => 'required|string|',
         'text2_1' => 'required|string|',
@@ -151,6 +154,7 @@ class FormatController extends Controller
         if($path)$format->image = $path;
         $format->name = $request->name;
         $format->summ = $request->summ;
+        $format->summ2 = $request->summ2;
         if($request->monthly)$format->monthly = "Ежемесячно"; else $format->monthly = "Разово";
         $format->video_1 = $request->video_1;
         $format->text_1 = $request->text_1;

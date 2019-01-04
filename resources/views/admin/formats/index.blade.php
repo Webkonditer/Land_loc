@@ -41,7 +41,7 @@
                     <td style="vertical-align:middle">{{ $format->position }}</td>
                     <td><img height="40"  src="{{ asset('/storage/'.$format->image) }}" alt="..."></td>
                     <td style="vertical-align:middle">{{ $format->name }}</td>
-                    <td style="vertical-align:middle">{{ $format->summ }}</td>
+                    <td style="vertical-align:middle">{{ $format->summ }}/{{ $format->summ2 }}</td>
                     <td style="vertical-align:middle"><a href="{{ route('admin.formats.edit', ['id' => $format->id]) }}"><i class="icon glyphicon glyphicon-pencil"></i></a></td>
                     <td style="vertical-align:middle"><a onclick="return confirm ('Удалить опцию?')" href="{{ route('admin.formats.delete', ['id' => $format->id]) }}"><i class="icon glyphicon glyphicon-remove"></i></a></td>
                 </tr>

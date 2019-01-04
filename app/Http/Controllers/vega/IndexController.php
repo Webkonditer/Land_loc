@@ -37,8 +37,7 @@ class InDexController extenDs Controller
         'format' => 'sometimes|string|max:100',
         'ref_namber' => 'sometimes|required|integer',
       ]);
-dd($request);
-      $user = VegaUser::where('email', $request->email)->first();
+       $user = VegaUser::where('email', $request->email)->first();
 
     if(!isset($user->id)) { //Для тех, кто в первый раз
 
@@ -66,6 +65,7 @@ dd($request);
     if(isset($request->format))$vegapayment->format = $request->format;
     //$vegapayment->ref_namber = $request->ref_namber;
     $vegapayment->summ = $format->summ;
+    if(substr($request->format, 0, 1) == 2) $vegapayment->summ = $format->summ2;
     $vegapayment->save();
     //dd($vegapayment);
 
