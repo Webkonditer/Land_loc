@@ -104,27 +104,25 @@
                     </div>
                 </section>
                 <div id="register" class="panel panel-default col-md-12">
-
+                  <center>
+                    <h4>
+                    <strong>Сразу после перевода на вашу почту будет отправлено письмо со ссылкой на группу клуба попечителей. Если письмо со ссылкой не пришло - оно в папке Спам. Если его нет в папке Спам - напишите на info@bhaktilata.ru </strong></h4></center>
 
                   @if(!Auth::guard('user_guard')->user())
-                    <h4 class="widget-title line-bottom">Уже делаете регулярные переводы? <a class="collapsed text-theme-colored" data-parent="#accordion1" data-toggle="collapse" href="#accordion11" aria-expanded="false">Авторизуйтесь!</a></h4>
+                    <h4 class="widget-title line-bottom">Уже делаете регулярные переводы? Авторизуйтесь!</h4>
 
-                    <div id="accordion11" class="panel-collapse collapse" role="tablist" aria-expanded="false" style="height: 0px;">
-                        <div class="panel-content">
-
-                          <div class="col-md-12 panel panel-default" style="padding-top: 10px;">
-                              <form name="edit" class="form-inline" enctype="multipart/form-data" action="{{ url('/user/login')}}" method="POST">
-                                  @csrf
-                                    <label for="name" class="col-form-label">Ваш email:</label>
-                                    <input class="form-control" id="e-mail" type="email" name="email" placeholder="Ваш email" required="required">
-                                    <label for="name" class="col-form-label">Ваш пароль:</label>
-                                    <input class="form-control" id="password" type="password" name="password" placeholder="Ваш пароль" required>
-                                    <input onclick="validation_left()" type="submit" class="form-control btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)" value="Войти" />
-                                    <a href="{{ url('/password/reset')}}" class="form-control btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62); padding-top:12px;">Забыл пароль</a>
-                              </form>
-                          </div>
-                        </div>
+                    <div class="col-md-12 panel panel-default" style="padding-top: 10px;">
+                        <form name="edit" class="form-inline" enctype="multipart/form-data" action="{{ url('/user/login')}}" method="POST">
+                            @csrf
+                              <label for="name" class="col-form-label">Ваш email:</label>
+                              <input class="form-control" id="e-mail" type="email" name="email" placeholder="Ваш email" required="required">
+                              <label for="name" class="col-form-label">Ваш пароль:</label>
+                              <input class="form-control" id="password" type="password" name="password" placeholder="Ваш пароль" required>
+                              <input onclick="validation_left()" type="submit" class="form-control btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)" value="Войти" />
+                              <a href="{{ url('/password/reset')}}" class="form-control btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62); padding-top:12px;">Забыл пароль</a>
+                        </form>
                     </div>
+                    <br>
                   @endif
 
                   @if  ($errors->any())
@@ -205,7 +203,7 @@
                                     </div>
                                     <p>*Мы обещаем не беспокоить Вас по телефону без крайней необходимости</p>
                                     <div class="form-group">
-                                        <label for="name" class="col-form-label">От кого вы узнали о клубе:</label>
+                                        <label for="name" class="col-form-label">Ваш город</label>
                                         <div>
                                             <input lang="ru" type="text" id="city" name="city" required="required"
                                             class="form-control"
@@ -236,25 +234,21 @@
                                                 </label>
                                             </div>
                                         </div>
-
-                                        @if ($format->monthly == "Ежемесячно")
-                                          <div class="form-group">
-                                              <div class="checkbox">
-                                                  <label for="is_opened">
-                                                      <input id="podp" name="podp" required="required" type="checkbox"> &nbsp; С условиями подписки ознакомился и согласен
-                                                  </label>
-                                              </div>
-                                          </div>
-                                        @endif
-
                                         </div>
                                       @if ($format->monthly == "Ежемесячно")
                                         <div class="col-md-6">
-                                            <label for="name" class="col-form-label">Условия подписки:</label>
-                                            <p>Сумма платежа - {{$format->summ}} рублей.</p>
-                                            <p>Периодичность списаний - ежемесячно в то число месяца, когда сделан первый платеж.</p>
-                                            <p>Отказаться от подписки Вы можете в любое время по Вашему желанию (Уже внесенные платежи не возвращаются).</p>
-                                            <p>Чтобы отказаться от подписки Вам необходимо пройти по этой <a href="{{ route('unsubscribe') }}" target="_blank"><font color="green;">этой ссылке</font></a>.</p>
+                                        <label for="name" class="col-form-label">Условия подписки:</label>
+                                        <p>Сумма платежа - {{$format->summ}} рублей.</p>
+                                        <p>Периодичность списаний - ежемесячно в то число месяца, когда сделан первый платеж.</p>
+                                        <p>Отказаться от подписки Вы можете в любое время по Вашему желанию (Уже внесенные платежи не возвращаются).</p>
+                                        <p>Чтобы отказаться от подписки Вам необходимо пройти по этой <a href="{{ route('unsubscribe') }}" target="_blank"><font color="green;">этой ссылке</font></a>.</p>
+                                        <div class="form-group">
+                                            <div class="checkbox">
+                                                <label for="is_opened">
+                                                    <input id="podp" name="podp" required="required" type="checkbox"> &nbsp; С условиями подписки ознакомился и согласен
+                                                </label>
+                                            </div>
+                                        </div>
                                         </div>
                                       @endif
                                           <input id="cost" name="format_id" value="{{$format->id}}" type="hidden">
@@ -277,13 +271,9 @@
                         @endif
 
                 </div>
-
-                <center>
-                <h4>
-                <strong>Сразу после перевода на вашу почту будет отправлено письмо со ссылкой на группу клуба попечителей. Если письмо со ссылкой не пришло - оно в папке Спам. Если его нет в папке Спам - напишите на info@bhaktilata.ru </strong></h4></center>
-          </div>
         </div>
-      </section>
+    </div>
+    </section>
     </div>
     <!-- end main-content -->
 
@@ -350,7 +340,7 @@
             if ($("#email").val().search(pattern) == 0) $("#email").get(0).setCustomValidity('');
             $("#phone").get(0).setCustomValidity('Введите, пожалуйста, номер телефона (только цифры).');
             if($("#phone").val().search(pattern_num) == 0 && $('#phone').val().length > 4) $("#phone").get(0).setCustomValidity('');
-            $("#city").get(0).setCustomValidity('Заполните, пожалуйста, это поле.');
+            $("#city").get(0).setCustomValidity('Введите, пожалуйста, Ваш город.');
             if ($("#city").val() != '') $("#city").get(0).setCustomValidity('');
             $("#pers").get(0).setCustomValidity('Для продолжения необходимо согласиться с условиями оферты.');
             if ($('#pers').is(':checked')) $("#pers").get(0).setCustomValidity('');
