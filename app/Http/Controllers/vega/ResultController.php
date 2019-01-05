@@ -43,7 +43,6 @@ class ResultController extends Controller
                 //Storage::append('test_down.html', 'Пароль не совпадает');
                 exit();
               }
-
               //Вычисляем платеж и жертвователя
             $pay = VegaPayment::where('id', $inv_id)->first();
             $don = VegaUser::where('id', $pay->user_id)->first();
@@ -75,15 +74,15 @@ class ResultController extends Controller
             Mail::to($don->email)->send(new DonatPayConfirm($data));
 
             //Отправка письма админу в случае курса с сопровождением
-            if($pay->format == 2){
+            if($pay->format == 2){//dd('!!!!');
                 $data2 = [
                     'name' => $don->name,
                     'email' => $don->email,
                     'course' => $format->name,
                     'summ' => $pay->summ,
                 ];
-
-                Mail::to("webkonditer@yandex.ru")->send(new CoursMailMain($data2));
+                $admin_email = "webkonditer@yandex.ru";
+                Mail::to($admin_email)->send(new CoursMailMain($data2));
             }
 
             //-------------------------------------------------
