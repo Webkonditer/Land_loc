@@ -20,6 +20,7 @@ use App\Mail\DonatPayConfirm;
 class ResultController extends Controller
 {
         public function result(Request $request, VegaUser $user, VegaPayment $payment) {
+          //Storage::append('test.html', $request->all());
             // регистрационная информация (пароль #2)
             $setting = Setting::first();
             if($setting->test_mode == 1)$mrh_pass2 = $setting->test_pass2;
