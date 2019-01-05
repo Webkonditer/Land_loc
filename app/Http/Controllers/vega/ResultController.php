@@ -74,6 +74,18 @@ class ResultController extends Controller
 
             Mail::to($don->email)->send(new DonatPayConfirm($data));
 
+            //Отправка письма админу в случае курса с сопровождением
+            if($pay->format == 2){
+                $data2 = [
+                    'name' => $don->name,
+                    'email' => $don->email,
+                    'course' => $format->name,
+                    'summ' => $don->summ,
+                ];
+
+                Mail::to('webkonditer@yandex.ru')->send(new CoursMailMain($data2));
+            }
+
             //-------------------------------------------------
             exit();
         }

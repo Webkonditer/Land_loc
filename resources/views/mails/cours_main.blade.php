@@ -4,8 +4,10 @@
         <meta charset="utf8">
     </head>
     <body>
-        <h2>Здравствуйте, {{$data['name']}}!</h2>
-        {!! $data['text'] !!}
-        <h3>Ваш пароль: {{$data['password']}}</h3>
+        <h3>Поступил платеж за курс с сопровождением.</h3>
+        <p>Имя -  {{$data['name']}}!</p>
+        <p>Емейл -  {{$data['email']}}!</p>
+        <p>Курс -  {{$data['course']}}!</p>
+        <p>Сумма -  {{$data['email']}}!</p>
     </body>
 </html>

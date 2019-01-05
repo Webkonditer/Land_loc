@@ -17,9 +17,9 @@ class CoursMailMain extends Mailable
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($data2)
     {
-        $this->data = $data;
+        $this->data = $data2;
     }
 
     /**
@@ -30,7 +30,7 @@ class CoursMailMain extends Mailable
     public function build()
     {
       return $this->from('info@prostofood.online')
-                  ->subject('Уведомление о поступлении платежа на prostofood.online')
+                  ->subject('Уведомление о поступлении платежа за курс с сопровождением на prostofood.online')
                   ->view('mails.cours_main');
     }
 }
