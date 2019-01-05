@@ -29,8 +29,8 @@ class CoursMailMain extends Mailable
      */
     public function build()
     {
-      return $this->from('info@kurs.prostofood.online')
-                  ->subject('Уведомление о поступлении платежа на bhaktilata.ru')
+      return $this->from('info@prostofood.online')
+                  ->subject('Уведомление о поступлении платежа на prostofood.online')
                   ->view('mails.cours_main');
     }
 }
