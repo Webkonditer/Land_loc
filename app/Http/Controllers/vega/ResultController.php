@@ -83,7 +83,7 @@ class ResultController extends Controller
                     'summ' => $don->summ,
                 ];
 
-                Mail::to('webkonditer@yandex.ru')->send(new CoursMailMain($data2));
+                Mail::to("webkonditer@yandex.ru")->send(new CoursMailMain($data2));
             }
 
             //-------------------------------------------------
