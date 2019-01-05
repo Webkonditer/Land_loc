@@ -81,7 +81,7 @@ class ResultController extends Controller
                     'course' => $format->name,
                     'summ' => $pay->summ,
                 ];
-                $admin_email = "webkonditer@yandex.ru";
+                $admin_email = "prostofoodonline@gmail.com";
                 Mail::to($admin_email)->send(new CoursMailMain($data2));
             }
 
