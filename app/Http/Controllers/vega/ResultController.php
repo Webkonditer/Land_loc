@@ -80,7 +80,7 @@ class ResultController extends Controller
                     'name' => $don->name,
                     'email' => $don->email,
                     'course' => $format->name,
-                    'summ' => $don->summ,
+                    'summ' => $pay->summ,
                 ];
 
                 Mail::to("webkonditer@yandex.ru")->send(new CoursMailMain($data2));
