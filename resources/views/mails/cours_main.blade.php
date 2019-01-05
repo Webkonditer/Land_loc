@@ -8,6 +8,6 @@
         <p>Имя -  {{$data['name']}}!</p>
         <p>Емейл -  {{$data['email']}}!</p>
         <p>Курс -  {{$data['course']}}!</p>
-        <p>Сумма -  {{$data['email']}}!</p>
+        <p>Сумма -  {{$data['summ']}}!</p>
     </body>
 </html>
