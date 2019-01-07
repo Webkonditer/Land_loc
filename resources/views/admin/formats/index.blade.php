@@ -20,10 +20,13 @@
             <thead>
                 <tr role="row">
                     <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Название: активируйте, чтобы изменить сортировку">
-                        Позиция
+                        Id
                     </th>
                     <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Название: активируйте, чтобы изменить сортировку">
                         Миниатюра
+                    </th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Название: активируйте, чтобы изменить сортировку">
+                        Позиция
                     </th>
                     <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Название: активируйте, чтобы изменить сортировку">
                         Название
@@ -44,8 +47,9 @@
             <tbody>
                 @forelse($formats  as $format)
                 <tr role="row" >
-                    <td style="vertical-align:middle">{{ $format->position }}</td>
+                    <td style="vertical-align:middle">{{ $format->id }}</td>
                     <td><img height="40"  src="{{ asset('/storage/'.$format->image) }}" alt="..."></td>
+                    <td style="vertical-align:middle">{{ $format->position }}</td>
                     <td style="vertical-align:middle">{{ $format->name }}</td>
                     <td style="vertical-align:middle">{{ $format->summ }}</td>
                     <td style="vertical-align:middle">{{ $format->monthly }}</td>
