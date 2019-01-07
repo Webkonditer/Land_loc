@@ -28,7 +28,7 @@ class InDexController extenDs Controller
       //$peoples = People::take(3)->get();
 
       return view('site.index', [
-        'formats' => Format::orderBy('position')->paginate(10),
+        'formats' => Format::where('on_home', 'Да')->orderBy('position')->paginate(10),
       ]);
     }
 

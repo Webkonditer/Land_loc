@@ -34,6 +34,9 @@
                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Код: активируйте, чтобы изменить сортировку">
                         Периодичность
                     </th>
+                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Код: активируйте, чтобы изменить сортировку">
+                        На главной
+                    </th>
                     <th class="action" style="width:30px !important;"></th>
                     <th class="action" style="width:30px !important;"></th>
                 </tr>
@@ -46,6 +49,7 @@
                     <td style="vertical-align:middle">{{ $format->name }}</td>
                     <td style="vertical-align:middle">{{ $format->summ }}</td>
                     <td style="vertical-align:middle">{{ $format->monthly }}</td>
+                    <td style="vertical-align:middle">{{ $format->on_home }}</td>
                     <td style="vertical-align:middle"><a href="{{ route('admin.formats.edit', ['id' => $format->id]) }}"><i class="icon glyphicon glyphicon-pencil"></i></a></td>
                     <td style="vertical-align:middle"><a onclick="return confirm ('Удалить опцию?')" href="{{ route('admin.formats.delete', ['id' => $format->id]) }}"><i class="icon glyphicon glyphicon-remove"></i></a></td>
                 </tr>

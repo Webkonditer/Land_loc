@@ -31,6 +31,14 @@
                     <div class="box-body">
 
                       <div class="form-group">
+                        <div class="checkbox">
+                            <label for="monthly">
+                                <input id="on_home" name="on_home" type="checkbox"> На главной
+                            </label>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
                           <label for="title">Положение в списке</label>
                           <input type="text"
                                  name="position"
