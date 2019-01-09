@@ -112,7 +112,7 @@
                                           <label for="name" class="col-form-label">Сумма (от 1 до 4000 рублей).</label>
                                           <div>
                                               <input lang="ru" type="text" id="def_sum" name="summ" required="required"
-                                              class="form-control" placeholder="2000" value="{{old('summ')}}" />
+                                              class="form-control" value="{{old('summ')}}" />
                                           </div>
                                       </div>
 
