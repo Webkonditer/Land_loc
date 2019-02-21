@@ -141,7 +141,7 @@ class CoursePaymentsController extends Controller
           $payment = Course_payment::where('confirmation','!=',NULL)->where('group_id', $request->group)->first();
           if (isset($payment->id)) {
             return view('admin.courses.payments', [
-              'payments' => Course_payment::where('confirmation','!=',NULL)->where('group_id', $request->group)->orderBy('created_at', 'desc')->paginate(10)
+              'payments' => Course_payment::where('confirmation','!=',NULL)->where('group_id', $request->group)->orderBy('created_at', 'desc')->paginate(200)
             ]);
           }
           else {
