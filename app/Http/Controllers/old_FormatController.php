@@ -72,6 +72,7 @@ class FormatController extends Controller
       $format->name = $request->name;
       $format->summ = $request->summ;
       $format->summ2 = $request->summ2;
+      if($request->monthly)$format->monthly = "Ежемесячно"; else $format->monthly = "Разово";
       $format->video_1 = $request->video_1;
       $format->text_1 = $request->text_1;
       $format->video_2 = $request->video_2;
@@ -154,6 +155,7 @@ class FormatController extends Controller
         $format->name = $request->name;
         $format->summ = $request->summ;
         $format->summ2 = $request->summ2;
+        if($request->monthly)$format->monthly = "Ежемесячно"; else $format->monthly = "Разово";
         $format->video_1 = $request->video_1;
         $format->text_1 = $request->text_1;
         $format->video_2 = $request->video_2;
