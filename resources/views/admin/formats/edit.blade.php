@@ -80,7 +80,8 @@
                         </div>
 
                     @for ($i=1; $i < 16; $i++)
-
+                        <?php $j = $i; if(isset($text_1[$j])) $text1 = $text_1[$j]; else $text1 = '';  ?>
+                        <?php if(isset($text_2[$j])) $text2 = $text_2[$j]; else $text2 = '';  ?>
                         <div class="form-group">
                             <label for="title">Видео {{ $i }}</label>
 
@@ -100,9 +101,10 @@
                                       rows="3"
                                       cols="80"
                                       class="js-editor-enabled">
-                                      @if(old('text_'.$i)){{old('text_'.$i)}} @else<?php $text = "text_".$i; ?>{{ $format->$text }} @endif
+                                      @if(old('text_'.$i)){{old('text_'.$i)}} @else{{ $text1 }}@endif
                            </textarea>
                         </div>
+
                         <div class="form-group">
                             <label for="description">Советы для видео {{ $i }}</label>
                             <textarea id="text2_{{ $i }}"
@@ -110,7 +112,7 @@
                                       rows="3"
                                       cols="80"
                                       class="js-editor-enabled">
-                                      @if(old('text2_'.$i)){{old('text2_'.$i)}} @else<?php $text2 = "text2_".$i; ?>{{ $format->$text2 }} @endif
+                                      @if(old('text2_'.$i)){{old('text2_'.$i)}} @else{{ $text2 }}@endif
                            </textarea>
                         </div>
                     @endfor

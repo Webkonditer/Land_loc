@@ -13,6 +13,7 @@ use App\Device;
 use App\VegaChat;
 use Carbon\Carbon;
 use Cookie;
+use App\Text;
 
 class VideosController extends Controller
 {
@@ -105,10 +106,22 @@ class VideosController extends Controller
       $pos = strpos($email, '@')+1;
       $nik = substr($email, 0, $pos);
 
+      //Тексты
+      $texts_1 = Text::where('format_id', $format->id)->where('text_x', 1)->get();//dd($format->id);
+      $texts_2 = Text::where('format_id', $format->id)->where('text_x', 2)->get();
+      foreach ($texts_1 as $text_1) {
+        $array1[$text_1->text_x_x] = $text_1->text;
+      }
+      foreach ($texts_2 as $text_2) {
+        $array2[$text_2->text_x_x] = $text_2->text;
+      }
+
       //dd($payment->course_id);
       return view('site.vega.course_page', [
         'format' => Format::where('id', $payment->course_id)->first(),
         'videos' => $videos,
+        'text_1' => $array1,
+        'text_2' => $array2,
         'pages' => $pages,
         'end' => $end,
         'vegachats' => VegaChat::where('question_id', $payment->course_id)->get(),

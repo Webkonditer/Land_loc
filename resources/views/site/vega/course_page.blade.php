@@ -81,6 +81,9 @@
 
 <div id="myTabContent" class="tab-content">
   @for ($i=1; $i <= $pages; $i++)
+    <?php if(isset($text_1[$i])) $text1 = $text_1[$i]; else $text1 = '';  ?>
+    <?php if(isset($text_2[$i])) $text2 = $text_2[$i]; else $text2 = '';  ?>
+
     <div class="tab-pane fade @if ($i == $pages) in active @endif " id="profile{{$i}}">
       <div class="row">
 
@@ -100,9 +103,9 @@
                   <div id="accordion{{$i}}{{$i}}" class="panel-collapse collapse" role="tablist" aria-expanded="true">
                     <div class="panel-content">
                         <?php $text = "text_".$i; ?>
-                        <pre>
-                          {!! $format->$text !!}
-                        </pre>
+                        <div style="border: 1px solid #ccc; border-radius: 4px; padding: 9.5px; font-size: 13px; color: #333; background-color: #f5f5f5;">
+                          {!! $text1 !!}
+                        </div>
                     </div>
                   </div>
                 </div>
@@ -110,10 +113,9 @@
                   <div class="panel-title"> <a class="collapsed" data-parent="#accordion{{$i}}" data-toggle="collapse" href="#accordion10{{$i}}" aria-expanded="false"> <span class="open-sub"></span>Советы по приготовлению</a> </div>
                   <div id="accordion10{{$i}}" class="panel-collapse collapse" role="tablist" aria-expanded="false" style="height: 0px;">
                     <div class="panel-content">
-                      <?php $text2 = "text2_".$i; ?>
-                      <pre>
-                        {!! $format->$text2 !!}
-                      </pre>
+                      <div style="border: 1px solid #ccc; border-radius: 4px; padding: 9.5px; font-size: 13px; color: #333; background-color: #f5f5f5;">
+                        {!! $text2 !!}
+                      </div>
                     </div>
                   </div>
                 </div>
