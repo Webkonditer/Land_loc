@@ -96,8 +96,9 @@ class InDexController extenDs Controller
       $Email = $request->email;
 
       //Фискальная информация URL-кодировать. Параметр включается в контрольную подпись запроса (после номера счета магазина). Например: MerchantLogin:OutSum:InvId:Receipt:Пароль#1
-      $receipt = '{"sno": "usn_income","items":[{"name": "Оплата курсов пакет '.$request->course_namber.'","quantity": 1.0,"sum": '.$request->summ.'.0,"tax": "none"}]}';
+      $receipt = '{"sno": "usn_income","items":[{"name": "Оплата курсов пакет '.$request->course_namber.'","quantity": 1.0,"sum": '.$out_summ.'.0,"payment_method":"full_payment","payment_object":"commodity","tax": "none"}]}';
       $receipt = urlencode($receipt);
+
 
       //Периодический платеж ()
       ///if($request->monthly == "Ежемесячно") $Recurring = true;
