@@ -31,50 +31,53 @@ class VideosController extends Controller
 
       $payment = VegaPayment::where('user_id', $id)->where('course_id', $format->id)->orderBy('created_at', 'desc')->first();
 
-      //Оплачен ли даный курс
-      if (!isset($payment->id)) {
-        return redirect()->back()
-          ->withErrors('К сожалению мы не нашли в базе сведений об оплате Вами данного курса. Обратитесь пожалуйста в техподдержку.')
-          ->withInput();
-      }
-
-      //Не исткло ли 90 дней
-      $date_of_pay =  Carbon::createFromFormat('Y-m-d H:i:s', $payment->created_at);
-      $finish_date = $date_of_pay->addDays(90);
-      $current_date = Carbon::now();
-      if (($current_date->gt($finish_date))) {
-        return redirect()->back()
-          ->withErrors('К сожалению время действия Вашего пароля для данного курса (90 дней) уже истекло.')
-          ->withInput();
-      }
-
-      //Проверка трех девайсов
-      if (!isset($_COOKIE['dev'])) {
-          $devices = Device::where('user_id', $id)->get();
-          if ($devices->count() == 3) {
+      if ($id < 1000000)
+        {
+          //Оплачен ли даный курс
+          if (!isset($payment->id)) {
             return redirect()->back()
-              ->withErrors('К сожалению Вы можете использовать Ваш пароль только на трех устройствах. Обратитесь пожалуйста в техподдержку.')
+              ->withErrors('К сожалению мы не нашли в базе сведений об оплате Вами данного курса. Обратитесь пожалуйста в техподдержку.')
               ->withInput();
           }
-          else {
-            $device->user_id = $id;
-            $device->course_id = $course;
-            $device->device = str_random(8);
-            $device->save();
-            setcookie("dev", $device->device, time()+7862400);
+
+          //Не исткло ли 90 дней
+          $date_of_pay =  Carbon::createFromFormat('Y-m-d H:i:s', $payment->created_at);
+          $finish_date = $date_of_pay->addDays(90);
+          $current_date = Carbon::now();
+          if (($current_date->gt($finish_date))) {
+            return redirect()->back()
+              ->withErrors('К сожалению время действия Вашего пароля для данного курса (90 дней) уже истекло.')
+              ->withInput();
           }
-      }
-      else {
-        $search_device = Device::where('user_id', $id)->where('device', $_COOKIE['dev'])->first();
-        if (!isset($search_device->id)) {
-          return redirect()->back()
-            ->withErrors('К сожалению Вы можете использовать Ваш пароль только на трех устройствах. Обратитесь пожалуйста в техподдержку.')
-            ->withInput();
+
+          //Проверка трех девайсов
+          if (!isset($_COOKIE['dev'])) {//Если куков нет
+              $devices = Device::where('user_id', $id)->get();
+              if ($devices->count() == 3) {//Если куков уже три
+                return redirect()->back()
+                  ->withErrors('К сожалению Вы можете использовать Ваш пароль только на трех устройствах. Обратитесь пожалуйста в техподдержку.')
+                  ->withInput();
+              }
+              else {//если куков меньше трех
+                $device->user_id = $id;
+                $device->course_id = $course;
+                $device->device = str_random(8);
+                $device->save();
+                setcookie("dev", $device->device, time()+7862400);
+              }
+          }
+          else {//Если куки уже есть
+            $search_device = Device::where('user_id', $id)->where('device', $_COOKIE['dev'])->first();
+            if (!isset($search_device->id)) {//Если левый кук, то до свидания!
+              return redirect()->back()
+                ->withErrors('К сожалению Вы можете использовать Ваш пароль только на трех устройствах. Обратитесь пожалуйста в техподдержку.')
+                ->withInput();
+            }
+          }
         }
-      }
 
       //Вывод страницы
-      $COOKIE_name = "course_".$payment->course_id;
+      $COOKIE_name = "course_".$format->id;
       if (isset($_COOKIE[$COOKIE_name])) $pages = ($_COOKIE[$COOKIE_name]);
       else $pages = 1;
 
@@ -118,13 +121,13 @@ class VideosController extends Controller
 
       //dd($payment->course_id);
       return view('site.vega.course_page', [
-        'format' => Format::where('id', $payment->course_id)->first(),
+        'format' => Format::where('id', $format->id)->first(),
         'videos' => $videos,
         'text_1' => $array1,
         'text_2' => $array2,
         'pages' => $pages,
         'end' => $end,
-        'vegachats' => VegaChat::where('question_id', $payment->course_id)->get(),
+        'vegachats' => VegaChat::where('question_id', $format->id)->get(),
         'nik' => $nik,
         'is_admin' => $is_admin,
       ]);
