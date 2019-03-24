@@ -24,7 +24,7 @@ class VideosController extends Controller
     }
 
     public function execute(Device $device, Request $request, VegaUser $vegauser, VegaPayment $vegapayment, $course) {
-
+//dd(Hash::make('12345'));
       $id = Auth::guard('user_guard')->user()->id;
 
       $format = Format::where('position', $course)->first();
@@ -99,15 +99,18 @@ class VideosController extends Controller
       if(isset(Auth::guard('admin_guard')->user()->email)) {
         $email = Auth::guard('admin_guard')->user()->email;
         $is_admin = 1;
+        $nik = Auth::guard('admin_guard')->user()->name;//dd($nik);
       }
       else {
         if(isset(Auth::guard('user_guard')->user()->email)) {
           $email = Auth::guard('user_guard')->user()->email;
           $is_admin = 0;
+          $nik = Auth::guard('user_guard')->user()->name;
         }
       }
       $pos = strpos($email, '@')+1;
-      $nik = substr($email, 0, $pos);
+      //$nik = substr($email, 0, $pos);
+
 
       //Тексты
       $texts_1 = Text::where('format_id', $format->id)->where('text_x', 1)->get();//dd($format->id);
