@@ -97,6 +97,7 @@ Route::group(['prefix'=>'admin','middleware'=>'IsAdmin'], function () {
       Route::post('/vegausers/{vegauser}/update', 'vega\VegaUsersController@update')->name('admin.vegausers.edit');
       Route::get('/vegausers/{vegauser}/delete', 'vega\VegaUsersController@destroy')->name('admin.vegausers.delete');
       Route::post('/vegausers/search', 'vega\VegaUsersController@search')->name('admin.vegausers.search');
+      Route::post('/vegausers/new_password', 'vega\VegaUsersController@new_password')->name('admin.vegausers.new_password');
 
       Route::get('/vegapayments/stat', 'vega\VegaPaymentsController@stat')->name('admin.vegapayments.stat');
       Route::get('/vegapayments', 'vega\VegaPaymentsController@execute')->name('admin.vegapayments');

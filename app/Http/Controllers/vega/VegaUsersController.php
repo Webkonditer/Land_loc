@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use App\Format;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 class VegaUsersController extends Controller
 {
@@ -38,6 +39,21 @@ class VegaUsersController extends Controller
         $delPayments = VegaPayment::where('user_id', $vegauser->id)->delete();
         $vegauser->delete();
         return redirect()->route('admin.vegausers');
+
+    }
+
+    public function new_password(VegaUser $vegauser, Request $request)
+    {
+        $validator = $this->validate($request, [
+            'new_password' => 'required|string|min:8',
+        ]);
+
+        $vegauser = VegaUser::where('id', $request->id)->first();
+        $vegauser->password = Hash::make($request->new_password);
+        $vegauser->save();
+
+        return redirect()->route('admin.vegausers')
+              ->withErrors('Пароль успешно изменен');
 
     }
 
