@@ -67,7 +67,7 @@
                             <button type="submit" class="btn btn-primary">Изменить</button>
                           </div>
                           <div class="form-group"  style="float:left; margin-left:5px;">
-                            <a href="#"><button class="btn btn-primary">Отмена</button></a>
+                            <a href="#"class="btn btn-primary">Отмена</a>
                           </div>
                         </form>
                     </div>
