@@ -155,6 +155,11 @@
                         <i class="fa fa-heart" aria-hidden="true"></i> <span>Платежи</span>
                     </a>
                 </li>
+                <li>
+                  <a href="{{route('admin.stat')}}">
+                          <i class="fa fa-calculator" aria-hidden="true"></i> <span>Статистика</span>
+                  </a>
+                </li>
 
                 {{--<li>
                     <a href="{{route('admin.payments.stat')}}">

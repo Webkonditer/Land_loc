@@ -53,102 +53,118 @@ class VegaPaymentsController extends Controller
       return redirect()->route('admin.vegapayments');
   }
 
-  public function stat() {
+  public function stat(VegaPayment $vegapayment) {
 
-    $result = array();
-    $formats = Format::all();//Коллекция из столбца групп
-    foreach($formats as $format){$result[$format->id] = $format->name;}
-    //dd($result);
+        $result = array();
+        $groups = VegaPayment::where('confirmation','!=',NULL)->pluck('course_name');//Коллекция из столбца названий курсов
+        foreach($groups as $value){$result[] = $value;}
+        $result = array_unique($result);
 
-    $month_now = Carbon::now()->format('m');echo '<br>';//Текущий месяц
-    $year_now = Carbon::now()->format('Y');echo '<br>';//Текущий год
+        $month_now = Carbon::now()->format('m');//Текущие год и месяц
+        $year_now = Carbon::now()->format('Y');
 
-      $year = $year_now;//Текущий год
-        for ($month=$month_now; $month > 0 ; $month--) {//Перебираем месяцы
-          $month_result = array();
+          $year = $year_now;
+            for ($month=$month_now+0; $month > 0 ; $month--) {
+              $month_result = array();
 
-          $month_result[] = $month.'.'.$year;
-          foreach ($result as $format_id=>$format_name){
+              $month_result[] = $month.'.'.$year;
+              foreach ($result as $course_name){//Перебираем таблицу по названиям курсов
 
-            $month_array = array();
-            $summ = 0;
-            $month_line = Payment::where('confirmation','!=',NULL)
-                                   ->where('format_id', $format_id)
-                                   ->whereYear('created_at', $year)
-                                   ->whereMonth('created_at', $month)
-                                   ->pluck('summ');
+                //Обнуляем переменые
+                $month_array_1 = array();
+                $month_array_2 = array();
+                $month_array_3 = array();
+                $summ1 = 0;
+                $summ2 = 0;
+                $summ3 = 0;
 
-            $count = $month_line->count();
-            if ($count == 0) {
-              $summ = 0;
-            }
-            else {
-              foreach($month_line as $value){$month_array[] = $value;}
-              //dd($month_array);
-              $summ = array_sum($month_array);
-            }
-            $month_result[] = $summ;
-          };
-          $year_result[] = $month_result;
-        }
-
-        $year = $year_now-1;
-          for ($month=12; $month > $month_now ; $month--) {
-            $month_result = array();
-
-            $month_result[] = $month.'.'.$year;
-            foreach ($result as $format_id=>$format_name){
-              $month_array = array();
-              $summ = 0;
-              $month_line = Payment::where('confirmation','!=',NULL)
-                                     ->where('format_id', $format_id)
+                //Выборки по  курсам и по форматам
+                $month_line_1 = VegaPayment::where('confirmation','!=',NULL)
+                                       ->where('course_name', $course_name)
+                                       ->where('format', 1)
+                                       ->whereYear('created_at', $year)
+                                       ->whereMonth('created_at', $month)
+                                       ->pluck('summ');
+                $month_line_2 = VegaPayment::where('confirmation','!=',NULL)
+                                      ->where('course_name', $course_name)
+                                      ->where('format', 2)
+                                      ->whereYear('created_at', $year)
+                                      ->whereMonth('created_at', $month)
+                                      ->pluck('summ');
+                $month_line_3 = VegaPayment::where('confirmation','!=',NULL)
+                                     ->where('course_name', $course_name)
+                                     ->where('format', 3)
                                      ->whereYear('created_at', $year)
                                      ->whereMonth('created_at', $month)
                                      ->pluck('summ');
 
-              $count = $month_line->count();
-              if ($count == 0) {
-                $summ = 0;
-              }
-              else {
-                foreach($month_line as $value){$month_array[] = $value;}
-                //dd($month_array);
-                $summ = array_sum($month_array);
-              }
-              $month_result[] = $summ;
-            };
-            $year_result[] = $month_result;
-          }
+                //Считаем суммы по каждому формату
+                foreach($month_line_1 as $value_1){$month_array_1[] = $value_1;}
+                $summ_1 = array_sum($month_array_1);
+                foreach($month_line_2 as $value_2){$month_array_2[] = $value_2;}
+                $summ_2 = array_sum($month_array_2);
+                foreach($month_line_3 as $value_3){$month_array_3[] = $value_3;}
+                $summ_3 = array_sum($month_array_3);
 
-          //Вычисляем кол-во отписавшихся
-          $year = $year_now;//Текущий год
-          $month_results = array();
-            for ($month=$month_now; $month > 0 ; $month--) {//Перебираем месяцы
-            $month_results[] = array('year'=>$year, 'month'=>$month);
-            }
-          $year = $year_now-1;//Прошлый год
-            for ($month=12; $month > $month_now ; $month--) {
-              $month_results[] = array('year'=>$year, 'month'=>$month);
+                $month_result[] = $summ_1.' / '.$summ_2.' / '.$summ_3;
+              };
+              $year_result[] = $month_result;
             }
 
-            foreach ($month_results as $month_result){
-              $summ = 0;
-              $month_array = array();
-              $month_line = Recurring::where('unsubscribed','!=',NULL)
-                                               ->whereYear('unsubscribed', $month_result['year'])
-                                               ->whereMonth('unsubscribed', $month_result['month'])
-                                               ->get();
+            $year = $year_now-1;
+              for ($month=12; $month > $month_now ; $month--) {
+                $month_result = array();
 
-              $unsubscribed[] = $month_line->count();
-            };
+                $month_result[] = $month.'.'.$year;
+                foreach ($result as $course_name){//Перебираем таблицу по названиям курсов
 
-    return view('admin.payments.stat', [
-      'formats' => $result,
-      'year_results' => $year_result,
-      'months' => $month_results,
-      'unsubscribeds' => $unsubscribed,
-    ]);
+                  //Обнуляем переменые
+                  $month_array_1 = array();
+                  $month_array_2 = array();
+                  $month_array_3 = array();
+                  $summ1 = 0;
+                  $summ2 = 0;
+                  $summ3 = 0;
 
-  }
+                  //Выборки по  курсам и по форматам
+                  $month_line_1 = VegaPayment::where('confirmation','!=',NULL)
+                                         ->where('course_name', $course_name)
+                                         ->where('format', 1)
+                                         ->whereYear('created_at', $year)
+                                         ->whereMonth('created_at', $month)
+                                         ->pluck('summ');
+                  $month_line_2 = VegaPayment::where('confirmation','!=',NULL)
+                                        ->where('course_name', $course_name)
+                                        ->where('format', 2)
+                                        ->whereYear('created_at', $year)
+                                        ->whereMonth('created_at', $month)
+                                        ->pluck('summ');
+                  $month_line_3 = VegaPayment::where('confirmation','!=',NULL)
+                                       ->where('course_name', $course_name)
+                                       ->where('format', 3)
+                                       ->whereYear('created_at', $year)
+                                       ->whereMonth('created_at', $month)
+                                       ->pluck('summ');
+
+                  //Считаем суммы по каждому формату
+                  foreach($month_line_1 as $value_1){$month_array_1[] = $value_1;}
+                  $summ_1 = array_sum($month_array_1);
+                  foreach($month_line_2 as $value_2){$month_array_2[] = $value_2;}
+                  $summ_2 = array_sum($month_array_2);
+                  foreach($month_line_3 as $value_3){$month_array_3[] = $value_3;}
+                  $summ_3 = array_sum($month_array_3);
+
+                  $month_result[] = $summ_1.' / '.$summ_2.' / '.$summ_3;
+                };
+                $year_result[] = $month_result;
+              }
+
+        //dd($year_result);
+
+        return view('admin.VegaPayments.stat', [
+          'course_names' => $result,
+          'year_results' => $year_result
+        ]);
+      }
 
 }

@@ -104,9 +104,11 @@ Route::group(['prefix'=>'admin','middleware'=>'IsAdmin'], function () {
       Route::get('/vegapayments/{sort}', 'vega\VegaPaymentsController@execute_sort')->name('admin.vegapayments.sort');
       Route::get('/vegapayments/id/{id}', 'vega\VegaPaymentsController@execute_id')->name('admin.vegapayments.id');
       Route::get('/vegapayments/{vegapayment}/delete', 'vega\VegaPaymentsController@destroy')->name('admin.vegapayments.delete');
+      Route::get('/stat', 'vega\VegaPaymentsController@stat')->name('admin.stat');
 
-      Route::get('/recurrings', 'RecurringController@execute')->name('admin.recurrings');
-      Route::get('/recurrings/{recurring}/delete', 'RecurringController@destroy')->name('admin.recurring.delete');
+
+      //Route::get('/recurrings', 'RecurringController@execute')->name('admin.recurrings');
+      //Route::get('/recurrings/{recurring}/delete', 'RecurringController@destroy')->name('admin.recurring.delete');
 
       Route::get('/courses/payments', 'CoursePaymentsController@payments')->name('admin.courses.payments');
       Route::post('/courses/payments', 'CoursePaymentsController@search');
