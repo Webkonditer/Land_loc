@@ -29,7 +29,7 @@ class VideosController extends Controller
 
       $format = Format::where('position', $course)->first();
 
-      $payment = VegaPayment::where('user_id', $id)->where('course_id', $format->id)->orderBy('created_at', 'desc')->first();
+      $payment = VegaPayment::where('user_id', $id)->where('course_id', $format->id)->where('confirmation', '<>',NULL)->orderBy('created_at', 'desc')->first();
 
       if ($id < 1000000)
         {
