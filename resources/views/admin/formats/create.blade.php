@@ -55,7 +55,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="title">Стоимость курса</label>
+                        <label for="title">Стоимость курса на время</label>
                         <input type="text"
                                name="summ"
                                class="form-control"
@@ -66,12 +66,23 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="title">Стоимость курса с сопровождением</label>
+                        <label for="title">Стоимость курса навсегда</label>
                         <input type="text"
                                name="summ2"
                                class="form-control"
                                id="summ2"
                                value="{{old('summ2')}}"
+                               placeholder="Сумма цифрами"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">Стоимость курса навсегда с сопровождением</label>
+                        <input type="text"
+                               name="summ3"
+                               class="form-control"
+                               id="summ3"
+                               value="{{old('summ3')}}"
                                placeholder="Сумма цифрами"
                         />
                     </div>

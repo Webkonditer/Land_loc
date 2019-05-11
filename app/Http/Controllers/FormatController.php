@@ -58,8 +58,9 @@ class FormatController extends Controller
       'position' => 'required|integer',
       'image' => 'required|image',
       'name' => 'required|string|max:191',
-      'summ' => 'required',
-      'summ2' => 'required',
+      'summ' => 'required|integer',
+      'summ2' => 'required|integer',
+      'summ3' => 'required|integer',
       'video_1' => 'required|string|',
       'text_1' => 'required|string|',
       'text2_1' => 'required|string|',
@@ -73,6 +74,7 @@ class FormatController extends Controller
       $format->name = $request->name;
       $format->summ = $request->summ;
       $format->summ2 = $request->summ2;
+      $format->summ3 = $request->summ3;
       $format->video_1 = $request->video_1;
       $format->video_2 = $request->video_2;
       $format->video_3 = $request->video_3;
@@ -345,7 +347,7 @@ class FormatController extends Controller
 
   public function edit(Format $format)
   {
-    
+
     $texts_1 = Text::where('format_id', $format->id)->where('text_x', 1)->get();
     $texts_2 = Text::where('format_id', $format->id)->where('text_x', 2)->get();
     foreach ($texts_1 as $text_1) {
@@ -368,8 +370,9 @@ class FormatController extends Controller
         'position' => 'required|integer',
         'image' => 'nullable|image',
         'name' => 'required|string|max:191',
-        'summ' => 'required',
-        'summ2' => 'required',
+        'summ' => 'required|integer',
+        'summ2' => 'required|integer',
+        'summ3' => 'required|integer',
         'video_1' => 'required|string|',
         'text_1' => 'required|string|',
         'text2_1' => 'required|string|',
@@ -383,6 +386,7 @@ class FormatController extends Controller
         $format->name = $request->name;
         $format->summ = $request->summ;
         $format->summ2 = $request->summ2;
+        $format->summ3 = $request->summ3;
         $format->video_1 = $request->video_1;
         $format->video_2 = $request->video_2;
         $format->video_3 = $request->video_3;

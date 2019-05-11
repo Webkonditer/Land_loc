@@ -63,18 +63,19 @@ class ResultController extends Controller
 
             $format = Format::where('id', $pay->course_id)->first();
 
-            //Отправка письма
+            //Отправка письма покупателю
             $data = [
                 'name' => $don->name,
                 'password' => $password,
                 'email' => $don->email,
                 'course' => $format->id,
+                'format' => $pay->format
             ];
 
             Mail::to($don->email)->send(new DonatPayConfirm($data));
 
             //Отправка письма админу в случае курса с сопровождением
-            if($pay->format == 2){//dd('!!!!');
+            if($pay->format == 3){//dd('!!!!');
                 $data2 = [
                     'name' => $don->name,
                     'email' => $don->email,

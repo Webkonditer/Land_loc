@@ -44,7 +44,7 @@ class VideosController extends Controller
           $date_of_pay =  Carbon::createFromFormat('Y-m-d H:i:s', $payment->created_at);
           $finish_date = $date_of_pay->addDays(90);
           $current_date = Carbon::now();
-          if (($current_date->gt($finish_date))) {
+          if (($current_date->gt($finish_date)) && $payment->format == 1) {
             return redirect()->back()
               ->withErrors('К сожалению время действия Вашего пароля для данного курса (90 дней) уже истекло.')
               ->withInput();

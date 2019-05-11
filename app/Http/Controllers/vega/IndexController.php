@@ -64,8 +64,11 @@ class InDexController extenDs Controller
     $vegapayment->course_name = $format->name;
     if(isset($request->format))$vegapayment->format = $request->format;
     //$vegapayment->ref_namber = $request->ref_namber;
+
+    //Суммы в зависимости от фт формата
     $vegapayment->summ = $format->summ;
     if(substr($request->format, 0, 1) == 2) $vegapayment->summ = $format->summ2;
+    if(substr($request->format, 0, 1) == 3) $vegapayment->summ = $format->summ3;
     $vegapayment->save();
     //dd($vegapayment);
 
@@ -86,8 +89,7 @@ class InDexController extenDs Controller
 
       // сумма заказа
 
-        $out_summ = $format->summ;
-        if(substr($request->format, 0, 1) == 2) $out_summ = $format->summ2;
+        $out_summ = $vegapayment->summ;
 
       // кодировка
       $encoding = "utf-8";
