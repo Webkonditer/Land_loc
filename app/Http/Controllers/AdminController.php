@@ -13,13 +13,13 @@ class AdminController extends Controller
 {
   public function __construct() {
 
-        $this->middleware('auth');
+        //
   }
 
   public function execute(Request $request) {
 
     return view('admin.administrators.index', [
-      'settings' => User::All(),
+      'settings' => User::All(), 
     ]);
   }
 

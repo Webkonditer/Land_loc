@@ -54,11 +54,23 @@
                             </a>
                             <ul class="menuzord-menu">
                                 <li class=" ">
-                                    <a href="https://iskconclub.ru" >Сайт отдела</a>
+                                    <a href="https://bhaktilata.ru" >Сайт отдела</a>
                                 </li>
                                 <li class=" ">
                                     <a href="https://iskconclub.ru/clubcontact.html" >Связь с нами</a>
                                 </li>
+                                <li class=" ">
+                                    <a href="{{route('user.dashboard')}}" >Личный кабинет</a>
+                                </li>
+                                @if(!Auth::guard('user_guard')->user())
+                                  <li class=" ">
+                                      <a href="{{route('user.login')}}" >Войти/Зарегистрироваться</a>
+                                  </li>
+                                @else
+                                  <li class=" ">
+                                      <a href="{{route('logout')}}" >Выйти</a>
+                                  </li>
+                                @endif
                             </ul>
                         </nav>
                     </div>
@@ -88,45 +100,62 @@
                     </div>
                 </section>
                 <div id="register" class="panel panel-default col-md-12">
-                    <p><h3 class="widget-title line-bottom">Добро пожаловать!</h3>
-                    </p>
-                    <p align="center"><h4>Спасибо вам, что подумываете стать частью нашего клуба. Этот клуб создан специально для тех, для кого слова "образование", "обучение", "наставничество" и "воспитание" - не пустой звук, но он считает их ключевой составляющей нашего социума, и потому хочет сам лучше понять принципы, на которых оно основано, и поддержать наши начинания в данной области.</h4>
-                    </p>
-                    <br><br>
+
+                        <p><h3 class="widget-title line-bottom">Выберите формат своего участия:</h3>
+                        </p>
+                        <div class="row">
+
+                            @forelse($formats  as $format)
+                            <div class="thumbnail col-md-2"> <a href="#"><img class="img-fullwidth" src="{{ asset('/storage/'.$format->image) }}" alt="..."></a>
+                                <div class="caption text-center">
+                                    <h3>{{ $format->name }}</h3>
+                                    <p>{{ $format->summ }}
+                                        @if(is_numeric  ($format->summ))руб.
+                                        @endif
+                                        @if($format->monthly == "Ежемесячно")/мес. @endif</p> <p><a href="{{ route('form', ['id' => $format->id]) }}" class="btn btn-theme-colored btn-flat btn-xl" role="button">Выбрать</a>
+                                    </p>
+                                </div>
+                                <h5><strong>Бонус:</strong></h5>
+                                <ul class="list table-list theme-colored check-circle">
+                                    <li>{{ $format->bonus_1 }}</li>
+                                    <li>{!! $format->bonus_2 !!}</li>
+                                    @if ($format->ctn > 0)
+                                      <p><strong>+{{ $format->ctn }} Чайтаний в мес.</strong></p>
+                                    @endif
+                                </ul>
+                            </div>
+                            @empty
+                            <tr>
+                                <td><h2>Опции отсутствуют</h2>
+                                </td>
+                            </tr>
+                            @endforelse
+
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 text-center">
+                                <p>Если вы хотите делать взносы большего размера - <a class="text-theme-colored" style="cursor: pointer;" href="skype:makarovta?add">напишите нам!</a></p>
+                            </div>
+                            <br><br>
+                        </div>
+
+                        <br><br>
+                    <div class="row">
+    <div class="panel panel-default col-md-10 col-md-offset-1">
                     <p><h3 class="widget-title line-bottom">Как это работает?</h3>
                     </p>
-                    <div class="row">
-                        <div class="panel panel-default col-md-10 col-md-offset-1">
-                            <br>
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <h3><strong>1.</strong> Вы выбираете комфортный формат Вашего участия (сумму).</h3>
-                                    <br>
-                                    <h3><strong>2.</strong> Вводите данные банковской карточки / электронных денег. Включая международные банки.</h3>
-                                    <br>
-                                    <h3><strong>3.</strong> Благодаря опции автоплатежа все Ваши перечисления в будущем будут легко и удобно списываться автоматически!</h3>
-                                    <br>
-                                    <h3><strong>4.</strong> Отказаться от автоплатежа можно в любое время!</h3>
-                                    <br>
-                                    <h3><strong>5.</strong> Ваши банковские данные находятся в абсолютной сохранности!</h3>
-                                    <p><i>Данные сохраняются в банке, а не у нас. Никто не будет иметь доступа к вашим банковским данным, никто не сможет их украсть и т.д. Раз в месяц будет подаваться автоматический запрос на снятие именно той суммы, которую вы выбрали. И, если у вас подключен мобильный банк, вам будут приходить SMS с просьбой подтвердить перевод. А на почту приходить чек о переводе.</i></p>
-
+                            <p>Вы выбираете комфортный формат Вашего участия (сумму). Вводите данные банковской карточки / электронных денег. Включая международные банки. Благодаря опции автоплатежа все Ваши перечисления в будущем будут легко и удобно списываться автоматически! Отказаться от автоплатежа можно в любое время! Ваши банковские данные находятся в абсолютной сохранности - Данные сохраняются в банке, а не у нас. Никто не будет иметь доступа к вашим банковским данным, никто не сможет их украсть и т.д. Раз в месяц будет подаваться автоматический запрос на снятие именно той суммы, которую вы выбрали. И, если у вас подключен мобильный банк, вам будут приходить SMS с просьбой подтвердить перевод. А на почту приходить чек о переводе.</p>
 
                                 </div>
-                                <div class="col-md-3">
-                                    <img class="img-fullwidth" src="/images/bank.jpg" alt="...">
-</div>
                                 </div>
-
-                            </div>
-                        </div>
-                        <br>
-                        <br>
-
-                    <p><h3 class="widget-title line-bottom">Наша скромная благодарность вам.</h3>
+    <br><br>
+    <div class="panel panel-default col-md-10 col-md-offset-1">
+                                <p><h3 class="widget-title line-bottom">Наша скромная благодарность вам.</h3>
                     </p>
-                    <div class="row">
-                        <div class="panel panel-default col-md-10 col-md-offset-1">
+
+
                             <br>
                             <div class="row">
                                 <h4 align="center"><strong>Вы поддерживаете наше служение в образовании, и нам также хочется отблагодарить вас:</strong></h4>
@@ -137,8 +166,8 @@
                                 <h4>2. Накопительными бонусами - "Чайтаньями"</h4>
                                 <p>Вы получаете бонусы - "Чайтаньи", которые можно обменять на такие подарки как комплект книг "Шримад Бхагаватам" или бесплатное обучение в Маяпуре/Вриндаване.
             <div class="row">
-			<div class="col-md-10 col-md-offset-1">
-			<div id="accordion1" class="panel-group accordion transparent">
+            <div class="col-md-10 col-md-offset-1">
+            <div id="accordion1" class="panel-group accordion transparent">
                                         <div class="panel">
                                             <div class="panel-title"> <a class="collapsed" data-parent="#accordion1" data-toggle="collapse" href="#accordion11" aria-expanded="false"> <span class="open-sub">Шрила Прабхупада о валюте для ИСККОН - "Чайтаньях":</span></a> </div>
                                             <div id="accordion11" class="panel-collapse collapse" role="tablist" aria-expanded="false" style="height: 0px;">
@@ -216,7 +245,7 @@
 
 
             </div>
-            </div>
+
 
 
 
@@ -225,54 +254,17 @@
 
                         </div>
                      </div>
-                        <br>
-                        <br>
-
-                        <p><h3 class="widget-title line-bottom">Выберите формат своего участия:</h3>
-                        </p>
-                        <div class="row">
 
 
 
-                            @forelse($formats  as $format)
-                            <div class="thumbnail col-md-2"> <a href="#"><img class="img-fullwidth" src="{{ asset('/storage/'.$format->image) }}" alt="..."></a>
-                                <div class="caption text-center">
-                                    <h3>{{ $format->name }}</h3>
-                                    <p>{{ $format->summ }}
-                                        @if(is_numeric  ($format->summ))руб.
-                                        @endif
-                                        @if($format->monthly == "Ежемесячно")/мес. @endif</p> <p><a href="{{ route('form', ['id' => $format->id]) }}" class="btn btn-theme-colored btn-flat btn-xl" role="button">Выбрать</a>
-                                    </p>
+
+                                <div class="col-md-6 text-center">
+                                 <p><a class="btn btn-default btn-xl btn-theme-colored" style="cursor: pointer;" href="{{ route('bonus.gifts') }}" target="_blank">Обменять Чайтаньи на подарок</a></p>
                                 </div>
-                                <h5><strong>Бонус:</strong></h5>
-                                <ul class="list table-list theme-colored check-circle">
-                                    <li>{{ $format->bonus_1 }}</li>
-                                    <li>{!! $format->bonus_2 !!}</li>
-                                    @if ($format->ctn > 0)
-                                      <p><strong>+{{ $format->ctn }} Чайтаний в мес.</strong></p>
-                                    @endif
-                                </ul>
-                            </div>
-                            @empty
-                            <tr>
-                                <td><h2>Опции отсутствуют</h2>
-                                </td>
-                            </tr>
-                            @endforelse
-
-
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-2 text-center">
-                                <p>Если вы хотите делать взносы большего размера - <a class="text-theme-colored" style="cursor: pointer;" href="skype:makarovta?add">напишите нам!</a></p>
-                                </div><br><br>
-                            <div class="col-md-6 text-center">
-                             <p><a class="btn btn-default btn-xl btn-theme-colored" style="cursor: pointer;" href="{{ route('bonus.gifts') }}" target="_blank">Обменять Чайтаньи на подарок</a></p>
-                            </div>
-                            <div class="col-md-6 text-center">
-                             <p><a class="btn btn-default btn-xl btn-theme-colored" style="cursor: pointer;" href="{{ route('unsubscribe') }}" target="_blank">Отписаться от ежемесячного перевода</a></p>
-                            </div>
+                                <div class="col-md-6 text-center">
+                                 <p><a class="btn btn-default btn-xl btn-theme-colored" style="cursor: pointer;" href="{{ route('unsubscribe') }}" target="_blank">Отписаться от ежемесячного перевода</a></p>
+                                </div>
+  </div>
 
                       </div>
 
@@ -301,7 +293,16 @@
                             безопасного проведения интернет-платежей Verified By Visa или MasterCard SecureCode для проведения платежа также может потребоваться ввод специального пароля.</p>
                         <p style="font-size: 10px; color: #fff;">Настоящий сайт поддерживает 256-битное шифрование. Введенная информация не будет предоставлена третьим лицам за исключением случаев, предусмотренных законодательством РФ. Проведение
                             платежей по банковским картам осуществляется в строгом соответствии с требованиями платежных систем МИР, Visa Int. и MasterCard Europe Sprl.</p>
-
+                        <p style="font-size: 10px; color: #fff;">
+                          <a href="https://money.yandex.ru" target="_blank">
+                             <img src="https://money.yandex.ru/img/yamoney_button.gif"
+                              alt="Я принимаю Яндекс.Деньги" align="left" hspace="5"
+                              title="Я принимаю Яндекс.Деньги" border="0" width="88" height="31"/>
+                          </a>
+                          Принимаем Яндекс.Деньги – доступный и безопасный способ платить за товары и услуги через интернет.
+                          Пополнение счета и оплата заказов происходят в реальном времени
+                          <a href="http://money.yandex.ru/" target="_blank">на сайте платежной системы</a>.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -319,36 +320,7 @@
     <script src="/js/custom.js"></script>
 
     <!-- Yandex.Metrika counter -->
-    <script type="text/javascript">
-        (function(d, w, c) {
-            (w[c] = w[c] || []).push(function() {
-                try {
-                    w.yaCounter46106202 = new Ya.Metrika({
-                        id: 46106202,
-                        clickmap: true,
-                        trackLinks: true,
-                        accurateTrackBounce: true
-                    });
-                } catch (e) {}
-            });
 
-            var n = d.getElementsByTagName("script")[0],
-                s = d.createElement("script"),
-                f = function() {
-                    n.parentNode.insertBefore(s, n);
-                };
-            s.type = "text/javascript";
-            s.async = true;
-            s.src = "https://mc.yandex.ru/metrika/watch.js";
-
-            if (w.opera == "[object Opera]") {
-                d.addEventListener("DOMContentLoaded", f, false);
-            } else {
-                f();
-            }
-        })(document, window, "yandex_metrika_callbacks");
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/46106202" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
 </body>
 

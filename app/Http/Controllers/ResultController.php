@@ -17,6 +17,9 @@ use App\Recurring;
 use App\Course;
 use App\Course_payment;
 use App\Course_pass;
+use App\Mail\CoursMailMain;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\DonatPayConfirm;
 
 class ResultController extends Controller
 {
@@ -86,29 +89,13 @@ class ResultController extends Controller
                 }
 
                 //Отправка письма
-                $to = $course_payment->email;
-                $subject = 'Уведомление о платеже';
+                $data = [
+                    'name' => $course_payment->name,
+                    'text' => $mail_text,
+                    'password' => $password,
+                ];
 
-                $message = '
-                <html>
-                    <head>
-                        <title>Уведомление о платеже</title>
-                        <meta charset="utf8">
-                    </head>
-                    <body>
-                        <h2>Здравствуйте, '.$course_payment->name.'!</h2>
-                        '.$mail_text.'
-                        <h3>Ваш пароль: '.$password.'</h3>
-                    </body>
-                </html>
-                ';
-
-                $headers[] = 'MIME-Version: 1.0';
-                $headers[] = 'Content-type: text/html; charset=utf8';
-                $headers[] = 'From: iskconclub.ru <info@iskconclub.ru>';
-
-                $result = mail($to, $subject, $message, implode("\r\n", $headers));
-                //echo $result ? 'OK' : 'Error';
+                Mail::to($course_payment->email)->send(new CoursMailMain($data));
 
                 //-------------------------------------------------
 
@@ -120,24 +107,6 @@ class ResultController extends Controller
             $don = Donator::where('id', $pay->donator_id)->first();
             $form = Format::where('id', $pay->format_id)->first();
 
-            // Меняем данные жертвователя
-            $old_donator = Donator::where('id','!=', $don->id)->where('email', $don->email)->first();
-            if (isset($old_donator->id)) {
-              $id = $old_donator->id;
-              $reg_date = $old_donator->created_at;
-              $recurring = $old_donator->recurring;
-              $anonim = $old_donator->anonim;
-              $monthly = $old_donator->monthly;
-              $ctn = $old_donator->bonus_points;
-              $old_donator->delete(); //При совпадении убираем старого жертвователя
-              $don->id = $id; //Его ид отдаем новому
-              $don->bonus_points = $ctn;
-              if ($recurring == 'Да')$don->recurring = $recurring; //Согласие на ежемесячные
-              if ($don->anonim == 'Нет') $don->anonim = $anonim; //Анонимность
-              if ($monthly == 'Ежемесячно') $don->monthly = $monthly; //Ежемесячно
-              $pay->donator_id = $id;//Меняем ид донатора у платежа
-            }
-
             $pay->confirmation = Carbon::now()->format('Y-m-d H:i:s');
             $pay->save();//Подтверждение платежа в таблицу платежей
 
@@ -145,11 +114,11 @@ class ResultController extends Controller
               $don->bonus_points = $don->bonus_points + $form->ctn;
             }
             $don->last_payment = Carbon::now()->format('Y-m-d H:i:s');
+            if ($pay->monthly == "Ежемесячно") $don->recurring = 'Да';
             $don->save();//Подтверждение платежа в таблицу платежей
 
             if ($pay->monthly == "Ежемесячно") {
-              if($pay->repeated != 'Рекурентный') {
-                  //$recurrings = Recurring;// В таблицу ежемесячных
+              if($pay->repeated != 'Рекурентный') {// В таблицу ежемесячных
 
                   $recurrings->payment_id = $pay->id;
                   $recurrings->donator_id = $pay->donator_id;
@@ -157,37 +126,31 @@ class ResultController extends Controller
                   $recurrings->summ = $pay->summ;
                   $recurrings->save();
               }
-
             }
 
             echo "OK$inv_id\n";
 
             //Отправка письма
-            $to = $don->email;
-            $subject = 'Уведомление о платеже';
-            $url = route('home').'/unsubscribe/'.$don->email.'/69483'.$don->id.'5739';
+
             $format = Format::where('id', $pay->format_id)->first();
 
-            $message = '
-            <html>
-                <head>
-                    <title>Уведомление о платеже</title>
-                    <meta charset="utf8">
-                </head>
-                <body>
-                    <h2>Здравствуйте, '.$don->name.'!</h2>
-                    '.$format->success.'
-                    <p>Ваш бонусный счет сейчас: '.$don->bonus_points.' Чайтаний.
-                </body>
-            </html>
-            ';
+            if($pay->repeated == 'Рекурентный') {
+              $mail_text = '
+              <p> Мы получили Ваш ежемесячный взнос. Спасибо Вам большое за Вашу поддержку!</p>
+              ';
+            }
+            else $mail_text = $format->success;
+            if($don->bonus_points == '') $bonus_points = 0;
+            else $bonus_points = $don->bonus_points;
 
-            $headers[] = 'MIME-Version: 1.0';
-            $headers[] = 'Content-type: text/html; charset=utf8';
-            $headers[] = 'From: iskconclub.ru <info@iskconclub.ru>';
+            //Отправка письма
+            $data = [
+                'name' => $don->name,
+                'text' => $mail_text,
+                'bonus_points' => $bonus_points,
+            ];
 
-            $result = mail($to, $subject, $message, implode("\r\n", $headers));
-            //echo $result ? 'OK' : 'Error';
+            Mail::to($don->email)->send(new DonatPayConfirm($data));
 
             //-------------------------------------------------
             exit();
