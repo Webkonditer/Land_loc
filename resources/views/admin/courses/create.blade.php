@@ -66,6 +66,25 @@
                       </div>
 
                       <div class="form-group">
+                          <label for="title">Рекомендуемое пожертвование</label>
+                          <input type="text"
+                                 name="from"
+                                 class="form-control"
+                                 value="{{old('from')}}"
+                                 placeholder="От"
+                          />
+                      </div>
+
+                      <div class="form-group">
+                          <input type="text"
+                                 name="to_"
+                                 class="form-control"
+                                 value="{{old('to_')}}"
+                                 placeholder="До"
+                          />
+                      </div>
+
+                      <div class="form-group">
                           <label for="description">Описание курса</label>
                           <textarea id="description"
                                     name="description"
@@ -109,28 +128,23 @@
                                     class="js-editor-enabled">
                                     {{old('result_text')}}
                          </textarea>
-
                       </div>
-                        {{--<div class="form-group">
-                            <label for="title">Сумма пожертвования</label>
-                            <input type="text"
-                                   name="summ"
-                                   class="form-control"
-                                   id="summ"
-                                   value="{{old('summ')}}"
-                                   placeholder="Сумма цифрами"
-                            />
+
+                      <div class="form-group">
+                        <div class="checkbox">
+                            <label for="inscription_chb">
+                                <input id="monthly" name="inscription_chb" type="checkbox" @if("on"==old('inscription_chb')) checked @endif> Отображать надпись ...Сразу после перевода...
+                            </label>
                         </div>
+                      </div>
 
-                        <div class="form-group">
-                          <div class="checkbox">
-                              <label for="monthly">
-                                  <input id="monthly" name="monthly" type="checkbox"> Ежемесячное пожертвование
-                              </label>
-                          </div>
-                        </div>--}}
-
-
+                      <div class="form-group">
+                        <div class="checkbox">
+                            <label for="ngrup_chb">
+                                <input id="monthly" name="ngrup_chb" type="checkbox" @if("on"==old('ngrup_chb')) checked @endif> Отображать поле номера группы
+                            </label>
+                        </div>
+                      </div>
 
 
 

@@ -36,7 +36,7 @@ Route::group(['middlevare'=>'web'], function () {
 
 
 
-Route::group(['prefix'=>'admin','middlevare'=>'auth'], function () {
+Route::group(['prefix'=>'admin'], function () {
 
       //Route::get('/dashboard', 'DashboardController@index')->name('admin.dashboard');
       Route::resource('/formats', 'FormatController', ['as'=>'admin']);
