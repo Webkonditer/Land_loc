@@ -45,6 +45,16 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+
+        'user_guard' =>[
+            'driver' => 'session',
+            'provider' => 'user_guard',
+        ],
+
+        'admin_guard' =>[
+            'driver' => 'session',
+            'provider' => 'admin_guard',
+        ],
     ],
 
     /*
@@ -66,6 +76,16 @@ return [
 
     'providers' => [
         'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Donator::class,
+        ],
+
+        'user_guard' => [
+            'driver' => 'eloquent',
+            'model' => App\Donator::class,
+        ],
+
+        'admin_guard' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],

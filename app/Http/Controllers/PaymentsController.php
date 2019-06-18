@@ -11,12 +11,13 @@ use App\Donator;
 use App\Recurring;
 use App\Format;
 use Carbon\Carbon;
+use Auth;
 
 class PaymentsController extends Controller
 {
   public function __construct() {
 
-        $this->middleware('auth');
+        //$this->middleware('auth');
   }
 
   public function execute(Payment $payments) {
@@ -42,7 +43,8 @@ class PaymentsController extends Controller
       'payments' => Payment::where('confirmation','!=',NULL)->where('donator_id', $id)->paginate(500),
       'donator' => Donator::where('id', $id)->first(),
       'recurring' => $recurring,
-      'format' => $format
+      'format' => $format,
+      'admin_email' => Auth::guard('admin_guard')->user()->email
     ]);
   }
 

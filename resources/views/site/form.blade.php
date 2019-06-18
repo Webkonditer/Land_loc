@@ -37,8 +37,10 @@
                         <div class="col-md-9">
                             <div class="widget no-border m-0">
                                 <ul class="styled-icons icon-dark icon-circled icon-theme-colored icon-sm text-right">
-                                    <li style="vertical-align: middle;"><span style="line-height: 30px;">Присоединяйтесь:</span></li>
-                                    <li style="vertical-align: middle;"><a target="_blank" href="https://vk.com/bhaktilata"><i class="fa fa-vk"></i></a></li>
+                                    <li class=" ">
+                                      <li style="vertical-align: middle;"><span style="line-height: 30px;">Присоединяйтесь:</span></li>
+                                      <li style="vertical-align: middle;"><a target="_blank" href="https://vk.com/bhaktilata"><i class="fa fa-vk"></i></a></li>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -54,11 +56,23 @@
                             </a>
                             <ul class="menuzord-menu">
                                 <li class=" ">
-                                    <a href="https://iskconclub.ru" >Сайт отдела</a>
+                                    <a href="https://bhaktilata.ru" >Сайт отдела</a>
                                 </li>
                                 <li class=" ">
                                     <a href="https://iskconclub.ru/clubcontact.html" >Связь с нами</a>
                                 </li>
+                                <li class=" ">
+                                    <a href="{{route('user.dashboard')}}" >Личный кабинет</a>
+                                </li>
+                                @if(!Auth::guard('user_guard')->user())
+                                  <li class=" ">
+                                      <a href="{{route('user.login')}}" >Войти/Зарегистрироваться</a>
+                                  </li>
+                                @else
+                                  <li class=" ">
+                                      <a href="{{route('logout')}}" >Выйти</a>
+                                  </li>
+                                @endif
                             </ul>
                         </nav>
                     </div>
@@ -90,29 +104,50 @@
                     </div>
                 </section>
                 <div id="register" class="panel panel-default col-md-12">
-                  <center>
-                    <h4>
-                    <strong>Сразу после перевода на вашу почту будет отправлено письмо со ссылкой на группу клуба попечителей. Если письмо со ссылкой не пришло - оно в папке Спам. Если его нет в папке Спам - напишите на info@bhaktilata.ru </strong></h4></center>
-                  <p><h3 class="widget-title line-bottom">Заполните пожалуйста форму</h3>
-                  </p>
 
 
+                  @if(!Auth::guard('user_guard')->user())
+                    <h4 class="widget-title line-bottom">Уже делаете регулярные переводы? <a class="collapsed text-theme-colored" data-parent="#accordion1" data-toggle="collapse" href="#accordion11" aria-expanded="false">Авторизуйтесь!</a></h4>
+
+                    <div id="accordion11" class="panel-collapse collapse" role="tablist" aria-expanded="false" style="height: 0px;">
+                        <div class="panel-content">
+
+                          <div class="col-md-12 panel panel-default" style="padding-top: 10px;">
+                              <form name="edit" class="form-inline" enctype="multipart/form-data" action="{{ url('/user/login')}}" method="POST">
+                                  @csrf
+                                    <label for="name" class="col-form-label">Ваш email:</label>
+                                    <input class="form-control" id="e-mail" type="email" name="email" placeholder="Ваш email" required="required">
+                                    <label for="name" class="col-form-label">Ваш пароль:</label>
+                                    <input class="form-control" id="password" type="password" name="password" placeholder="Ваш пароль" required>
+                                    <input onclick="validation_left()" type="submit" class="form-control btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62)" value="Войти" />
+                                    <a href="{{ url('/password/reset')}}" class="form-control btn btn-primary" style="background-color:rgb(106, 180, 62); border-color:rgb(106, 180, 62); padding-top:12px;">Забыл пароль</a>
+                              </form>
+                          </div>
+                        </div>
+                    </div>
+                  @endif
+
+                  @if  ($errors->any())
+                  <div class="alert alert-danger">
+                      <ul>
+                          @foreach  ($errors->all() as $error){{--Возврат ошибок--}}
+                          <li>{{$error}}</li>
+                          @endforeach
+                      </ul>
+                  </div>
+                  @endif
+
+
+                    <div style="clear: both"></div>
+                    @if(!Auth::guard('user_guard')->user())
+                      <h4 class="widget-title">Ваш первый перевод? Заполните, пожалуйста, форму:</h4>
+                    @endif
+
+                  <div class="col-md-12 panel panel-default" style="padding-top: 10px;">
                         <form role="form" name="edit" enctype="multipart/form-data" action="{{ route('form_check')}}" method="POST">
                             @csrf
                             <div class="col-md-6">
                             <fieldset>
-
-                                @if  ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach  ($errors->all() as $error){{--Возврат ошибок--}}
-                                        <li>{{$error}}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                                @endif
-
-
                                     @if(!is_numeric ($format->summ))
                                       <div class="form-group">
                                           <label for="name" class="col-form-label">Введите желаемую сумму</label>
@@ -126,10 +161,16 @@
                                     @endif
 
                                     <div class="form-group">
-                                        <label for="name" class="col-form-label">Ваше духовное имя. Если его нет - ФИО."</label>
+                                        <label for="name" class="col-form-label">Ваше духовное имя. Если его нет - ФИО.</label>
                                         <div>
                                             <input lang="ru" type="text" id="name" name="name" required="required"
-                                            class="form-control" value="{{old('name')}}" />
+                                            class="form-control"
+                                            @if(Auth::guard('user_guard')->user())
+                                              value="{{ $user->name }}"
+                                              disabled />
+                                            @else
+                                              value="{{old('name')}}" />
+                                            @endif
                                         </div>
                                     </div>
 
@@ -137,7 +178,14 @@
                                         <label for="email" class="col-form-label">Ваш Email</label>
                                         <div>
                                             <input type="email" id="email" name="email" required="required"
-                                            class="form-control" value="{{old('email')}}" />
+                                            class="form-control"
+                                            @if(Auth::guard('user_guard')->user())
+                                              value="{{ $user->email }}"
+                                              disabled />
+                                            @else
+                                              value="{{old('email')}}" />
+                                            @endif
+
                                         </div>
                                     </div>
 
@@ -145,15 +193,29 @@
                                         <label for="email" class="col-form-label">Ваш телефон*</label>
                                         <div>
                                             <input type="text" id="phone" name="phone" required="required"
-                                            class="form-control" value="{{old('phone')}}" />
+                                            class="form-control"
+                                            @if(Auth::guard('user_guard')->user())
+                                              value="{{ $user->phone }}"
+                                              disabled />
+                                            @else
+                                              value="{{old('phone')}}" />
+                                            @endif
+
                                         </div>
                                     </div>
                                     <p>*Мы обещаем не беспокоить Вас по телефону без крайней необходимости</p>
                                     <div class="form-group">
-                                        <label for="name" class="col-form-label">Ваш город</label>
+                                        <label for="name" class="col-form-label">От кого вы узнали о клубе:</label>
                                         <div>
                                             <input lang="ru" type="text" id="city" name="city" required="required"
-                                            class="form-control" value="{{old('city')}}" />
+                                            class="form-control"
+                                            @if(Auth::guard('user_guard')->user())
+                                              value="{{ $user->city }}"
+                                              disabled />
+                                            @else
+                                              value="{{old('city')}}" />
+                                            @endif
+
                                         </div>
                                     </div>
 
@@ -174,27 +236,33 @@
                                                 </label>
                                             </div>
                                         </div>
+
+                                        @if ($format->monthly == "Ежемесячно")
+                                          <div class="form-group">
+                                              <div class="checkbox">
+                                                  <label for="is_opened">
+                                                      <input id="podp" name="podp" required="required" type="checkbox"> &nbsp; С условиями подписки ознакомился и согласен
+                                                  </label>
+                                              </div>
+                                          </div>
+                                        @endif
+
                                         </div>
                                       @if ($format->monthly == "Ежемесячно")
                                         <div class="col-md-6">
-                                        <label for="name" class="col-form-label">Условия подписки:</label>
-                                        <p>Сумма платежа - {{$format->summ}} рублей.</p>
-                                        <p>Периодичность списаний - ежемесячно в то число месяца, когда сделан первый платеж.</p>
-                                        <p>Отказаться от подписки Вы можете в любое время по Вашему желанию (Уже внесенные платежи не возвращаются).</p>
-                                        <p>Чтобы отказаться от подписки Вам необходимо пройти по этой <a href="{{ route('unsubscribe') }}" target="_blank"><font color="green;">этой ссылке</font></a>.</p>
-                                        <div class="form-group">
-                                            <div class="checkbox">
-                                                <label for="is_opened">
-                                                    <input id="podp" name="podp" required="required" type="checkbox"> &nbsp; С условиями подписки ознакомился и согласен
-                                                </label>
-                                            </div>
-                                        </div>
+                                            <label for="name" class="col-form-label">Условия подписки:</label>
+                                            <p>Сумма платежа - {{$format->summ}} рублей.</p>
+                                            <p>Периодичность списаний - ежемесячно в то число месяца, когда сделан первый платеж.</p>
+                                            <p>Отказаться от подписки Вы можете в любое время по Вашему желанию (Уже внесенные платежи не возвращаются).</p>
+                                            <p>Чтобы отказаться от подписки Вам необходимо пройти по этой <a href="{{ route('unsubscribe') }}" target="_blank"><font color="green;">этой ссылке</font></a>.</p>
                                         </div>
                                       @endif
                                           <input id="cost" name="format_id" value="{{$format->id}}" type="hidden">
                                           <input id="cost" name="format_name" value="{{$format->name}}" type="hidden">
                                           <input id="cost" name="monthly" value="{{$format->monthly}}" type="hidden">
-
+                                          @if(Auth::guard('user_guard')->user())
+                                            <input id="cost" name="autorised" value="autorised" type="hidden">
+                                          @endif
 
                                         <div class="form-group row">
                                             <div class="col-sm-10">
@@ -204,11 +272,18 @@
                                        </div>
                             </fieldset>
                         </form>
+                        @if(Auth::guard('user_guard')->user())
+                          **При необходимости Вы можете изменить Ваши данные в <a href="{{route('user.dashboard')}}">личном кабинете</a>.
+                        @endif
 
                 </div>
+
+                <center>
+                <h4>
+                <strong>Сразу после перевода на вашу почту будет отправлено письмо со ссылкой на группу клуба попечителей. Если письмо со ссылкой не пришло - оно в папке Спам. Если его нет в папке Спам - напишите на info@bhaktilata.ru </strong></h4></center>
+          </div>
         </div>
-    </div>
-    </section>
+      </section>
     </div>
     <!-- end main-content -->
 
@@ -230,7 +305,16 @@
                         безопасного проведения интернет-платежей Verified By Visa или MasterCard SecureCode для проведения платежа также может потребоваться ввод специального пароля.</p>
                     <p style="font-size: 10px; color: #fff;">Настоящий сайт поддерживает 256-битное шифрование. Введенная информация не будет предоставлена третьим лицам за исключением случаев, предусмотренных законодательством РФ. Проведение
                         платежей по банковским картам осуществляется в строгом соответствии с требованиями платежных систем МИР, Visa Int. и MasterCard Europe Sprl.</p>
-
+                    <p style="font-size: 10px; color: #fff;">
+                      <a href="https://money.yandex.ru" target="_blank">
+                         <img src="https://money.yandex.ru/img/yamoney_button.gif"
+                          alt="Я принимаю Яндекс.Деньги" align="left" hspace="5"
+                          title="Я принимаю Яндекс.Деньги" border="0" width="88" height="31"/>
+                      </a>
+                      Принимаем Яндекс.Деньги – доступный и безопасный способ платить за товары и услуги через интернет.
+                      Пополнение счета и оплата заказов происходят в реальном времени
+                      <a href="http://money.yandex.ru/" target="_blank">на сайте платежной системы</a>.
+                    </p>
                 </div>
             </div>
         </div>
@@ -266,7 +350,7 @@
             if ($("#email").val().search(pattern) == 0) $("#email").get(0).setCustomValidity('');
             $("#phone").get(0).setCustomValidity('Введите, пожалуйста, номер телефона (только цифры).');
             if($("#phone").val().search(pattern_num) == 0 && $('#phone').val().length > 4) $("#phone").get(0).setCustomValidity('');
-            $("#city").get(0).setCustomValidity('Введите, пожалуйста, Ваш город.');
+            $("#city").get(0).setCustomValidity('Заполните, пожалуйста, это поле.');
             if ($("#city").val() != '') $("#city").get(0).setCustomValidity('');
             $("#pers").get(0).setCustomValidity('Для продолжения необходимо согласиться с условиями оферты.');
             if ($('#pers').is(':checked')) $("#pers").get(0).setCustomValidity('');

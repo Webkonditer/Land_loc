@@ -31,12 +31,27 @@ Route::group(['middlevare'=>'web'], function () {
     Route::get('/spend/entrance', 'BonusController@entrance')->name('spend.entrance');
     Route::post('/spend/check', 'BonusController@entrance_check')->name('spend.check');
     //Route::auth();Route::match(['get', 'post'],
+    //Аутентификация
+    Route::get('/user/login',['as' => 'user.login','uses' => 'UserAuth\LoginController@showLoginForm']);
+    Route::post('/user/login',['uses' => 'UserAuth\LoginController@login']);
+    Route::get('/user/logout',['as' => 'user.logout','uses' => 'UserAuth\LoginController@logout']);
+    Route::post('/user/register',['as' => 'user.register','uses' => 'UserAuth\RegisterController@create']);
+    //Личный кабинете
+    Route::get('/user/dashboard',['as' => 'user.dashboard','uses' => 'UserDashboardController@execute','middleware'=>'IsUser']);
+    Route::post('/user/dashboard/edit',['as' => 'user.dashboard.edit','uses' => 'UserDashboardController@edit','middleware'=>'IsUser']);
+    //Вега проект
+    Route::post('/vega/form_check', 'vega\IndexController@form_check')->name('vega.form_check');
+    Route::get('/vega/form_check', 'vega\IndexController@form_check')->name('vega.form_check');//убрать потом
+    Route::post('/vega/result_url', 'vega\ResultController@result')->name('vega.result_url');
+    Route::get('/vega/result_url', 'vega\ResultController@result')->name('vega.result_url');//убрать потом
+    Route::get('/vega/success_url', 'vega\IndexController@success')->name('vega.success');
+    Route::get('/vega/fail_url', 'vega\IndexController@fail')->name('vega.fail');
 });
 
 
 
 
-Route::group(['prefix'=>'admin'], function () {
+Route::group(['prefix'=>'admin','middleware'=>'IsAdmin'], function () {
 
       //Route::get('/dashboard', 'DashboardController@index')->name('admin.dashboard');
       Route::resource('/formats', 'FormatController', ['as'=>'admin']);
@@ -84,6 +99,8 @@ Route::group(['prefix'=>'admin'], function () {
       Route::post('/bonus/application/processed', 'BonusApplicationController@processed')->name('admin.bonuses.processed');
       Route::get('/bonus/stat', 'BonusApplicationController@stat')->name('admin.bonus.stat');
 
+      Route::post('/ch/edit', 'DonatorsController@ch_edit')->name('admin.ch.edit');
+
 });
 
 
@@ -91,3 +108,7 @@ Route::group(['prefix'=>'admin'], function () {
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -33,6 +33,14 @@
                     <div class="box-body">
 
                       <div class="form-group">
+                        <div class="checkbox">
+                            <label for="monthly">
+                                <input id="on_home" name="on_home" type="checkbox" @if($format->on_home == "Да")checked="checked"@endif> На главной
+                            </label>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
                           <label for="title">Положение в списке</label>
                           <input type="text"
                                  name="position"

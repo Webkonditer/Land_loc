@@ -63,7 +63,11 @@
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="/admin/user-160x160.jpg" class="user-image" alt="User Image">
+<<<<<<< HEAD
                             <span class="hidden-xs">{{-- Auth::user()->name --}}</span>
+=======
+                            <span class="hidden-xs">{{ Auth::guard('admin_guard')->user()->name }}{{-- Auth::user()->name --}}</span>
+>>>>>>> 82fcf3b3bccc50fb1c0c43f30a7f3786b2dd30c7
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
@@ -71,7 +75,7 @@
                                 <img src="/admin/user-160x160.jpg" class="img-circle" alt="User Image">
                                 <p>
                                     {{-- Auth::user()->name --}} - Web Developer
-                                    <small>Зарегистрирован с {{-- Auth::user()->created_at->format('d.m.Y') --}}</small>
+                                    <small>Зарегистрирован с {{ Auth::guard('admin_guard')->user()->created_at->format('d.m.Y') }}{{-- Auth::user()->created_at->format('d.m.Y') --}}</small>
                                 </p>
                             </li>
 
@@ -105,7 +109,7 @@
                     <img src="/admin/user-160x160.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>{{-- Auth::user()->name --}}</p>
+                    <p>{{ Auth::guard('admin_guard')->user()->name }}{{-- Auth::user()->name --}}</p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>

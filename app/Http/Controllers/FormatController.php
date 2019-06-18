@@ -11,7 +11,7 @@ class FormatController extends Controller
 
     public function __construct() {
 
-          $this->middleware('auth');
+          //$this->middleware('auth');
     }
   /**
    * Display a listing of the resource.
@@ -73,6 +73,7 @@ class FormatController extends Controller
       $format->name = $request->name;
       $format->summ = $request->summ;
       if($request->monthly)$format->monthly = "Ежемесячно"; else $format->monthly = "Разово";
+      if($request->on_home)$format->on_home = "Да"; else $format->on_home = "Нет";
       $format->bonus_1 = $request->bonus_1;
       $format->bonus_2 = $request->bonus_2;
       $format->ctn = $request->ctn;
@@ -139,6 +140,7 @@ class FormatController extends Controller
         $format->name = $request->name;
         $format->summ = $request->summ;
         if($request->monthly)$format->monthly = "Ежемесячно"; else $format->monthly = "Разово";
+        if($request->on_home)$format->on_home = "Да"; else $format->on_home = "Нет";
         $format->bonus_1 = $request->bonus_1;
         $format->bonus_2 = $request->bonus_2;
         $format->ctn = $request->ctn;

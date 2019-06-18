@@ -102,7 +102,7 @@ class CoursePaymentsController extends Controller
 
     public function payments(Course_payment $payments) {
 
-      if (!Auth::check()) {return redirect('/login');}
+      if (!Auth::guard('admin_guard')->check()) {return redirect('/login');}
 
       return view('admin.courses.payments', [
         'payments' => Course_payment::where('confirmation','!=',NULL)->orderBy('created_at', 'desc')->paginate(10)
@@ -111,7 +111,7 @@ class CoursePaymentsController extends Controller
     //-----------------------------------------------------------------
     public function destroy(Course_payment $payment)
     {
-        if (!Auth::check()) {return redirect('/login');}
+        if (!Auth::guard('admin_guard')->check()) {return redirect('/login');}
 
         $payment->delete();
         return redirect()->route('admin.courses.payments');
@@ -141,7 +141,7 @@ class CoursePaymentsController extends Controller
           $payment = Course_payment::where('confirmation','!=',NULL)->where('group_id', $request->group)->first();
           if (isset($payment->id)) {
             return view('admin.courses.payments', [
-              'payments' => Course_payment::where('confirmation','!=',NULL)->where('group_id', $request->group)->orderBy('created_at', 'desc')->paginate(10)
+              'payments' => Course_payment::where('confirmation','!=',NULL)->where('group_id', $request->group)->orderBy('created_at', 'desc')->paginate(200)
             ]);
           }
           else {
@@ -154,7 +154,7 @@ class CoursePaymentsController extends Controller
 
       public function stat(Course_payment $payments) {
 
-        if (!Auth::check()) {return redirect('/login');}
+        if (!Auth::guard('admin_guard')->check()) {return redirect('/login');}
 
         $result = array();
         $groups = Course_payment::where('confirmation','!=',NULL)->pluck('group_id');//Коллекция из столбца групп
