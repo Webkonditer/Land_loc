@@ -45,7 +45,7 @@ class ResultController extends Controller
               {
                 echo "bad sign\n";
                 //Storage::append('test_down.html', 'Пароль не совпадает');
-                //exit();
+                exit();
               }
 
               //Платежи за курсы
@@ -150,7 +150,7 @@ class ResultController extends Controller
                 'bonus_points' => $bonus_points,
             ];
 
-            //Mail::to($don->email)->send(new DonatPayConfirm($data));
+            Mail::to($don->email)->send(new DonatPayConfirm($data));
 
             //-------------------------------------------------
             exit();
