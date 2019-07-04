@@ -11,7 +11,7 @@
     <div class="col-sm-12"  style="overflow-x: scroll">
 
 
-        <table class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+        <table style="white-space:nowrap;" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
             <thead>
                 <tr role="row">
                     <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Название: активируйте, чтобы изменить сортировку">
