@@ -7,7 +7,7 @@
 
 
 <div class="row">
-    <h3>Статистика:</h3>
+    <h3>Статистика по курсам:</h3>
     <div class="col-sm-12"  style="overflow-x: scroll">
 
 
