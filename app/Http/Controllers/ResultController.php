@@ -110,8 +110,15 @@ class ResultController extends Controller
             $pay->confirmation = Carbon::now()->format('Y-m-d H:i:s');
             $pay->save();//Подтверждение платежа в таблицу платежей
 
+            Storage::append('test_recuring.html', Carbon::now()->format('Y-m-d H:i:s'));
+            Storage::append('test_recuring.html', $request->InvId);
+            Storage::append('test_recuring.html', $pay->donator_id);
+            Storage::append('test_recuring.html', $pay->monthly);
+            Storage::append('test_recuring.html', $pay->repeated);
+
             if ($form->ctn > 0) {
               $don->bonus_points = $don->bonus_points + $form->ctn;
+              Storage::append('test_recuring.html', $form->ctn);
             }
             $don->last_payment = Carbon::now()->format('Y-m-d H:i:s');
             if ($pay->monthly == "Ежемесячно") $don->recurring = 'Да';
