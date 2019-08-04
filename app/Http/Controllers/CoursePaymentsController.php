@@ -125,7 +125,7 @@ class CoursePaymentsController extends Controller
         }
         else {
           return redirect()->route('admin.courses.payments')
-                              ->withErrors('Все платежи по данному номеру группы удалены.')
+                              ->withErrors('Все платежи по заданному фильтру удалены.')
                               ->withInput();
         }
     }
