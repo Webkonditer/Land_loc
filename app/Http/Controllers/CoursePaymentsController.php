@@ -112,9 +112,22 @@ class CoursePaymentsController extends Controller
     public function destroy(Course_payment $payment)
     {
         if (!Auth::guard('admin_guard')->check()) {return redirect('/login');}
-
+        $group = $payment->group_id;
         $payment->delete();
-        return redirect()->route('admin.courses.payments');
+        //return redirect()->route('admin.courses.payments');
+        //return redirect()->back();
+
+        $payment = Course_payment::where('confirmation','!=',NULL)->where('group_id', $group)->first();
+        if (isset($payment->id)) {
+          return view('admin.courses.payments', [
+            'payments' => Course_payment::where('confirmation','!=',NULL)->where('group_id', $group)->orderBy('created_at', 'desc')->paginate(200)
+          ]);
+        }
+        else {
+          return redirect()->route('admin.courses.payments')
+                              ->withErrors('Все платежи по данному номеру группы удалены.')
+                              ->withInput();
+        }
     }
 
     public function search(Course_payment $payment, Request $request) {

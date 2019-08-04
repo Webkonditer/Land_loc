@@ -37,6 +37,13 @@
                     />
                     <button type="submit" name="submit" value="1" >Найти</button>
                   </form>
+
+                  <a href="{{route('admin.courses.payments')}}">
+                      <button style="color: #333339; margin-top: 15px;">Сбросить фильтр</button>
+                  </a>
+
+
+
                 </div>
 
           <div class="col-sm-12">
@@ -50,7 +57,7 @@
                 </div>
               @endif
           </div>
-    
+
     <div class="col-sm-12"><p></p></div>
 
 </div>
