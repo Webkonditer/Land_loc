@@ -67,28 +67,28 @@
             <thead>
                 <tr role="row">
                     <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Название: активируйте, чтобы изменить сортировку">
-                        <a href="{{-- route('admin.donators.sort', ['sort' => 'id']) --}}">N чека</a>
+                        N чека
                     </th>
                     <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Название: активируйте, чтобы изменить сортировку">
-                        <a href="{{-- route('admin.donators.sort', ['sort' => 'name']) --}}">Дата</a>
+                        Дата
                     </th>
                     <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Название: активируйте, чтобы изменить сортировку">
-                        <a href="{{-- route('admin.donators.sort', ['sort' => 'email']) --}}">Имя</a>
+                        Имя
                     </th>
                     <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Название: активируйте, чтобы изменить сортировку">
-                        <a href="{{-- route('admin.donators.sort', ['sort' => 'city']) --}}">Email</a>
+                        Email
                     </th>
                     <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Название: активируйте, чтобы изменить сортировку">
-                        <a href="{{-- route('admin.donators.sort', ['sort' => 'format_name']) --}}">Группа</a>
+                        Группа
                     </th>
                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Код: активируйте, чтобы изменить сортировку">
-                        <a href="{{-- route('admin.donators.sort', ['sort' => 'monthly']) --}}">Курс</a>
+                        Курс
                     </th>
                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Код: активируйте, чтобы изменить сортировку">
-                        <a href="">Модуль</a>
+                        Модуль
                     </th>
                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Код: активируйте, чтобы изменить сортировку">
-                        <a href="">Сумма</a>
+                        Сумма
                     </th>
                     <th class="action" style="width:30px !important;"></th>
                     <th class="action" style="width:30px !important;"></th>
@@ -106,7 +106,7 @@
                     <td style="vertical-align:middle">{{ $payment->module }}</td>
                     <td style="vertical-align:middle">{{ $payment->summ }}</td>
                     <td style="vertical-align:middle">{{--<a href="{{-- route('admin.payments.id', ['id' => $payment->id]) }}"><i class="fa fa-eye fa-2" aria-hidden="true"></i></a>--}}</td>
-                    <td style="vertical-align:middle"><a onclick="return confirm ('Удалить информацию о платеже из базы?')" href="{{ route('admin.courses.payments.delete', ['id' => $payment->id]) }}"><i class="icon glyphicon glyphicon-remove"></i></a></td>
+                    <td style="vertical-align:middle"><a onclick="return confirm ('Удалить информацию о платеже из базы?')" href="{{ route('admin.courses.payments.delete', ['id' => $payment->id, 'filter' => $filter]) }}"><i class="icon glyphicon glyphicon-remove"></i></a></td>
                 </tr>
                 @empty
                 <tr>
