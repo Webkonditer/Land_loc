@@ -30,6 +30,7 @@ class ResultController extends Controller
             if($setting->test_mode == 1)$mrh_pass2 = $setting->test_pass2;
             else $mrh_pass2 = $setting->mrh_pass2;
 
+
             //Переменные из запроса
             $out_summ = $request->OutSum;
             $inv_id = $request->InvId;
@@ -40,13 +41,17 @@ class ResultController extends Controller
             //Вычисляем подпись
             $my_crc = strtoupper(md5("$out_summ:$inv_id:$mrh_pass2"));
 
+            //Логируем подтверждение сервера РК
+            $forLog = 'Подтверждение РК по чеку № '.$inv_id. ' получено '. Carbon::now()->format('Y-m-d H:i:s').'. Сумма - '.$out_summ.' Емейл отправителя - '.$request->EMail;
+            Storage::append('public/rk_messages.txt', $forLog);
             // проверка корректности подписи
             if ($my_crc !=$crc)
               {
                 echo "bad sign\n";
-                //Storage::append('test_down.html', 'Пароль не совпадает');
+                Storage::append('public/rk_messages.txt', 'Цифровая подпись не совпадает. Обработка прервана.');
                 exit();
               }
+
 
               //Платежи за курсы
               if ($inv_id > 1000000) {
@@ -54,6 +59,7 @@ class ResultController extends Controller
                 $course_payment = Course_payment::where('id', $inv_id-1000000)->first();
                 $course_payment->confirmation = Carbon::now()->format('Y-m-d H:i:s');
                 $course_payment->save();
+                Storage::append('public/rk_messages.txt', 'Платеж внесен в базу.');
 
                 $pass_line = Course_pass::where('course', $course_payment->course_name)->where('module', $course_payment->module)->first();
                 if (isset($pass_line->password)) $password = $pass_line->password;
@@ -96,6 +102,7 @@ class ResultController extends Controller
                 ];
 
                 Mail::to($course_payment->email)->send(new CoursMailMain($data));
+                Storage::append('public/rk_messages.txt', 'Письмо отправлено.');
 
                 //-------------------------------------------------
 
@@ -109,9 +116,18 @@ class ResultController extends Controller
 
             $pay->confirmation = Carbon::now()->format('Y-m-d H:i:s');
             $pay->save();//Подтверждение платежа в таблицу платежей
+            Storage::append('public/rk_messages.txt', 'Платеж внесен в базу.');
+
+            Storage::append('test_recuring.html', Carbon::now()->format('Y-m-d H:i:s'));
+            Storage::append('test_recuring.html', $request->InvId);
+            Storage::append('test_recuring.html', $pay->donator_id);
+            Storage::append('test_recuring.html', $pay->monthly);
+            Storage::append('test_recuring.html', $pay->repeated);
+            Storage::append('test_recuring.html', $don->bonus_points);
 
             if ($form->ctn > 0) {
               $don->bonus_points = $don->bonus_points + $form->ctn;
+              Storage::append('public/rk_messages.txt', 'Чайтаньи начислены.');
             }
             $don->last_payment = Carbon::now()->format('Y-m-d H:i:s');
             if ($pay->monthly == "Ежемесячно") $don->recurring = 'Да';
@@ -151,6 +167,7 @@ class ResultController extends Controller
             ];
 
             Mail::to($don->email)->send(new DonatPayConfirm($data));
+            Storage::append('public/rk_messages.txt', 'Письмо отправлено.');
 
             //-------------------------------------------------
             exit();

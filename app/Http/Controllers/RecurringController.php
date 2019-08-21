@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Donator;
+use App\Format;
 use App\Payment;
 use Carbon\Carbon;
 use App\Recurring;
@@ -146,14 +147,24 @@ class RecurringController extends Controller
 
           echo $response = $res->getBody()->getContents();
 
-          if ($response == 'OK'.$inv_id) {
-            $payment->confirmation = Carbon::now()->format('Y-m-d H:i:s');
-            $payment->save();
-            //dump($payment);
+          if ($response == 'OK'.$inv_id) {//Записываем результаты в базу
+            //$payment->confirmation = Carbon::now()->format('Y-m-d H:i:s');//Подтверждение платежа
+            //$payment->save();
+            /*
+            $don = Donator::where('id', $payment->donator_id)->first();
+            $form = Format::where('id', $payment->format_id)->first();
+            if ($form->ctn > 0) {
+              $don->bonus_points = $don->bonus_points + $form->ctn;//Прибавляем бонусы
+            }
+            $don->last_payment = Carbon::now()->format('Y-m-d H:i:s');//Дата последнего платежа
+            $don->save();
+            */
           }
 
         }
-		Storage::append('cron2.html', Carbon::now()->format('Y-m-d H:i:s'));//Крутняк
+		Storage::append('cron2.html', Carbon::now()->format('Y-m-d H:i:s'));
+    $forLog = 'Рекурентный № '.$inv_id. ' от '. Carbon::now()->format('Y-m-d H:i:s').'. Ответ сервера РК - '.$response;
+    Storage::append('public/recur_orders.txt', $forLog);
     }
 
     public function execute(Recurring $recurrings) {

@@ -48,6 +48,8 @@ class CoursesController extends Controller
         'image' => 'required|image',
         'name' => 'required|string|max:191',
         'nic' => 'required|string|max:191',
+        'from' => 'required|integer',
+        'to_' => 'required|integer',
         'description' => 'required|string',
         'module' => 'required|string',
         'mail_text' => 'required|string',
@@ -60,10 +62,14 @@ class CoursesController extends Controller
       $course->image = $path;
       $course->name = $request->name;
       $course->nic = $request->nic;
+      $course->from = $request->from;
+      $course->to = $request->to_;
       $course->description = $request->description;
       $course->module = $request->module;
       $course->mail_text = $request->mail_text;
       $course->result_text = $request->result_text;
+      if(isset($request->inscription_chb))$course->inscription_chb = 1;
+      if(isset($request->ngrup_chb))$course->ngrup_chb = 1;
       $course->save();
 
       return redirect()->route('admin.courses.index');
@@ -111,6 +117,8 @@ class CoursesController extends Controller
         'image' => 'nullable|image',
         'name' => 'required|string|max:191',
         'nic' => 'required|string|max:191',
+        'from' => 'required|integer',
+        'to_' => 'required|integer',
         'description' => 'required|string',
         'module' => 'required|string',
         'mail_text' => 'required|string',
@@ -124,10 +132,14 @@ class CoursesController extends Controller
         if($path)$course->image = $path;
         $course->name = $request->name;
         $course->nic = $request->nic;
+        $course->from = $request->from;
+        $course->to = $request->to_;
         $course->description = $request->description;
         $course->module = $request->module;
         $course->mail_text = $request->mail_text;
         $course->result_text = $request->result_text;
+        if(isset($request->inscription_chb))$course->inscription_chb = 1; else $course->inscription_chb = 0;
+        if(isset($request->ngrup_chb))$course->ngrup_chb = 1; else $course->ngrup_chb = 0;
         $course->save();
 
         return redirect()->route('admin.courses.index');

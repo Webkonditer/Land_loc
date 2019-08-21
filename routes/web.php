@@ -87,7 +87,7 @@ Route::group(['prefix'=>'admin','middleware'=>'IsAdmin'], function () {
       Route::post('/courses/payments', 'CoursePaymentsController@search');
       Route::get('/courses/stat', 'CoursePaymentsController@stat')->name('admin.courses.stat');
 
-      Route::get('/courses/payments/delete/{payment}', 'CoursePaymentsController@destroy')->name('admin.courses.payments.delete');
+      Route::get('/courses/payments/delete/{payment}/{filter}', 'CoursePaymentsController@destroy')->name('admin.courses.payments.delete');
       Route::resource('/courses', 'CoursesController', ['as'=>'admin']);
       Route::get('/courses/{course}/delete', 'CoursesController@destroy')->name('admin.courses.delete');
       Route::get('/course/passwords', 'CoursePassController@execute')->name('admin.courses.passwords');

@@ -87,7 +87,9 @@
                     </div>
                 </section>
                 <div id="register" class="panel panel-default col-md-12">
-                  <center><h4><strong>Сразу после перевода на вашу почту будет отправлен пароль. Если письмо с паролем не пришло - оно в папке Спам. Если его нет в папке Спам - обратитесь к администратору курса.</strong></h4></center>
+                  @if  ($course->inscription_chb == 1)
+                    <center><h4><strong>Сразу после перевода на вашу почту будет отправлен пароль. Если письмо с паролем не пришло - оно в папке Спам. Если его нет в папке Спам - обратитесь к администратору курса.</strong></h4></center>
+                  @endif
                     <p><h3 class="widget-title line-bottom">Для перевода заполните пожалуйста форму</h3>
                     </p>
 
@@ -109,7 +111,7 @@
 
 
                                       <div class="form-group">
-                                          <label for="name" class="col-form-label">Сумма (от 1 до 4000 рублей).</label>
+                                          <label for="name" class="col-form-label">Сумма (от {{$course->from}} до {{$course->to}} рублей).</label>
                                           <div>
                                               <input lang="ru" type="text" id="def_sum" name="summ" required="required"
                                               class="form-control" value="{{old('summ')}}" />
@@ -132,13 +134,17 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="group" class="col-form-label">Номер вашей группы (Узнайте Ваш номер у куратора)</label>
-                                        <div>
-                                            <input type="text" id="group" name="group" required="required"
-                                            class="form-control" value="{{old('group')}}" />
-                                        </div>
-                                    </div>
+                                    @if  ($course->ngrup_chb == 1)
+                                      <div class="form-group">
+                                          <label for="group" class="col-form-label">Номер вашей группы (Узнайте Ваш номер у куратора)</label>
+                                          <div>
+                                              <input type="text" id="group" name="group" required="required"
+                                              class="form-control" value="{{old('group')}}" />
+                                          </div>
+                                      </div>
+                                   @else
+                                     <input type="hidden" name="group" value="1">
+                                   @endif
 
                                     <div class="form-group">
                                         <label for="title">Модуль: Варианты на выбор:</label>

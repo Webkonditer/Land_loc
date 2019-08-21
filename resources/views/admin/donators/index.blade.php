@@ -109,6 +109,9 @@
                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Код: активируйте, чтобы изменить сортировку">
                         <a href="">Согласие на изменение ежемесячного платежа</a>
                     </th>
+                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Код: активируйте, чтобы изменить сортировку">
+                        <a href="">Анонимный</a>
+                    </th>
                     <th class="action" style="width:30px !important;"></th>
                     <th class="action" style="width:30px !important;"></th>
                 </tr>
@@ -124,6 +127,7 @@
                     <td style="vertical-align:middle">{{ $donator->monthly }}</td>
                     <td style="vertical-align:middle">{{ $donator->recurring }}</td>
                     <td style="vertical-align:middle">{{ $donator->recurring_change }}</td>
+                    <td style="vertical-align:middle">{{ $donator->anonim }}</td>
                     <td style="vertical-align:middle"><a href="{{ route('admin.payments.id', ['id' => $donator->id]) }}"><i class="fa fa-eye fa-2" aria-hidden="true"></i></a></td>
                     <td style="vertical-align:middle"><a onclick="return confirm ('Удалить жертвователя, его подписки и всю историю его платежей?')" href="{{ route('admin.donator.delete', ['id' => $donator->id]) }}"><i class="icon glyphicon glyphicon-remove"></i></a></td>
                 </tr>

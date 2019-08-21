@@ -105,16 +105,55 @@ class CoursePaymentsController extends Controller
       if (!Auth::guard('admin_guard')->check()) {return redirect('/login');}
 
       return view('admin.courses.payments', [
-        'payments' => Course_payment::where('confirmation','!=',NULL)->orderBy('created_at', 'desc')->paginate(10)
+        'payments' => Course_payment::where('confirmation','!=',NULL)->orderBy('created_at', 'desc')->paginate(10),
+        'filter' => 'nofilter',
       ]);
     }
     //-----------------------------------------------------------------
-    public function destroy(Course_payment $payment)
+    public function destroy(Course_payment $payment, $filter)
     {
         if (!Auth::guard('admin_guard')->check()) {return redirect('/login');}
 
+        $group = $payment->group_id;
+        $email = $payment->email;
         $payment->delete();
-        return redirect()->route('admin.courses.payments');
+        //return redirect()->route('admin.courses.payments');
+        //return redirect()->back();
+        if($filter == 'email'){
+          $payment = Course_payment::where('confirmation','!=',NULL)->where('email', $email)->first();
+          if (isset($payment->id)) {
+            return view('admin.courses.payments', [
+              'payments' => Course_payment::where('confirmation','!=',NULL)->where('email', $email)->orderBy('created_at', 'desc')->paginate(200),
+              'filter' => 'email',
+            ]);
+          }
+          else {
+            return redirect()->route('admin.courses.payments')
+                                ->withErrors('Все платежи по заданному фильтру удалены.')
+                                ->withInput();
+          }
+
+        }
+        if($filter == 'group'){
+          $payment = Course_payment::where('confirmation','!=',NULL)->where('group_id', $group)->first();
+          if (isset($payment->id)) {
+            return view('admin.courses.payments', [
+              'payments' => Course_payment::where('confirmation','!=',NULL)->where('group_id', $group)->orderBy('created_at', 'desc')->paginate(200),
+              'filter' => 'group',
+            ]);
+          }
+          else {
+            return redirect()->route('admin.courses.payments')
+                                ->withErrors('Все платежи по заданному фильтру удалены.')
+                                ->withInput();
+          }
+
+        }
+        return view('admin.courses.payments', [
+          'payments' => Course_payment::where('confirmation','!=',NULL)->orderBy('created_at', 'desc')->paginate(10),
+          'filter' => 'nofilter',
+        ]);
+
     }
 
     public function search(Course_payment $payment, Request $request) {
@@ -125,7 +164,8 @@ class CoursePaymentsController extends Controller
           $payment = Course_payment::where('confirmation','!=',NULL)->where('email', $request->email)->first();
           if (isset($payment->id)) {
             return view('admin.courses.payments', [
-              'payments' => Course_payment::where('confirmation','!=',NULL)->where('email', $request->email)->orderBy('created_at', 'desc')->paginate(10)
+              'payments' => Course_payment::where('confirmation','!=',NULL)->where('email', $request->email)->orderBy('created_at', 'desc')->paginate(10),
+              'filter' => 'email',
             ]);
           }
           else {
@@ -141,7 +181,8 @@ class CoursePaymentsController extends Controller
           $payment = Course_payment::where('confirmation','!=',NULL)->where('group_id', $request->group)->first();
           if (isset($payment->id)) {
             return view('admin.courses.payments', [
-              'payments' => Course_payment::where('confirmation','!=',NULL)->where('group_id', $request->group)->orderBy('created_at', 'desc')->paginate(200)
+              'payments' => Course_payment::where('confirmation','!=',NULL)->where('group_id', $request->group)->orderBy('created_at', 'desc')->paginate(200),
+              'filter' => 'group',
             ]);
           }
           else {
