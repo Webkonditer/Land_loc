@@ -8,7 +8,7 @@
 
 <div class="row">
     <h3>Статистика:</h3>
-    <div class="col-sm-12">
+    <div class="col-sm-12" style="overflow-x: auto">
 
 
         <table class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">

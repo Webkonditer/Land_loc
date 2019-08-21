@@ -70,7 +70,7 @@ class CoursePassController extends Controller
         'module' => 'required|string',
         'password' => 'required|string',
     ]);
-      $user = Auth::user()->name;
+      $user = Auth::guard('admin_guard')->user()->name;
       $pass_line = Course_pass::where('course', $request->course)->where('module', $request->module)->first();
       if (isset($pass_line->module)) {
         $pass_line->password = $this->generate_password(8);
