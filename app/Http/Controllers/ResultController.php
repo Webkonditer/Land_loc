@@ -219,7 +219,7 @@ class ResultController extends Controller
           }
 
           $pay = Payment::where('id', $request->inv_id)->first();
-          dd($pay->format_id);
+          dd($pay);
           $format = Format::where('id', $pay->format_id)->first();
           //dd($pay->format_id);
           return view('site.success', [
