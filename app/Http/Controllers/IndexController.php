@@ -102,6 +102,7 @@ class InDexController extenDs Controller
       $donator_id = Auth::guard('user_guard')->user()->id; //ид донатора
 
       //проверяем на наличие подписок
+      /*
       if($request->monthly == "Ежемесячно"){
           $old_recurring = Recurring::where('unsubscribed',NULL)->where('donator_id', $donator_id)->first();
           if (isset($old_recurring->id)) {
@@ -110,6 +111,7 @@ class InDexController extenDs Controller
                                 ->withInput();
           }
       }
+      */
     }
 
     $payment->donator_id = $donator_id;
