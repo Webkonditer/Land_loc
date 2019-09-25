@@ -136,6 +136,13 @@ class ResultController extends Controller
             if ($pay->monthly == "Ежемесячно") {
               if($pay->repeated != 'Рекурентный') {// В таблицу ежемесячных
 
+                  //Отписываем пользователя от старой подписки
+                  $old_recurring = Recurring::where('unsubscribed', NULL)->where('donator_id', $don->id)->first();
+                  if(isset($old_recurring->id)){
+                    $old_recurring->unsubscribed = Carbon::now()->format('Y-m-d H:i:s');
+                    $old_recurring->save();
+                  }
+
                   $recurrings->payment_id = $pay->id;
                   $recurrings->donator_id = $pay->donator_id;
                   $recurrings->format_id = $pay->format_id;

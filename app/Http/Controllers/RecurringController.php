@@ -25,7 +25,7 @@ class RecurringController extends Controller
         $donator = Donator::where('last_payment','!=',NULL)->where('email', $request->email)->first();
         if (isset($donator->id)) {
             $recur = Recurring::where('unsubscribed', NULL)->where('donator_id', $donator->id)->first();
-            if($recur != NULL) {
+            if($recur != NULL) { 
               //Отправка письма
               $to = $request->email;
               $subject = 'Отписка от ежемесячного платежа';
