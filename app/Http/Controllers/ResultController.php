@@ -121,6 +121,7 @@ class ResultController extends Controller
             if(isset($old_don->id)){
               $don->created_at = $old_don->created_at;
               $don->bonus_points = $old_don->bonus_points;
+              $don->last_payment = $old_don->last_payment;
               $id = $old_don->id;
               $old_don->delete();
               $don->id = $id;
