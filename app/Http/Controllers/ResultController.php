@@ -117,7 +117,7 @@ class ResultController extends Controller
 
             //Проверяем емейл на уникальность, сливаем при совпадении
             $email = $don->email;
-            $old_don = Donator::where('email', $email)->first();
+            $old_don = Donator::where('last_payment','!=',NULL)->where('email', $email)->first();
             if(isset($old_don->id)){
               $don->created_at = $old_don->created_at;
               $don->bonus_points = $old_don->bonus_points;
