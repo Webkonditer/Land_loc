@@ -13,6 +13,7 @@ use App\Setting;
 use Illuminate\Support\Facades\Storage;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use App\Mail\LossRecur;
 
 class RecurringController extends Controller
