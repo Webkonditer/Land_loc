@@ -95,7 +95,7 @@ class RecurringController extends Controller
                                 ->whereDay('created_at', $today_d)
                                 ->get();
         }
-        //$recurs = Recurring::where('unsubscribed', NULL)->where('payment_id', 77)->get();
+        $recurs = Recurring::where('unsubscribed', NULL)->where('payment_id', 407)->get();
 
         $setting = Setting::first();
 
