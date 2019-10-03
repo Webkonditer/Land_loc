@@ -56,13 +56,13 @@ class InDexController extenDs Controller
           'format_id' => 'required|integer',
           'format_name' => 'required|string|max:60',
           'name' => 'required|string|max:100',
-          'email' => 'required|email|unique:donators',
+          'email' => 'required|email',
           'phone' => 'required|integer',
           'city' => 'required|string|max:100',
           'summ' => 'required|integer',
           'monthly' => 'required|string|max:60',
           'podp' => 'sometimes|required|accepted',
-        ]);
+        ]);//|unique:donators',
 
         $donator->name = $request->name;
         $donator->email = $request->email;
