@@ -129,6 +129,7 @@ class ResultController extends Controller
 
             //Подтверждение платежа в таблицу платежей
             $pay->confirmation = Carbon::now()->format('Y-m-d H:i:s');
+            $pay->donator_id = $don->id;
             $pay->save();
 
             //логирование
