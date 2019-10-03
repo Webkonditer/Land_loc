@@ -13,6 +13,7 @@ use App\Setting;
 use Illuminate\Support\Facades\Storage;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\LossRecur;
 
 class RecurringController extends Controller
 {
@@ -25,7 +26,7 @@ class RecurringController extends Controller
         $donator = Donator::where('last_payment','!=',NULL)->where('email', $request->email)->first();
         if (isset($donator->id)) {
             $recur = Recurring::where('unsubscribed', NULL)->where('donator_id', $donator->id)->first();
-            if($recur != NULL) { 
+            if($recur != NULL) {
               //Отправка письма
               $to = $request->email;
               $subject = 'Отписка от ежемесячного платежа';
@@ -115,7 +116,7 @@ class RecurringController extends Controller
           if($setting->test_mode == 1)$IsTest = true;
           else $IsTest = false;
 
-        foreach($recurs as $recur){//dd($recur);
+        foreach($recurs as $recur){
 
 			$payment = new Payment;
 
@@ -141,26 +142,23 @@ class RecurringController extends Controller
 
             // формирование подписи
             $crc  = md5("$mrh_login:$out_summ:$inv_id:$receipt:$mrh_pass1");
-
+if($inv_id == 407){
           $client = new Client();
           $res = $client->request('POST', 'https://auth.robokassa.ru/Merchant/Recurring', [ 'form_params' => [ 'MrchLogin' => $mrh_login, 'OutSum' => $out_summ, 'PreviousInvoiceID' => $prev_inv_id, 'InvId' => $inv_id, 'SignatureValue' => $crc, 'Receipt' => $receipt, 'Desc' =>  $desc, ] ]);
 
           echo $response = $res->getBody()->getContents();
 
-          if ($response == 'OK'.$inv_id) {//Записываем результаты в базу
-            //$payment->confirmation = Carbon::now()->format('Y-m-d H:i:s');//Подтверждение платежа
-            //$payment->save();
-            /*
+          //В случае отрицательного ответа сервера
+          if ($response == 'OK'.$inv_id) {
             $don = Donator::where('id', $payment->donator_id)->first();
-            $form = Format::where('id', $payment->format_id)->first();
-            if ($form->ctn > 0) {
-              $don->bonus_points = $don->bonus_points + $form->ctn;//Прибавляем бонусы
-            }
-            $don->last_payment = Carbon::now()->format('Y-m-d H:i:s');//Дата последнего платежа
-            $don->save();
-            */
-          }
 
+            $data = [
+                'name' => $don->name,
+            ];
+
+            Mail::to($don->email)->send(new LossRecur($data));
+          }
+}
         }
 		Storage::append('cron2.html', Carbon::now()->format('Y-m-d H:i:s'));
     $forLog = 'Рекурентный № '.$inv_id. ' от '. Carbon::now()->format('Y-m-d H:i:s').'. Ответ сервера РК - '.$response;
