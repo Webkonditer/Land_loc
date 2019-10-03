@@ -156,7 +156,7 @@ class RecurringController extends Controller
             $data = [
                 'name' => $don->name,
             ];
-dd($don->email);
+//dd($don->email);
             Mail::to($don->email)->send(new LossRecur($data));
 
           }
