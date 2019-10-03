@@ -142,7 +142,7 @@ class RecurringController extends Controller
 
             // формирование подписи
             $crc  = md5("$mrh_login:$out_summ:$inv_id:$receipt:$mrh_pass1");
-if($inv_id == 407){
+
           $client = new Client();
           $res = $client->request('POST', 'https://auth.robokassa.ru/Merchant/Recurring', [ 'form_params' => [ 'MrchLogin' => $mrh_login, 'OutSum' => $out_summ, 'PreviousInvoiceID' => $prev_inv_id, 'InvId' => $inv_id, 'SignatureValue' => $crc, 'Receipt' => $receipt, 'Desc' =>  $desc, ] ]);
 
@@ -158,7 +158,7 @@ if($inv_id == 407){
 
             Mail::to($don->email)->send(new LossRecur($data));
           }
-}
+
         }
 		Storage::append('cron2.html', Carbon::now()->format('Y-m-d H:i:s'));
     $forLog = 'Рекурентный № '.$inv_id. ' от '. Carbon::now()->format('Y-m-d H:i:s').'. Ответ сервера РК - '.$response;
