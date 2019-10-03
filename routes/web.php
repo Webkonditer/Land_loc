@@ -30,7 +30,7 @@ Route::group(['middlevare'=>'web'], function () {
     //Route::post('/spend', 'BonusController@entrance');
     Route::get('/spend/entrance', 'BonusController@entrance')->name('spend.entrance');
     Route::post('/spend/check', 'BonusController@entrance_check')->name('spend.check');
-    //Route::auth();Route::match(['get', 'post'],
+    //Route::auth();Route::match(['get', 'post'], 
     //Аутентификация
     Route::get('/user/login',['as' => 'user.login','uses' => 'UserAuth\LoginController@showLoginForm']);
     Route::post('/user/login',['uses' => 'UserAuth\LoginController@login']);

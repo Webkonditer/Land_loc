@@ -125,6 +125,8 @@ class ResultController extends Controller
               $old_don->delete();
               $don->id = $id;
               $don->save();
+              $garbage = Donator::where('last_payment','==',NULL)->where('email', $email)->all();
+              $garbage->delete();
             }
 
             //Подтверждение платежа в таблицу платежей
