@@ -109,13 +109,29 @@ class ResultController extends Controller
                 exit();
               }
 
+              //Клубные пожертвования
               //Вычисляем платеж и жертвователя
             $pay = Payment::where('id', $inv_id)->first();
             $don = Donator::where('id', $pay->donator_id)->first();
             $form = Format::where('id', $pay->format_id)->first();
 
+            //Проверяем емейл на уникальность, сливаем при совпадении
+            $email = $don->email;
+            $old_don = Donator::where('email', $email)->first();
+            if(isset($old_don->id)){
+              $don->created_at = $old_don->created_at;
+              $don->bonus_points = $old_don->bonus_points;
+              $id = $old_don->id;
+              $old_don->delete();
+              $don->id = $id;
+              $don->save();
+            }
+
+            //Подтверждение платежа в таблицу платежей
             $pay->confirmation = Carbon::now()->format('Y-m-d H:i:s');
-            $pay->save();//Подтверждение платежа в таблицу платежей
+            $pay->save();
+
+            //логирование
             Storage::append('public/rk_messages.txt', 'Платеж внесен в базу.');
 
             Storage::append('test_recuring.html', Carbon::now()->format('Y-m-d H:i:s'));
@@ -125,16 +141,20 @@ class ResultController extends Controller
             Storage::append('test_recuring.html', $pay->repeated);
             Storage::append('test_recuring.html', $don->bonus_points);
 
+            //Начисляем Чайтаньи
             if ($form->ctn > 0) {
               $don->bonus_points = $don->bonus_points + $form->ctn;
+              $don->save();
               Storage::append('public/rk_messages.txt', 'Чайтаньи начислены.');
             }
+            //Вносим изменения в профиль донора
             $don->last_payment = Carbon::now()->format('Y-m-d H:i:s');
             if ($pay->monthly == "Ежемесячно") $don->recurring = 'Да';
-            $don->save();//Подтверждение платежа в таблицу платежей
+            $don->save();
 
+            // Вносим изменения в таблицу ежемесячных
             if ($pay->monthly == "Ежемесячно") {
-              if($pay->repeated != 'Рекурентный') {// В таблицу ежемесячных
+              if($pay->repeated != 'Рекурентный') {
 
                   //Отписываем пользователя от старой подписки
                   $old_recurring = Recurring::where('unsubscribed', NULL)->where('donator_id', $don->id)->first();
@@ -142,7 +162,7 @@ class ResultController extends Controller
                     $old_recurring->unsubscribed = Carbon::now()->format('Y-m-d H:i:s');
                     $old_recurring->save();
                   }
-
+                  //Вносим в таблицу новую подписку
                   $recurrings->payment_id = $pay->id;
                   $recurrings->donator_id = $pay->donator_id;
                   $recurrings->format_id = $pay->format_id;
