@@ -96,7 +96,7 @@ class RecurringController extends Controller
                                 ->whereDay('created_at', $today_d)
                                 ->get();
         }
-        $recurs = Recurring::where('unsubscribed', NULL)->where('payment_id', 405)->get();
+        //$recurs = Recurring::where('unsubscribed', NULL)->where('payment_id', 405)->get();
 
         $setting = Setting::first();
 
@@ -150,13 +150,13 @@ class RecurringController extends Controller
           echo $response = $res->getBody()->getContents();
 
           //В случае отрицательного ответа сервера
-          if ($response == 'OK'.$inv_id) {
+          if ($response != 'OK'.$inv_id) {
             $don = Donator::where('id', $payment->donator_id)->first();
 
             $data = [
                 'name' => $don->name,
             ];
-//dd($don->email);
+
             Mail::to($don->email)->send(new LossRecur($data));
 
           }
