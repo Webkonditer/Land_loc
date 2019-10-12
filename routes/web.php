@@ -23,6 +23,7 @@ Route::group(['middlevare'=>'web'], function () {
     Route::post('/unsubscribe', 'RecurringController@unsubscribe')->name('unsubscribe');
     Route::get('/unsubscribe/{email}/{key}', 'RecurringController@unsubscribe_after_email');
     Route::get('/cron_recurring', 'RecurringController@cron_script')->name('cron_script');
+    Route::get('/check_cron', 'RecurringController@check_cron')->name('check_cron');
     Route::get('/courses/{nic}', 'CoursePaymentsController@forms')->name('courses_form');
     Route::post('/courses/{nic}', 'CoursePaymentsController@form_check');
     Route::get('/bs', function () {return redirect()->route('courses_form','bs');});
@@ -30,7 +31,7 @@ Route::group(['middlevare'=>'web'], function () {
     //Route::post('/spend', 'BonusController@entrance');
     Route::get('/spend/entrance', 'BonusController@entrance')->name('spend.entrance');
     Route::post('/spend/check', 'BonusController@entrance_check')->name('spend.check');
-    //Route::auth();Route::match(['get', 'post'], 
+    //Route::auth();Route::match(['get', 'post'],
     //Аутентификация
     Route::get('/user/login',['as' => 'user.login','uses' => 'UserAuth\LoginController@showLoginForm']);
     Route::post('/user/login',['uses' => 'UserAuth\LoginController@login']);

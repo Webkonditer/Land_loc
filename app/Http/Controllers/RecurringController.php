@@ -191,4 +191,32 @@ class RecurringController extends Controller
         }
         return redirect()->back();
     }
+
+    public function check_cron() {
+
+        $lost_payments = Payment::where('confirmation',NULL)
+                               ->where('repeated', 'Рекурентный')
+                               ->whereDate('created_at', Carbon::now()->format('Y-m-d'))
+                               ->get();
+        if($lost_payments->count() != 0) {
+
+          foreach ($lost_payments as $lost_payment){
+
+            $don = Donator::where('id', $lost_payment->donator_id)->first();
+
+            $data = [
+                'name' => $don->name,
+            ];
+
+            $forLog = Carbon::now()->format('Y-m-d H:i:s').' -  рекурентный платеж с номером '.$lost_payment->id.' не подтвержден. ';
+            Storage::append('public/recur_orders.txt', $forLog);
+            Mail::to($don->email)->send(new LossRecur($data));
+          }
+        }
+        else {
+          $forLog = Carbon::now()->format('Y-m-d H:i:s').' - все рекурентные платежи подтверждены. ';
+          Storage::append('public/recur_orders.txt', $forLog);
+        }
+
+    }
 }
