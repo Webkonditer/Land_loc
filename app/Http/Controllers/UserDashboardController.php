@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers;
 
@@ -25,7 +25,7 @@ class UserDashboardController extends Controller
       'donator' => Donator::where('id', $id)->first(),
       'recurring' => $recurring,
       'format' => $format,
-      'formates' => Format::where('monthly', 'Ежемесячно')->get()
+      'formates' => Format::where('monthly', 'Ежемесячно')->where('on_home', 'Да')->get() 
     ]);
   }
 

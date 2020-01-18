@@ -262,7 +262,7 @@
                                  <p><a class="btn btn-default btn-xl btn-theme-colored" style="cursor: pointer;" href="{{ route('bonus.gifts') }}" target="_blank">Обменять Чайтаньи на подарок</a></p>
                                 </div>
                                 <div class="col-md-6 text-center">
-                                 <p><a class="btn btn-default btn-xl btn-theme-colored" style="cursor: pointer;" href="{{ route('unsubscribe') }}" target="_blank">Отписаться от ежемесячного перевода</a></p>
+                                 {{--<p><a class="btn btn-default btn-xl btn-theme-colored" style="cursor: pointer;" href="{{ route('unsubscribe') }}" target="_blank">Отписаться от ежемесячного перевода</a></p>--}}
                                 </div>
   </div>
 
